@@ -1,0 +1,109 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e4]:
+    - generic [ref=e8]:
+      - generic [ref=e10]:
+        - img [ref=e12]
+        - generic [ref=e16]:
+          - generic [ref=e17]: FieldGuard AI
+          - generic [ref=e18]: 현장 의사결정 보조
+      - generic [ref=e20]:
+        - generic [ref=e21]: 주 메뉴
+        - list [ref=e23]:
+          - listitem [ref=e24]:
+            - link "대시보드" [ref=e25] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e26]
+              - generic [ref=e31]: 대시보드
+          - listitem [ref=e32]:
+            - link "필지 지도" [ref=e33] [cursor=pointer]:
+              - /url: /fields/map
+              - img [ref=e34]
+              - generic [ref=e36]: 필지 지도
+          - listitem [ref=e37]:
+            - link "작업 카드" [ref=e38] [cursor=pointer]:
+              - /url: /tasks
+              - img [ref=e39]
+              - generic [ref=e42]: 작업 카드
+          - listitem [ref=e43]:
+            - link "사진 판독" [ref=e44] [cursor=pointer]:
+              - /url: /diagnosis
+              - img [ref=e45]
+              - generic [ref=e48]: 사진 판독
+          - listitem [ref=e49]:
+            - link "자료/상담" [ref=e50] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e51]
+              - generic [ref=e54]: 자료/상담
+          - listitem [ref=e55]:
+            - link "설정" [ref=e56] [cursor=pointer]:
+              - /url: /settings
+              - img [ref=e57]
+              - generic [ref=e60]: 설정
+    - generic [ref=e61]:
+      - banner [ref=e62]:
+        - button "Toggle Sidebar" [ref=e63] [cursor=pointer]:
+          - img
+          - generic [ref=e64]: Toggle Sidebar
+        - generic [ref=e65]: 2026년 5월 6일 (수)
+        - generic [ref=e66]:
+          - combobox [ref=e67] [cursor=pointer]:
+            - generic: 농민QA-주소테스트 · 배추
+            - img [ref=e68]
+          - generic [ref=e70]: 마지막 갱신 5월 6일 14:36
+          - button "동기화" [ref=e71] [cursor=pointer]:
+            - img
+      - main [ref=e72]:
+        - generic [ref=e2260]:
+          - tablist [ref=e2261]:
+            - tab "오늘 (0)" [ref=e2262] [cursor=pointer]
+            - tab "이번 주" [active] [selected] [ref=e2263] [cursor=pointer]
+            - tab "완료 (0)" [ref=e2264] [cursor=pointer]
+          - tabpanel "오늘 (0)"
+          - tabpanel "이번 주" [ref=e2267]:
+            - generic [ref=e2269]:
+              - region "작물 농작업일정" [ref=e2270]:
+                - generic [ref=e2271]:
+                  - img [ref=e2272]
+                  - heading "작물 농작업일정" [level=2] [ref=e2274]
+                - paragraph [ref=e2275]: 선택한 작물과 일치하는 농작업일정 공식 자료가 없습니다.
+              - region "주간농사정보" [ref=e2276]:
+                - heading "주간농사정보" [level=2] [ref=e2277]
+                - generic [ref=e2278]:
+                  - generic [ref=e2279]: 주간농사정보 제 18호 (2026.5.4.~5.10.)
+                  - generic [ref=e2280]: 2026-04-29 · 배선아
+                  - link "공식 자료 확인" [ref=e2281] [cursor=pointer]:
+                    - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=ABJzxyxUGheNpFTMoQfu3KF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                - generic [ref=e2282]:
+                  - generic [ref=e2283]: 주간농사정보 제 17호 (2026.4.27.~5.3.)
+                  - generic [ref=e2284]: 2026-04-22 · 배선아
+                  - link "공식 자료 확인" [ref=e2285] [cursor=pointer]:
+                    - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=ziIpwYArkwUhn3YwnFrFAKF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                - generic [ref=e2286]:
+                  - generic [ref=e2287]: 주간농사정보 제 16호 (2026.4.20.~4.26.)
+                  - generic [ref=e2288]: 2026-04-16 · 배선아
+                  - link "공식 자료 확인" [ref=e2289] [cursor=pointer]:
+                    - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=Cm@84uhsozu8AA5djyHEMaF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                - generic [ref=e2290]:
+                  - generic [ref=e2291]: 주간농사정보 제 15호 (2026. 4. 13.~4. 19.)
+                  - generic [ref=e2292]: 2026-04-08 · 배선아
+                  - link "공식 자료 확인" [ref=e2293] [cursor=pointer]:
+                    - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=PNuGuc4lVJj2m35BVRClVKF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                - generic [ref=e2294]:
+                  - generic [ref=e2295]: 주간농사정보 제 14호 (2026. 4. 6.~4. 12.)
+                  - generic [ref=e2296]: 2026-04-01 · 배선아
+                  - link "공식 자료 확인" [ref=e2297] [cursor=pointer]:
+                    - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=5AzsKZIMBKmRMVW2n2@G3KF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                - generic [ref=e2298]:
+                  - generic [ref=e2299]: 주간농사정보 제 13호 (2026.3.30.~4.5.)
+                  - generic [ref=e2300]: 2026-03-26 · 김정우
+                  - link "공식 자료 확인" [ref=e2301] [cursor=pointer]:
+                    - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=UuZEpW@ZfhUM/t1Dj9d4d6F1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                - generic [ref=e2302]:
+                  - generic [ref=e2303]: 주간농사정보 제 12호 (2026.3.23.~3.29.)
+                  - generic [ref=e2304]: 2026-03-18 · 김정우
+                  - link "공식 자료 확인" [ref=e2305] [cursor=pointer]:
+                    - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=IxkQiPZsfXcn6KwfcUgfr6F1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+          - tabpanel "완료 (0)"

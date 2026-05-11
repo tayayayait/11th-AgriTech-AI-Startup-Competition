@@ -1,0 +1,184 @@
+- generic:
+  - generic:
+    - list
+    - region "Notifications alt+T"
+    - generic:
+      - generic:
+        - generic:
+          - banner:
+            - button:
+              - img
+              - generic: Toggle Sidebar
+            - generic:
+              - combobox:
+                - generic: 농민QA-주소테스트 · 배추
+                - img
+              - button:
+                - img
+          - main:
+            - generic:
+              - generic:
+                - generic:
+                  - heading [level=3]: 내 필지
+                - generic:
+                  - button:
+                    - generic:
+                      - generic: 벼
+                      - generic:
+                        - img
+                        - generic: 데이터 없음
+                    - generic: 벼 · 1,000㎡ (303평)
+                  - button:
+                    - generic:
+                      - generic: 농민QA-주소테스트
+                      - generic:
+                        - img
+                        - generic: 데이터 없음
+                    - generic: 배추 · 1,000㎡ (303평)
+                  - button:
+                    - generic:
+                      - generic: 농민QA-PNU테스트
+                      - generic:
+                        - img
+                        - generic: 데이터 없음
+                    - generic: 배추 · 1,000㎡ (303평)
+                  - button:
+                    - generic:
+                      - generic: 농민QA-좌표테스트
+                      - generic:
+                        - img
+                        - generic: 데이터 없음
+                    - generic: 배추 · 1,000㎡ (303평)
+                  - button:
+                    - generic:
+                      - generic: 농민QA-좌표2
+                      - generic:
+                        - img
+                        - generic: 데이터 없음
+                    - generic: 배추 · 1,000㎡ (303평)
+                  - generic: 지도 미리보기 (후속 단계)
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading [level=3]: 오늘 위험도
+                      - generic:
+                        - img
+                        - generic: 데이터 없음
+                  - generic:
+                    - generic:
+                      - generic: "0"
+                      - generic: / 100
+                    - generic:
+                      - generic: 위험 원인
+                      - list:
+                        - listitem: • 기상 위험 신호가 낮습니다.
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading [level=3]: 날씨 위험
+                      - generic:
+                        - generic: 정상 수집
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                          - text: 강수
+                        - generic: 0mm
+                      - generic:
+                        - generic:
+                          - img
+                          - text: 기온
+                        - generic: 25.4도
+                      - generic:
+                        - generic:
+                          - img
+                          - text: 풍속
+                        - generic: 4m/s
+                      - generic:
+                        - generic:
+                          - img
+                          - text: 습도
+                        - generic: 37%
+                    - paragraph: "수집 시각: 2026. 5. 6. 오후 2:41:49"
+                - generic:
+                  - generic:
+                    - heading [level=3]: 병해충 위험 후보
+                  - generic:
+                    - paragraph: 표시할 위험 후보가 없습니다.
+                    - generic:
+                      - generic: 공식 병해충 발생정보
+                      - paragraph: 해당 작물의 공식 발생정보가 확인되지 않습니다.
+              - generic:
+                - generic:
+                  - generic:
+                    - heading [level=3]: 오늘 작업
+                    - link:
+                      - /url: /tasks
+                      - text: 전체
+                      - img
+                - generic:
+                  - paragraph: 대기 중인 작업이 없습니다.
+              - generic:
+                - link:
+                  - /url: /diagnosis
+                  - generic:
+                    - img
+                  - generic:
+                    - generic: 사진 판독
+                    - generic: 병징 사진으로 의심 후보 확인
+                - link:
+                  - /url: /reports?tab=pesticide
+                  - generic:
+                    - img
+                  - generic:
+                    - generic: 농약 안전사용지침
+                    - generic: 농사로 공식 자료 검색
+                - link:
+                  - /url: /reports
+                  - generic:
+                    - img
+                  - generic:
+                    - generic: 상담 리포트
+                    - generic: 농업기술센터 상담용 자료 모음
+  - dialog [ref=e2562]:
+    - generic [ref=e2563]:
+      - generic [ref=e2565]:
+        - img [ref=e2567]
+        - generic [ref=e2571]:
+          - generic [ref=e2572]: FieldGuard AI
+          - generic [ref=e2573]: 현장 의사결정 보조
+      - generic [ref=e2575]:
+        - generic [ref=e2576]: 주 메뉴
+        - list [ref=e2578]:
+          - listitem [ref=e2579]:
+            - link "대시보드" [active] [ref=e2580] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e2581]
+              - generic [ref=e2586]: 대시보드
+          - listitem [ref=e2587]:
+            - link "필지 지도" [ref=e2588] [cursor=pointer]:
+              - /url: /fields/map
+              - img [ref=e2589]
+              - generic [ref=e2591]: 필지 지도
+          - listitem [ref=e2592]:
+            - link "작업 카드" [ref=e2593] [cursor=pointer]:
+              - /url: /tasks
+              - img [ref=e2594]
+              - generic [ref=e2597]: 작업 카드
+          - listitem [ref=e2598]:
+            - link "사진 판독" [ref=e2599] [cursor=pointer]:
+              - /url: /diagnosis
+              - img [ref=e2600]
+              - generic [ref=e2603]: 사진 판독
+          - listitem [ref=e2604]:
+            - link "자료/상담" [ref=e2605] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e2606]
+              - generic [ref=e2609]: 자료/상담
+          - listitem [ref=e2610]:
+            - link "설정" [ref=e2611] [cursor=pointer]:
+              - /url: /settings
+              - img [ref=e2612]
+              - generic [ref=e2615]: 설정

@@ -1,0 +1,76 @@
+- generic:
+  - generic:
+    - list
+    - region "Notifications alt+T"
+    - generic:
+      - generic:
+        - generic:
+          - banner:
+            - button:
+              - img
+              - generic: Toggle Sidebar
+            - generic:
+              - combobox [expanded]:
+                - generic: Phase10 E2E 필지 · 벼
+                - img
+              - button:
+                - img
+          - main:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading [level=3]: 사진 판독
+                      - generic: 대기
+                  - generic:
+                    - note:
+                      - img
+                      - paragraph: 이 결과는 사진과 현재 기상 조건을 바탕으로 한 의심 후보입니다. 병해충 확정 진단이나 농약 처방이 아닙니다.
+                    - generic:
+                      - generic:
+                        - text: 필지
+                        - combobox:
+                          - generic: Phase10 E2E 필지 · 벼
+                          - img
+                      - generic:
+                        - text: 작물명
+                        - textbox:
+                          - /placeholder: "예: 배추"
+                          - text: 벼
+                      - generic:
+                        - text: 촬영 부위
+                        - combobox:
+                          - generic: 잎 앞면
+                          - img
+                    - generic:
+                      - generic:
+                        - button:
+                          - img
+                          - text: 사진 선택
+                        - generic: JPG, PNG, WEBP / 1장 최대 10MB / 1회 최대 5장
+                      - button
+                    - generic:
+                      - button [disabled]: 사진 분석 시작
+              - generic:
+                - generic:
+                  - generic:
+                    - heading [level=3]: 현장 체크리스트
+                  - generic:
+                    - paragraph: 분석 완료 후 체크리스트가 생성됩니다.
+                    - button [disabled]: 진단 기록 저장
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading [level=3]: 농사로 공식 자료 비교
+                      - generic: 대기
+                  - generic:
+                    - paragraph: 분석 후 의심 후보 기준 공식 자료를 조회합니다.
+  - listbox [ref=e57]:
+    - option "Phase10 E2E 필지 · 벼" [active] [selected] [ref=e58]:
+      - img [ref=e61]
+      - generic [ref=e63]: Phase10 E2E 필지 · 벼
+    - option "Phase10 PNU 필지 · 벼" [ref=e64]:
+      - generic [ref=e66]: Phase10 PNU 필지 · 벼
+    - option "Phase9 테스트 필지 · 벼" [ref=e67]:
+      - generic [ref=e69]: Phase9 테스트 필지 · 벼

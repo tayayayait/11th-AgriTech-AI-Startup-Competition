@@ -1,0 +1,67 @@
+- generic:
+  - generic:
+    - list
+    - region "Notifications alt+T"
+    - generic:
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - img
+                  - generic:
+                    - generic: FieldGuard AI
+                    - generic: 현장 의사결정 보조
+              - generic:
+                - generic:
+                  - generic: 주 메뉴
+                  - generic:
+                    - list:
+                      - listitem:
+                        - link:
+                          - /url: /dashboard
+                          - img
+                          - generic: 대시보드
+                      - listitem:
+                        - link:
+                          - /url: /fields/map
+                          - img
+                          - generic: 필지 지도
+                      - listitem:
+                        - link:
+                          - /url: /tasks
+                          - img
+                          - generic: 작업 카드
+                      - listitem:
+                        - link:
+                          - /url: /diagnosis
+                          - img
+                          - generic: 사진 판독
+                      - listitem:
+                        - link:
+                          - /url: /reports
+                          - img
+                          - generic: 자료/상담
+                      - listitem:
+                        - link:
+                          - /url: /settings
+                          - img
+                          - generic: 설정
+        - generic:
+          - banner:
+            - button:
+              - img
+              - generic: Toggle Sidebar
+            - generic: 2026년 5월 8일 (금)
+            - generic:
+              - combobox [expanded]:
+                - generic: 필지 선택
+                - img
+              - generic: 마지막 갱신 —
+              - button:
+                - img
+          - main:
+            - paragraph: 등록된 필지를 먼저 선택해야 작업 카드를 생성할 수 있습니다.
+  - listbox [active] [ref=e74]

@@ -1,0 +1,40 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e5]:
+    - banner [ref=e6]:
+      - button "Toggle Sidebar" [ref=e7] [cursor=pointer]:
+        - img
+        - generic [ref=e8]: Toggle Sidebar
+      - generic [ref=e9]:
+        - combobox [ref=e10] [cursor=pointer]:
+          - generic: 필지 선택
+          - img [ref=e11]
+        - button "동기화" [ref=e13] [cursor=pointer]:
+          - img
+    - main [ref=e14]:
+      - generic [ref=e15]:
+        - generic [ref=e16]:
+          - heading "필터" [level=3] [ref=e18]
+          - generic [ref=e19]:
+            - generic [ref=e20]:
+              - text: 작물
+              - combobox [ref=e21] [cursor=pointer]:
+                - generic: 전체
+                - img [ref=e22]
+            - generic [ref=e24]:
+              - text: 위험 등급
+              - combobox [ref=e25] [cursor=pointer]:
+                - generic: 전체
+                - img [ref=e26]
+            - generic [ref=e28]: 검색 결과 0건
+        - generic [ref=e32]:
+          - generic [ref=e34]:
+            - generic [ref=e35]:
+              - img [ref=e36]
+              - text: 팜맵 Open API
+            - generic [ref=e39]: 필지 0건 표시
+          - generic [ref=e41]:
+            - img [ref=e42]
+            - text: 팜맵 지도를 불러오는 중

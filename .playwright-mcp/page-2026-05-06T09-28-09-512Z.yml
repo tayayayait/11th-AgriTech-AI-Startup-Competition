@@ -1,0 +1,58 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e5]:
+    - banner [ref=e6]:
+      - button "Toggle Sidebar" [ref=e7] [cursor=pointer]:
+        - img
+        - generic [ref=e8]: Toggle Sidebar
+      - generic [ref=e9]:
+        - combobox [ref=e10] [cursor=pointer]:
+          - img [ref=e11]
+        - button "동기화" [ref=e13] [cursor=pointer]:
+          - img
+    - main [ref=e14]:
+      - generic [ref=e15]:
+        - generic [ref=e17]:
+          - generic [ref=e19]:
+            - heading "사진 판독" [level=3] [ref=e20]
+            - generic [ref=e21]: 대기
+          - generic [ref=e22]:
+            - note [ref=e23]:
+              - img [ref=e24]
+              - paragraph [ref=e26]: 이 결과는 사진과 현재 기상 조건을 바탕으로 한 의심 후보입니다. 병해충 확정 진단이나 농약 처방이 아닙니다.
+            - generic [ref=e27]:
+              - generic [ref=e28]:
+                - text: 필지
+                - combobox "필지" [ref=e29] [cursor=pointer]:
+                  - img [ref=e30]
+              - generic [ref=e32]:
+                - text: 작물명
+                - textbox "작물명" [ref=e33]:
+                  - /placeholder: "예: 배추"
+              - generic [ref=e34]:
+                - text: 촬영 부위
+                - combobox "촬영 부위" [ref=e35] [cursor=pointer]:
+                  - generic: 잎 앞면
+                  - img [ref=e36]
+            - generic [ref=e38]:
+              - generic [ref=e39]:
+                - button "사진 선택" [ref=e40] [cursor=pointer]:
+                  - img
+                  - text: 사진 선택
+                - generic [ref=e41]: JPG, PNG, WEBP / 1장 최대 10MB / 1회 최대 5장
+              - button "Choose File" [ref=e42]
+            - generic [ref=e43]:
+              - button "사진 분석 시작" [disabled]
+        - generic [ref=e44]:
+          - generic [ref=e45]:
+            - heading "현장 체크리스트" [level=3] [ref=e47]
+            - generic [ref=e48]:
+              - paragraph [ref=e49]: 분석 완료 후 체크리스트가 생성됩니다.
+              - button "진단 기록 저장" [disabled]
+          - generic [ref=e50]:
+            - generic [ref=e52]:
+              - heading "농사로 공식 자료 비교" [level=3] [ref=e53]
+              - generic [ref=e54]: 대기
+            - paragraph [ref=e56]: 분석 후 의심 후보 기준 공식 자료를 조회합니다.

@@ -1,0 +1,293 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e4]:
+    - generic [ref=e8]:
+      - generic [ref=e10]:
+        - img [ref=e12]
+        - generic [ref=e16]:
+          - generic [ref=e17]: FieldGuard AI
+          - generic [ref=e18]: 현장 의사결정 보조
+      - generic [ref=e20]:
+        - generic [ref=e21]: 주 메뉴
+        - list [ref=e23]:
+          - listitem [ref=e24]:
+            - link "대시보드" [ref=e25] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e26]
+              - generic [ref=e31]: 대시보드
+          - listitem [ref=e32]:
+            - link "필지 지도" [ref=e33] [cursor=pointer]:
+              - /url: /fields/map
+              - img [ref=e34]
+              - generic [ref=e36]: 필지 지도
+          - listitem [ref=e37]:
+            - link "작업 카드" [ref=e38] [cursor=pointer]:
+              - /url: /tasks
+              - img [ref=e39]
+              - generic [ref=e42]: 작업 카드
+          - listitem [ref=e43]:
+            - link "사진 판독" [ref=e44] [cursor=pointer]:
+              - /url: /diagnosis
+              - img [ref=e45]
+              - generic [ref=e48]: 사진 판독
+          - listitem [ref=e49]:
+            - link "자료/상담" [ref=e50] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e51]
+              - generic [ref=e54]: 자료/상담
+          - listitem [ref=e55]:
+            - link "설정" [ref=e56] [cursor=pointer]:
+              - /url: /settings
+              - img [ref=e57]
+              - generic [ref=e60]: 설정
+    - generic [ref=e61]:
+      - banner [ref=e62]:
+        - button "Toggle Sidebar" [ref=e63] [cursor=pointer]:
+          - img
+          - generic [ref=e64]: Toggle Sidebar
+        - generic [ref=e65]: 2026년 5월 7일 (목)
+        - generic [ref=e66]:
+          - combobox [ref=e67] [cursor=pointer]:
+            - generic: 필지 선택
+            - img [ref=e68]
+          - generic [ref=e70]: 마지막 갱신 —
+          - button "동기화" [ref=e71] [cursor=pointer]:
+            - img
+      - main [ref=e72]:
+        - generic [ref=e74]:
+          - generic [ref=e169]:
+            - generic:
+              - generic:
+                - img [ref=e310]
+                - img [ref=e311]
+                - img [ref=e312]
+                - img [ref=e313]
+                - img [ref=e314]
+                - img [ref=e315]
+                - img [ref=e316]
+                - img [ref=e379]
+                - img [ref=e380]
+                - img [ref=e381]
+                - img [ref=e317]
+                - img [ref=e382]
+                - img [ref=e318]
+                - img [ref=e383]
+                - img [ref=e319]
+                - img [ref=e384]
+                - img [ref=e320]
+                - img [ref=e385]
+                - img [ref=e386]
+                - img [ref=e321]
+                - img [ref=e387]
+                - img [ref=e322]
+                - img [ref=e323]
+                - img [ref=e388]
+                - img [ref=e389]
+                - img [ref=e324]
+                - img [ref=e390]
+                - img [ref=e391]
+                - img [ref=e392]
+                - img [ref=e393]
+                - img [ref=e394]
+                - img [ref=e395]
+                - img [ref=e396]
+                - img [ref=e397]
+                - img [ref=e325]
+                - img [ref=e398]
+                - img [ref=e326]
+                - img [ref=e399]
+                - img [ref=e400]
+                - img [ref=e327]
+                - img [ref=e401]
+                - img [ref=e402]
+                - img [ref=e328]
+                - img [ref=e403]
+                - img [ref=e404]
+                - img [ref=e405]
+                - img [ref=e406]
+                - img [ref=e407]
+                - img [ref=e408]
+                - img [ref=e329]
+                - img [ref=e409]
+                - img [ref=e410]
+                - img [ref=e411]
+                - img [ref=e412]
+                - img [ref=e330]
+                - img [ref=e413]
+                - img [ref=e414]
+                - img [ref=e415]
+                - img [ref=e416]
+                - img [ref=e331]
+                - img [ref=e417]
+                - img [ref=e418]
+                - img [ref=e419]
+                - img [ref=e420]
+                - img [ref=e421]
+                - img [ref=e422]
+                - img [ref=e332]
+                - img [ref=e333]
+                - img [ref=e423]
+                - img [ref=e424]
+                - img [ref=e425]
+                - img [ref=e426]
+                - img [ref=e427]
+                - img [ref=e428]
+                - img [ref=e429]
+                - img [ref=e430]
+                - img [ref=e431]
+                - img [ref=e432]
+                - img [ref=e433]
+                - img [ref=e434]
+                - img [ref=e435]
+                - img [ref=e436]
+                - img [ref=e437]
+                - img [ref=e438]
+                - img [ref=e439]
+                - img [ref=e440]
+                - img [ref=e441]
+                - img [ref=e442]
+              - img [ref=e258]
+              - generic:
+                - img [ref=e334]
+                - img [ref=e335]
+                - img [ref=e336]
+                - img [ref=e337]
+                - img [ref=e338]
+                - img [ref=e339]
+                - img [ref=e340]
+                - img [ref=e341]
+                - img [ref=e342]
+                - img [ref=e343]
+                - img [ref=e344]
+                - img [ref=e345]
+                - img [ref=e346]
+                - img [ref=e347]
+                - img [ref=e348]
+                - img [ref=e349]
+                - img [ref=e350]
+                - img [ref=e351]
+                - img [ref=e352]
+                - img [ref=e353]
+                - img [ref=e354]
+                - img [ref=e355]
+                - img [ref=e356]
+                - img [ref=e443]
+                - img [ref=e444]
+                - img [ref=e445]
+                - img [ref=e446]
+                - img [ref=e447]
+                - img [ref=e448]
+                - img [ref=e449]
+                - img [ref=e450]
+                - img [ref=e451]
+                - img [ref=e452]
+                - img [ref=e453]
+                - img [ref=e454]
+                - img [ref=e455]
+                - img [ref=e456]
+                - img [ref=e457]
+                - img [ref=e458]
+                - img [ref=e459]
+                - img [ref=e460]
+                - img [ref=e461]
+              - img [ref=e490]
+            - generic [ref=e491]:
+              - text: 본 시스템에서 제공하는 정보는 법적인 효력이 없으며, 참고용으로만 활용하시기 바랍니다
+              - img "국토지리정보원" [ref=e492]
+              - img "농림수산식품교육문화정보원" [ref=e493]
+              - img "농림축산식품부" [ref=e494]
+              - text: "시스템 문의 : 031-778-7728"
+          - generic [ref=e82]:
+            - generic [ref=e83]:
+              - generic [ref=e84]: F
+              - generic [ref=e85]:
+                - generic [ref=e86]: FARMMAP
+                - generic [ref=e87]: FieldGuard AI
+            - generic [ref=e88]:
+              - generic [ref=e89]: 팜맵 PNU
+              - generic [ref=e90]: 좌표 조회
+              - generic [ref=e91]: 농경지분류
+              - generic [ref=e92]: 법정동코드
+          - generic [ref=e93]:
+            - generic [ref=e95]:
+              - generic [ref=e96]:
+                - img [ref=e97]
+                - text: 팜맵 검색
+              - button "검색 결과 초기화" [ref=e100] [cursor=pointer]:
+                - img
+            - generic [ref=e101]:
+              - generic [ref=e102]:
+                - tablist [ref=e103]:
+                  - tab "주소" [ref=e104] [cursor=pointer]
+                  - tab "PNU" [ref=e105] [cursor=pointer]
+                  - tab "지도 클릭" [ref=e106] [cursor=pointer]
+                  - tab "좌표" [selected] [ref=e107] [cursor=pointer]
+                - generic [ref=e109]:
+                  - text: 분류
+                  - combobox [ref=e110] [cursor=pointer]:
+                    - generic: 전체(논, 밭, 과수, 시설)
+                    - img [ref=e111]
+                - tabpanel "좌표" [ref=e468]:
+                  - generic [ref=e469]:
+                    - generic [ref=e470]:
+                      - text: 위도
+                      - textbox "36.5483953" [ref=e471]: "36.54841048653204"
+                    - generic [ref=e472]:
+                      - text: 경도
+                      - textbox "127.2380545" [ref=e473]: "127.23811815220063"
+                  - paragraph [ref=e474]: 허용 범위는 위도 33.0-39.5, 경도 124.0-132.0입니다.
+                  - button "좌표로 팜맵 조회" [ref=e475] [cursor=pointer]:
+                    - img
+                    - text: 좌표로 팜맵 조회
+                  - paragraph [ref=e476]: 좌표 기반 팜맵 결과 1건을 찾았습니다.
+                  - generic [ref=e477]:
+                    - generic [ref=e495]:
+                      - generic [ref=e496]: 필지목록(1건)
+                      - generic [ref=e497]: 분류명
+                    - button "세종특별자치시 연기면 수산리 3611031024201550000 · 밭 · 3,965.048㎡ 36.5484105, 127.2381182" [ref=e498] [cursor=pointer]:
+                      - generic [ref=e499]:
+                        - generic [ref=e500]: 세종특별자치시 연기면 수산리
+                        - img [ref=e501]
+                      - generic [ref=e504]: 3611031024201550000 · 밭 · 3,965.048㎡
+                      - generic [ref=e505]: 36.5484105, 127.2381182
+              - generic [ref=e133]:
+                - generic [ref=e134]:
+                  - generic [ref=e135]:
+                    - text: 필지명
+                    - 'textbox "예: 배추 - 해룡면" [ref=e136]': 세종특별자치시 연기면 수산리 밭
+                  - generic [ref=e137]:
+                    - text: 작물명
+                    - 'textbox "예: 배추" [ref=e138]'
+                - generic [ref=e139]:
+                  - generic [ref=e140]: 저장될 위치 정보
+                  - generic [ref=e141]: "좌표: 36.5484105, 127.2381182"
+                  - generic [ref=e142]: "PNU: 3611031024201550000"
+                  - generic [ref=e143]: "법정동주소: 세종특별자치시 연기면 수산리"
+                  - generic [ref=e144]: "농경지분류: 밭"
+                  - generic [ref=e145]: "면적: 3,965.048㎡"
+            - button "선택한 필지 등록" [ref=e375] [cursor=pointer]:
+              - img
+              - text: 선택한 필지 등록
+          - complementary [ref=e147]:
+            - generic [ref=e148]:
+              - generic [ref=e149]:
+                - generic [ref=e150]:
+                  - img [ref=e506]
+                  - text: 선택 필지 정보
+                - paragraph [ref=e154]: 좌표 기반 팜맵 결과 1건을 찾았습니다.
+              - generic [ref=e155]: "입력 방식: 좌표 입력"
+            - generic [ref=e156]:
+              - generic [ref=e157]:
+                - generic [ref=e158]: 필지명
+                - generic [ref=e159]: 세종특별자치시 연기면 수산리 밭
+              - generic [ref=e160]:
+                - generic [ref=e161]: 작물명
+                - generic [ref=e162]: 작물 미입력
+              - generic [ref=e163]:
+                - generic [ref=e164]: 좌표
+                - generic [ref=e165]: 36.5484105, 127.2381182
+              - generic [ref=e166]:
+                - generic [ref=e167]: 분류/면적
+                - generic [ref=e168]: 밭 · 3,965.048㎡

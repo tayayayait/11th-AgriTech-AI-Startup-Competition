@@ -1,0 +1,182 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e8]:
+    - generic [ref=e12]:
+      - link "FieldGuard AI home" [ref=e14] [cursor=pointer]:
+        - /url: /
+        - img [ref=e16]
+        - generic [ref=e20]:
+          - generic [ref=e21]: FieldGuard AI
+          - generic [ref=e22]: 현장 의사결정 보조
+      - generic [ref=e24]:
+        - generic [ref=e25]: 주 메뉴
+        - list [ref=e27]:
+          - listitem [ref=e28]:
+            - link "대시보드" [ref=e29] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e30]
+              - generic [ref=e35]: 대시보드
+          - listitem [ref=e36]:
+            - link "필지 지도" [ref=e37] [cursor=pointer]:
+              - /url: /fields/map
+              - img [ref=e38]
+              - generic [ref=e40]: 필지 지도
+          - listitem [ref=e41]:
+            - link "작업 카드" [ref=e42] [cursor=pointer]:
+              - /url: /tasks
+              - img [ref=e43]
+              - generic [ref=e46]: 작업 카드
+          - listitem [ref=e47]:
+            - link "사진 판독" [ref=e48] [cursor=pointer]:
+              - /url: /diagnosis
+              - img [ref=e49]
+              - generic [ref=e52]: 사진 판독
+          - listitem [ref=e53]:
+            - link "자료/상담" [ref=e54] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e55]
+              - generic [ref=e58]: 자료/상담
+          - listitem [ref=e59]:
+            - link "설정" [ref=e60] [cursor=pointer]:
+              - /url: /settings
+              - img [ref=e61]
+              - generic [ref=e64]: 설정
+    - generic [ref=e65]:
+      - banner [ref=e66]:
+        - button "Toggle Sidebar" [ref=e67] [cursor=pointer]:
+          - img
+          - generic [ref=e68]: Toggle Sidebar
+        - generic [ref=e69]: 2026년 5월 11일 (월)
+        - generic [ref=e70]:
+          - combobox [ref=e71] [cursor=pointer]:
+            - generic: 경상북도 구미시 옥계동 밭 · 사과
+            - img [ref=e72]
+          - generic [ref=e74]: 마지막 갱신 5월 11일 16:09
+          - generic [ref=e75]:
+            - img [ref=e76]
+            - generic [ref=e80]: dbcdkwo629@naver.com
+          - button "동기화" [ref=e81] [cursor=pointer]:
+            - img
+      - main [ref=e82]:
+        - generic [ref=e83]:
+          - tablist [ref=e84]:
+            - tab "AI 상담" [ref=e85] [cursor=pointer]
+            - tab "농약 안전/등록정보" [selected] [ref=e86] [cursor=pointer]
+          - tabpanel "농약 안전/등록정보" [ref=e87]:
+            - generic [ref=e88]:
+              - note [ref=e89]:
+                - img [ref=e90]
+                - paragraph [ref=e92]: FieldGuard AI는 농약을 처방하지 않습니다. 실제 사용 전 PSIS 등록정보, 농사로 공식 지침, 제품 라벨, 전문가 상담을 확인하세요.
+              - generic [ref=e94]: "농약안전정보시스템 등록정보는 작물·적용대상별 공식 등록 농약 후보와 사용방법, 희석배수/10a당 사용량, 수확 전 기준, 사용횟수를 확인하는 용도입니다. FieldGuard AI는 확정 진단, 자동 처방, 임의 비율 조정을 제공하지 않습니다. 농사로 `agchmSafeManualList`는 별도 공식 안전사용지침 문서 확인용으로 함께 표시합니다."
+              - generic [ref=e95]:
+                - heading "공식 자료 검색" [level=3] [ref=e97]
+                - generic [ref=e98]:
+                  - generic [ref=e99]:
+                    - button "병해충명을 알아요" [ref=e100] [cursor=pointer]:
+                      - img
+                      - text: 병해충명을 알아요
+                    - button "공식 사진에서 고르기" [ref=e101] [cursor=pointer]:
+                      - img
+                      - text: 공식 사진에서 고르기
+                    - button "내 사진으로 찾기" [ref=e102] [cursor=pointer]:
+                      - img
+                      - text: 내 사진으로 찾기
+                  - generic [ref=e103]:
+                    - generic [ref=e104]:
+                      - text: 작물명
+                      - textbox "작물명" [ref=e105]:
+                        - /placeholder: "예: 포도"
+                        - text: 포도
+                    - generic [ref=e106]:
+                      - text: 병해충명/적용대상
+                      - textbox "병해충명/적용대상" [ref=e107]:
+                        - /placeholder: "예: 노균병"
+                        - text: 흰빛썩음병
+                    - generic [ref=e108]:
+                      - text: 농약명
+                      - textbox "농약명" [ref=e109]:
+                        - /placeholder: "예: 만코제브"
+                    - generic [ref=e110]:
+                      - text: 안전사용기간 필터
+                      - combobox "안전사용기간 필터" [ref=e111] [cursor=pointer]:
+                        - generic: 전체
+                        - img [ref=e112]
+                  - button "공식 자료 확인" [ref=e115] [cursor=pointer]
+              - generic [ref=e116]:
+                - generic [ref=e118]:
+                  - generic [ref=e119]:
+                    - heading "농약안전정보시스템 등록농약 후보" [level=3] [ref=e120]
+                    - paragraph [ref=e121]: PSIS 등록정보 API 기준입니다. 상표명 검색은 품목명 검색 결과가 없을 때 보조로 수행합니다.
+                  - generic [ref=e122]: 정상 수집
+                - generic [ref=e123]:
+                  - generic [ref=e212]: 총 6건 중 6건 조회
+                  - paragraph [ref=e213]: Gemini가 공식 등록정보 안에서 대표 후보를 정리하는 중입니다.
+              - generic [ref=e132]:
+                - generic [ref=e134]:
+                  - heading "농사로 공식 지침" [level=3] [ref=e135]
+                  - generic [ref=e136]: 정상 수집
+                - generic [ref=e137]:
+                  - generic [ref=e214]:
+                    - generic [ref=e215]: (캐나다) 수출용 (포도) 농약안전사용지침 (2026. 4.)
+                    - generic [ref=e216]: 포도 · 개정 2026.04 · 캐나다
+                    - link "원문 열기" [ref=e217] [cursor=pointer]:
+                      - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=EkxWLmHiy2katBGfAMGIG6F1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                      - text: 원문 열기
+                      - img [ref=e218]
+                  - generic [ref=e222]:
+                    - generic [ref=e223]: (일본) 수출용 (포도) 농약안전사용지침(2026. 4.)
+                    - generic [ref=e224]: 포도 · 개정 2026.04 · 일본
+                    - link "원문 열기" [ref=e225] [cursor=pointer]:
+                      - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=vdqwwzJtN6@451DaycQKLqF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                      - text: 원문 열기
+                      - img [ref=e226]
+                  - generic [ref=e230]:
+                    - generic [ref=e231]: (인도네시아) 수출용 (포도) 농약안전사용지침(2026. 4.)
+                    - generic [ref=e232]: 포도 · 개정 2026.04 · 인도네시아
+                    - link "원문 열기" [ref=e233] [cursor=pointer]:
+                      - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=av/usmGEEitovl7OPsH1qKF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                      - text: 원문 열기
+                      - img [ref=e234]
+                  - generic [ref=e238]:
+                    - generic [ref=e239]: (홍콩) 수출용(포도) 농약안전사용지침(2026. 4.)
+                    - generic [ref=e240]: 포도 · 개정 2026.04 · 홍콩
+                    - link "원문 열기" [ref=e241] [cursor=pointer]:
+                      - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=91QlHylQwgHJP/LHjzoCjKF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                      - text: 원문 열기
+                      - img [ref=e242]
+                  - generic [ref=e246]:
+                    - generic [ref=e247]: (대만) 수출용 (포도) 농약안전사용지침 및 사용금지 농약 목록(2026. 3.)
+                    - generic [ref=e248]: 포도 · 개정 2026.03 · 대만
+                    - link "원문 열기" [ref=e249] [cursor=pointer]:
+                      - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=iz13MbcDM/SAV@jhMFxK@KF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                      - text: 원문 열기
+                      - img [ref=e250]
+                  - generic [ref=e254]:
+                    - generic [ref=e255]: (중국) 수출용 (포도) 농약안전사용지침(2026. 3.)
+                    - generic [ref=e256]: 포도 · 개정 2026.03 · 중국
+                    - link "원문 열기" [ref=e257] [cursor=pointer]:
+                      - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=JrMejjJPjuhQPmbScsR6w6F1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                      - text: 원문 열기
+                      - img [ref=e258]
+                  - generic [ref=e262]:
+                    - generic [ref=e263]: (호주) 수출용(포도) 농약안전사용지침(2026. 3.)
+                    - generic [ref=e264]: 포도 · 개정 2026.03 · 호주
+                    - link "원문 열기" [ref=e265] [cursor=pointer]:
+                      - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=ySDN0HsuwDxYZito@sb3RKF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                      - text: 원문 열기
+                      - img [ref=e266]
+                  - generic [ref=e270]:
+                    - generic [ref=e271]: (뉴질랜드) 수출용 (포도) 농약안전사용지침(2026. 3.)
+                    - generic [ref=e272]: 포도 · 개정 2026.03 · 뉴질랜드
+                    - link "원문 열기" [ref=e273] [cursor=pointer]:
+                      - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=5jn3dFw25bGFRHvNN2yU7KF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                      - text: 원문 열기
+                      - img [ref=e274]
+              - generic [ref=e202]:
+                - heading "안전사용기간/사용횟수 참고" [level=3] [ref=e204]
+                - paragraph [ref=e278]: 해당 조건의 공식 자료가 확인되지 않습니다.
+              - generic [ref=e208]:
+                - img [ref=e209]
+                - text: 농약 등록정보와 지침은 공식 자료 확인을 우선하며, 자동 처방을 제공하지 않습니다.

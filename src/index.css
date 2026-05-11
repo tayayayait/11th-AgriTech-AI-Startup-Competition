@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html, body, #root {
+    @apply h-full;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    font-feature-settings: "tnum";
+  }
+  h1, h2, h3, h4 {
+    @apply text-foreground tracking-tight;
+  }
+}
+
+@keyframes fg-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.fg-noise {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.fg-mask-edges {
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+
+/* ── 팜맵 OpenLayers attribution 위치 조정 ── */
+.olControlAttribution {
+  right: 2px !important;
+  bottom: 2px !important;
+  left: auto !important;
+  top: auto !important;
+  font-size: 10px !important;
+  opacity: 0.7;
+  max-width: 60%;
+  text-align: right;
+}
+
+/* ── 감사보고서 #6: 긴 목록 렌더링 성능 개선 ── */
+.fg-lazy-render {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 120px;
+}

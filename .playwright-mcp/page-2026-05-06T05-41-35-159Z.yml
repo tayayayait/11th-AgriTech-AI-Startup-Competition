@@ -1,0 +1,134 @@
+- generic:
+  - generic:
+    - list
+    - region "Notifications alt+T"
+    - generic:
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - img
+                  - generic:
+                    - generic: FieldGuard AI
+                    - generic: 현장 의사결정 보조
+              - generic:
+                - generic:
+                  - generic: 주 메뉴
+                  - generic:
+                    - list:
+                      - listitem:
+                        - link:
+                          - /url: /dashboard
+                          - img
+                          - generic: 대시보드
+                      - listitem:
+                        - link:
+                          - /url: /fields/map
+                          - img
+                          - generic: 필지 지도
+                      - listitem:
+                        - link:
+                          - /url: /tasks
+                          - img
+                          - generic: 작업 카드
+                      - listitem:
+                        - link:
+                          - /url: /diagnosis
+                          - img
+                          - generic: 사진 판독
+                      - listitem:
+                        - link:
+                          - /url: /reports
+                          - img
+                          - generic: 자료/상담
+                      - listitem:
+                        - link:
+                          - /url: /settings
+                          - img
+                          - generic: 설정
+        - generic:
+          - banner:
+            - button:
+              - img
+              - generic: Toggle Sidebar
+            - generic: 2026년 5월 6일 (수)
+            - generic:
+              - combobox [expanded]:
+                - generic: 벼 · 벼
+                - img
+              - generic: 마지막 갱신 5월 6일 14:06
+              - button:
+                - img
+          - main:
+            - generic:
+              - generic:
+                - generic:
+                  - heading [level=3]: 필지 관리
+                  - link:
+                    - /url: /fields/new
+                    - img
+                    - text: 새 필지
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic: 벼
+                      - generic: 벼 · 주소 없음
+                    - button:
+                      - img
+                  - generic:
+                    - generic:
+                      - generic: 농민QA-주소테스트
+                      - generic: 배추 · 전라남도 순천시 해룡면
+                    - button:
+                      - img
+                  - generic:
+                    - generic:
+                      - generic: 농민QA-PNU테스트
+                      - generic: 배추 · 주소 없음
+                    - button:
+                      - img
+                  - generic:
+                    - generic:
+                      - generic: 농민QA-좌표테스트
+                      - generic: 배추 · 주소 없음
+                    - button:
+                      - img
+                  - generic:
+                    - generic:
+                      - generic: 농민QA-좌표2
+                      - generic: 배추 · 주소 없음
+                    - button:
+                      - img
+              - generic:
+                - generic:
+                  - heading [level=3]: 알림 설정
+                - generic:
+                  - generic:
+                    - generic: 강수/강풍 위험 알림
+                    - switch [checked]
+                  - generic:
+                    - generic: 병해충 발생정보 알림
+                    - switch [checked]
+                  - generic:
+                    - generic: 작업 카드 리마인더
+                    - switch [checked]
+              - generic:
+                - generic:
+                  - heading [level=3]: 계정
+                - generic:
+                  - paragraph: 인증 기능은 후속 단계에서 추가됩니다. 현재는 게스트 모드로 동작합니다.
+  - listbox [ref=e1932]:
+    - option "벼 · 벼" [active] [selected] [ref=e1933]:
+      - img [ref=e1936]
+      - generic [ref=e1938]: 벼 · 벼
+    - option "농민QA-주소테스트 · 배추" [ref=e1939]:
+      - generic [ref=e1941]: 농민QA-주소테스트 · 배추
+    - option "농민QA-PNU테스트 · 배추" [ref=e1942]:
+      - generic [ref=e1944]: 농민QA-PNU테스트 · 배추
+    - option "농민QA-좌표테스트 · 배추" [ref=e1945]:
+      - generic [ref=e1947]: 농민QA-좌표테스트 · 배추
+    - option "농민QA-좌표2 · 배추" [ref=e1948]:
+      - generic [ref=e1950]: 농민QA-좌표2 · 배추

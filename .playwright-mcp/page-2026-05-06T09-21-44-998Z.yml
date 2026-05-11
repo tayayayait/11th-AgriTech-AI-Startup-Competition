@@ -1,0 +1,56 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e5]:
+    - banner [ref=e6]:
+      - button "Toggle Sidebar" [ref=e7] [cursor=pointer]:
+        - img
+        - generic [ref=e8]: Toggle Sidebar
+      - generic [ref=e9]:
+        - combobox [ref=e10] [cursor=pointer]:
+          - generic: Phase10 E2E 필지 · 벼
+          - img [ref=e11]
+        - button "동기화" [ref=e13] [cursor=pointer]:
+          - img
+    - main [ref=e14]:
+      - generic [ref=e16]:
+        - heading "필지 등록" [level=3] [ref=e18]
+        - generic [ref=e19]:
+          - generic [ref=e20]:
+            - generic [ref=e21]:
+              - text: 필지명
+              - 'textbox "예: 배추 - 해룡면" [ref=e22]': Phase10 PNU 필지
+            - generic [ref=e23]:
+              - text: 작물명
+              - 'textbox "예: 배추" [ref=e24]': 벼
+          - generic [ref=e25]:
+            - tablist [ref=e26]:
+              - tab "주소" [ref=e27] [cursor=pointer]
+              - tab "PNU" [selected] [ref=e28] [cursor=pointer]
+              - tab "지도 클릭" [ref=e29] [cursor=pointer]
+              - tab "좌표" [ref=e30] [cursor=pointer]
+            - tabpanel "PNU" [ref=e42]:
+              - generic [ref=e43]:
+                - text: PNU (19자리)
+                - textbox "숫자 19자리" [ref=e44]: "3611031024201550000"
+              - button "팜맵 조회" [ref=e52] [cursor=pointer]:
+                - img
+                - text: 팜맵 조회
+              - button "세종특별자치시 연기면 수산리 3611031024201550000 · 밭 · 3,965.048㎡ 36.5484105, 127.2381182" [ref=e54] [cursor=pointer]:
+                - generic [ref=e55]:
+                  - generic [ref=e56]: 세종특별자치시 연기면 수산리
+                  - img [ref=e57]
+                - generic [ref=e60]: 3611031024201550000 · 밭 · 3,965.048㎡
+                - generic [ref=e61]: 36.5484105, 127.2381182
+              - generic [ref=e45]:
+                - generic [ref=e46]: 저장될 위치 정보
+                - generic [ref=e47]: "좌표: 36.5484105, 127.2381182"
+                - generic [ref=e48]: "PNU: 3611031024201550000"
+                - generic [ref=e49]: "법정동주소: 세종특별자치시 연기면 수산리"
+                - generic [ref=e50]: "농경지분류: 밭"
+                - generic [ref=e51]: "면적: 3,965.048㎡"
+              - button "PNU로 등록" [ref=e62] [cursor=pointer]:
+                - img
+                - text: PNU로 등록
+          - paragraph [ref=e63]: 팜맵 결과 1건을 찾았습니다.

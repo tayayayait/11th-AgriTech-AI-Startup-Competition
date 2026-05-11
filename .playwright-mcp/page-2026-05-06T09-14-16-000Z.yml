@@ -1,0 +1,17 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e5]:
+    - banner [ref=e6]:
+      - button "Toggle Sidebar" [ref=e7] [cursor=pointer]:
+        - img
+        - generic [ref=e8]: Toggle Sidebar
+      - generic [ref=e9]:
+        - combobox [ref=e10] [cursor=pointer]:
+          - generic: 필지 선택
+          - img [ref=e11]
+        - button "동기화" [ref=e13] [cursor=pointer]:
+          - img
+    - main [ref=e14]:
+      - generic [ref=e15]: 등록된 필지가 없습니다. 설정에서 먼저 필지를 등록하세요.

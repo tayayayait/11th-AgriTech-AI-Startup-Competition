@@ -1,0 +1,61 @@
+- generic:
+  - generic:
+    - list
+    - region "Notifications alt+T"
+    - generic:
+      - generic:
+        - generic:
+          - banner:
+            - button:
+              - img
+              - generic: Toggle Sidebar
+            - generic:
+              - combobox [expanded]:
+                - generic: Phase10 E2E 필지 · 벼
+                - img
+              - button:
+                - img
+          - main:
+            - generic:
+              - generic:
+                - tablist:
+                  - tab [selected]: 오늘 (1)
+                  - tab: 이번 주 (2)
+                  - tab: 완료 (0)
+                - generic: 공식 데이터 기반 자동 생성
+              - tabpanel:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic: 2순위
+                          - generic: 5월 6일 (수)
+                        - generic: 병해충 위험 예보 근거 확인
+                      - generic:
+                        - img
+                        - text: 25분
+                    - paragraph: 농사로 병해충 발생정보 4건 확인
+                    - generic:
+                      - generic:
+                        - checkbox
+                        - generic: 공식 발생정보 원문 확인
+                      - generic:
+                        - checkbox
+                        - generic: 잎 뒷면·줄기·생장점 확인
+                      - generic:
+                        - checkbox
+                        - generic: 발견 위치와 사진 기록
+                    - generic:
+                      - button:
+                        - img
+                        - text: 근거 데이터 보기
+                    - button [disabled]: 완료 처리 (0/3)
+  - listbox [ref=e51]:
+    - option "Phase10 E2E 필지 · 벼" [active] [selected] [ref=e52]:
+      - img [ref=e55]
+      - generic [ref=e57]: Phase10 E2E 필지 · 벼
+    - option "Phase10 PNU 필지 · 벼" [ref=e58]:
+      - generic [ref=e60]: Phase10 PNU 필지 · 벼
+    - option "Phase9 테스트 필지 · 벼" [ref=e61]:
+      - generic [ref=e63]: Phase9 테스트 필지 · 벼

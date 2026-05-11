@@ -1,0 +1,323 @@
+- generic:
+  - generic:
+    - list
+    - region "Notifications alt+T"
+    - generic:
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - img
+                  - generic:
+                    - generic: FieldGuard AI
+                    - generic: 현장 의사결정 보조
+              - generic:
+                - generic:
+                  - generic: 주 메뉴
+                  - generic:
+                    - list:
+                      - listitem:
+                        - link:
+                          - /url: /dashboard
+                          - img
+                          - generic: 대시보드
+                      - listitem:
+                        - link:
+                          - /url: /fields/map
+                          - img
+                          - generic: 필지 지도
+                      - listitem:
+                        - link:
+                          - /url: /tasks
+                          - img
+                          - generic: 작업 카드
+                      - listitem:
+                        - link:
+                          - /url: /diagnosis
+                          - img
+                          - generic: 사진 판독
+                      - listitem:
+                        - link:
+                          - /url: /reports
+                          - img
+                          - generic: 자료/상담
+                      - listitem:
+                        - link:
+                          - /url: /settings
+                          - img
+                          - generic: 설정
+        - generic:
+          - banner:
+            - button:
+              - img
+              - generic: Toggle Sidebar
+            - generic: 2026년 5월 7일 (목)
+            - generic:
+              - combobox:
+                - generic: 필지 선택
+                - img
+              - generic: 마지막 갱신 —
+              - button:
+                - img
+          - main:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - generic:
+                        - generic:
+                          - text: 본 시스템에서 제공하는 정보는 법적인 효력이 없으며, 참고용으로만 활용하시기 바랍니다
+                          - img
+                          - img
+                          - img
+                          - text: "시스템 문의 : 031-778-7728"
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic: F
+                      - generic:
+                        - generic: FARMMAP
+                        - generic: FieldGuard AI
+                    - generic:
+                      - generic: 팜맵 검색
+                      - generic: PNU
+                      - generic: 지역 조건
+                      - generic: 필지 등록
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                        - text: 팜맵 검색
+                      - button:
+                        - img
+                  - generic:
+                    - generic:
+                      - tablist:
+                        - tab: 주소
+                        - tab [selected]: 지역
+                      - tabpanel:
+                        - generic:
+                          - generic:
+                            - generic: 지역 *
+                            - button:
+                              - img
+                              - text: 코드 갱신
+                          - generic:
+                            - combobox:
+                              - generic: 경상남도
+                              - img
+                            - combobox [expanded]:
+                              - generic: 시군구
+                              - img
+                            - combobox [disabled]:
+                              - generic: 읍면동
+                              - img
+                            - combobox [disabled]:
+                              - generic: 리
+                              - img
+                          - paragraph: 지역 코드 20,560건을 불러왔습니다.
+                        - generic:
+                          - generic:
+                            - generic: 번지
+                            - generic:
+                              - generic: 산
+                              - checkbox
+                          - generic:
+                            - generic:
+                              - text: 본번
+                              - textbox:
+                                - /placeholder: 본번
+                            - generic: ~
+                            - generic:
+                              - text: 부번
+                              - textbox:
+                                - /placeholder: 부번
+                        - generic:
+                          - text: 면적(m²)
+                          - generic:
+                            - textbox:
+                              - /placeholder: 최소
+                            - generic: ~
+                            - textbox:
+                              - /placeholder: 최대
+                        - generic:
+                          - text: 분류
+                          - combobox:
+                            - generic: 전체(논, 밭, 과수, 시설)
+                            - img
+                        - button [disabled]:
+                          - img
+                          - text: 검색하기
+                        - generic: 검색결과가 없습니다.
+                - complementary:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                        - text: 선택 필지 정보
+                      - paragraph: 지역 코드 20,560건을 불러왔습니다.
+                    - generic: "입력 방식: 지번 조회"
+                  - generic:
+                    - generic:
+                      - text: 필지명
+                      - textbox:
+                        - /placeholder: "예: 배추 - 해룡면"
+                    - generic:
+                      - text: 작물명
+                      - textbox:
+                        - /placeholder: "예: 배추"
+                    - button [disabled]:
+                      - img
+                      - text: 선택한 필지 등록
+                  - generic:
+                    - generic:
+                      - generic: 좌표
+                      - generic: 미입력
+                    - generic:
+                      - generic: PNU
+                      - generic: 미입력
+                    - generic:
+                      - generic: 법정동주소
+                      - generic: 미입력
+                    - generic:
+                      - generic: 분류/면적
+                      - generic: 미입력
+  - listbox [ref=e345]:
+    - option "창원시" [active] [ref=e346]:
+      - generic [ref=e348]: 창원시
+    - option "창원시 의창구" [ref=e349]:
+      - generic [ref=e351]: 창원시 의창구
+    - option "창원시 성산구" [ref=e352]:
+      - generic [ref=e354]: 창원시 성산구
+    - option "창원시 마산합포구" [ref=e355]:
+      - generic [ref=e357]: 창원시 마산합포구
+    - option "창원시 마산회원구" [ref=e358]:
+      - generic [ref=e360]: 창원시 마산회원구
+    - option "창원시 진해구" [ref=e361]:
+      - generic [ref=e363]: 창원시 진해구
+    - option "밀양시" [ref=e364]:
+      - generic [ref=e366]: 밀양시
+    - option "거제시" [ref=e367]:
+      - generic [ref=e369]: 거제시
+    - option "양산시" [ref=e370]:
+      - generic [ref=e372]: 양산시
+    - option "의령군" [ref=e373]:
+      - generic [ref=e375]: 의령군
+    - option "함안군" [ref=e376]:
+      - generic [ref=e378]: 함안군
+    - option "창녕군" [ref=e379]:
+      - generic [ref=e381]: 창녕군
+    - option "고성군" [ref=e382]:
+      - generic [ref=e384]: 고성군
+    - option "남해군" [ref=e385]:
+      - generic [ref=e387]: 남해군
+    - option "하동군" [ref=e388]:
+      - generic [ref=e390]: 하동군
+    - option "산청군" [ref=e391]:
+      - generic [ref=e393]: 산청군
+    - option "함양군" [ref=e394]:
+      - generic [ref=e396]: 함양군
+    - option "거창군" [ref=e397]:
+      - generic [ref=e399]: 거창군
+    - option "합천군" [ref=e400]:
+      - generic [ref=e402]: 합천군
+    - option "진주시" [ref=e403]:
+      - generic [ref=e405]: 진주시
+    - option "통영시" [ref=e406]:
+      - generic [ref=e408]: 통영시
+    - option "사천시" [ref=e409]:
+      - generic [ref=e411]: 사천시
+    - option "김해시" [ref=e412]:
+      - generic [ref=e414]: 김해시
+    - img [ref=e416]

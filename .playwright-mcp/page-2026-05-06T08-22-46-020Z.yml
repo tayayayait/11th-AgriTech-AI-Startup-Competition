@@ -1,0 +1,224 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e4]:
+    - generic [ref=e8]:
+      - generic [ref=e10]:
+        - img [ref=e12]
+        - generic [ref=e16]:
+          - generic [ref=e17]: FieldGuard AI
+          - generic [ref=e18]: 현장 의사결정 보조
+      - generic [ref=e20]:
+        - generic [ref=e21]: 주 메뉴
+        - list [ref=e23]:
+          - listitem [ref=e24]:
+            - link "대시보드" [ref=e25] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e26]
+              - generic [ref=e31]: 대시보드
+          - listitem [ref=e32]:
+            - link "필지 지도" [ref=e33] [cursor=pointer]:
+              - /url: /fields/map
+              - img [ref=e34]
+              - generic [ref=e36]: 필지 지도
+          - listitem [ref=e37]:
+            - link "작업 카드" [ref=e38] [cursor=pointer]:
+              - /url: /tasks
+              - img [ref=e39]
+              - generic [ref=e42]: 작업 카드
+          - listitem [ref=e43]:
+            - link "사진 판독" [ref=e44] [cursor=pointer]:
+              - /url: /diagnosis
+              - img [ref=e45]
+              - generic [ref=e48]: 사진 판독
+          - listitem [ref=e49]:
+            - link "자료/상담" [ref=e50] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e51]
+              - generic [ref=e54]: 자료/상담
+          - listitem [ref=e55]:
+            - link "설정" [ref=e56] [cursor=pointer]:
+              - /url: /settings
+              - img [ref=e57]
+              - generic [ref=e60]: 설정
+    - generic [ref=e61]:
+      - banner [ref=e62]:
+        - button "Toggle Sidebar" [ref=e63] [cursor=pointer]:
+          - img
+          - generic [ref=e64]: Toggle Sidebar
+        - generic [ref=e65]: 2026년 5월 6일 (수)
+        - generic [ref=e66]:
+          - combobox [ref=e67] [cursor=pointer]:
+            - generic: 벼 · 벼
+            - img [ref=e68]
+          - generic [ref=e70]: 마지막 갱신 5월 6일 17:17
+          - button "동기화" [ref=e71] [cursor=pointer]:
+            - img
+      - main [ref=e72]:
+        - generic [ref=e73]:
+          - generic [ref=e74]:
+            - generic [ref=e75]:
+              - generic [ref=e77]:
+                - heading "사진 판독" [level=3] [ref=e78]
+                - generic [ref=e79]: 추가 촬영 필요
+              - generic [ref=e80]:
+                - note [ref=e81]:
+                  - img [ref=e82]
+                  - paragraph [ref=e84]: 이 결과는 사진과 현재 기상 조건을 바탕으로 한 의심 후보입니다. 병해충 확정 진단이나 농약 처방이 아닙니다.
+                - generic [ref=e85]:
+                  - generic [ref=e86]:
+                    - text: 필지
+                    - combobox "필지" [ref=e87] [cursor=pointer]:
+                      - generic: 벼 · 벼
+                      - img [ref=e88]
+                  - generic [ref=e90]:
+                    - text: 작물명
+                    - textbox "작물명" [ref=e91]:
+                      - /placeholder: "예: 배추"
+                      - text: 벼
+                  - generic [ref=e92]:
+                    - text: 촬영 부위
+                    - combobox "촬영 부위" [ref=e93] [cursor=pointer]:
+                      - generic: 잎 앞면
+                      - img [ref=e94]
+                - generic [ref=e96]:
+                  - generic [ref=e97]:
+                    - button "사진 선택" [ref=e98] [cursor=pointer]:
+                      - img
+                      - text: 사진 선택
+                    - generic [ref=e99]: JPG, PNG, WEBP / 1장 최대 10MB / 1회 최대 5장
+                  - button "Choose File" [ref=e100]
+                  - generic [ref=e116]:
+                    - img "tmp-fieldguard-diagnosis-test.png" [ref=e118]
+                    - generic [ref=e119]: tmp-fieldguard-diagnosis-test.png
+                - button "사진 분석 시작" [ref=e120] [cursor=pointer]
+            - generic [ref=e126]:
+              - heading "의심 후보 결과" [level=3] [ref=e128]
+              - generic [ref=e129]:
+                - generic [ref=e130]:
+                  - generic [ref=e131]:
+                    - generic [ref=e132]: 1. 깨씨무늬병
+                    - generic [ref=e133]: 추가 확인 필요
+                  - generic [ref=e134]: 판단 근거
+                  - list [ref=e135]:
+                    - listitem [ref=e136]: • 잎 표면에 갈색의 타원형 반점이 관찰됨
+                    - listitem [ref=e137]: • 반점의 형태가 깨씨 모양과 유사함
+                  - generic [ref=e138]: 추가 확인 항목
+                  - list [ref=e139]:
+                    - listitem [ref=e140]: • 반점 주위에 노란색 테두리가 형성되는지 확인
+                    - listitem [ref=e141]: • 토양의 영양 상태 및 칼리 부족 여부 점검
+                  - generic [ref=e142]:
+                    - generic [ref=e143]: 농사로 근거자료
+                    - list [ref=e144]:
+                      - listitem [ref=e145]:
+                        - link "병해충발생정보 제 4호 (2026.4.1~4.30.)" [ref=e146] [cursor=pointer]:
+                          - /url: http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=khDTekIxZ7Vv/I6ELZ5WhqF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                          - text: 병해충발생정보 제 4호 (2026.4.1~4.30.)
+                          - img [ref=e147]
+                        - generic [ref=e151]: · 작물 공식 발생정보 fallback · 2026-04-07
+                      - listitem [ref=e152]:
+                        - link "병해충발생정보 제 3호 (2026.3.1~3.31.)" [ref=e153] [cursor=pointer]:
+                          - /url: http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=/M0cP3cvxgdtO0@x/ZsdfKF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                          - text: 병해충발생정보 제 3호 (2026.3.1~3.31.)
+                          - img [ref=e154]
+                        - generic [ref=e158]: · 작물 공식 발생정보 fallback · 2026-03-03
+                  - link "공식 안전사용지침 확인" [ref=e159] [cursor=pointer]:
+                    - /url: /reports?tab=pesticide
+                    - text: 공식 안전사용지침 확인
+                    - img [ref=e160]
+                - generic [ref=e164]:
+                  - generic [ref=e165]:
+                    - generic [ref=e166]: 2. 도열병
+                    - generic [ref=e167]: 판독 제한
+                  - generic [ref=e168]: 판단 근거
+                  - list [ref=e169]:
+                    - listitem [ref=e170]: • 잎에 방추형 또는 타원형의 갈색 반점이 나타남
+                  - generic [ref=e171]: 추가 확인 항목
+                  - list [ref=e172]:
+                    - listitem [ref=e173]: • 반점 중앙부가 회백색으로 변하는지 관찰
+                    - listitem [ref=e174]: • 질소질 비료의 과다 시비 여부 확인
+                  - generic [ref=e175]:
+                    - generic [ref=e176]: 농사로 근거자료
+                    - list [ref=e177]:
+                      - listitem [ref=e178]:
+                        - link "병해충발생정보 제 4호 (2026.4.1~4.30.)" [ref=e179] [cursor=pointer]:
+                          - /url: http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=khDTekIxZ7Vv/I6ELZ5WhqF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                          - text: 병해충발생정보 제 4호 (2026.4.1~4.30.)
+                          - img [ref=e180]
+                        - generic [ref=e184]: · 작물 공식 발생정보 fallback · 2026-04-07
+                      - listitem [ref=e185]:
+                        - link "병해충발생정보 제 3호 (2026.3.1~3.31.)" [ref=e186] [cursor=pointer]:
+                          - /url: http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=/M0cP3cvxgdtO0@x/ZsdfKF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                          - text: 병해충발생정보 제 3호 (2026.3.1~3.31.)
+                          - img [ref=e187]
+                        - generic [ref=e191]: · 작물 공식 발생정보 fallback · 2026-03-03
+                  - link "공식 안전사용지침 확인" [ref=e192] [cursor=pointer]:
+                    - /url: /reports?tab=pesticide
+                    - text: 공식 안전사용지침 확인
+                    - img [ref=e193]
+                - generic [ref=e197]:
+                  - generic [ref=e198]:
+                    - img [ref=e199]
+                    - text: 판독 제한 사유
+                  - list [ref=e203]:
+                    - listitem [ref=e204]: • 실제 사진이 아닌 그래픽 이미지로 정밀 판독에 한계가 있음
+                    - listitem [ref=e205]: • 병반의 미세한 질감이나 포자 형성 여부 확인 불가
+                - generic [ref=e206]:
+                  - generic [ref=e207]: 추가 촬영 안내
+                  - list [ref=e208]:
+                    - listitem [ref=e209]: • 잎 뒷면의 병반 확대 사진
+                    - listitem [ref=e210]: • 줄기 하단부 및 잎집의 증상 사진
+                    - listitem [ref=e211]: • 논 전체의 발생 분포를 알 수 있는 원경 사진
+          - generic [ref=e102]:
+            - generic [ref=e103]:
+              - heading "현장 체크리스트" [level=3] [ref=e105]
+              - generic [ref=e106]:
+                - generic [ref=e212]:
+                  - checkbox "농사로 공식 발생정보 원문 확인" [checked] [active] [ref=e213] [cursor=pointer]:
+                    - generic:
+                      - img
+                  - generic [ref=e214]: 농사로 공식 발생정보 원문 확인
+                - generic [ref=e215]:
+                  - checkbox "최근의 강우량 및 평균 습도 확인" [ref=e216] [cursor=pointer]
+                  - generic [ref=e217]: 최근의 강우량 및 평균 습도 확인
+                - generic [ref=e218]:
+                  - checkbox "비료 시비량 및 시기 기록 점검" [ref=e219] [cursor=pointer]
+                  - generic [ref=e220]: 비료 시비량 및 시기 기록 점검
+                - generic [ref=e221]:
+                  - checkbox "주변 필지의 동일 증상 확산 여부 확인" [ref=e222] [cursor=pointer]
+                  - generic [ref=e223]: 주변 필지의 동일 증상 확산 여부 확인
+                - button "체크리스트 저장 (1/4)" [ref=e257] [cursor=pointer]
+            - generic [ref=e108]:
+              - generic [ref=e110]:
+                - heading "농사로 공식 자료 비교" [level=3] [ref=e111]
+                - generic [ref=e112]: 정상 수집
+              - generic [ref=e113]:
+                - generic [ref=e225]:
+                  - generic [ref=e226]: 병해충발생정보 제 4호 (2026.4.1~4.30.)
+                  - generic [ref=e227]: 2026-04-07
+                  - link "원문 열기" [ref=e228] [cursor=pointer]:
+                    - /url: http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=khDTekIxZ7Vv/I6ELZ5WhqF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                    - text: 원문 열기
+                    - img [ref=e229]
+                - generic [ref=e233]:
+                  - generic [ref=e234]: 병해충발생정보 제 3호 (2026.3.1~3.31.)
+                  - generic [ref=e235]: 2026-03-03
+                  - link "원문 열기" [ref=e236] [cursor=pointer]:
+                    - /url: http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=/M0cP3cvxgdtO0@x/ZsdfKF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                    - text: 원문 열기
+                    - img [ref=e237]
+                - generic [ref=e241]:
+                  - generic [ref=e242]: 병해충발생정보 제 2호 (2026.2.1~2.28.)
+                  - generic [ref=e243]: 2026-02-02
+                  - link "원문 열기" [ref=e244] [cursor=pointer]:
+                    - /url: http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=Gj95ART1TW36xCsbsQxA/aF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                    - text: 원문 열기
+                    - img [ref=e245]
+                - generic [ref=e249]:
+                  - generic [ref=e250]: 병해충발생정보 제 1호 (2026.1.1~31.)
+                  - generic [ref=e251]: 2026-01-05
+                  - link "원문 열기" [ref=e252] [cursor=pointer]:
+                    - /url: http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=r5CA0yXrBIlfC0FalI58O6F1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                    - text: 원문 열기
+                    - img [ref=e253]

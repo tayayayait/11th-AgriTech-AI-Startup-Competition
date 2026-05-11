@@ -1,0 +1,286 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e4]:
+    - generic [ref=e8]:
+      - generic [ref=e10]:
+        - img [ref=e12]
+        - generic [ref=e16]:
+          - generic [ref=e17]: FieldGuard AI
+          - generic [ref=e18]: 현장 의사결정 보조
+      - generic [ref=e20]:
+        - generic [ref=e21]: 주 메뉴
+        - list [ref=e23]:
+          - listitem [ref=e24]:
+            - link "대시보드" [ref=e25] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e26]
+              - generic [ref=e31]: 대시보드
+          - listitem [ref=e32]:
+            - link "필지 지도" [ref=e33] [cursor=pointer]:
+              - /url: /fields/map
+              - img [ref=e34]
+              - generic [ref=e36]: 필지 지도
+          - listitem [ref=e37]:
+            - link "작업 카드" [ref=e38] [cursor=pointer]:
+              - /url: /tasks
+              - img [ref=e39]
+              - generic [ref=e42]: 작업 카드
+          - listitem [ref=e43]:
+            - link "사진 판독" [ref=e44] [cursor=pointer]:
+              - /url: /diagnosis
+              - img [ref=e45]
+              - generic [ref=e48]: 사진 판독
+          - listitem [ref=e49]:
+            - link "자료/상담" [ref=e50] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e51]
+              - generic [ref=e54]: 자료/상담
+          - listitem [ref=e55]:
+            - link "설정" [ref=e56] [cursor=pointer]:
+              - /url: /settings
+              - img [ref=e57]
+              - generic [ref=e60]: 설정
+    - generic [ref=e61]:
+      - banner [ref=e62]:
+        - button "Toggle Sidebar" [ref=e63] [cursor=pointer]:
+          - img
+          - generic [ref=e64]: Toggle Sidebar
+        - generic [ref=e65]: 2026년 5월 7일 (목)
+        - generic [ref=e66]:
+          - combobox [ref=e67] [cursor=pointer]:
+            - generic: 필지 선택
+            - img [ref=e68]
+          - generic [ref=e70]: 마지막 갱신 —
+          - button "동기화" [ref=e71] [cursor=pointer]:
+            - img
+      - main [ref=e72]:
+        - generic [ref=e74]:
+          - generic [ref=e1218]:
+            - generic:
+              - generic:
+                - img [ref=e1219]
+                - img [ref=e1220]
+                - img [ref=e1221]
+                - img [ref=e1222]
+                - img [ref=e1223]
+                - img [ref=e1224]
+                - img [ref=e1225]
+                - img [ref=e1226]
+                - img [ref=e1227]
+                - img [ref=e1228]
+                - img [ref=e1229]
+                - img [ref=e1230]
+                - img [ref=e1231]
+                - img [ref=e1232]
+                - img [ref=e1233]
+                - img [ref=e1234]
+                - img [ref=e1235]
+                - img [ref=e1236]
+                - img [ref=e1237]
+                - img [ref=e1238]
+                - img [ref=e1239]
+                - img [ref=e1240]
+                - img [ref=e1241]
+                - img [ref=e1242]
+                - img [ref=e1243]
+                - img [ref=e1244]
+                - img [ref=e1245]
+                - img [ref=e1246]
+                - img [ref=e1247]
+                - img [ref=e1248]
+                - img [ref=e1249]
+                - img [ref=e1250]
+                - img [ref=e1251]
+                - img [ref=e1252]
+                - img [ref=e1253]
+                - img [ref=e1254]
+                - img [ref=e1255]
+                - img [ref=e1256]
+                - img [ref=e1257]
+                - img [ref=e1258]
+                - img [ref=e1259]
+                - img [ref=e1260]
+                - img [ref=e1261]
+                - img [ref=e1262]
+                - img [ref=e1263]
+                - img [ref=e1264]
+                - img [ref=e1265]
+                - img [ref=e1266]
+                - img [ref=e1267]
+                - img [ref=e1268]
+                - img [ref=e1269]
+                - img [ref=e1270]
+                - img [ref=e1271]
+                - img [ref=e1272]
+                - img [ref=e1273]
+                - img [ref=e1274]
+                - img [ref=e1275]
+                - img [ref=e1276]
+                - img [ref=e1277]
+                - img [ref=e1278]
+                - img [ref=e1279]
+                - img [ref=e1280]
+                - img [ref=e1281]
+                - img [ref=e1282]
+                - img [ref=e1283]
+                - img [ref=e1284]
+                - img [ref=e1285]
+                - img [ref=e1286]
+                - img [ref=e1287]
+                - img [ref=e1288]
+                - img [ref=e1289]
+                - img [ref=e1290]
+                - img [ref=e1291]
+                - img [ref=e1292]
+                - img [ref=e1293]
+                - img [ref=e1294]
+                - img [ref=e1295]
+                - img [ref=e1296]
+                - img [ref=e1297]
+                - img [ref=e1298]
+                - img [ref=e1299]
+                - img [ref=e1300]
+                - img [ref=e1301]
+                - img [ref=e1302]
+                - img [ref=e1303]
+                - img [ref=e1304]
+                - img [ref=e1305]
+                - img [ref=e1306]
+                - img [ref=e1307]
+                - img [ref=e1308]
+                - img [ref=e1309]
+                - img [ref=e1310]
+                - img [ref=e1311]
+                - img [ref=e1312]
+                - img [ref=e1313]
+                - img [ref=e1314]
+                - img [ref=e1315]
+                - img [ref=e1316]
+                - img [ref=e1317]
+                - img [ref=e1318]
+                - img [ref=e1319]
+                - img [ref=e1320]
+                - img [ref=e1321]
+                - img [ref=e1322]
+                - img [ref=e1323]
+                - img [ref=e1324]
+                - img [ref=e1325]
+                - img [ref=e1326]
+                - img [ref=e1327]
+                - img [ref=e1328]
+                - img [ref=e1329]
+                - img [ref=e1330]
+                - img [ref=e1331]
+                - img [ref=e1332]
+                - img [ref=e1333]
+                - img [ref=e1334]
+                - img [ref=e1335]
+                - img [ref=e1336]
+                - img [ref=e1337]
+                - img [ref=e1338]
+                - img [ref=e1339]
+                - img [ref=e1340]
+                - img [ref=e1341]
+                - img [ref=e1342]
+                - img [ref=e1343]
+                - img [ref=e1344]
+                - img [ref=e1345]
+                - img [ref=e1346]
+                - img [ref=e1347]
+                - img [ref=e1348]
+                - img [ref=e1349]
+                - img [ref=e1350]
+                - img [ref=e1351]
+                - img [ref=e1352]
+                - img [ref=e1353]
+                - img [ref=e1354]
+                - img [ref=e1355]
+                - img [ref=e1356]
+                - img [ref=e1357]
+                - img [ref=e1358]
+              - img [ref=e1359]
+            - generic [ref=e1361]:
+              - text: 본 시스템에서 제공하는 정보는 법적인 효력이 없으며, 참고용으로만 활용하시기 바랍니다
+              - img "국토지리정보원" [ref=e1362]
+              - img "농림수산식품교육문화정보원" [ref=e1363]
+              - img "농림축산식품부" [ref=e1364]
+              - text: "시스템 문의 : 031-778-7728"
+          - generic [ref=e82]:
+            - generic [ref=e83]:
+              - generic [ref=e84]: F
+              - generic [ref=e85]:
+                - generic [ref=e86]: FARMMAP
+                - generic [ref=e87]: FieldGuard AI
+            - generic [ref=e88]:
+              - generic [ref=e89]: 팜맵 검색
+              - generic [ref=e90]: PNU
+              - generic [ref=e91]: 지역 조건
+              - generic [ref=e92]: 필지 등록
+          - generic [ref=e93]:
+            - generic [ref=e95]:
+              - generic [ref=e96]:
+                - img [ref=e97]
+                - text: 팜맵 검색
+              - button "검색 결과 초기화" [ref=e100] [cursor=pointer]:
+                - img
+            - generic [ref=e102]:
+              - tablist [ref=e103]:
+                - tab "주소" [selected] [ref=e104] [cursor=pointer]
+                - tab "지역" [ref=e105] [cursor=pointer]
+              - tabpanel "주소" [ref=e106]:
+                - generic [ref=e107]:
+                  - combobox [ref=e108] [cursor=pointer]:
+                    - generic: PNU
+                    - img [ref=e109]
+                  - generic [ref=e111]:
+                    - img
+                    - textbox "PNU 19자리" [ref=e795]: "3611031024201550000"
+                  - button "검색" [ref=e113] [cursor=pointer]:
+                    - img
+                - generic [ref=e127]:
+                  - generic [ref=e1365]:
+                    - generic [ref=e1366]: 필지목록(2건)
+                    - generic [ref=e1367]: 분류명
+                  - button "후보 1 3611031024201550000 좌표 정보 없음" [ref=e1368] [cursor=pointer]:
+                    - generic [ref=e1369]:
+                      - generic [ref=e1370]: 후보 1
+                      - img [ref=e1371]
+                    - generic [ref=e1374]: "3611031024201550000"
+                    - generic [ref=e1375]: 좌표 정보 없음
+                  - button "세종특별자치시 연기면 수산리 3611031024201550000 · 밭 · 3,965.048㎡ 36.5484105, 127.2381182" [ref=e1376] [cursor=pointer]:
+                    - generic [ref=e1378]: 세종특별자치시 연기면 수산리
+                    - generic [ref=e1379]: 3611031024201550000 · 밭 · 3,965.048㎡
+                    - generic [ref=e1380]: 36.5484105, 127.2381182
+          - complementary [ref=e128]:
+            - generic [ref=e129]:
+              - generic [ref=e130]:
+                - generic [ref=e131]:
+                  - img [ref=e1381]
+                  - text: 선택 필지 정보
+                - paragraph [ref=e135]: 필지목록 2건
+              - generic [ref=e136]: "입력 방식: PNU 조회"
+            - generic [ref=e137]:
+              - generic [ref=e138]:
+                - text: 필지명
+                - 'textbox "예: 배추 - 해룡면" [ref=e139]'
+              - generic [ref=e140]:
+                - text: 작물명
+                - 'textbox "예: 배추" [ref=e141]'
+              - button "선택한 필지 등록" [disabled]:
+                - img
+                - text: 선택한 필지 등록
+            - generic [ref=e142]:
+              - generic [ref=e143]:
+                - generic [ref=e144]: 좌표
+                - generic [ref=e145]: 미입력
+              - generic [ref=e146]:
+                - generic [ref=e147]: PNU
+                - generic [ref=e148]: 미입력
+              - generic [ref=e149]:
+                - generic [ref=e150]: 법정동주소
+                - generic [ref=e151]: 미입력
+              - generic [ref=e152]:
+                - generic [ref=e153]: 분류/면적
+                - generic [ref=e154]: 미입력

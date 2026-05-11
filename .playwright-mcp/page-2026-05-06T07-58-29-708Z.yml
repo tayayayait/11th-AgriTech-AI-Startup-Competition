@@ -1,0 +1,155 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T":
+    - list:
+      - listitem [ref=e232]:
+        - img [ref=e234]
+        - generic [ref=e237]: "완료: 농작업일정 확인: 벼 기계이앙재배"
+        - button "취소" [ref=e238] [cursor=pointer]
+  - generic [ref=e4]:
+    - generic [ref=e8]:
+      - generic [ref=e10]:
+        - img [ref=e12]
+        - generic [ref=e16]:
+          - generic [ref=e17]: FieldGuard AI
+          - generic [ref=e18]: 현장 의사결정 보조
+      - generic [ref=e20]:
+        - generic [ref=e21]: 주 메뉴
+        - list [ref=e23]:
+          - listitem [ref=e24]:
+            - link "대시보드" [ref=e25] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e26]
+              - generic [ref=e31]: 대시보드
+          - listitem [ref=e32]:
+            - link "필지 지도" [ref=e33] [cursor=pointer]:
+              - /url: /fields/map
+              - img [ref=e34]
+              - generic [ref=e36]: 필지 지도
+          - listitem [ref=e37]:
+            - link "작업 카드" [ref=e38] [cursor=pointer]:
+              - /url: /tasks
+              - img [ref=e39]
+              - generic [ref=e42]: 작업 카드
+          - listitem [ref=e43]:
+            - link "사진 판독" [ref=e44] [cursor=pointer]:
+              - /url: /diagnosis
+              - img [ref=e45]
+              - generic [ref=e48]: 사진 판독
+          - listitem [ref=e49]:
+            - link "자료/상담" [ref=e50] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e51]
+              - generic [ref=e54]: 자료/상담
+          - listitem [ref=e55]:
+            - link "설정" [ref=e56] [cursor=pointer]:
+              - /url: /settings
+              - img [ref=e57]
+              - generic [ref=e60]: 설정
+    - generic [ref=e61]:
+      - banner [ref=e62]:
+        - button "Toggle Sidebar" [ref=e63] [cursor=pointer]:
+          - img
+          - generic [ref=e64]: Toggle Sidebar
+        - generic [ref=e65]: 2026년 5월 6일 (수)
+        - generic [ref=e66]:
+          - combobox [ref=e67] [cursor=pointer]:
+            - generic: 벼 · 벼
+            - img [ref=e68]
+          - generic [ref=e70]: 마지막 갱신 5월 6일 16:56
+          - button "동기화" [ref=e71] [cursor=pointer]:
+            - img
+      - main [ref=e72]:
+        - generic [ref=e74]:
+          - generic [ref=e75]:
+            - tablist [ref=e76]:
+              - tab "오늘 (1)" [ref=e77] [cursor=pointer]
+              - tab "이번 주 (1)" [selected] [ref=e239] [cursor=pointer]
+              - tab "완료 (1)" [ref=e240] [cursor=pointer]
+            - generic [ref=e80]: 공식 데이터 기반 자동 생성
+          - tabpanel "오늘 (1)"
+          - tabpanel "이번 주 (1)" [ref=e241]:
+            - generic [ref=e139]:
+              - generic [ref=e140]:
+                - generic [ref=e141]:
+                  - generic [ref=e142]:
+                    - generic [ref=e143]: 5순위
+                    - generic [ref=e144]: 5월 11일 (월)
+                  - generic [ref=e145]: "주간농사정보 확인: 주간농사정보 제 18호 (2026.5.4.~5.10.)"
+                - generic [ref=e146]:
+                  - img [ref=e147]
+                  - text: 15분
+              - paragraph [ref=e150]: 농사로 주간농사정보 기준으로 이번 주 작업과 주의사항 확인 필요
+              - generic [ref=e151]:
+                - generic [ref=e152]:
+                  - checkbox "이번 주 기상·작업 주의사항 확인" [ref=e153] [cursor=pointer]
+                  - generic [ref=e154]: 이번 주 기상·작업 주의사항 확인
+                - generic [ref=e155]:
+                  - checkbox "필지에 해당되는 항목 표시" [ref=e156] [cursor=pointer]
+                  - generic [ref=e157]: 필지에 해당되는 항목 표시
+                - generic [ref=e158]:
+                  - checkbox "필요 작업 카드 추가 여부 판단" [ref=e159] [cursor=pointer]
+                  - generic [ref=e160]: 필요 작업 카드 추가 여부 판단
+              - button "근거 데이터 보기" [ref=e162] [cursor=pointer]:
+                - img [ref=e163]
+                - text: 근거 데이터 보기
+              - button "완료 처리 (0/3)" [disabled]
+            - generic [ref=e166]:
+              - region "농작업일정 근거" [ref=e167]:
+                - generic [ref=e168]:
+                  - img [ref=e169]
+                  - heading "농작업일정 근거" [level=2] [ref=e171]
+                - generic [ref=e172]:
+                  - generic [ref=e173]:
+                    - generic [ref=e174]: 논농사
+                    - generic [ref=e175]: 벼 기계이앙재배
+                  - paragraph [ref=e176]: 생육과정(주요농작업) 1월 2월 3월 4월 5월 6월 7월 8월 9월 10월 11월 12월 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 모기르기 모내기때 이삭팰때 익음때 수확할때 객토,퇴비주기 토양 개량 제주기, 논갈이 밑거름 이삭거름 볏짚깔기,논갈이 새끼칠거름 제초제살포 물깊이 대기 중간물때기 물걸러대기 완전물때기 기상재해 및 예상되는 문제점 1월 2월 3월 4월 5월 6월 7월 8월 9월 10월 11월 12월 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 가뭄 → 모내기 지연,이삭수감소 이상패기지연,여뭄불량 침관수, 태풍 → 이삭수감소 흰이삭, 쓰러짐, 여뭄불량 저온 → 모생육부진 이삭수감소 이삭패기 지연, 벼알수감소 여뭄불량 병충해 방제 1월 2월 3월 4월 5월 6월 7월 8월 9월 10월 11월 12월 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 잎도열병, 벼물바구미. 이화명나방 이삭도열병, 잎집무늬마름병, 흰잎마름병, 이화명나방, 멸구류, 흑명나방, 먹노린재
+                  - link "첨부 자료 확인" [ref=e177] [cursor=pointer]:
+                    - /url: http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=EFSYJUFHs9N/Mq23Vs/wOLDp1w/VGwS/8A8al7oQrKU9KolHxCN4Fta7hfMXElwF
+                    - text: 첨부 자료 확인
+                    - img [ref=e178]
+                - generic [ref=e182]:
+                  - generic [ref=e183]:
+                    - generic [ref=e184]: 논농사
+                    - generic [ref=e185]: 벼 직파재배
+                  - paragraph [ref=e186]: 생육과정(주요농작업) 1월 2월 3월 4월 5월 6월 7월 8월 9월 10월 11월 12월 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 씨뿌릴때 이삭팰때 익음때 수확할때 객토,퇴비주기 개량제주기, 논갈이 밑거름 새끼칠거름 이삭거름 볏짚깔기, 논갈이 제초제 살포 건답직파 물대기(벼잎 2~3매) 중간물때기(2~3회) 물걸러대기 완전물때기 무논직파 논 물가두기 파종후 무담수 10일 기상재해 및 예상되는 문제점 1월 2월 3월 4월 5월 6월 7월 8월 9월 10월 11월 12월 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 가뭄 → 발아불량, 이삭수 감소 이삭패기지연, 여뭄불량 침관수, 태풍 → 이삭수감소 흰이삭, 쓰러짐, 여뭄불량 저온 → 발아불량, 이삭수감소 이삭패기지연, 벼알수감소 여뭄불량 병충해 방제 1월 2월 3월 4월 5월 6월 7월 8월 9월 10월 11월 12월 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 잎도열병, 벼물바구미, 이화명나방 이삭도열병, 잎집무늬마름병, 흰잎마름병, 이화명나방, 멸구류, 흑명나방, 먹노린재
+                  - link "첨부 자료 확인" [ref=e187] [cursor=pointer]:
+                    - /url: http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=YK3gyvjBwAS0/Ox8DWdGl7Dp1w/VGwS/8A8al7oQrKU9KolHxCN4Fta7hfMXElwF
+                    - text: 첨부 자료 확인
+                    - img [ref=e188]
+                - generic [ref=e192]:
+                  - generic [ref=e193]:
+                    - generic [ref=e194]: 논농사
+                    - generic [ref=e195]: 사료용벼
+                  - paragraph [ref=e196]: "생육과정(주요농작업) 1월 2월 3월 4월 5월 6월 7월 8월 9월 10월 11월 12월 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 유묘기 (묘대기) 이앙 활착기 분얼기 유수 형성기 수잉기 등숙기 경운 밑거름 파종 및 육묘관리 포장관리 이삭거름 포장관리 물떼기 수확 기상재해 및 예상되는 문제점 1월 2월 3월 4월 5월 6월 7월 8월 9월 10월 11월 12월 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 상 중 하 잦은비 고온 태풍 잦은 비 병 해 충 잡초 ⊙ 잦은 비 : 영양 및 생식 생장기 생육 불량 - 활착 지연, 웃자람, 연약 생장, 잡초 방제 부실 - 이삭수 감소, 이삭패기 지연, 벼알수 감소, 등숙불량 - 병해충 : 잎도열병, 목도열병, 세균성벼알마름병 ⊙ 고온으로 수정불량, 잎집문의마름병 발생 ⊙ 태풍으로 도복, 각종 병해충 발생 및 생산성 저조 ⊙ 수확기 결정 - 강우시 논토양 과습으로 수확작업 불량 - 보유 수확작업 기종의 성능 - 수확기 기상재해로 품질 저하"
+                  - link "첨부 자료 확인" [ref=e197] [cursor=pointer]:
+                    - /url: http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=fXw2epYFmNtdiC80kuz8zKF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                    - text: 첨부 자료 확인
+                    - img [ref=e198]
+              - region "주간농사정보 근거" [ref=e202]:
+                - generic [ref=e203]:
+                  - img [ref=e204]
+                  - heading "주간농사정보 근거" [level=2] [ref=e206]
+                - generic [ref=e207]:
+                  - generic [ref=e208]: 주간농사정보 제 18호 (2026.5.4.~5.10.)
+                  - generic [ref=e209]: 2026-04-29 · 배선아
+                  - link "공식 자료 확인" [ref=e210] [cursor=pointer]:
+                    - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=ABJzxyxUGheNpFTMoQfu3KF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                    - text: 공식 자료 확인
+                    - img [ref=e211]
+                - generic [ref=e215]:
+                  - generic [ref=e216]: 주간농사정보 제 17호 (2026.4.27.~5.3.)
+                  - generic [ref=e217]: 2026-04-22 · 배선아
+                  - link "공식 자료 확인" [ref=e218] [cursor=pointer]:
+                    - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=ziIpwYArkwUhn3YwnFrFAKF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                    - text: 공식 자료 확인
+                    - img [ref=e219]
+                - generic [ref=e223]:
+                  - generic [ref=e224]: 주간농사정보 제 16호 (2026.4.20.~4.26.)
+                  - generic [ref=e225]: 2026-04-16 · 배선아
+                  - link "공식 자료 확인" [ref=e226] [cursor=pointer]:
+                    - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=Cm@84uhsozu8AA5djyHEMaF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                    - text: 공식 자료 확인
+                    - img [ref=e227]
+          - tabpanel "완료 (1)"

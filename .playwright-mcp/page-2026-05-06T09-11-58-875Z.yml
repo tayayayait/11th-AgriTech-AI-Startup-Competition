@@ -1,0 +1,117 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e4]:
+    - generic [ref=e8]:
+      - generic [ref=e10]:
+        - img [ref=e12]
+        - generic [ref=e16]:
+          - generic [ref=e17]: FieldGuard AI
+          - generic [ref=e18]: 현장 의사결정 보조
+      - generic [ref=e20]:
+        - generic [ref=e21]: 주 메뉴
+        - list [ref=e23]:
+          - listitem [ref=e24]:
+            - link "대시보드" [ref=e25] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e26]
+              - generic [ref=e31]: 대시보드
+          - listitem [ref=e32]:
+            - link "필지 지도" [ref=e33] [cursor=pointer]:
+              - /url: /fields/map
+              - img [ref=e34]
+              - generic [ref=e36]: 필지 지도
+          - listitem [ref=e37]:
+            - link "작업 카드" [ref=e38] [cursor=pointer]:
+              - /url: /tasks
+              - img [ref=e39]
+              - generic [ref=e42]: 작업 카드
+          - listitem [ref=e43]:
+            - link "사진 판독" [ref=e44] [cursor=pointer]:
+              - /url: /diagnosis
+              - img [ref=e45]
+              - generic [ref=e48]: 사진 판독
+          - listitem [ref=e49]:
+            - link "자료/상담" [ref=e50] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e51]
+              - generic [ref=e54]: 자료/상담
+          - listitem [ref=e55]:
+            - link "설정" [ref=e56] [cursor=pointer]:
+              - /url: /settings
+              - img [ref=e57]
+              - generic [ref=e60]: 설정
+    - generic [ref=e61]:
+      - banner [ref=e62]:
+        - button "Toggle Sidebar" [ref=e63] [cursor=pointer]:
+          - img
+          - generic [ref=e64]: Toggle Sidebar
+        - generic [ref=e65]: 2026년 5월 6일 (수)
+        - generic [ref=e66]:
+          - combobox [ref=e67] [cursor=pointer]:
+            - generic: Phase9 테스트 필지 · 벼
+            - img [ref=e68]
+          - generic [ref=e70]: 마지막 갱신 5월 6일 17:57
+          - button "동기화" [ref=e71] [cursor=pointer]:
+            - img
+      - main [ref=e72]:
+        - generic [ref=e313]:
+          - tablist [ref=e314]:
+            - tab "상담 리포트" [ref=e315] [cursor=pointer]
+            - tab "농약 안전사용지침" [selected] [ref=e316] [cursor=pointer]
+          - tabpanel "농약 안전사용지침" [ref=e317]:
+            - generic [ref=e318]:
+              - note [ref=e319]:
+                - img [ref=e320]
+                - paragraph [ref=e322]: FieldGuard AI는 농약을 처방하지 않습니다. 실제 사용 전 농사로 공식 지침, 제품 라벨, 전문가 상담을 확인하세요.
+              - generic [ref=e324]: "농사로 `agchmSafeManualList`는 공식 안전사용지침 문서 접근용입니다. 수확 전 사용기간, 사용횟수, 희석배수는 현재 가이드 응답만으로 확정할 수 없으며 별도 공식 상세 DB 구축 또는 추가 공식 데이터가 필요합니다."
+              - generic [ref=e325]:
+                - heading "공식 안전사용지침 확인" [level=3] [ref=e327]
+                - generic [ref=e328]:
+                  - generic [ref=e329]:
+                    - generic [ref=e330]:
+                      - text: 작물명
+                      - textbox "작물명" [ref=e331]:
+                        - /placeholder: "예: 배추"
+                        - text: 벼
+                    - generic [ref=e332]:
+                      - text: 병해충명/적용대상
+                      - textbox "병해충명/적용대상" [ref=e333]:
+                        - /placeholder: "예: 노균병"
+                        - text: 깨씨무늬병
+                    - generic [ref=e334]:
+                      - text: 농약명
+                      - textbox "농약명" [ref=e335]:
+                        - /placeholder: "예: 만코제브"
+                    - generic [ref=e336]:
+                      - text: 안전사용기간 필터
+                      - combobox "안전사용기간 필터" [ref=e337] [cursor=pointer]:
+                        - generic: 전체
+                        - img [ref=e338]
+                  - button "공식 자료 확인" [ref=e341] [cursor=pointer]
+              - generic [ref=e342]:
+                - generic [ref=e344]:
+                  - heading "농사로 공식 지침" [level=3] [ref=e345]
+                  - generic [ref=e346]: 정상 수집
+                - generic [ref=e347]:
+                  - generic [ref=e348]:
+                    - generic [ref=e349]: (중국) 수출용 (쌀) 농약안전사용지침(2026. 2.)
+                    - generic [ref=e350]: 논벼 · 개정 2026.02 · 중국
+                    - link "원문 열기" [ref=e351] [cursor=pointer]:
+                      - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=c/3PQJwrtmvlwPugYZmVzaF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                      - text: 원문 열기
+                      - img [ref=e352]
+                  - generic [ref=e356]:
+                    - generic [ref=e357]: (미국) 수출용 (쌀) 농약안전사용 지침(2025. 11.)
+                    - generic [ref=e358]: 논벼 · 개정 2025.11 · 미국
+                    - link "원문 열기" [ref=e359] [cursor=pointer]:
+                      - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=bOIfrcQMJdExLnCj0mteh6F1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                      - text: 원문 열기
+                      - img [ref=e360]
+              - generic [ref=e364]:
+                - heading "안전사용기간/사용횟수 참고" [level=3] [ref=e366]
+                - paragraph [ref=e368]: 해당 조건의 공식 자료가 확인되지 않습니다.
+              - generic [ref=e370]:
+                - img [ref=e371]
+                - text: 농약 지침은 공식 자료 확인을 우선하며, 자동 처방을 제공하지 않습니다.

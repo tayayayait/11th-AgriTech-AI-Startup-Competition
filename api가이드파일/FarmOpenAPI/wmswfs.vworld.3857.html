@@ -1,0 +1,679 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>VWorld EPSG 3857</title>
+	
+	<!------------------------------------------------------------------------------ 
+		vworld apiKey : vworld에서 발급한 apiKey
+		vworld domain : vworld에서 apiKey발급시 입력한 domain
+	-------------------------------------------------------------------------------->
+	<script type="text/javascript" src="https://map.vworld.kr/js/vworldMapInit.js.do?version=2.0&apiKey=vworld apiKey&domain=vworld domain"></script>
+    
+	<script type="text/javascript" src="https://riversun.github.io/xml-beautify/XmlBeautify.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
+</head>
+
+<body onload="init()">
+    <div id="map" style="width:70%;height:70%;"></div>
+    <div id="resultDiv" style="background-color:white; padding-left: 10px; width:29%; height:70%; position: absolute; right: 5px; top: 0px; z-index: 1000;">
+        <textarea id="info" name="info" style="width:100%;height:100%;">
+		</textarea>
+    </div>
+    <div id="mapType" style="width:30%; position: absolute; right: 200px; top: 10px; z-index: 1000;">
+        <button type="button" onclick="javascript:changeMapType(vw.ol3.BasemapType.GRAPHIC);">base</button>
+        <button type="button" onclick="javascript:changeMapType(vw.ol3.BasemapType.GRAPHIC_WHITE);">white</button>
+        <button type="button" onclick="javascript:changeMapType(vw.ol3.BasemapType.PHOTO);">satellite</button>
+    </div>
+    <div id="buttonDiv">
+    	<button type="button" onclick="javascript:mapClickEvent(true);">click event on</button>
+	    <button type="button" onclick="javascript:mapClickEvent(false);">click event off</button>
+	    <button type="button" onclick="javascript:removeLayer('all');">레이어제거</button><br>
+	    <button type="button" onclick="javascript:addWMS('01,02,03,04,06','farm_map_api','farmmapWMS','01');">팜맵 Color</button>
+	    <button type="button" onclick="javascript:addWMS('01,02,03,04,06','farm_map_api','farmmapWMS','02');">팜맵 백지도</button>
+	    <button type="button" onclick="javascript:addWMS('01','farm_map_api01','farmmapWMS01');">논</button>
+	    <button type="button" onclick="javascript:addWMS('02','farm_map_api02','farmmapWMS02','01');">밭</button>
+	    <button type="button" onclick="javascript:addWMS('03','farm_map_api03','farmmapWMS03','01');">과수</button>
+	    <button type="button" onclick="javascript:addWMS('04','farm_map_api04','farmmapWMS04','01');">시설</button>
+	    <button type="button" onclick="javascript:addWMS('06','farm_map_api06','farmmapWMS06','01');">비경지</button>
+	    <button type="button" onclick="javascript:addWMS('01,02','farm_map_api0102','farmmapWMS0102','01');">논,밭</button>
+	    <button type="button" onclick="javascript:addWMS('03,04','farm_map_api0304','farmmapWMS030406','01');">과수,시설,비경지</button>
+	    <br><br>
+	    <div>
+	        면색 : <label for="01f">논</label><input type="color" id="01f" name="01f" value="#d3f556">&nbsp;
+	        <label for="02f">밭</label><input type="color" id="02f" name="02f" value="#2cba77">&nbsp;
+	        <label for="03f">과수</label><input type="color" id="03f" name="03f" value="#fb5b5b">&nbsp;
+	        <label for="04f">시설</label><input type="color" id="04f" name="04f" value="#b0d3e4">&nbsp;
+	        <label for="05f">비경지</label><input type="color" id="06f" name="06f" value="#d6c5bd">&nbsp;&nbsp;
+	        면투명도(0 ~ 1) : <input type="text" id="sldBodyFillOpacity" name="sldBodyFillOpacity" value="0.8" size=4>&nbsp;<br>
+	        
+	        선색 : <label for="01s">논</label><input type="color" id="01s" name="01s" value="#8e8e8e">&nbsp;
+	        <label for="02s">밭</label><input type="color" id="02s" name="02s" value="#8e8e8e">&nbsp;
+	        <label for="03s">과수</label><input type="color" id="03s" name="03s" value="#8e8e8e">&nbsp;
+	        <label for="04s">시설</label><input type="color" id="04s" name="04s" value="#8e8e8e">&nbsp;
+	        <label for="06s">비경지</label><input type="color" id="06s" name="06s" value="#8e8e8e">&nbsp;&nbsp;
+	        선투명도(0 ~ 1) : <input type="text" id="sldBodyStrokeOpacity" name="sldBodyStrokeOpacity" value="0.5" size=4>&nbsp;
+	        선두께(1 ~ 10) : <input type="text" id="sldBodyStrokeWidth" name="sldBodyStrokeWidth" value="1" size=4>&nbsp;<br>
+	        
+	        <button type="button" onclick="javascript:addWMSColor();">사용자 Color 적용</button>
+	    </div>
+	    <br>
+	    wfs outputformat test :  
+	    <button type="button" onclick="javascript:wfsTest01();">wfs json</button>
+	    <button type="button" onclick="javascript:wfsTest02();">wfs jsonp</button>
+	    <button type="button" onclick="javascript:wfsTest03('gml2');">wfs gml2</button>
+	    <button type="button" onclick="javascript:wfsTest03('gml3');">wfs gml3</button>
+	    <button type="button" onclick="javascript:wfsTest04('2.0.0','jsonp',0);">wfs bbox 1page</button>
+	    <button type="button" onclick="javascript:wfsTest04('1.1.0','json',10);">wfs bbox 2page</button>
+	    <button type="button" onclick="javascript:wfsTest04('2.0.0','gml3',20);">wfs bbox 3page</button>
+	    <button type="button" onclick="javascript:wfsTest04('1.1.0','gml2',30);">wfs bbox 4page</button>
+	    <br>
+	    wfs filter test :  
+    	<button name="btnWfsSend" type="button" onclick="javascript:wfsFilterTest('PropertyIsEqualTo');">PropertyIsEqualTo</button>
+    	<button name="btnWfsSend" type="button" onclick="javascript:wfsFilterTest('PropertyIsLike');">PropertyIsLike</button>
+    	<button name="btnWfsSend" type="button" onclick="javascript:wfsFilterTest('PropertyIsBetween');">PropertyIsBetween</button>
+    	<button name="btnWfsSend" type="button" onclick="javascript:wfsFilterTest('Intersects');">Intersects</button>
+    	<button name="btnWfsSend" type="button" onclick="javascript:wfsFilterTest('And');">And</button>
+    	<button name="btnWfsSend" type="button" onclick="javascript:wfsFilterTest('Spatial_Attribute');">Spatial + Attribute</button>
+    </div>
+
+    <script>
+	    $(function(){
+			$("button[name='btnWfsSend']").click(function(){
+				$.blockUI({message : "<h3>Please wait...</h3>", css : {height : "5%"}});
+			});
+		});
+	    
+		var apiKey = "apiKey";  //팜맵API Key 입력
+		var domain = "domain";  //팜맵API Key 발급시 입력한 domain 입력
+		
+        var reqUrl = "https://agis.epis.or.kr/ASD/";
+        var map;
+        var mapLayer;
+        var mapView;
+        var _tilegrid;
+        
+        var vectorSource;
+
+        function init() {
+            vw.ol3.MapOptions = {
+                basemapType: vw.ol3.BasemapType.GRAPHIC,
+                controlDensity: vw.ol3.DensityType.EMPTY,
+                interactionDensity: vw.ol3.DensityType.BASIC,
+                controlsAutoArrange: true,
+                homePosition: vw.ol3.CameraPosition,
+                initPosition: vw.ol3.CameraPosition
+            };
+
+            map = new vw.ol3.Map("map", vw.ol3.MapOptions);
+
+            mapView = new ol.View({
+                projection: 'EPSG:3857',
+                minZoom: 7,
+                maxZoom: 18,
+                constrainResolution: true,
+                center: [14173755.776822584, 4365986.018360078],
+                zoom: 16
+            });
+
+            map.setView(mapView);
+
+            var zoom = new vw.ol3.control.Zoom(map);
+            zoom.delta = 1;
+            zoom.sliderVisible = false;
+            zoom.site = vw.ol3.SiteAlignType.TOP_LEFT;
+            zoom.draw();
+            map.addControl(zoom);
+
+            var _resolutions = new Array(22);
+            for (var i = 0, ii = _resolutions.length; i < ii; ++i) {
+                _resolutions[i] = _startResolution / Math.pow(2, i);
+            }
+            _tilegrid = new ol.tilegrid.TileGrid({
+                origin: ol.extent.getTopLeft(vw.ol3.ViewConfig.MAXEXTENT),
+                resolutions: _resolutions,
+                tileSize: [512, 512]
+            });
+            
+            $("#vw-zoombar").css("opacity",1);
+        }
+
+        function mapClickEvent(type) {
+            if (type) {
+                map.on("singleclick", getWFS);
+            } else {
+                $("#info").val("");
+                map.un("singleclick", getWFS);
+            }
+        }
+
+        function addWMSColor() {
+            var sld = "01f:" + $("#01f").val() + ",02f:" + $("#02f").val() + ",03f:" + $("#03f").val() + ",04f:" + $("#04f").val() + ",06f:" + $("#06f").val() + 
+            		  ",01s:" + $("#01s").val() + ",02s:" + $("#02s").val() + ",03s:" + $("#03s").val() + ",04s:" + $("#04s").val() + ",06s:" + $("#06s").val()
+            sld = sld.replace(/#/gi, "");
+            addWMS('01,02,03,04,06', 'farm_map_api', 'farmmapWMS', '01', true, sld);
+        }
+
+        function addWMS(landcd, id, name, style, isSld, sld) {
+            var layer;
+
+            if (name == 'farmmapWMS') {
+                removeLayer('wms');
+            } else {
+                layer = getLayerByName('farmmapWMS');
+                if (layer != null) {
+                    map.removeLayer(getLayerByName('farmmapWMS'));
+                }
+            }
+
+            layer = getLayerByName(name);
+
+            if (layer == null) {
+                var source;
+                var sldBodyFillOpacity = $("#sldBodyFillOpacity").val();
+                var sldBodyStrokeOpacity = $("#sldBodyStrokeOpacity").val();
+                var sldBodyStrokeWidth = $("#sldBodyStrokeWidth").val();
+                
+                if (isSld) {
+                    source = new ol.source.TileWMS({
+                        url: 'https://agis.epis.or.kr/ASD/farmmapApi/wms.do',
+                        params: {
+                            'version': '1.1.1',
+                            //'version':'1.3.0',
+                            'crs': 'EPSG:3857',
+                            'layers': 'farm_map_api',
+                            'landcd': landcd,
+                            'sldbody': sld,
+                            'sldbodyfillopacity': sldBodyFillOpacity,
+                            'sldbodystrokeopacity': sldBodyStrokeOpacity,
+                            'sldbodystrokewidth': sldBodyStrokeWidth,
+                            'apiKey': apiKey,
+                            'domain': domain
+                        },
+                        tileGrid: _tilegrid
+                    });
+                } else {
+                    source = new ol.source.TileWMS({
+                        url: 'https://agis.epis.or.kr/ASD/farmmapApi/wms.do',
+                        params: {
+                            //'version':'1.1.1',
+                            'version': '1.3.0',
+                            'crs': 'EPSG:3857',
+                            'layers': 'farm_map_api',
+                            'styles': style,
+                            'landcd': landcd,
+                            'apiKey': apiKey,
+                            'domain': domain
+                        },
+                        tileGrid: _tilegrid
+                    });
+                }
+
+                //bbox=14175705.515682373,4366083.055041503,14176928.508134766,4367306.0474938955
+
+                var tileImg = new ol.layer.Tile({
+                    id: id,
+                    name: name,
+                    visible: true,
+                    zIndex: 1000,
+                    source: source
+                });
+
+                map.addLayer(tileImg);
+            }
+        }
+
+
+
+
+        function getWFS(evt) {
+            let coordinate = evt.coordinate;
+
+            //wfs version:1.1.0 필터
+            //var filter = "<Filter><Intersects><PropertyName>shape</PropertyName><Point srsName=\"EPSG:3857\"><pos>" + coordinate[0] + " " + coordinate[1] + "</pos></Point></Intersects></Filter>";
+
+            //wfs version:2.0.0 필터
+            var filter = "<Filter xmlns:gml=\"http://www.opengis.net/gml/3.2\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.opengis.net/wfs/2.0 \"><Intersects><ValueReference>shape</ValueReference><gml:Point srsName=\"EPSG:3857\"><gml:pos>" + coordinate[0] + " " + coordinate[1] + "</gml:pos></gml:Point></Intersects></Filter>";
+
+            var params = {};
+            params.service = "wfs";
+            //params.version = "1.1.0";
+            params.version = "2.0.0";
+            params.request = "GetFeature";
+            params.outputformat = "jsonp";
+            params.typename = "farm_map_api";
+            params.propertyname = "id,uid,clsf_nm,pnu,ldcg_cd,stdg_cd,stdg_addr,shape";
+            params.sortby = "asc";
+            //params.sortby = "desc";
+            params.startindex = "0";
+            params.count = "10";
+            params.srsname = "EPSG:3857";
+            params.filter = encodeURI(filter);
+            params.apiKey = apiKey;
+            params.domain = domain;
+
+            goAjax(params);
+        }
+
+        function wfsTest01() {
+            var params = {};
+            params.service = "wfs";
+            params.version = "2.0.0";
+            params.request = "GetFeature";
+            params.outputformat = "json";
+            params.typename = "farm_map_api";
+            params.bbox = "14169071.50125577,4368511.22811474,14169071.50125577,4368511.22811474,EPSG:3857";
+            params.propertyname = "id,uid,pnu,ldcg_cd,stdg_cd,stdg_addr,clsf_nm,area,cad_con_ra,chg_rsn_nm,fl_armt_yn,o_clsf_nm";
+            params.sortby = "asc";
+            params.startindex = "0";
+            params.count = "10";
+            params.srsname = "EPSG:3857";
+            params.apiKey = apiKey;
+            params.domain = domain;
+
+            goAjax(params);
+        }
+
+        function wfsTest02() {
+            var params = {};
+            params.service = "wfs";
+            params.version = "2.0.0";
+            params.request = "GetFeature";
+            params.outputformat = "jsonp";
+            params.typename = "farm_map_api";
+            params.bbox = "14169071.50125577,4368511.22811474,14169071.50125577,4368511.22811474,EPSG:3857";
+            params.sortby = "asc";
+            params.startindex = "0";
+            params.count = "10";
+            params.srsname = "EPSG:3857";
+            params.apiKey = apiKey;
+            params.domain = domain;
+
+            goAjax(params);
+        }
+
+        function wfsTest03(outputType) {
+            var params = {};
+            params.service = "wfs";
+            params.version = "2.0.0";
+            params.request = "GetFeature";
+            params.outputformat = outputType;
+            params.typename = "farm_map_api";
+            params.bbox = "14169071.50125577,4368511.22811474,14169071.50125577,4368511.22811474,EPSG:3857";
+            if (outputType == 'gml2') {
+                params.propertyname = "id,uid,pnu,ldcg_cd,stdg_cd,stdg_addr,clsf_nm,area,cad_con_ra,chg_rsn_nm,fl_armt_yn,o_clsf_nm";
+            }
+            params.sortby = "asc";
+            params.startindex = "0";
+            params.count = "10";
+            params.srsname = "EPSG:3857";
+            params.apiKey = apiKey;
+            params.domain = domain;
+
+            goAjax(params);
+        }
+        
+        function drawBBOX(xmin, ymin, xmax, ymax) {
+        	var bboxFeature = new ol.Feature(
+        		new ol.geom.Polygon([[[xmin,ymin], [xmin,ymax], [xmax,ymax], [xmax,ymin]]])
+        	);
+        	
+        	var bboxStyle = style = new ol.style.Style({
+        	    stroke : new ol.style.Stroke({
+        	        color : [ 0, 255, 0, .7 ],
+        	        width : 3
+        	    })
+        	});
+        	bboxFeature.setStyle(bboxStyle);
+        	
+        	var bboxLayer = new ol.layer.Vector({
+        		id: "bboxLayer",
+        		name: "bboxLayer",
+        		zIndex: 100,
+        	    source : new ol.source.Vector({
+        	        features : [ bboxFeature ]
+        	    })
+        	});
+        	map.addLayer(bboxLayer);
+        }
+
+        function wfsTest04(version, outputType, start) {
+        	removeLayer('wfs');
+        	
+        	drawBBOX(14167598.93790123,4367354.859934921,14170009.29308921,4368726.91992866);
+        	
+        	map.getView().setCenter([14168804.11549522, 4368090.8899317905]);
+        	map.getView().setZoom(16);
+        	
+            var params = {};
+            params.service = "wfs";
+            params.version = version;
+            params.request = "GetFeature";
+            params.outputformat = outputType;
+            params.typename = "farm_map_api";
+            params.bbox = "14167598.93790123,4367354.859934921,14170009.29308921,4368726.91992866,EPSG:3857";
+            params.propertyname = "id,uid,clsf_nm,pnu,ldcg_cd,stdg_cd,stdg_addr,shape";
+            params.sortby = "asc";
+            params.startindex = start;
+            params.count = "10";
+            params.srsname = "EPSG:3857";
+            params.apiKey = apiKey;
+            params.domain = domain;
+
+            var sourceFormat = new ol.format.GeoJSON();
+            var sourceDataType = 'jsonp';
+            var layerId = 'search1';
+            if(params.outputformat == 'json') {
+            	sourceDataType = 'json';
+            	layerId = 'search2';
+            } else if(params.outputformat == 'gml3') {
+            	sourceFormat = new ol.format.GML3();
+            	sourceDataType = 'xml';
+            	layerId = 'search3';
+            } else if(params.outputformat == 'gml2') {
+            	sourceFormat = new ol.format.GML2();
+            	sourceDataType = 'xml';
+            	layerId = 'search4';
+            }
+            
+            if(params.outputformat == 'jsonp') {
+            	vectorSource = new ol.source.Vector({
+                	format: sourceFormat,
+                	loader: function() {
+                		$.ajax({
+                            url: reqUrl + "farmmapApi/wfs.do",
+                            dataType: sourceDataType,
+                            jsonpCallback: "loadFeaturesCallback",
+                            async: false,
+                            type: "GET",
+                            cache: false,
+                            data: params,
+                            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                console.log(XMLHttpRequest);
+                            }
+                        });
+                	},
+                	strategy: ol.loadingstrategy.all
+                });
+            } else {
+            	vectorSource = new ol.source.Vector({
+                	format: sourceFormat,
+                	loader: function() {
+                		$.ajax({
+                            url: reqUrl + "farmmapApi/wfs.do",
+                            dataType: sourceDataType,
+                            async: false,
+                            type: "GET",
+                            cache: false,
+                            data: params,
+                            success: function(data) {
+                            	if(sourceDataType == 'xml') {
+                            		var xmlText = new XmlBeautify().beautify(new XMLSerializer().serializeToString(data), {
+                                        indent: "  ",
+                                        useSelfClosingElement: true
+                                    });
+                                    $("#info").val(xmlText);
+                            	} else {
+                            		$("#info").val(JSON.stringify(data, null, 4));
+                            	}
+                            },
+                            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                console.log(XMLHttpRequest);
+                            }
+                        }).done(loadFeatures);
+                	},
+                	strategy: ol.loadingstrategy.all
+                });
+            }
+            
+            var loadFeatures = function(response) {
+            	var features = vectorSource.getFormat().readFeatures(response);
+            	vectorSource.addFeatures(features);
+            };
+            
+            var vector = new ol.layer.Vector({
+            	id: layerId,
+            	name: layerId,
+                source: vectorSource,
+                style: new ol.style.Style({
+                	stroke: new ol.style.Stroke({
+               	      color: 'rgba(240, 150, 90, 1.0)',
+               	      width: 2
+               	    }),
+                    fill: new ol.style.Fill({
+                        color: 'rgba(30, 170, 240, 1.0)'
+                    })
+                }),
+                zIndex: 2000
+            });
+            
+            map.addLayer(vector);
+        }
+        
+        function loadFeaturesCallback(response) {
+        	$("#info").val(JSON.stringify(response, null, 4));
+        	var features = vectorSource.getFormat().readFeatures(response);
+        	vectorSource.addFeatures(features);
+        }
+        
+        function wfsFilterTest(type) {
+        	/******************************************************************************************************************
+			 * encodeURI 변환 필요, WFS version에 따라 filter xml 엘리먼트가 다름.                                            *
+			 * WFS Filter 목록 및 샘플예제는 첨부문서 [wfs_filter_1.1.0_sample.txt], [wfs_filter_1.1.0_sample.txt] 참조       *
+			 ******************************************************************************************************************/
+			 
+			var params = {};
+			params.service = "wfs";
+			params.version = "2.0.0";
+			params.request = "GetFeature";
+			params.outputformat = "jsonp";
+			params.typename = "farm_map_api";
+			params.propertyname = "id,uid,clsf_nm,pnu,ldcg_cd,stdg_cd,stdg_addr,shape";
+			params.sortby = "asc";
+			params.startindex = "0";
+			params.count = "200";
+			params.srsname = "EPSG:3857";
+			params.apiKey = apiKey;
+			params.domain = domain;
+             
+			if(type == "PropertyIsEqualTo") {
+				/* id = '117401010000058'
+				<Filter>
+				  <PropertyIsEqualTo matchCase="true">
+				    <ValueReference>id</ValueReference>
+				    <Literal>117401010000058</Literal>
+				  </PropertyIsEqualTo>
+				</Filter> */
+				params.filter = "%3CFilter%3E%0A%20%20%3CPropertyIsEqualTo%20matchCase%3D%22true%22%3E%0A%20%20%20%20%3CValueReference%3Eid%3C%2FValueReference%3E%0A%20%20%20%20%3CLiteral%3E117401010000058%3C%2FLiteral%3E%0A%20%20%3C%2FPropertyIsEqualTo%3E%0A%3C%2FFilter%3E";
+			} else if(type == "PropertyIsLike") {
+				/* pnu like '361101190010114%'
+				<Filter>
+				  <PropertyIsLike wildCard="*" singleChar="_" escapeChar="\">
+				    <ValueReference>pnu</ValueReference>
+				    <Literal>361101190010114*</Literal>
+				  </PropertyIsLike>
+				</Filter> */
+				params.filter = "%3CFilter%3E%0A%20%20%3CPropertyIsLike%20wildCard%3D%22*%22%20singleChar%3D%22_%22%20escapeChar%3D%22%5C%22%3E%0A%20%20%20%20%3CValueReference%3Epnu%3C%2FValueReference%3E%0A%20%20%20%20%3CLiteral%3E361101190010114*%3C%2FLiteral%3E%0A%20%20%3C%2FPropertyIsLike%3E%0A%3C%2FFilter%3E";
+			} else if(type == "PropertyIsBetween") {
+				/* area >= 2000 and area <= 2500
+				<Filter>
+                  <And>
+                    <PropertyIsLike wildCard="*" singleChar="_" escapeChar="\">
+                      <ValueReference>pnu</ValueReference>
+                      <Literal>36110*</Literal>
+                    </PropertyIsLike>
+                    <PropertyIsBetween>
+                      <ValueReference>area</ValueReference>
+                      <LowerBoundary>
+                        <Literal>2000</Literal>
+                      </LowerBoundary>
+                      <UpperBoundary>
+                        <Literal>2500</Literal>
+                      </UpperBoundary>
+                    </PropertyIsBetween>
+                  </And>
+                </Filter> */
+				params.filter = "%3CFilter%3E%0A%20%20%3CAnd%3E%0A%20%20%20%20%3CPropertyIsLike%20wildCard%3D%22*%22%20singleChar%3D%22_%22%20escapeChar%3D%22%5C%22%3E%0A%20%20%20%20%20%20%3CValueReference%3Epnu%3C%2FValueReference%3E%0A%20%20%20%20%20%20%3CLiteral%3E36110*%3C%2FLiteral%3E%0A%20%20%20%20%3C%2FPropertyIsLike%3E%0A%20%20%20%20%3CPropertyIsBetween%3E%0A%20%20%20%20%20%20%3CValueReference%3Earea%3C%2FValueReference%3E%0A%20%20%20%20%20%20%3CLowerBoundary%3E%0A%20%20%20%20%20%20%20%20%3CLiteral%3E2000%3C%2FLiteral%3E%0A%20%20%20%20%20%20%3C%2FLowerBoundary%3E%0A%20%20%20%20%20%20%3CUpperBoundary%3E%0A%20%20%20%20%20%20%20%20%3CLiteral%3E2500%3C%2FLiteral%3E%0A%20%20%20%20%20%20%3C%2FUpperBoundary%3E%0A%20%20%20%20%3C%2FPropertyIsBetween%3E%0A%20%20%3C%2FAnd%3E%0A%3C%2FFilter%3E";
+			} else if(type == "Intersects") {
+				/* Intersects(POINT('14174213.789277812','4365724.618559506') , shape)
+				<Filter xmlns:gml="http://www.opengis.net/gml/3.2">
+				  <Intersects>
+				    <ValueReference>shape</ValueReference>
+				    <gml:Point srsName="EPSG:3857">
+				      <gml:pos>14174213.789277812 4365724.618559506</gml:pos>
+				    </gml:Point>
+				  </Intersects>
+				</Filter> */
+				params.filter = "%3CFilter%20xmlns%3Agml%3D%22http%3A%2F%2Fwww.opengis.net%2Fgml%2F3.2%22%3E%0A%20%20%3CIntersects%3E%0A%20%20%20%20%3CValueReference%3Eshape%3C%2FValueReference%3E%0A%20%20%20%20%3Cgml%3APoint%20srsName%3D%22EPSG%3A3857%22%3E%0A%20%20%20%20%20%20%3Cgml%3Apos%3E14174213.789277812%204365724.618559506%3C%2Fgml%3Apos%3E%0A%20%20%20%20%3C%2Fgml%3APoint%3E%0A%20%20%3C%2FIntersects%3E%0A%3C%2FFilter%3E";
+			} else if(type == "And") {
+				/* clsf_nm = '논' and area > 1000
+				<Filter>
+				  <And>
+					<PropertyIsLike wildCard="*" singleChar="_" escapeChar="\">
+				      <ValueReference>pnu</ValueReference>
+				      <Literal>361101190010114*</Literal>
+				    </PropertyIsLike>
+				    <PropertyIsEqualTo matchCase="true">
+				      <ValueReference>clsf_nm</ValueReference>
+				      <Literal>논</Literal>
+				    </PropertyIsEqualTo>
+				    <PropertyIsGreaterThan>
+				      <ValueReference>area</ValueReference>
+				      <Literal>1000</Literal>
+				    </PropertyIsGreaterThan>
+				  </And>
+				</Filter> */
+				params.filter = "%3CFilter%3E%0A%20%20%3CAnd%3E%0A%20%20%20%20%3CPropertyIsLike%20wildCard%3D%22*%22%20singleChar%3D%22_%22%20escapeChar%3D%22%5C%22%3E%0A%20%20%20%20%20%20%3CValueReference%3Epnu%3C%2FValueReference%3E%0A%20%20%20%20%20%20%3CLiteral%3E361101190010114*%3C%2FLiteral%3E%0A%20%20%20%20%3C%2FPropertyIsLike%3E%0A%20%20%20%20%3CPropertyIsEqualTo%20matchCase%3D%22true%22%3E%0A%20%20%20%20%20%20%3CValueReference%3Eclsf_nm%3C%2FValueReference%3E%0A%20%20%20%20%20%20%3CLiteral%3E%EB%85%BC%3C%2FLiteral%3E%0A%20%20%20%20%3C%2FPropertyIsEqualTo%3E%0A%20%20%20%20%3CPropertyIsGreaterThan%3E%0A%20%20%20%20%20%20%3CValueReference%3Earea%3C%2FValueReference%3E%0A%20%20%20%20%20%20%3CLiteral%3E1000%3C%2FLiteral%3E%0A%20%20%20%20%3C%2FPropertyIsGreaterThan%3E%0A%20%20%3C%2FAnd%3E%0A%3C%2FFilter%3E";
+			} else if(type == "Spatial_Attribute") {
+				/* clsf_nm = '과수' and Intersects(POINT('14174213.789277812','4365724.618559506') , shape)
+				<Filter xmlns:gml="http://www.opengis.net/gml/3.2">
+				  <And>
+				    <PropertyIsEqualTo matchCase="true">
+				      <ValueReference>clsf_nm</ValueReference>
+				      <Literal>과수</Literal>
+				    </PropertyIsEqualTo>
+				    <Intersects>
+				      <ValueReference>shape</ValueReference>
+				        <gml:Point srsName="EPSG:3857">
+				          <gml:pos>14174213.789277812 4365724.618559506</gml:pos>
+				      </gml:Point>
+				    </Intersects>
+				  </And>
+				</Filter> */
+				params.filter = "%3CFilter%20xmlns%3Agml%3D%22http%3A%2F%2Fwww.opengis.net%2Fgml%2F3.2%22%3E%0A%20%20%3CAnd%3E%0A%20%20%20%20%3CPropertyIsEqualTo%20matchCase%3D%22true%22%3E%0A%20%20%20%20%20%20%3CValueReference%3Eclsf_nm%3C%2FValueReference%3E%0A%20%20%20%20%20%20%3CLiteral%3E%EA%B3%BC%EC%88%98%3C%2FLiteral%3E%0A%20%20%20%20%3C%2FPropertyIsEqualTo%3E%0A%20%20%20%20%3CIntersects%3E%0A%20%20%20%20%20%20%3CValueReference%3Eshape%3C%2FValueReference%3E%0A%20%20%20%20%20%20%20%20%3Cgml%3APoint%20srsName%3D%22EPSG%3A3857%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cgml%3Apos%3E14174213.789277812%204365724.618559506%3C%2Fgml%3Apos%3E%0A%20%20%20%20%20%20%3C%2Fgml%3APoint%3E%0A%20%20%20%20%3C%2FIntersects%3E%0A%20%20%3C%2FAnd%3E%0A%3C%2FFilter%3E";
+			}
+			setTimeout(function() {
+				goAjax(params);
+			}, 500);
+        }
+
+        function goAjax(params) {
+        	/******************************************************************************************************************
+			 * Server side에는 크로스 도메인(Cross Domain) 오류에 대한 처리가 되어있지만 사용환경에 따라 적용되지 않을수 있음 *
+			 * outputformat - [json, gml2, gml3] 옵션은 크로스 도메인(Cross Domain) 오류가 발생하지 않는 환경에서만 사용가능  *
+			 * 요청서버와 응답서버의 URL이 다를경우 outputformat - jsonp 사용                                                 *	
+			 ******************************************************************************************************************/
+			 
+            if (params.outputformat == undefined || params.outputformat == 'gml2' || params.outputformat == 'gml3') {
+                $.ajax({
+                    url: reqUrl + "farmmapApi/wfs.do",
+                    dataType: "xml",
+                    async: false,
+                    type: "GET",
+                    cache: false,
+                    data: params,
+                    success: function(data) {
+                        var xmlText = new XmlBeautify().beautify(new XMLSerializer().serializeToString(data), {
+                            indent: "  ",
+                            useSelfClosingElement: true
+                        });
+                        $("#info").val(xmlText);
+                        $.unblockUI();
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        console.log(XMLHttpRequest);
+                        $.unblockUI();
+                    }
+                });
+            /******************************************************************************************************************
+             * ajax 요청시 크로스 도메인(Cross Domain) 처리를 위해 outputformat파라미터를 jsonp 사용해야 함.                  *
+             * jsonp 사용시 ajax dataType은 jsonp 이여야 하고 jsonpCallback에 ajax응답 후 실행할 함수명 입력해야 함.          *
+             ******************************************************************************************************************/
+            } else if (params.outputformat == 'jsonp') {
+                $.ajax({
+                    url: reqUrl + "farmmapApi/wfs.do",
+                    dataType: "jsonp",
+                    jsonpCallback: "wfsCallback",
+                    async: false,
+                    type: "GET",
+                    cache: false,
+                    data: params,
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        console.log(XMLHttpRequest);
+                        $.unblockUI();
+                    }
+                });
+            } else if (params.outputformat == 'json') {
+                $.ajax({
+                    url: reqUrl + "farmmapApi/wfs.do",
+                    dataType: "json",
+                    async: false,
+                    type: "GET",
+                    cache: false,
+                    data: params,
+                    success: function(data) {
+                        $("#info").val(JSON.stringify(data, null, 4));
+                        $.unblockUI();
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        console.log(XMLHttpRequest);
+                        $.unblockUI();
+                    }
+                });
+            }
+        }
+
+        //jsonpCallback 함수
+        function wfsCallback(data) {
+            $("#info").val(JSON.stringify(data, null, 4));
+            $.unblockUI();
+        }
+
+        function removeLayer(type) {
+        	var layerNames;
+        	if(type == "all") {
+        		layerNames = ['farmmapWMS', 'farmmapWMS01', 'farmmapWMS02', 'farmmapWMS03', 'farmmapWMS04', 'farmmapWMS06', 'farmmapWMS0102', 'farmmapWMS030406', 'search1','search2','search3','search4','bboxLayer'];
+        	} else if(type == "wms") {
+        		layerNames = ['farmmapWMS', 'farmmapWMS01', 'farmmapWMS02', 'farmmapWMS03', 'farmmapWMS04', 'farmmapWMS06', 'farmmapWMS0102', 'farmmapWMS030406'];
+        	} else if(type == "wfs") {
+        		layerNames = ['search1','search2','search3','search4','bboxLayer'];
+        	}
+        	
+            for (var i = 0; i < layerNames.length; i++) {
+                var layer = getLayerByName(layerNames[i]);
+                if (layer != null) {
+                    map.removeLayer(layer);
+                }
+            }
+        }
+
+        function getLayerByName(layerName) {
+            var layer;
+            var layers = map.getLayers().getArray();
+            for (var i = 0; i < layers.length; i++) {
+                if (layers[i].get('name') == layerName) {
+                    layer = layers[i];
+                    break;
+                }
+            }
+            return layer;
+        }
+
+        function changeMapType(mapType) {
+            map.setBasemapType(mapType);
+        }
+    </script>
+</body>
+
+</html>

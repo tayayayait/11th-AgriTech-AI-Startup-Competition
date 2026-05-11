@@ -1,0 +1,11 @@
+﻿title,desc,url,source
+축산물품질평가원_축산물등급판정정보,소·돼지·닭·계란·오리·말 등 축산물 등급판정 및 경매 관련 정보,https://www.data.go.kr/data/15058822/openapi.do,data.go.kr / 축산물품질평가원
+축산물품질평가원_축산물통합이력정보,소·돼지 이력번호/묶음번호 기반 사육·이동·도축·유통 이력 조회,https://www.data.go.kr/data/15058923/openapi.do,data.go.kr / 축산물품질평가원
+축산물품질평가원_쇠고기이력정보,소 개체 및 쇠고기 이력 정보 조회,https://www.data.go.kr/data/15056898/openapi.do,data.go.kr / 축산물품질평가원
+축산물품질평가원_축산물등급판정확인서 발급정보,축산물등급판정확인서 발급번호·도축·등급판정 정보 조회,https://www.data.go.kr/data/15057101/openapi.do,data.go.kr / 축산물품질평가원
+축산물품질평가원_축산물유통정보,"학교급식 검수정보, 소비자가격, 재고 등 유통정보 조회",https://www.data.go.kr/data/15000577/openapi.do,data.go.kr / 축산물품질평가원
+축산물품질평가원_축산물경락가격정보,축산물 도매시장 경락가격·경매 정보 조회,https://www.data.go.kr/data/15057912/openapi.do,data.go.kr / 축산물품질평가원
+축산물품질평가원_가금산물 일일거래가격정보,육계·계란·오리 일일 거래가격 정보,https://www.data.go.kr/data/15073985/openapi.do,data.go.kr / 축산물품질평가원
+축산물품질평가원_농장식별번호정보,농장식별번호 기반 축산 농장 정보 조회,https://www.data.go.kr/data/15106233/openapi.do,data.go.kr / 축산물품질평가원
+축산물품질평가원_계란등급판정정보,계란 등급판정 정보 조회,https://www.data.go.kr/data/15059251/openapi.do,data.go.kr / 축산물품질평가원
+축산물품질평가원_축산물DNA동일성검사 업소정보,축산물 DNA 동일성검사 시료·업소 정보 조회,https://www.data.go.kr/data/15056733/openapi.do,data.go.kr / 축산물품질평가원

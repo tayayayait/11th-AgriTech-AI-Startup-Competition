@@ -1,0 +1,95 @@
+- generic:
+  - generic:
+    - list
+    - region "Notifications alt+T"
+    - generic:
+      - generic:
+        - generic:
+          - banner:
+            - button:
+              - img
+              - generic: Toggle Sidebar
+            - generic:
+              - combobox:
+                - generic: Phase9 테스트 필지 · 벼
+                - img
+              - button:
+                - img
+          - main:
+            - generic:
+              - generic:
+                - tablist:
+                  - tab [selected]: 오늘 (1)
+                  - tab: 이번 주 (2)
+                  - tab: 완료 (0)
+                - generic: 공식 데이터 기반 자동 생성
+              - tabpanel:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic: 2순위
+                          - generic: 5월 6일 (수)
+                        - generic: 병해충 위험 예보 근거 확인
+                      - generic:
+                        - img
+                        - text: 25분
+                    - paragraph: 농사로 병해충 발생정보 4건 확인
+                    - generic:
+                      - generic:
+                        - checkbox
+                        - generic: 공식 발생정보 원문 확인
+                      - generic:
+                        - checkbox
+                        - generic: 잎 뒷면·줄기·생장점 확인
+                      - generic:
+                        - checkbox
+                        - generic: 발견 위치와 사진 기록
+                    - generic:
+                      - button:
+                        - img
+                        - text: 근거 데이터 보기
+                    - button [disabled]: 완료 처리 (0/3)
+  - dialog "주 메뉴" [ref=e222]:
+    - heading "주 메뉴" [level=2] [ref=e223]
+    - paragraph [ref=e224]: FieldGuard AI 화면 이동 메뉴
+    - generic [ref=e225]:
+      - generic [ref=e227]:
+        - img [ref=e229]
+        - generic [ref=e233]:
+          - generic [ref=e234]: FieldGuard AI
+          - generic [ref=e235]: 현장 의사결정 보조
+      - generic [ref=e237]:
+        - generic [ref=e238]: 주 메뉴
+        - list [ref=e240]:
+          - listitem [ref=e241]:
+            - link "대시보드" [ref=e242] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e243]
+              - generic [ref=e248]: 대시보드
+          - listitem [ref=e249]:
+            - link "필지 지도" [ref=e250] [cursor=pointer]:
+              - /url: /fields/map
+              - img [ref=e251]
+              - generic [ref=e253]: 필지 지도
+          - listitem [ref=e254]:
+            - link "작업 카드" [active] [ref=e255] [cursor=pointer]:
+              - /url: /tasks
+              - img [ref=e256]
+              - generic [ref=e259]: 작업 카드
+          - listitem [ref=e260]:
+            - link "사진 판독" [ref=e261] [cursor=pointer]:
+              - /url: /diagnosis
+              - img [ref=e262]
+              - generic [ref=e265]: 사진 판독
+          - listitem [ref=e266]:
+            - link "자료/상담" [ref=e267] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e268]
+              - generic [ref=e271]: 자료/상담
+          - listitem [ref=e272]:
+            - link "설정" [ref=e273] [cursor=pointer]:
+              - /url: /settings
+              - img [ref=e274]
+              - generic [ref=e277]: 설정

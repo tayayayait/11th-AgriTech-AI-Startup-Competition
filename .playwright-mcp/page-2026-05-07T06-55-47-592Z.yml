@@ -1,0 +1,116 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e5]:
+    - banner [ref=e6]:
+      - button "Toggle Sidebar" [ref=e7] [cursor=pointer]:
+        - img
+        - generic [ref=e8]: Toggle Sidebar
+      - generic [ref=e9]:
+        - combobox [ref=e10] [cursor=pointer]:
+          - generic: 필지 선택
+          - img [ref=e11]
+        - button "동기화" [ref=e13] [cursor=pointer]:
+          - img
+    - main [ref=e14]:
+      - generic [ref=e16]:
+        - generic [ref=e20]:
+          - img [ref=e21]
+          - text: 팜맵 지도를 불러오는 중
+        - generic [ref=e25]:
+          - generic [ref=e26]: F
+          - generic [ref=e27]:
+            - generic [ref=e28]: FARMMAP
+            - generic [ref=e29]: FieldGuard AI
+        - generic [ref=e30]:
+          - generic [ref=e32]:
+            - generic [ref=e33]:
+              - img [ref=e34]
+              - text: 팜맵 검색
+            - button "검색 결과 초기화" [ref=e37] [cursor=pointer]:
+              - img
+          - generic [ref=e38]:
+            - generic [ref=e39]:
+              - tablist [ref=e40]:
+                - tab "주소" [selected] [ref=e41] [cursor=pointer]
+                - tab "PNU" [ref=e42] [cursor=pointer]
+                - tab "지도 클릭" [ref=e43] [cursor=pointer]
+                - tab "좌표" [ref=e44] [cursor=pointer]
+              - generic [ref=e46]:
+                - text: 분류
+                - combobox [ref=e47] [cursor=pointer]:
+                  - generic: 전체(논, 밭, 과수, 시설)
+                  - img [ref=e48]
+              - tabpanel "주소" [ref=e50]:
+                - generic [ref=e51]:
+                  - text: 법정동 검색
+                  - generic [ref=e52]:
+                    - generic [ref=e53]:
+                      - img
+                      - 'textbox "예: 구미시 옥계동" [ref=e54]'
+                    - button "법정동 검색" [ref=e55] [cursor=pointer]:
+                      - img
+                  - paragraph [ref=e56]: 법정동명을 입력해 행정표준코드 API에서 법정동코드를 조회하세요.
+                - generic [ref=e57]:
+                  - generic [ref=e58]: 지번 입력
+                  - generic [ref=e59]:
+                    - generic [ref=e60]:
+                      - text: 본번
+                      - textbox "155" [ref=e61]
+                    - generic [ref=e62]:
+                      - text: 부번
+                      - textbox "0" [ref=e63]
+                  - generic [ref=e64]:
+                    - checkbox "산 번지" [ref=e65] [cursor=pointer]
+                    - text: 산 번지
+                  - generic [ref=e66]:
+                    - generic [ref=e67]: 생성 PNU
+                    - generic [ref=e68]: 법정동과 본번을 입력하세요.
+                - generic [ref=e69]:
+                  - button "법정동+지번으로 PNU 조회" [disabled]:
+                    - img
+                    - text: 법정동+지번으로 PNU 조회
+                  - button "선택 법정동/분류로 필지목록 조회" [disabled]:
+                    - img
+                    - text: 선택 법정동/분류로 필지목록 조회
+            - generic [ref=e70]:
+              - generic [ref=e71]:
+                - generic [ref=e72]:
+                  - text: 필지명
+                  - 'textbox "예: 배추 - 해룡면" [ref=e73]'
+                - generic [ref=e74]:
+                  - text: 작물명
+                  - 'textbox "예: 배추" [ref=e75]'
+              - generic [ref=e76]:
+                - generic [ref=e77]: 저장될 위치 정보
+                - generic [ref=e78]: "좌표: 미입력"
+                - generic [ref=e79]: "PNU: 미입력"
+                - generic [ref=e80]: "법정동주소: 미입력"
+                - generic [ref=e81]: "농경지분류: 미입력"
+                - generic [ref=e82]: "면적: 미입력"
+          - generic [ref=e83]:
+            - button "선택한 필지 등록" [disabled]:
+              - img
+              - text: 선택한 필지 등록
+        - complementary [ref=e84]:
+          - generic [ref=e85]:
+            - generic [ref=e86]:
+              - generic [ref=e87]:
+                - img [ref=e88]
+                - text: 선택 필지 정보
+              - paragraph [ref=e91]: 법정동명을 입력해 행정표준코드 API에서 법정동코드를 조회하세요.
+            - generic [ref=e92]: "입력 방식: 법정동+지번"
+          - generic [ref=e93]:
+            - generic [ref=e94]:
+              - generic [ref=e95]: 필지명
+              - generic [ref=e96]: 미입력
+            - generic [ref=e97]:
+              - generic [ref=e98]: 작물명
+              - generic [ref=e99]: 미입력
+            - generic [ref=e100]:
+              - generic [ref=e101]: 좌표
+              - generic [ref=e102]: 미입력
+            - generic [ref=e103]:
+              - generic [ref=e104]: 분류/면적
+              - generic [ref=e105]: 미입력

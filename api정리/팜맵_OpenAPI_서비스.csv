@@ -1,0 +1,57 @@
+﻿serviceType,group,no,name,functionOrEndpoint,descOrUrl,note,sourceUrl
+지도API,지도관리 API,1,FarmMap API 요청,farmapApi.do,FarmMap Obj 반환,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,지도관리 API,2,FarmMap Obj 생성,init,-,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,지도관리 API,3,이벤트 추가,addEvent,맵 이벤트 추가,※참고 1 ) 맵 이벤트,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,지도관리 API,4,이벤트 제거,removeEvent,맵 이벤트 제거,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,지도관리 API,5,컨트롤 추가,addControl,맵 컨트롤 추가,참고 2 ) 맵 컨트롤,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,지도관리 API,6,컨트롤 제거,removeControl,맵 컨트롤 제거,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,지도관리 API,7,객체찾기,getObject,객체명을 이용해서 객체찾기,"레이어, 이벤트, 컨트롤, 마커, 벡터",https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,지도관리 API,8,좌표로 법정동명 조회,searchBjdFromPoint,현재 지도 중심의 법정동명 찾기,Longitude 경도 X축 / Latitude 위도 Y축,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,레이어 API,1,WMS 레이어 추가,addWMSLayer,WMS 레이어 생성,"var layerOption = { version : ""1.3.0"", //string format : ""image/png"", //string layers : ""wmsLayers"", //string styles : ""wmsStyles"", //string crs : ""EPSG:5179"", //string width: 512, //int height: 512, //int }",https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,레이어 API,2,Marker 레이어 추가,addMarkerLayer,Marker 레이어 생성,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,레이어 API,3,Vector 레이어 추가,addVectorLayer,Vector 레이어 생성,"var layerOption = { defaultStyle : { fillColor: ""#ff0000"", pointRadius: 6, strokeWidth: 3, strokeColor: ""#669933"" }, selectStyle : { fillColor: ""#669933"", pointRadius: 6, strokeWidth: 10, strokeColor: ""#ff0000"" }, hover : true, //boolean multiple: true, //boolean toggle: true, //boolean onSelect : vectorSelect, //function onUnselect : vectorUnselect //function } ※ 참고 3 ) Vector 레이어 이벤트 ※ 참고 4 ) Vector type별 스타일항목",https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,레이어 API,4,Vector 레이어 이벤트 활성화,activateVectorLayerEvent,Vector click 이벤트 추가,Vector 레이어 추가할때 layerOption에 이벤트가 있으면 자동으로 활성화됨 true : 활성 / false : 비활성 / None : 이벤트 없음,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,레이어 API,5,Vector 레이어 이벤트 활성화,activateVectorLayerEvent,Vector click 이벤트 추가,Vector 레이어 추가할때 layerOption에 이벤트가 있으면 자동으로 활성화됨 true : 활성 / false : 비활성 / None : 이벤트 없음,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,레이어 API,6,Vector 레이어 이벤트 비활성화,deactivateVectorLayerEvent,Vector click 이벤트 제거,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,레이어 API,7,레이어 보기,showLayer,레이어 보기,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,레이어 API,8,레이어 숨김,hideLayer,레이어 숨김,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,레이어 API,9,레이어목록 조회,getLayerNameList,레이어목록 조회,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,레이어 API,10,레이어 제거,removeLayer,레이어명을 이용해서 레이어 제거,모든 레이어 공통,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,팜맵 API,1,팜맵 레이어 추가,addFarmmapLayer,팜맵 지도 레이어 생성,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,팜맵 API,2,팜맵 백지도 레이어 추가,addWhiteFarmmapLayer,팜맵 지도 레이어 생성,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,팜맵 API,3,국토정보기본도 추가,addBasicInfomapLayer,국토정보기본도 레이어 생성,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,팜맵 API,4,팜맵 속성조회 이벤트 활성화,addSearchFarmmapDataEvent,팜맵 속성조회 이벤트 추가,팜맵 레이어 더블클릭 이벤트 활성화 24.05.07 apiVersion 추가,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,팜맵 API,5,팜맵 속성조회 이벤트 비활성화,removeSearchFarmmapDataEvent,팜맵 속성조회 이벤트 제거,팜맵 레이어 더블클릭 이벤트 비활성화,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,팜맵 API,6,팜맵 속성조회,-,팜맵 속성조회,"팜맵 속성조회 이벤트가 활성화된 상태에서 팜맵 레이어 더블클릭시 속성데이터 조회 - 팜맵 레이어가 여러개일경우, 현재 보여지는 모든 팜맵레이어에 대해 속성조회 후 json object 형태로 반환함 - 각 팜맵 레이어의 속성데이터는 레이어명으로 접근 가능 ※참고 5) 속성조회 결과 json object",https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,팜맵 API,7,팜맵 범례조회,getLegendImage,팜맵 범례조회,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,Marker API,1,마커생성,addMarker,마커생성,"var markerOptions = { id:'marker2' ,iconSizeWidth: 70 ,iconSizeHeight: 70 ,iconUrl: 'http://192.168.0.101:8080/ASD/images/marker/marker2.png' ,x: 982709.00765681 ,y: 1832877.1211186 ,epsg: 'EPSG:5179' ,opacity: 0.5 ,clickFunc: markerClick ,data: { id:'marker2', iconSize:'70/70', xy:'982709.00765681/1832877.1211186' } } 지원 좌표계 설명 - 참고 7) 지원좌표계",https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,Marker API,2,마커표출여부,isMarkerVisible,마커표출여부 조회,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,Marker API,3,마커보기,showMarker,마커보기,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,Marker API,4,마커숨김,hideMarker,마커숨김,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,Marker API,5,마커 전체보기,showAllMarker,레이어단위 마커 전체보기,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,Marker API,6,마커 전체숨김,hideAllMarker,레이어단위 마커 전체숨김,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,Marker API,7,마커 크기변경,setMarkerSize,마커 크기변경,"var sizeOptions = { iconSizeWidth: 70 ,iconSizeHeight: 70 }",https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,Marker API,8,마커 위치변경,setMarkerLocation,마커 위치변경,"var locationOption = { x: 982709.00765681 ,y: 1832877.1211186 ,epsg: 'EPSG:5179' } ※ 참고 7) 지원좌표계",https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,Marker API,9,마커 아이콘변경,setMarkerIcon,마커 이미지 변경,"var iconOptions = { iconUrl: 'http://192.168.0.101:8080/ASD/images/marker/marker2.png' ,opacity: 0.5 }",https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,Marker API,10,마커 데이터변경,setMarkerData,마커 데이터 변경,"var data = { id:'marker2', iconSize:'70/70', xy:'982709.00765681/1832877.1211186' }",https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,Marker API,11,마커제거,removeMarker,마커제거,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,Vector API,1,벡터 객체생성,addVector,벡터 객체생성,각 벡터 타입별 옵션설정 설명 - 참고 6) 각 벡터 타입별 옵션설정 스타일 설정 설명 - 참고 4 ) Vector type별 스타일항목 지원 좌표계 설명 - 참고 7) 지원좌표계,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,Vector API,2,벡터 표출여부,isVectorVisible,벡터표출여부 조회,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,Vector API,3,벡터 보기,showVector,벡터 보기,Vector 객체 스타일 변경 (setVectorStyle)과 동일한 효과 발생,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,Vector API,4,벡터 숨김,hideVector,벡터 숨김,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,Vector API,5,벡터 전체보기,hideAllVecto,레이어단위 벡터 전체보기,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,Vector API,6,벡터 전체숨김,hideAllVecto,레이어단위 벡터 전체숨김,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,Vector API,7,벡터 객체 스타일 변경,setVectorStyle,벡터 객체 스타일 변경,vector 객체에 스타일을 적용하는 방법. 1번. VectorLayer 생성시(addVectorLayer) 적용한 defaultStyle과 selectStyle 2번. Vector 객체생성시(addVector) 적용한 style 2번이 우선순위를 갖기때문에 Vector 객체생성시 style을 적용했다면 1번은 무시되어 defaultStyle과 selectStyle을 직접 컨트롤 해야 함. setVectorStyle을 이용해서 Vector의 스타일을 변경했다면 2번과 같은 효과가 발생함. 스타일 설정 설명 - ※참고 4 ) Vector type별 스타일항목,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,Vector API,8,벡터 데이터 변경,setVectorData,벡터 데이터 변경,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+지도API,Vector API,9,벡터 객체제거,removeVector,벡터 객체제거,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+데이터API,Vector API,1,pnu 기반 데이터 API,PNU 이용 데이터조회,farmmapApi/getFarmmapDataSeachPnu.do,24.05.07 apiVersion 추가,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+데이터API,Vector API,2,좌표 기반 데이터 API,좌표 이용 데이터조회,farmmapApi/getFarmmapDataSeachXY.do,24.05.07 apiVersion 추가,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+데이터API,Vector API,3,반경검색 기반 데이터 API,중심좌표 + 반경(m) 이용 데이터조회,farmmapApi/getFarmmapDataSeachRadius.do,24.05.07 apiVersion 추가,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+데이터API,Vector API,4,농경지분류 기반 데이터 API,읍면동리코드 + 농경지분류 이용 데이터조회,farmmapApi/getFarmmapDataSeachBjdAndLandCode.do,24.05.07 apiVersion 추가,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+데이터API,Vector API,5,갱신유형 기반 데이터 API,읍면동코드 + 갱신유형코드 이용 데이터조회,farmmapApi/getFarmmapDataSeachBjdAndUpdateCode.do,24.05.07 apiVersion 추가,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+데이터API,Vector API,6,갱신일자 기반 데이터 API,읍면동코드+ 갱신일자검색시작+ 갱신일자검색종료 이용 데이터조회,farmmapApi/getFarmmapDataSeachBjdAndUpdateDate.do,24.05.07 apiVersion 추가,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+데이터API,Vector API,7,팜맵 + 국토정보기본도 조회 데이터 API,팜맵과 국토정보기본도 중첩데이터 조회,farmmapApi/getFarmmapDataSeachRelationLayer.do,24.05.07 apiVersion 추가,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+데이터API,Vector API,8,지적기반경작면적분석 데이터 API(PNU),PNU를 이용한 지적기반 경작면적 분석 데이터조회,farmmapApi/getFarmmapDataSeachAnalysisBasePnu.do,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+데이터API,Vector API,9,지적기반경작면적분석 데이터 API(검색조건),검색조건 이용한 지적기반 경작면적 분석 데이터조회,farmmapApi/getFarmmapDataSeachAnalysisBaseAttr.do,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+WMS/WFS서비스,Vector API,1,WMS 서비스,팜맵오픈API WMS 서비스,farmmapApi/wms.do,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3
+WMS/WFS서비스,Vector API,2,WFS 서비스,팜맵오픈API WMS 서비스,farmmapApi/wms.do,,https://agis.epis.or.kr/ASD/guide/faq.do?bbsSn=3

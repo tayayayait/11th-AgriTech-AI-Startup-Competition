@@ -1,0 +1,343 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e4]:
+    - generic [ref=e8]:
+      - generic [ref=e10]:
+        - img [ref=e12]
+        - generic [ref=e16]:
+          - generic [ref=e17]: FieldGuard AI
+          - generic [ref=e18]: 현장 의사결정 보조
+      - generic [ref=e20]:
+        - generic [ref=e21]: 주 메뉴
+        - list [ref=e23]:
+          - listitem [ref=e24]:
+            - link "대시보드" [ref=e25] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e26]
+              - generic [ref=e31]: 대시보드
+          - listitem [ref=e32]:
+            - link "필지 지도" [ref=e33] [cursor=pointer]:
+              - /url: /fields/map
+              - img [ref=e34]
+              - generic [ref=e36]: 필지 지도
+          - listitem [ref=e37]:
+            - link "작업 카드" [ref=e38] [cursor=pointer]:
+              - /url: /tasks
+              - img [ref=e39]
+              - generic [ref=e42]: 작업 카드
+          - listitem [ref=e43]:
+            - link "사진 판독" [ref=e44] [cursor=pointer]:
+              - /url: /diagnosis
+              - img [ref=e45]
+              - generic [ref=e48]: 사진 판독
+          - listitem [ref=e49]:
+            - link "자료/상담" [ref=e50] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e51]
+              - generic [ref=e54]: 자료/상담
+          - listitem [ref=e55]:
+            - link "설정" [ref=e56] [cursor=pointer]:
+              - /url: /settings
+              - img [ref=e57]
+              - generic [ref=e60]: 설정
+    - generic [ref=e61]:
+      - banner [ref=e62]:
+        - button "Toggle Sidebar" [ref=e63] [cursor=pointer]:
+          - img
+          - generic [ref=e64]: Toggle Sidebar
+        - generic [ref=e65]: 2026년 5월 7일 (목)
+        - generic [ref=e66]:
+          - combobox [ref=e67] [cursor=pointer]:
+            - generic: 필지 선택
+            - img [ref=e68]
+          - generic [ref=e70]: 마지막 갱신 —
+          - button "동기화" [ref=e71] [cursor=pointer]:
+            - img
+      - main [ref=e72]:
+        - generic [ref=e74]:
+          - generic [ref=e77]:
+            - generic:
+              - generic:
+                - img [ref=e78]
+                - img [ref=e79]
+                - img [ref=e80]
+                - img [ref=e81]
+                - img [ref=e82]
+                - img [ref=e83]
+                - img [ref=e84]
+                - img [ref=e85]
+                - img [ref=e86]
+                - img [ref=e87]
+                - img [ref=e88]
+                - img [ref=e89]
+                - img [ref=e90]
+                - img [ref=e91]
+                - img [ref=e92]
+                - img [ref=e93]
+                - img [ref=e94]
+                - img [ref=e95]
+                - img [ref=e96]
+                - img [ref=e97]
+                - img [ref=e98]
+                - img [ref=e99]
+                - img [ref=e100]
+                - img [ref=e101]
+                - img [ref=e102]
+                - img [ref=e103]
+                - img [ref=e104]
+                - img [ref=e105]
+                - img [ref=e106]
+                - img [ref=e107]
+                - img [ref=e108]
+                - img [ref=e109]
+                - img [ref=e110]
+                - img [ref=e111]
+                - img [ref=e112]
+                - img [ref=e113]
+                - img [ref=e114]
+                - img [ref=e115]
+                - img [ref=e116]
+                - img [ref=e117]
+                - img [ref=e118]
+                - img [ref=e119]
+                - img [ref=e120]
+                - img [ref=e121]
+                - img [ref=e122]
+                - img [ref=e123]
+                - img [ref=e124]
+                - img [ref=e125]
+                - img [ref=e126]
+                - img [ref=e127]
+                - img [ref=e128]
+                - img [ref=e129]
+                - img [ref=e130]
+                - img [ref=e131]
+                - img [ref=e132]
+                - img [ref=e133]
+                - img [ref=e134]
+                - img [ref=e135]
+                - img [ref=e136]
+                - img [ref=e137]
+                - img [ref=e138]
+                - img [ref=e139]
+                - img [ref=e140]
+                - img [ref=e141]
+                - img [ref=e142]
+                - img [ref=e143]
+                - img [ref=e144]
+                - img [ref=e145]
+                - img [ref=e146]
+                - img [ref=e147]
+              - img [ref=e148]
+              - generic:
+                - img [ref=e149]
+                - img [ref=e150]
+                - img [ref=e151]
+                - img [ref=e152]
+                - img [ref=e153]
+                - img [ref=e154]
+                - img [ref=e155]
+                - img [ref=e156]
+                - img [ref=e157]
+                - img [ref=e158]
+                - img [ref=e159]
+                - img [ref=e160]
+                - img [ref=e161]
+                - img [ref=e162]
+                - img [ref=e163]
+            - generic [ref=e165]:
+              - text: 본 시스템에서 제공하는 정보는 법적인 효력이 없으며, 참고용으로만 활용하시기 바랍니다
+              - img "국토지리정보원" [ref=e166]
+              - img "농림수산식품교육문화정보원" [ref=e167]
+              - img "농림축산식품부" [ref=e168]
+              - text: "시스템 문의 : 031-778-7728"
+          - generic [ref=e170]:
+            - generic [ref=e171]:
+              - generic [ref=e172]: F
+              - generic [ref=e173]:
+                - generic [ref=e174]: FARMMAP
+                - generic [ref=e175]: FieldGuard AI
+            - generic [ref=e176]:
+              - generic [ref=e177]: 팜맵 검색
+              - generic [ref=e178]: PNU
+              - generic [ref=e179]: 지역 조건
+              - generic [ref=e180]: 필지 등록
+          - generic [ref=e181]:
+            - generic [ref=e183]:
+              - generic [ref=e184]:
+                - img [ref=e185]
+                - text: 팜맵 검색
+              - button "검색 결과 초기화" [ref=e188] [cursor=pointer]:
+                - img
+            - generic [ref=e190]:
+              - tablist [ref=e191]:
+                - tab "주소" [selected] [ref=e192] [cursor=pointer]
+                - tab "지역" [ref=e193] [cursor=pointer]
+              - tabpanel "주소" [ref=e194]:
+                - generic [ref=e195]:
+                  - combobox [ref=e196] [cursor=pointer]:
+                    - generic: 지번
+                    - img [ref=e197]
+                  - generic [ref=e199]:
+                    - img
+                    - textbox "검색어를 입력해 주세요" [ref=e200]: 옥계동
+                  - button "검색" [ref=e201] [cursor=pointer]:
+                    - img
+                - paragraph [ref=e242]: 팜맵 필지 후보 30건
+                - generic [ref=e214]:
+                  - generic [ref=e243]:
+                    - generic [ref=e244]: 필지목록(30건)
+                    - generic [ref=e245]: PNU
+                  - button "경상북도 구미시 옥계동 463 4719012800104630000 · 밭 · 528.643㎡ 36.1473851, 128.4226793" [ref=e246] [cursor=pointer]:
+                    - generic [ref=e248]: 경상북도 구미시 옥계동 463
+                    - generic [ref=e249]: 4719012800104630000 · 밭 · 528.643㎡
+                    - generic [ref=e250]: 36.1473851, 128.4226793
+                  - button "경상북도 구미시 옥계동 463 4719012800104630000 · 밭 · 1,249.194㎡ 36.1468075, 128.4229343" [ref=e251] [cursor=pointer]:
+                    - generic [ref=e253]: 경상북도 구미시 옥계동 463
+                    - generic [ref=e254]: 4719012800104630000 · 밭 · 1,249.194㎡
+                    - generic [ref=e255]: 36.1468075, 128.4229343
+                  - button "경상북도 구미시 옥계동 473 4719012800104730000 · 밭 · 578.019㎡ 36.1466280, 128.4231691" [ref=e256] [cursor=pointer]:
+                    - generic [ref=e258]: 경상북도 구미시 옥계동 473
+                    - generic [ref=e259]: 4719012800104730000 · 밭 · 578.019㎡
+                    - generic [ref=e260]: 36.1466280, 128.4231691
+                  - button "경상북도 구미시 옥계동 498-1 4719012800104980001 · 논 · 1,224.274㎡ 36.1533844, 128.4147438" [ref=e261] [cursor=pointer]:
+                    - generic [ref=e263]: 경상북도 구미시 옥계동 498-1
+                    - generic [ref=e264]: 4719012800104980001 · 논 · 1,224.274㎡
+                    - generic [ref=e265]: 36.1533844, 128.4147438
+                  - button "경상북도 구미시 옥계동 498-2 4719012800104980002 · 논 · 621.591㎡ 36.1533993, 128.4145452" [ref=e266] [cursor=pointer]:
+                    - generic [ref=e268]: 경상북도 구미시 옥계동 498-2
+                    - generic [ref=e269]: 4719012800104980002 · 논 · 621.591㎡
+                    - generic [ref=e270]: 36.1533993, 128.4145452
+                  - button "경상북도 구미시 옥계동 498-2 4719012800104980002 · 밭 · 348.826㎡ 36.1533320, 128.4144310" [ref=e271] [cursor=pointer]:
+                    - generic [ref=e273]: 경상북도 구미시 옥계동 498-2
+                    - generic [ref=e274]: 4719012800104980002 · 밭 · 348.826㎡
+                    - generic [ref=e275]: 36.1533320, 128.4144310
+                  - button "경상북도 구미시 옥계동 499 4719012800104990000 · 밭 · 1,496.376㎡ 36.1535315, 128.4141882" [ref=e276] [cursor=pointer]:
+                    - generic [ref=e278]: 경상북도 구미시 옥계동 499
+                    - generic [ref=e279]: 4719012800104990000 · 밭 · 1,496.376㎡
+                    - generic [ref=e280]: 36.1535315, 128.4141882
+                  - button "경상북도 구미시 옥계동 500 4719012800105000000 · 밭 · 3,944.104㎡ 36.1532744, 128.4137710" [ref=e281] [cursor=pointer]:
+                    - generic [ref=e283]: 경상북도 구미시 옥계동 500
+                    - generic [ref=e284]: 4719012800105000000 · 밭 · 3,944.104㎡
+                    - generic [ref=e285]: 36.1532744, 128.4137710
+                  - button "경상북도 구미시 옥계동 500 4719012800105000000 · 밭 · 634.781㎡ 36.1537796, 128.4139836" [ref=e286] [cursor=pointer]:
+                    - generic [ref=e288]: 경상북도 구미시 옥계동 500
+                    - generic [ref=e289]: 4719012800105000000 · 밭 · 634.781㎡
+                    - generic [ref=e290]: 36.1537796, 128.4139836
+                  - button "경상북도 구미시 옥계동 500 4719012800105000000 · 과수 · 699.222㎡ 36.1536257, 128.4138327" [ref=e291] [cursor=pointer]:
+                    - generic [ref=e293]: 경상북도 구미시 옥계동 500
+                    - generic [ref=e294]: 4719012800105000000 · 과수 · 699.222㎡
+                    - generic [ref=e295]: 36.1536257, 128.4138327
+                  - button "경상북도 구미시 옥계동 500 4719012800105000000 · 시설 · 105.875㎡ 36.1538848, 128.4137447" [ref=e296] [cursor=pointer]:
+                    - generic [ref=e298]: 경상북도 구미시 옥계동 500
+                    - generic [ref=e299]: 4719012800105000000 · 시설 · 105.875㎡
+                    - generic [ref=e300]: 36.1538848, 128.4137447
+                  - button "경상북도 구미시 옥계동 504-1 4719012800105040001 · 논 · 582.236㎡ 36.1536266, 128.4134059" [ref=e301] [cursor=pointer]:
+                    - generic [ref=e303]: 경상북도 구미시 옥계동 504-1
+                    - generic [ref=e304]: 4719012800105040001 · 논 · 582.236㎡
+                    - generic [ref=e305]: 36.1536266, 128.4134059
+                  - button "경상북도 구미시 옥계동 504-1 4719012800105040001 · 논 · 1,071.868㎡ 36.1531143, 128.4133570" [ref=e306] [cursor=pointer]:
+                    - generic [ref=e308]: 경상북도 구미시 옥계동 504-1
+                    - generic [ref=e309]: 4719012800105040001 · 논 · 1,071.868㎡
+                    - generic [ref=e310]: 36.1531143, 128.4133570
+                  - button "경상북도 구미시 옥계동 504-2 4719012800105040002 · 밭 · 1,376.237㎡ 36.1530523, 128.4131220" [ref=e311] [cursor=pointer]:
+                    - generic [ref=e313]: 경상북도 구미시 옥계동 504-2
+                    - generic [ref=e314]: 4719012800105040002 · 밭 · 1,376.237㎡
+                    - generic [ref=e315]: 36.1530523, 128.4131220
+                  - button "경상북도 구미시 옥계동 504-2 4719012800105040002 · 밭 · 133.361㎡ 36.1537096, 128.4132680" [ref=e316] [cursor=pointer]:
+                    - generic [ref=e318]: 경상북도 구미시 옥계동 504-2
+                    - generic [ref=e319]: 4719012800105040002 · 밭 · 133.361㎡
+                    - generic [ref=e320]: 36.1537096, 128.4132680
+                  - button "경상북도 구미시 옥계동 507 4719012800105070000 · 밭 · 1,242.038㎡ 36.1525174, 128.4126500" [ref=e321] [cursor=pointer]:
+                    - generic [ref=e323]: 경상북도 구미시 옥계동 507
+                    - generic [ref=e324]: 4719012800105070000 · 밭 · 1,242.038㎡
+                    - generic [ref=e325]: 36.1525174, 128.4126500
+                  - button "경상북도 구미시 옥계동 508 4719012800105080000 · 밭 · 525.397㎡ 36.1527710, 128.4110811" [ref=e326] [cursor=pointer]:
+                    - generic [ref=e328]: 경상북도 구미시 옥계동 508
+                    - generic [ref=e329]: 4719012800105080000 · 밭 · 525.397㎡
+                    - generic [ref=e330]: 36.1527710, 128.4110811
+                  - button "경상북도 구미시 옥계동 508 4719012800105080000 · 과수 · 2,228.315㎡ 36.1529011, 128.4122069" [ref=e331] [cursor=pointer]:
+                    - generic [ref=e333]: 경상북도 구미시 옥계동 508
+                    - generic [ref=e334]: 4719012800105080000 · 과수 · 2,228.315㎡
+                    - generic [ref=e335]: 36.1529011, 128.4122069
+                  - button "경상북도 구미시 옥계동 509 4719012800105090000 · 밭 · 204.652㎡ 36.1534609, 128.4123020" [ref=e336] [cursor=pointer]:
+                    - generic [ref=e338]: 경상북도 구미시 옥계동 509
+                    - generic [ref=e339]: 4719012800105090000 · 밭 · 204.652㎡
+                    - generic [ref=e340]: 36.1534609, 128.4123020
+                  - button "경상북도 구미시 옥계동 509 4719012800105090000 · 시설 · 613.197㎡ 36.1533630, 128.4122371" [ref=e341] [cursor=pointer]:
+                    - generic [ref=e343]: 경상북도 구미시 옥계동 509
+                    - generic [ref=e344]: 4719012800105090000 · 시설 · 613.197㎡
+                    - generic [ref=e345]: 36.1533630, 128.4122371
+                  - button "경상북도 구미시 옥계동 509-3 4719012800105090003 · 밭 · 1,370.107㎡ 36.1531735, 128.4122733" [ref=e346] [cursor=pointer]:
+                    - generic [ref=e348]: 경상북도 구미시 옥계동 509-3
+                    - generic [ref=e349]: 4719012800105090003 · 밭 · 1,370.107㎡
+                    - generic [ref=e350]: 36.1531735, 128.4122733
+                  - button "경상북도 구미시 옥계동 510 4719012800105100000 · 밭 · 1,963.101㎡ 36.1531467, 128.4128184" [ref=e351] [cursor=pointer]:
+                    - generic [ref=e353]: 경상북도 구미시 옥계동 510
+                    - generic [ref=e354]: 4719012800105100000 · 밭 · 1,963.101㎡
+                    - generic [ref=e355]: 36.1531467, 128.4128184
+                  - button "경상북도 구미시 옥계동 510 4719012800105100000 · 시설 · 579.559㎡ 36.1533083, 128.4129123" [ref=e356] [cursor=pointer]:
+                    - generic [ref=e358]: 경상북도 구미시 옥계동 510
+                    - generic [ref=e359]: 4719012800105100000 · 시설 · 579.559㎡
+                    - generic [ref=e360]: 36.1533083, 128.4129123
+                  - button "경상북도 구미시 옥계동 510 4719012800105100000 · 시설 · 252.032㎡ 36.1532697, 128.4126900" [ref=e361] [cursor=pointer]:
+                    - generic [ref=e363]: 경상북도 구미시 옥계동 510
+                    - generic [ref=e364]: 4719012800105100000 · 시설 · 252.032㎡
+                    - generic [ref=e365]: 36.1532697, 128.4126900
+                  - button "경상북도 구미시 옥계동 510 4719012800105100000 · 시설 · 146.292㎡ 36.1537426, 128.4130787" [ref=e366] [cursor=pointer]:
+                    - generic [ref=e368]: 경상북도 구미시 옥계동 510
+                    - generic [ref=e369]: 4719012800105100000 · 시설 · 146.292㎡
+                    - generic [ref=e370]: 36.1537426, 128.4130787
+                  - button "경상북도 구미시 옥계동 510 4719012800105100000 · 시설 · 106.57㎡ 36.1535637, 128.4130292" [ref=e371] [cursor=pointer]:
+                    - generic [ref=e373]: 경상북도 구미시 옥계동 510
+                    - generic [ref=e374]: 4719012800105100000 · 시설 · 106.57㎡
+                    - generic [ref=e375]: 36.1535637, 128.4130292
+                  - button "경상북도 구미시 옥계동 513 4719012800105130000 · 시설 · 94.815㎡ 36.1539451, 128.4117129" [ref=e376] [cursor=pointer]:
+                    - generic [ref=e378]: 경상북도 구미시 옥계동 513
+                    - generic [ref=e379]: 4719012800105130000 · 시설 · 94.815㎡
+                    - generic [ref=e380]: 36.1539451, 128.4117129
+                  - button "경상북도 구미시 옥계동 514 4719012800105140000 · 논 · 2,272.672㎡ 36.1532610, 128.4117308" [ref=e381] [cursor=pointer]:
+                    - generic [ref=e383]: 경상북도 구미시 옥계동 514
+                    - generic [ref=e384]: 4719012800105140000 · 논 · 2,272.672㎡
+                    - generic [ref=e385]: 36.1532610, 128.4117308
+                  - button "경상북도 구미시 옥계동 515 4719012800105150000 · 밭 · 2,113.663㎡ 36.1531316, 128.4109930" [ref=e386] [cursor=pointer]:
+                    - generic [ref=e388]: 경상북도 구미시 옥계동 515
+                    - generic [ref=e389]: 4719012800105150000 · 밭 · 2,113.663㎡
+                    - generic [ref=e390]: 36.1531316, 128.4109930
+                  - button "경상북도 구미시 옥계동 515 4719012800105150000 · 밭 · 188.669㎡ 36.1529499, 128.4111828" [ref=e391] [cursor=pointer]:
+                    - generic [ref=e393]: 경상북도 구미시 옥계동 515
+                    - generic [ref=e394]: 4719012800105150000 · 밭 · 188.669㎡
+                    - generic [ref=e395]: 36.1529499, 128.4111828
+          - complementary [ref=e215]:
+            - generic [ref=e216]:
+              - generic [ref=e217]:
+                - generic [ref=e218]:
+                  - img [ref=e396]
+                  - text: 선택 필지 정보
+                - paragraph [ref=e222]: 팜맵 필지 후보 30건
+              - generic [ref=e223]: "입력 방식: 지번 조회"
+            - generic [ref=e224]:
+              - generic [ref=e225]:
+                - text: 필지명
+                - 'textbox "예: 배추 - 해룡면" [ref=e226]'
+              - generic [ref=e227]:
+                - text: 작물명
+                - 'textbox "예: 배추" [ref=e228]'
+              - button "선택한 필지 등록" [disabled]:
+                - img
+                - text: 선택한 필지 등록
+            - generic [ref=e229]:
+              - generic [ref=e230]:
+                - generic [ref=e231]: 좌표
+                - generic [ref=e232]: 미입력
+              - generic [ref=e233]:
+                - generic [ref=e234]: PNU
+                - generic [ref=e235]: 미입력
+              - generic [ref=e236]:
+                - generic [ref=e237]: 법정동주소
+                - generic [ref=e238]: 미입력
+              - generic [ref=e239]:
+                - generic [ref=e240]: 분류/면적
+                - generic [ref=e241]: 미입력

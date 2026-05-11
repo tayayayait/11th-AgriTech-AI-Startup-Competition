@@ -1,0 +1,50 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e5]:
+    - banner [ref=e6]:
+      - button "Toggle Sidebar" [ref=e7] [cursor=pointer]:
+        - img
+        - generic [ref=e8]: Toggle Sidebar
+      - generic [ref=e9]:
+        - combobox [ref=e10] [cursor=pointer]:
+          - generic: Phase9 테스트 필지 · 벼
+          - img [ref=e11]
+        - button "동기화" [ref=e13] [cursor=pointer]:
+          - img
+    - main [ref=e14]:
+      - generic [ref=e16]:
+        - heading "필지 등록" [level=3] [ref=e18]
+        - generic [ref=e19]:
+          - generic [ref=e20]:
+            - generic [ref=e21]:
+              - text: 필지명
+              - 'textbox "예: 배추 - 해룡면" [ref=e22]': Phase10 E2E 필지
+            - generic [ref=e23]:
+              - text: 작물명
+              - 'textbox "예: 배추" [ref=e24]': 벼
+          - generic [ref=e25]:
+            - tablist [ref=e26]:
+              - tab "주소" [ref=e27] [cursor=pointer]
+              - tab "PNU" [ref=e28] [cursor=pointer]
+              - tab "지도 클릭" [ref=e29] [cursor=pointer]
+              - tab "좌표" [active] [selected] [ref=e30] [cursor=pointer]
+            - tabpanel "좌표" [ref=e42]:
+              - generic [ref=e43]:
+                - generic [ref=e44]:
+                  - text: 위도 (33.0-39.5)
+                  - textbox "36.5483953" [ref=e45]
+                - generic [ref=e46]:
+                  - text: 경도 (124.0-132.0)
+                  - textbox "127.2380545" [ref=e47]
+              - generic [ref=e48]:
+                - generic [ref=e49]: 저장될 위치 정보
+                - generic [ref=e50]: "좌표: 미입력"
+                - generic [ref=e51]: "PNU: 미입력"
+                - generic [ref=e52]: "법정동주소: 미입력"
+                - generic [ref=e53]: "농경지분류: 미입력"
+                - generic [ref=e54]: "면적: 미입력"
+              - button "좌표로 등록" [ref=e55] [cursor=pointer]:
+                - img
+                - text: 좌표로 등록

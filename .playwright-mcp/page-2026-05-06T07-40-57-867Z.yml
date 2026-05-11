@@ -1,0 +1,160 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e4]:
+    - generic [ref=e8]:
+      - generic [ref=e10]:
+        - img [ref=e12]
+        - generic [ref=e16]:
+          - generic [ref=e17]: FieldGuard AI
+          - generic [ref=e18]: 현장 의사결정 보조
+      - generic [ref=e20]:
+        - generic [ref=e21]: 주 메뉴
+        - list [ref=e23]:
+          - listitem [ref=e24]:
+            - link "대시보드" [ref=e25] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e26]
+              - generic [ref=e31]: 대시보드
+          - listitem [ref=e32]:
+            - link "필지 지도" [ref=e33] [cursor=pointer]:
+              - /url: /fields/map
+              - img [ref=e34]
+              - generic [ref=e36]: 필지 지도
+          - listitem [ref=e37]:
+            - link "작업 카드" [ref=e38] [cursor=pointer]:
+              - /url: /tasks
+              - img [ref=e39]
+              - generic [ref=e42]: 작업 카드
+          - listitem [ref=e43]:
+            - link "사진 판독" [ref=e44] [cursor=pointer]:
+              - /url: /diagnosis
+              - img [ref=e45]
+              - generic [ref=e48]: 사진 판독
+          - listitem [ref=e49]:
+            - link "자료/상담" [ref=e50] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e51]
+              - generic [ref=e54]: 자료/상담
+          - listitem [ref=e55]:
+            - link "설정" [ref=e56] [cursor=pointer]:
+              - /url: /settings
+              - img [ref=e57]
+              - generic [ref=e60]: 설정
+    - generic [ref=e61]:
+      - banner [ref=e62]:
+        - button "Toggle Sidebar" [ref=e63] [cursor=pointer]:
+          - img
+          - generic [ref=e64]: Toggle Sidebar
+        - generic [ref=e65]: 2026년 5월 6일 (수)
+        - generic [ref=e66]:
+          - combobox [ref=e67] [cursor=pointer]:
+            - generic: 벼 · 벼
+            - img [ref=e68]
+          - generic [ref=e70]: 마지막 갱신 5월 6일 16:40
+          - button "동기화" [ref=e71] [cursor=pointer]:
+            - img
+      - main [ref=e72]:
+        - generic [ref=e73]:
+          - generic [ref=e74]:
+            - heading "내 필지" [level=3] [ref=e76]
+            - generic [ref=e77]:
+              - button "벼 낮음 벼 · 1,000㎡ (303평)" [ref=e78] [cursor=pointer]:
+                - generic [ref=e79]:
+                  - generic [ref=e80]: 벼
+                  - generic [ref=e81]:
+                    - img [ref=e82]
+                    - generic [ref=e85]: 낮음
+                - generic [ref=e86]: 벼 · 1,000㎡ (303평)
+              - generic [ref=e87]: 지도 미리보기 (후속 단계)
+          - generic [ref=e88]:
+            - generic [ref=e89]:
+              - generic [ref=e91]:
+                - heading "오늘 위험도" [level=3] [ref=e92]
+                - generic [ref=e93]:
+                  - img [ref=e94]
+                  - generic [ref=e97]: 낮음
+              - generic [ref=e98]:
+                - generic [ref=e99]:
+                  - generic [ref=e100]: "25"
+                  - generic [ref=e101]: / 100
+                - generic [ref=e102]:
+                  - generic [ref=e103]: 위험 원인
+                  - list [ref=e104]:
+                    - listitem [ref=e105]: • 기상 위험 신호가 낮습니다.
+                    - listitem [ref=e106]: • 벼 병해충 위험 예보/확인 권고
+            - generic [ref=e107]:
+              - generic [ref=e109]:
+                - heading "날씨 위험" [level=3] [ref=e110]
+                - generic [ref=e112]: 정상 수집
+              - generic [ref=e113]:
+                - generic [ref=e114]:
+                  - generic [ref=e115]:
+                    - generic [ref=e116]:
+                      - img [ref=e117]
+                      - text: 강수
+                    - generic [ref=e119]: 0mm
+                  - generic [ref=e120]:
+                    - generic [ref=e121]:
+                      - img [ref=e122]
+                      - text: 기온
+                    - generic [ref=e124]: 25.1도
+                  - generic [ref=e125]:
+                    - generic [ref=e126]:
+                      - img [ref=e127]
+                      - text: 풍속
+                    - generic [ref=e131]: 3.7m/s
+                  - generic [ref=e132]:
+                    - generic [ref=e133]:
+                      - img [ref=e134]
+                      - text: 습도
+                    - generic [ref=e137]: 37%
+                - paragraph [ref=e138]: "수집 시각: 2026. 5. 6. 오후 4:40:54"
+            - generic [ref=e139]:
+              - heading "병해충 위험 예보/확인 권고" [level=3] [ref=e141]
+              - generic [ref=e142]:
+                - generic [ref=e143]:
+                  - generic [ref=e144]:
+                    - generic [ref=e145]: 벼 병해충 위험 예보/확인 권고
+                    - generic [ref=e146]:
+                      - img [ref=e147]
+                      - generic [ref=e150]: 낮음
+                  - generic [ref=e151]: 농사로 병해충 발생정보 4건 확인
+                  - generic [ref=e152]:
+                    - generic [ref=e153]: 공식 근거자료
+                    - list [ref=e154]:
+                      - listitem [ref=e155]: "병해충 발생정보: 병해충발생정보 제 4호 (2026.4.1~4.30.)"
+                      - listitem [ref=e156]: "병해충 발생정보: 병해충발생정보 제 3호 (2026.3.1~3.31.)"
+                      - listitem [ref=e157]: "병해충 발생정보: 병해충발생정보 제 2호 (2026.2.1~2.28.)"
+                      - listitem [ref=e158]: "병해충 발생정보: 병해충발생정보 제 1호 (2026.1.1~31.)"
+                - generic [ref=e159]:
+                  - generic [ref=e160]: 공식 병해충 발생정보
+                  - paragraph [ref=e161]: 공식 자료를 조회하는 중입니다.
+          - generic [ref=e162]:
+            - generic [ref=e164]:
+              - heading "오늘 작업" [level=3] [ref=e165]
+              - link "전체" [ref=e166] [cursor=pointer]:
+                - /url: /tasks
+                - text: 전체
+                - img
+            - paragraph [ref=e168]: 대기 중인 작업이 없습니다.
+          - generic [ref=e169]:
+            - link "사진 판독 병징 사진으로 의심 후보 확인" [ref=e170] [cursor=pointer]:
+              - /url: /diagnosis
+              - img [ref=e172]
+              - generic [ref=e175]:
+                - generic [ref=e176]: 사진 판독
+                - generic [ref=e177]: 병징 사진으로 의심 후보 확인
+            - link "농약 안전사용지침 농사로 공식 자료 검색" [ref=e178] [cursor=pointer]:
+              - /url: /reports?tab=pesticide
+              - img [ref=e180]
+              - generic [ref=e183]:
+                - generic [ref=e184]: 농약 안전사용지침
+                - generic [ref=e185]: 농사로 공식 자료 검색
+            - link "상담 리포트 농업기술센터 상담용 자료 모음" [ref=e186] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e188]
+              - generic [ref=e191]:
+                - generic [ref=e192]: 상담 리포트
+                - generic [ref=e193]: 농업기술센터 상담용 자료 모음

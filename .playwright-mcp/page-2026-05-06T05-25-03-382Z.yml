@@ -1,0 +1,153 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e4]:
+    - generic [ref=e8]:
+      - generic [ref=e10]:
+        - img [ref=e12]
+        - generic [ref=e16]:
+          - generic [ref=e17]: FieldGuard AI
+          - generic [ref=e18]: 현장 의사결정 보조
+      - generic [ref=e20]:
+        - generic [ref=e21]: 주 메뉴
+        - list [ref=e23]:
+          - listitem [ref=e24]:
+            - link "대시보드" [active] [ref=e25] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e26]
+              - generic [ref=e31]: 대시보드
+          - listitem [ref=e32]:
+            - link "필지 지도" [ref=e33] [cursor=pointer]:
+              - /url: /fields/map
+              - img [ref=e34]
+              - generic [ref=e36]: 필지 지도
+          - listitem [ref=e37]:
+            - link "작업 카드" [ref=e38] [cursor=pointer]:
+              - /url: /tasks
+              - img [ref=e39]
+              - generic [ref=e42]: 작업 카드
+          - listitem [ref=e43]:
+            - link "사진 판독" [ref=e44] [cursor=pointer]:
+              - /url: /diagnosis
+              - img [ref=e45]
+              - generic [ref=e48]: 사진 판독
+          - listitem [ref=e49]:
+            - link "자료/상담" [ref=e50] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e51]
+              - generic [ref=e54]: 자료/상담
+          - listitem [ref=e55]:
+            - link "설정" [ref=e56] [cursor=pointer]:
+              - /url: /settings
+              - img [ref=e57]
+              - generic [ref=e60]: 설정
+    - generic [ref=e61]:
+      - banner [ref=e62]:
+        - button "Toggle Sidebar" [ref=e63] [cursor=pointer]:
+          - img
+          - generic [ref=e64]: Toggle Sidebar
+        - generic [ref=e65]: 2026년 5월 6일 (수)
+        - generic [ref=e66]:
+          - combobox [ref=e67] [cursor=pointer]:
+            - generic: QA테스트-삭제대상 · 배추
+            - img [ref=e68]
+          - generic [ref=e70]: 마지막 갱신 5월 6일 14:20
+          - button "동기화" [ref=e71] [cursor=pointer]:
+            - img
+      - main [ref=e72]:
+        - generic [ref=e419]:
+          - generic [ref=e420]:
+            - heading "내 필지" [level=3] [ref=e422]
+            - generic [ref=e423]:
+              - button "벼 데이터 없음 벼 · 1,000㎡ (303평)" [ref=e424] [cursor=pointer]:
+                - generic [ref=e425]:
+                  - generic [ref=e426]: 벼
+                  - generic [ref=e427]:
+                    - img [ref=e428]
+                    - generic [ref=e431]: 데이터 없음
+                - generic [ref=e432]: 벼 · 1,000㎡ (303평)
+              - button "QA테스트-삭제대상 데이터 없음 배추 · 1,000㎡ (303평)" [ref=e433] [cursor=pointer]:
+                - generic [ref=e434]:
+                  - generic [ref=e435]: QA테스트-삭제대상
+                  - generic [ref=e436]:
+                    - img [ref=e437]
+                    - generic [ref=e440]: 데이터 없음
+                - generic [ref=e441]: 배추 · 1,000㎡ (303평)
+              - generic [ref=e442]: 지도 미리보기 (후속 단계)
+          - generic [ref=e443]:
+            - generic [ref=e444]:
+              - generic [ref=e446]:
+                - heading "오늘 위험도" [level=3] [ref=e447]
+                - generic [ref=e448]:
+                  - img [ref=e449]
+                  - generic [ref=e452]: 데이터 없음
+              - generic [ref=e453]:
+                - generic [ref=e454]:
+                  - generic [ref=e455]: "0"
+                  - generic [ref=e456]: / 100
+                - generic [ref=e457]:
+                  - generic [ref=e458]: 위험 원인
+                  - list [ref=e459]:
+                    - listitem [ref=e460]: • 기상 위험 신호가 낮습니다.
+            - generic [ref=e461]:
+              - generic [ref=e463]:
+                - heading "날씨 위험" [level=3] [ref=e464]
+                - generic [ref=e466]: 정상 수집
+              - generic [ref=e467]:
+                - generic [ref=e468]:
+                  - generic [ref=e469]:
+                    - generic [ref=e470]:
+                      - img [ref=e471]
+                      - text: 강수
+                    - generic [ref=e473]: 0mm
+                  - generic [ref=e474]:
+                    - generic [ref=e475]:
+                      - img [ref=e476]
+                      - text: 기온
+                    - generic [ref=e478]: 24.7도
+                  - generic [ref=e479]:
+                    - generic [ref=e480]:
+                      - img [ref=e481]
+                      - text: 풍속
+                    - generic [ref=e485]: 3.7m/s
+                  - generic [ref=e486]:
+                    - generic [ref=e487]:
+                      - img [ref=e488]
+                      - text: 습도
+                    - generic [ref=e491]: 37%
+                - paragraph [ref=e492]: "수집 시각: 2026. 5. 6. 오후 2:24:54"
+            - generic [ref=e493]:
+              - heading "병해충 위험 후보" [level=3] [ref=e495]
+              - generic [ref=e496]:
+                - paragraph [ref=e497]: 표시할 위험 후보가 없습니다.
+                - generic [ref=e498]:
+                  - generic [ref=e499]: 공식 병해충 발생정보
+                  - paragraph [ref=e500]: 해당 작물의 공식 발생정보가 확인되지 않습니다.
+          - generic [ref=e501]:
+            - generic [ref=e503]:
+              - heading "오늘 작업" [level=3] [ref=e504]
+              - link "전체" [ref=e505] [cursor=pointer]:
+                - /url: /tasks
+                - text: 전체
+                - img
+            - paragraph [ref=e507]: 대기 중인 작업이 없습니다.
+          - generic [ref=e508]:
+            - link "사진 판독 병징 사진으로 의심 후보 확인" [ref=e509] [cursor=pointer]:
+              - /url: /diagnosis
+              - img [ref=e511]
+              - generic [ref=e514]:
+                - generic [ref=e515]: 사진 판독
+                - generic [ref=e516]: 병징 사진으로 의심 후보 확인
+            - link "농약 안전사용지침 농사로 공식 자료 검색" [ref=e517] [cursor=pointer]:
+              - /url: /reports?tab=pesticide
+              - img [ref=e519]
+              - generic [ref=e522]:
+                - generic [ref=e523]: 농약 안전사용지침
+                - generic [ref=e524]: 농사로 공식 자료 검색
+            - link "상담 리포트 농업기술센터 상담용 자료 모음" [ref=e525] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e527]
+              - generic [ref=e530]:
+                - generic [ref=e531]: 상담 리포트
+                - generic [ref=e532]: 농업기술센터 상담용 자료 모음

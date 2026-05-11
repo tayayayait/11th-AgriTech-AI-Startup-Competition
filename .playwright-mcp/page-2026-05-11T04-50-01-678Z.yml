@@ -1,0 +1,394 @@
+- generic [ref=e392]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e394]:
+    - generic [ref=e398]:
+      - link "FieldGuard AI home" [ref=e400] [cursor=pointer]:
+        - /url: /
+        - img [ref=e402]
+        - generic [ref=e406]:
+          - generic [ref=e407]: FieldGuard AI
+          - generic [ref=e408]: 현장 의사결정 보조
+      - generic [ref=e410]:
+        - generic [ref=e411]: 주 메뉴
+        - list [ref=e413]:
+          - listitem [ref=e414]:
+            - link "대시보드" [ref=e415] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e416]
+              - generic [ref=e421]: 대시보드
+          - listitem [ref=e422]:
+            - link "필지 지도" [ref=e423] [cursor=pointer]:
+              - /url: /fields/map
+              - img [ref=e424]
+              - generic [ref=e426]: 필지 지도
+          - listitem [ref=e427]:
+            - link "작업 카드" [ref=e428] [cursor=pointer]:
+              - /url: /tasks
+              - img [ref=e429]
+              - generic [ref=e432]: 작업 카드
+          - listitem [ref=e433]:
+            - link "사진 판독" [ref=e434] [cursor=pointer]:
+              - /url: /diagnosis
+              - img [ref=e435]
+              - generic [ref=e438]: 사진 판독
+          - listitem [ref=e439]:
+            - link "자료/상담" [ref=e440] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e441]
+              - generic [ref=e444]: 자료/상담
+          - listitem [ref=e445]:
+            - link "설정" [ref=e446] [cursor=pointer]:
+              - /url: /settings
+              - img [ref=e447]
+              - generic [ref=e450]: 설정
+    - generic [ref=e451]:
+      - banner [ref=e452]:
+        - button "Toggle Sidebar" [ref=e453] [cursor=pointer]:
+          - img
+          - generic [ref=e454]: Toggle Sidebar
+        - generic [ref=e455]: 2026년 5월 11일 (월)
+        - generic [ref=e456]:
+          - combobox [ref=e457] [cursor=pointer]:
+            - generic: 인천광역시 서구 가좌동 밭 · 수박
+            - img [ref=e458]
+          - generic [ref=e460]: 마지막 갱신 5월 11일 13:44
+          - generic [ref=e461]:
+            - img [ref=e462]
+            - generic [ref=e466]: dbcdkwo629@naver.com
+          - button "동기화" [ref=e467] [cursor=pointer]:
+            - img
+      - main [ref=e1]:
+        - generic [ref=e2]:
+          - generic [ref=e3]:
+            - generic [ref=e4]:
+              - heading "해야 할 작업" [level=1] [ref=e5]
+              - paragraph [ref=e6]: 0개 대기 중
+            - generic [ref=e7]: 공식 데이터 기반 자동 생성
+          - region "해야 할 작업" [ref=e8]:
+            - paragraph [ref=e9]: 해야 할 작업 카드가 없습니다.
+          - generic [ref=e11]:
+            - region "이번 달 농작업일정" [ref=e12]:
+              - generic [ref=e13]:
+                - img [ref=e14]
+                - heading "이번 달 농작업일정" [level=2] [ref=e16]
+              - generic [ref=e18]: 농작업일정 API 조회 성공 + 이번 달 매칭 10건
+              - generic [ref=e19]:
+                - generic [ref=e20]:
+                  - generic [ref=e21]:
+                    - generic [ref=e22]:
+                      - generic [ref=e23]: 채소
+                      - generic [ref=e24]: 수박
+                    - paragraph [ref=e25]: 농사로 농작업일정 API 기준 · KST 현재 월(5월)
+                  - generic [ref=e26]: 5월 10개
+                - generic [ref=e27]:
+                  - generic [ref=e28]:
+                    - generic [ref=e29]: 이번 달(5월) 해당 항목
+                    - generic [ref=e30]: 5월
+                  - generic [ref=e31]:
+                    - generic [ref=e32]:
+                      - generic [ref=e33]: 기상재해 및 예상 문제
+                      - generic [ref=e34]: 4개
+                    - generic [ref=e35]:
+                      - generic [ref=e36]:
+                        - generic [ref=e37]: 4월 하-6월 중
+                        - generic [ref=e38]:
+                          - generic [ref=e40]: 가뭄
+                          - generic [ref=e41]: 현재 시기
+                          - generic [ref=e42]:
+                            - generic [ref=e43]: 확인할 일
+                            - list [ref=e44]:
+                              - listitem [ref=e45]: 기상 예보와 현장 상태 확인
+                              - listitem [ref=e46]: 피해 징후 기록
+                              - listitem [ref=e47]: 필요 시 보호·배수 조치 준비
+                          - generic [ref=e48]:
+                            - generic [ref=e50]: 도움되는 동영상
+                            - generic [ref=e51]:
+                              - generic [ref=e54]:
+                                - generic [ref=e55]:
+                                  - generic [ref=e56]: 직접 관련 95점
+                                  - generic [ref=e57]: 전북농업기술원
+                                - generic [ref=e58]: 수박 생리장해 원인과 대책
+                                - paragraph [ref=e59]: 가뭄은 주요 생리장해 원인 중 하나이므로 직접적인 대책 정보를 제공합니다.
+                                - link "영상 보기" [ref=e60] [cursor=pointer]:
+                                  - /url: https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=321
+                                  - text: 영상 보기
+                                  - img [ref=e61]
+                              - button "더 보기" [ref=e65] [cursor=pointer]
+                      - generic [ref=e66]:
+                        - generic [ref=e67]: 2월 하-5월 중
+                        - generic [ref=e68]:
+                          - generic [ref=e70]: 설명 입력
+                          - generic [ref=e71]: 현재 시기
+                          - generic [ref=e72]:
+                            - generic [ref=e73]: 확인할 일
+                            - list [ref=e74]:
+                              - listitem [ref=e75]: 기상 예보와 현장 상태 확인
+                              - listitem [ref=e76]: 피해 징후 기록
+                              - listitem [ref=e77]: 필요 시 보호·배수 조치 준비
+                          - generic [ref=e78]:
+                            - generic [ref=e80]: 도움되는 동영상
+                            - generic [ref=e81]:
+                              - generic [ref=e84]:
+                                - generic [ref=e85]:
+                                  - generic [ref=e86]: 직접 관련 98점
+                                  - generic [ref=e87]: 전북농업기술원
+                                - generic [ref=e88]: 수박 생리장해 원인과 대책
+                                - paragraph [ref=e89]: 기상재해로 인해 발생하는 생리장해의 원인과 대책을 직접적으로 다룹니다.
+                                - link "영상 보기" [ref=e90] [cursor=pointer]:
+                                  - /url: https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=321
+                                  - text: 영상 보기
+                                  - img [ref=e91]
+                              - button "더 보기" [ref=e95] [cursor=pointer]
+                      - generic [ref=e96]:
+                        - generic [ref=e97]: 5월 하-6월 중
+                        - generic [ref=e98]:
+                          - generic [ref=e100]: 가뭄
+                          - generic [ref=e101]:
+                            - generic [ref=e102]: 확인할 일
+                            - list [ref=e103]:
+                              - listitem [ref=e104]: 기상 예보와 현장 상태 확인
+                              - listitem [ref=e105]: 피해 징후 기록
+                              - listitem [ref=e106]: 필요 시 보호·배수 조치 준비
+                          - generic [ref=e107]:
+                            - generic [ref=e109]: 도움되는 동영상
+                            - generic [ref=e110]:
+                              - generic [ref=e113]:
+                                - generic [ref=e114]:
+                                  - generic [ref=e115]: 직접 관련 95점
+                                  - generic [ref=e116]: 전북농업기술원
+                                - generic [ref=e117]: 수박 생리장해 원인과 대책
+                                - paragraph [ref=e118]: 가뭄으로 인한 수분 부족은 생리장해의 주요 원인이므로 직접적인 대책 정보를 포함합니다.
+                                - link "영상 보기" [ref=e119] [cursor=pointer]:
+                                  - /url: https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=321
+                                  - text: 영상 보기
+                                  - img [ref=e120]
+                              - button "더 보기" [ref=e124] [cursor=pointer]
+                      - generic [ref=e125]:
+                        - generic [ref=e126]: 2월 하-8월 하
+                        - generic [ref=e127]:
+                          - generic [ref=e129]: 모기르기불량, 모잘록병발생, 아주심기 지연, 초기생육 불량, 습해, 병 다발생, 과실생리장해 발생
+                          - generic [ref=e130]: 현재 시기
+                          - generic [ref=e131]:
+                            - generic [ref=e132]: 확인할 일
+                            - list [ref=e133]:
+                              - listitem [ref=e134]: 기상 예보와 현장 상태 확인
+                              - listitem [ref=e135]: 피해 징후 기록
+                              - listitem [ref=e136]: 필요 시 보호·배수 조치 준비
+                          - generic [ref=e137]:
+                            - generic [ref=e139]: 도움되는 동영상
+                            - generic [ref=e140]:
+                              - generic [ref=e143]:
+                                - generic [ref=e144]:
+                                  - generic [ref=e145]: 직접 관련 100점
+                                  - generic [ref=e146]: 전북농업기술원
+                                - generic [ref=e147]: 수박 생리장해 원인과 대책
+                                - paragraph [ref=e148]: 과실 생리장해의 원인과 대책을 직접적으로 다루고 있어 작업 항목과 완벽히 일치합니다.
+                                - link "영상 보기" [ref=e149] [cursor=pointer]:
+                                  - /url: https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=321
+                                  - text: 영상 보기
+                                  - img [ref=e150]
+                              - button "더 보기" [ref=e154] [cursor=pointer]
+                  - generic [ref=e155]:
+                    - generic [ref=e156]:
+                      - generic [ref=e157]: 병충해 방제
+                      - generic [ref=e158]: 1개
+                    - generic [ref=e160]:
+                      - generic [ref=e161]: 1월 상-12월 하
+                      - generic [ref=e162]:
+                        - generic [ref=e164]: 모잘록병, 진딧물, 응애, 덩굴마름병, 탄저병, 바이러스
+                        - generic [ref=e165]: 현재 시기
+                        - generic [ref=e166]:
+                          - generic [ref=e167]: 확인할 일
+                          - list [ref=e168]:
+                            - listitem [ref=e169]: 병해충 발생 여부 관찰
+                            - listitem [ref=e170]: 피해 부위 사진 기록
+                            - listitem [ref=e171]: 공식 방제자료 확인
+                        - generic [ref=e172]:
+                          - generic [ref=e174]: 도움되는 동영상
+                          - generic [ref=e175]:
+                            - generic [ref=e178]:
+                              - generic [ref=e179]:
+                                - generic [ref=e180]: 직접 관련 100점
+                                - generic [ref=e181]: 전북농업기술원
+                              - generic [ref=e182]: 수박 병해충 방제
+                              - paragraph [ref=e183]: 수박의 주요 병해충 방제법을 직접적으로 다루고 있어 작업 항목과 일치합니다.
+                              - link "영상 보기" [ref=e184] [cursor=pointer]:
+                                - /url: https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=319
+                                - text: 영상 보기
+                                - img [ref=e185]
+                            - button "더 보기" [ref=e189] [cursor=pointer]
+                  - generic [ref=e190]:
+                    - generic [ref=e191]:
+                      - generic [ref=e192]: 생육과정
+                      - generic [ref=e193]: 5개
+                    - generic [ref=e194]:
+                      - generic [ref=e195]:
+                        - generic [ref=e196]: 5월 중-6월 상
+                        - generic [ref=e197]:
+                          - generic [ref=e199]: 수확기
+                          - generic [ref=e200]: 현재 시기
+                          - generic [ref=e201]:
+                            - generic [ref=e202]: 확인할 일
+                            - list [ref=e203]:
+                              - listitem [ref=e204]: 수확기 적용 여부 확인
+                              - listitem [ref=e205]: 필지 생육단계와 농작업일정 비교
+                              - listitem [ref=e206]: 필요 자재·장비·인력 준비 상태 확인
+                          - generic [ref=e207]:
+                            - generic [ref=e209]: 도움되는 동영상
+                            - generic [ref=e210]:
+                              - generic [ref=e213]:
+                                - generic [ref=e214]:
+                                  - generic [ref=e215]: 직접 관련 95점
+                                  - generic [ref=e216]: 국립원예특작과학원
+                                - generic [ref=e217]: 맛있는 수박 고르기
+                                - paragraph [ref=e218]: 맛있는 수박을 고르는 기준은 수확 적기를 판단하는 기준과 직접적으로 연결됩니다.
+                                - link "영상 보기" [ref=e219] [cursor=pointer]:
+                                  - /url: https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=355
+                                  - text: 영상 보기
+                                  - img [ref=e220]
+                              - button "더 보기" [ref=e224] [cursor=pointer]
+                      - generic [ref=e225]:
+                        - generic [ref=e226]: 3월 하-6월 상
+                        - generic [ref=e227]:
+                          - generic [ref=e229]: 과실비대, 성숙기
+                          - generic [ref=e230]: 현재 시기
+                          - generic [ref=e231]:
+                            - generic [ref=e232]: 확인할 일
+                            - list [ref=e233]:
+                              - listitem [ref=e234]: 과실비대, 성숙기 적용 여부 확인
+                              - listitem [ref=e235]: 필지 생육단계와 농작업일정 비교
+                              - listitem [ref=e236]: 필요 자재·장비·인력 준비 상태 확인
+                          - generic [ref=e237]:
+                            - generic [ref=e239]: 도움되는 동영상
+                            - generic [ref=e240]:
+                              - generic [ref=e243]:
+                                - generic [ref=e244]:
+                                  - generic [ref=e245]: 직접 관련 95점
+                                  - generic [ref=e246]: 농촌진흥청
+                                - generic [ref=e247]: 예쁘고 맛있는 수박 어떻게 키우지?
+                                - paragraph [ref=e248]: 예쁘고 맛있는 수박을 키우기 위한 과실 관리 및 성숙기 요령을 직접적으로 설명합니다.
+                                - link "영상 보기" [ref=e249] [cursor=pointer]:
+                                  - /url: https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=2608
+                                  - text: 영상 보기
+                                  - img [ref=e250]
+                              - button "더 보기" [ref=e254] [cursor=pointer]
+                      - generic [ref=e255]:
+                        - generic [ref=e256]: 5월 하-6월 하
+                        - generic [ref=e257]:
+                          - generic [ref=e259]: 개화기
+                          - generic [ref=e260]:
+                            - generic [ref=e261]: 확인할 일
+                            - list [ref=e262]:
+                              - listitem [ref=e263]: 개화기 적용 여부 확인
+                              - listitem [ref=e264]: 필지 생육단계와 농작업일정 비교
+                              - listitem [ref=e265]: 필요 자재·장비·인력 준비 상태 확인
+                          - generic [ref=e266]:
+                            - generic [ref=e268]: 도움되는 동영상
+                            - generic [ref=e269]:
+                              - generic [ref=e272]:
+                                - generic [ref=e273]:
+                                  - generic [ref=e274]: 참고 85점
+                                  - generic [ref=e275]: 전북농업기술원
+                                - generic [ref=e276]: 수박 정식후 본포관리
+                                - paragraph [ref=e277]: 정식 후 본포 관리 과정에 개화기 전후의 생육 관리가 포함되어 관련성이 높습니다.
+                                - link "영상 보기" [ref=e278] [cursor=pointer]:
+                                  - /url: https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=322
+                                  - text: 영상 보기
+                                  - img [ref=e279]
+                              - button "더 보기" [ref=e283] [cursor=pointer]
+                      - generic [ref=e284]:
+                        - generic [ref=e285]: 4월 중-5월 중
+                        - generic [ref=e286]:
+                          - generic [ref=e288]: 아주심기
+                          - generic [ref=e289]: 현재 시기
+                          - generic [ref=e290]:
+                            - generic [ref=e291]: 확인할 일
+                            - list [ref=e292]:
+                              - listitem [ref=e293]: 아주심기 적용 여부 확인
+                              - listitem [ref=e294]: 필지 생육단계와 농작업일정 비교
+                              - listitem [ref=e295]: 필요 자재·장비·인력 준비 상태 확인
+                          - generic [ref=e296]:
+                            - generic [ref=e298]: 도움되는 동영상
+                            - generic [ref=e299]:
+                              - generic [ref=e302]:
+                                - generic [ref=e303]:
+                                  - generic [ref=e304]: 직접 관련 95점
+                                  - generic [ref=e305]: 전북농업기술원
+                                - generic [ref=e306]: 수박 정식후 본포관리
+                                - paragraph [ref=e307]: 정식(아주심기) 후의 본포 관리를 다루고 있어 해당 작업과 직접적으로 연관됩니다.
+                                - link "영상 보기" [ref=e308] [cursor=pointer]:
+                                  - /url: https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=322
+                                  - text: 영상 보기
+                                  - img [ref=e309]
+                              - button "더 보기" [ref=e313] [cursor=pointer]
+                      - generic [ref=e314]:
+                        - generic [ref=e315]: 5월 상-6월 상
+                        - generic [ref=e316]:
+                          - generic [ref=e318]: 덩굴 신장기
+                          - generic [ref=e319]: 현재 시기
+                          - generic [ref=e320]:
+                            - generic [ref=e321]: 확인할 일
+                            - list [ref=e322]:
+                              - listitem [ref=e323]: 덩굴 신장기 적용 여부 확인
+                              - listitem [ref=e324]: 필지 생육단계와 농작업일정 비교
+                              - listitem [ref=e325]: 필요 자재·장비·인력 준비 상태 확인
+                          - generic [ref=e326]:
+                            - generic [ref=e328]: 도움되는 동영상
+                            - generic [ref=e329]:
+                              - generic [ref=e332]:
+                                - generic [ref=e333]:
+                                  - generic [ref=e334]: 직접 관련 95점
+                                  - generic [ref=e335]: 전북농업기술원
+                                - generic [ref=e336]: 수박 정식후 본포관리
+                                - paragraph [ref=e337]: 정식 후 본포 관리 전반을 다루어 덩굴 신장기 작업과 직접적으로 관련됩니다.
+                                - link "영상 보기" [ref=e338] [cursor=pointer]:
+                                  - /url: https://www.nongsaro.go.kr/portal/ps/psb/psby/vodPlay.ps?mvpNo=322
+                                  - text: 영상 보기
+                                  - img [ref=e339]
+                              - button "더 보기" [ref=e343] [cursor=pointer]
+                - link "첨부 자료 확인" [ref=e344] [cursor=pointer]:
+                  - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=B4dnyowbPjASwVmu3KG75rDp1w/VGwS/8A8al7oQrKU9KolHxCN4Fta7hfMXElwF
+                  - text: 첨부 자료 확인
+                  - img [ref=e345]
+            - region "주간농사정보 근거 (이번 주)" [ref=e349]:
+              - generic "이번 주 농사 브리핑" [ref=e350]:
+                - generic [ref=e351]:
+                  - generic [ref=e352]:
+                    - img [ref=e353]
+                    - heading "이번 주 농사 브리핑" [level=2] [ref=e355]
+                    - generic [ref=e356]: Gemini
+                  - button "이번주 주간농사정보 파일 요약" [ref=e357] [cursor=pointer]:
+                    - img
+                    - text: 요약
+                - generic [ref=e469]:
+                  - generic [ref=e470]:
+                    - generic [ref=e471]:
+                      - generic [ref=e472]: 수박
+                      - generic [ref=e473]: 주간농사정보 제 19호 (2026.5.11.~5.17.)
+                    - paragraph [ref=e474]: 수박 관련 주간 농사 정보가 없습니다.
+                    - paragraph [ref=e475]: 선택 작물과 직접 관련된 내용이 원문에서 확인되지 않았습니다.
+                  - generic [ref=e476]:
+                    - generic [ref=e477]:
+                      - generic [ref=e478]: 인천광역시 서구 가좌동 밭
+                      - generic [ref=e479]: 인천광역시 서구 가좌동
+                    - generic [ref=e480]:
+                      - generic [ref=e481]: 강수 0mm
+                      - generic [ref=e482]: 기온 20.8℃
+                      - generic [ref=e483]: 풍속 1.2m/s
+                      - generic [ref=e484]: 습도 71%
+                  - link "원문 PDF 확인" [ref=e485] [cursor=pointer]:
+                    - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=fUMiGZKeliQHdgX3U@8rhaF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                    - text: 원문 PDF 확인
+                    - img [ref=e486]
+              - generic [ref=e379]:
+                - img [ref=e380]
+                - heading "주간농사정보 근거 (이번 주)" [level=2] [ref=e382]
+              - generic [ref=e383]:
+                - generic [ref=e384]: 주간농사정보 제 19호 (2026.5.11.~5.17.)
+                - generic [ref=e385]: 2026-05-11 ~ 2026-05-17 · 등록 2026-05-07 · 배선아
+                - link "공식 자료 확인" [ref=e386] [cursor=pointer]:
+                  - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=fUMiGZKeliQHdgX3U@8rhaF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                  - text: 공식 자료 확인
+                  - img [ref=e387]

@@ -1,0 +1,60 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e5]:
+    - banner [ref=e6]:
+      - button "Toggle Sidebar" [ref=e7] [cursor=pointer]:
+        - img
+        - generic [ref=e8]: Toggle Sidebar
+      - generic [ref=e9]:
+        - combobox [ref=e10] [cursor=pointer]:
+          - generic: Phase9 테스트 필지 · 벼
+          - img [ref=e11]
+        - button "동기화" [ref=e13] [cursor=pointer]:
+          - img
+    - main [ref=e14]:
+      - generic [ref=e278]:
+        - generic [ref=e279]:
+          - tablist [ref=e280]:
+            - tab "오늘 (1)" [selected] [ref=e281] [cursor=pointer]
+            - tab "이번 주 (2)" [ref=e282] [cursor=pointer]
+            - tab "완료 (0)" [ref=e283] [cursor=pointer]
+          - generic [ref=e284]: 공식 데이터 기반 자동 생성
+        - tabpanel "오늘 (1)" [ref=e285]:
+          - generic [ref=e287]:
+            - generic [ref=e288]:
+              - generic [ref=e289]:
+                - generic [ref=e290]:
+                  - generic [ref=e291]: 2순위
+                  - generic [ref=e292]: 5월 6일 (수)
+                - generic [ref=e293]: 병해충 위험 예보 근거 확인
+              - generic [ref=e294]:
+                - img [ref=e295]
+                - text: 25분
+            - paragraph [ref=e298]: 농사로 병해충 발생정보 4건 확인
+            - generic [ref=e299]:
+              - generic [ref=e300]:
+                - checkbox "공식 발생정보 원문 확인" [checked] [active] [ref=e301] [cursor=pointer]:
+                  - generic:
+                    - img
+                - generic [ref=e302]: 공식 발생정보 원문 확인
+              - generic [ref=e303]:
+                - checkbox "잎 뒷면·줄기·생장점 확인" [ref=e304] [cursor=pointer]
+                - generic [ref=e305]: 잎 뒷면·줄기·생장점 확인
+              - generic [ref=e306]:
+                - checkbox "발견 위치와 사진 기록" [ref=e307] [cursor=pointer]
+                - generic [ref=e308]: 발견 위치와 사진 기록
+            - generic [ref=e309]:
+              - button "근거 데이터 보기" [expanded] [ref=e310] [cursor=pointer]:
+                - img [ref=e311]
+                - text: 근거 데이터 보기
+              - generic [ref=e313]:
+                - generic [ref=e314]:
+                  - text: 벼 병해충 위험 예보/확인 권고
+                  - generic [ref=e315]: · 2026. 5. 6. 오후 6:15:54
+                - generic [ref=e316]: "병해충 발생정보: 병해충발생정보 제 4호 (2026.4.1~4.30.) (http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=khDTekIxZ7Vv/I6ELZ5WhqF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/)"
+                - generic [ref=e317]: "병해충 발생정보: 병해충발생정보 제 3호 (2026.3.1~3.31.) (http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=/M0cP3cvxgdtO0@x/ZsdfKF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/)"
+                - generic [ref=e318]: "병해충 발생정보: 병해충발생정보 제 2호 (2026.2.1~2.28.) (http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=Gj95ART1TW36xCsbsQxA/aF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/)"
+            - button "완료 처리 (1/3)" [disabled]
+        - tabpanel "완료 (0)"

@@ -1,0 +1,49 @@
+project_id = "zlbuelcabafwtothdvno"
+
+[functions.farmmap-proxy]
+enabled = true
+verify_jwt = false
+import_map = "./functions/farmmap-proxy/deno.json"
+entrypoint = "./functions/farmmap-proxy/index.ts"
+
+[functions.kma-proxy]
+enabled = true
+verify_jwt = false
+import_map = "./functions/kma-proxy/deno.json"
+entrypoint = "./functions/kma-proxy/index.ts"
+
+[functions.standard-region-proxy]
+enabled = true
+verify_jwt = false
+import_map = "./functions/standard-region-proxy/deno.json"
+entrypoint = "./functions/standard-region-proxy/index.ts"
+
+[functions.nongsaro-proxy]
+enabled = true
+verify_jwt = false
+import_map = "./functions/nongsaro-proxy/deno.json"
+entrypoint = "./functions/nongsaro-proxy/index.ts"
+
+[functions.npms-proxy]
+enabled = true
+verify_jwt = false
+import_map = "./functions/npms-proxy/deno.json"
+entrypoint = "./functions/npms-proxy/index.ts"
+
+[functions.psis-proxy]
+enabled = true
+verify_jwt = false
+import_map = "./functions/psis-proxy/deno.json"
+entrypoint = "./functions/psis-proxy/index.ts"
+
+[functions.gemini-proxy]
+enabled = true
+verify_jwt = false
+import_map = "./functions/gemini-proxy/deno.json"
+entrypoint = "./functions/gemini-proxy/index.ts"
+
+[functions.weekly-farm-briefing-proxy]
+enabled = true
+verify_jwt = false
+import_map = "./functions/weekly-farm-briefing-proxy/deno.json"
+entrypoint = "./functions/weekly-farm-briefing-proxy/index.ts"

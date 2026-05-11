@@ -1,0 +1,91 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e517]:
+    - generic [ref=e521]:
+      - link "FieldGuard AI home" [ref=e523] [cursor=pointer]:
+        - /url: /
+        - img [ref=e525]
+        - generic [ref=e529]:
+          - generic [ref=e530]: FieldGuard AI
+          - generic [ref=e531]: 현장 의사결정 보조
+      - generic [ref=e533]:
+        - generic [ref=e534]: 주 메뉴
+        - list [ref=e536]:
+          - listitem [ref=e537]:
+            - link "대시보드" [ref=e538] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e539]
+              - generic [ref=e544]: 대시보드
+          - listitem [ref=e545]:
+            - link "필지 지도" [ref=e546] [cursor=pointer]:
+              - /url: /fields/map
+              - img [ref=e547]
+              - generic [ref=e549]: 필지 지도
+          - listitem [ref=e550]:
+            - link "작업 카드" [active] [ref=e551] [cursor=pointer]:
+              - /url: /tasks
+              - img [ref=e552]
+              - generic [ref=e555]: 작업 카드
+          - listitem [ref=e556]:
+            - link "사진 판독" [ref=e557] [cursor=pointer]:
+              - /url: /diagnosis
+              - img [ref=e558]
+              - generic [ref=e561]: 사진 판독
+          - listitem [ref=e562]:
+            - link "자료/상담" [ref=e563] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e564]
+              - generic [ref=e567]: 자료/상담
+          - listitem [ref=e568]:
+            - link "설정" [ref=e569] [cursor=pointer]:
+              - /url: /settings
+              - img [ref=e570]
+              - generic [ref=e573]: 설정
+    - generic [ref=e574]:
+      - banner [ref=e575]:
+        - button "Toggle Sidebar" [ref=e576] [cursor=pointer]:
+          - img
+          - generic [ref=e577]: Toggle Sidebar
+        - generic [ref=e578]: 2026년 5월 11일 (월)
+        - generic [ref=e579]:
+          - combobox [ref=e580] [cursor=pointer]:
+            - generic: 인천광역시 서구 가좌동 밭 · 수박
+            - img [ref=e581]
+          - generic [ref=e583]: 마지막 갱신 5월 11일 13:41
+          - generic [ref=e584]:
+            - img [ref=e585]
+            - generic [ref=e589]: dbcdkwo629@naver.com
+          - button "동기화" [ref=e590] [cursor=pointer]:
+            - img
+      - main [ref=e591]:
+        - generic [ref=e592]:
+          - generic [ref=e593]:
+            - generic [ref=e594]:
+              - heading "해야 할 작업" [level=1] [ref=e595]
+              - paragraph [ref=e596]: 0개 대기 중
+            - generic [ref=e597]: 공식 데이터 기반 자동 생성
+          - region "해야 할 작업" [ref=e598]:
+            - paragraph [ref=e599]: 해야 할 작업 카드가 없습니다.
+          - generic [ref=e601]:
+            - region "이번 달 농작업일정" [ref=e602]:
+              - generic [ref=e603]:
+                - img [ref=e604]
+                - heading "이번 달 농작업일정" [level=2] [ref=e606]
+              - paragraph [ref=e607]: 농작업일정 정보를 조회하는 중입니다.
+            - region "주간농사정보 근거 (이번 주)" [ref=e608]:
+              - generic "이번 주 농사 브리핑" [ref=e609]:
+                - generic [ref=e610]:
+                  - generic [ref=e611]:
+                    - img [ref=e612]
+                    - heading "이번 주 농사 브리핑" [level=2] [ref=e614]
+                    - generic [ref=e615]: 요약 대기
+                  - button "이번주 주간농사정보 파일 요약" [disabled]:
+                    - img
+                    - text: 요약
+                - paragraph [ref=e616]: 요약할 주간농사정보 PDF 링크가 없습니다.
+              - generic [ref=e617]:
+                - img [ref=e618]
+                - heading "주간농사정보 근거 (이번 주)" [level=2] [ref=e620]
+              - paragraph [ref=e621]: 주간농사정보를 조회하는 중입니다.

@@ -1,0 +1,185 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e5]:
+    - banner [ref=e6]:
+      - button "Toggle Sidebar" [ref=e7] [cursor=pointer]:
+        - img
+        - generic [ref=e8]: Toggle Sidebar
+      - generic [ref=e9]:
+        - combobox [ref=e10] [cursor=pointer]:
+          - generic: Phase10 E2E 필지 · 벼
+          - img [ref=e11]
+        - button "동기화" [ref=e13] [cursor=pointer]:
+          - img
+    - main [ref=e14]:
+      - generic [ref=e15]:
+        - generic [ref=e16]:
+          - heading "내 필지" [level=3] [ref=e18]
+          - generic [ref=e19]:
+            - button "Phase10 E2E 필지 낮음 벼 · 0㎡ (0평)" [ref=e20] [cursor=pointer]:
+              - generic [ref=e21]:
+                - generic [ref=e22]: Phase10 E2E 필지
+                - generic [ref=e23]:
+                  - img [ref=e24]
+                  - generic [ref=e27]: 낮음
+              - generic [ref=e28]: 벼 · 0㎡ (0평)
+            - button "Phase9 테스트 필지 낮음 벼 · 0㎡ (0평)" [ref=e29] [cursor=pointer]:
+              - generic [ref=e30]:
+                - generic [ref=e31]: Phase9 테스트 필지
+                - generic [ref=e32]:
+                  - img [ref=e33]
+                  - generic [ref=e36]: 낮음
+              - generic [ref=e37]: 벼 · 0㎡ (0평)
+            - generic [ref=e38]: 지도 미리보기 (후속 단계)
+        - generic [ref=e39]:
+          - generic [ref=e40]:
+            - generic [ref=e42]:
+              - heading "오늘 위험도" [level=3] [ref=e43]
+              - generic [ref=e44]:
+                - img [ref=e45]
+                - generic [ref=e48]: 낮음
+            - generic [ref=e49]:
+              - generic [ref=e50]:
+                - generic [ref=e51]: "25"
+                - generic [ref=e52]: / 100
+              - generic [ref=e53]:
+                - generic [ref=e54]: 위험 원인
+                - list [ref=e55]:
+                  - listitem [ref=e56]: • 기상 위험 신호가 낮습니다.
+                  - listitem [ref=e57]: • 벼 병해충 위험 예보/확인 권고
+          - generic [ref=e58]:
+            - generic [ref=e60]:
+              - heading "날씨 위험" [level=3] [ref=e61]
+              - generic [ref=e63]: 정상 수집
+            - generic [ref=e64]:
+              - generic [ref=e65]:
+                - generic [ref=e66]:
+                  - generic [ref=e67]:
+                    - img [ref=e68]
+                    - text: 강수
+                  - generic [ref=e70]: 0mm
+                - generic [ref=e71]:
+                  - generic [ref=e72]:
+                    - img [ref=e73]
+                    - text: 기온
+                  - generic [ref=e75]: 21.9도
+                - generic [ref=e76]:
+                  - generic [ref=e77]:
+                    - img [ref=e78]
+                    - text: 풍속
+                  - generic [ref=e82]: 1.5m/s
+                - generic [ref=e83]:
+                  - generic [ref=e84]:
+                    - img [ref=e85]
+                    - text: 습도
+                  - generic [ref=e88]: 50%
+              - paragraph [ref=e89]: "수집 시각: 2026. 5. 6. 오후 6:19:31"
+          - generic [ref=e90]:
+            - heading "병해충 위험 예보/확인 권고" [level=3] [ref=e92]
+            - generic [ref=e93]:
+              - generic [ref=e94]:
+                - generic [ref=e95]:
+                  - generic [ref=e96]: 벼 병해충 위험 예보/확인 권고
+                  - generic [ref=e97]:
+                    - img [ref=e98]
+                    - generic [ref=e101]: 낮음
+                - generic [ref=e102]: 농사로 병해충 발생정보 4건 확인
+                - generic [ref=e103]:
+                  - generic [ref=e104]: 공식 근거자료
+                  - list [ref=e105]:
+                    - listitem [ref=e106]: "병해충 발생정보: 병해충발생정보 제 4호 (2026.4.1~4.30.)"
+                    - listitem [ref=e107]: "병해충 발생정보: 병해충발생정보 제 3호 (2026.3.1~3.31.)"
+                    - listitem [ref=e108]: "병해충 발생정보: 병해충발생정보 제 2호 (2026.2.1~2.28.)"
+                    - listitem [ref=e109]: "병해충 발생정보: 병해충발생정보 제 1호 (2026.1.1~31.)"
+              - generic [ref=e110]:
+                - generic [ref=e111]: 공식 병해충 발생정보
+                - list [ref=e112]:
+                  - listitem [ref=e113]:
+                    - generic [ref=e114]: 병해충발생정보 제 4호 (2026.4.1~4.30.)
+                    - generic [ref=e115]:
+                      - text: 2026-04-07
+                      - link "원문" [ref=e116] [cursor=pointer]:
+                        - /url: http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=khDTekIxZ7Vv/I6ELZ5WhqF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                        - text: 원문
+                        - img [ref=e117]
+                  - listitem [ref=e121]:
+                    - generic [ref=e122]: 병해충발생정보 제 3호 (2026.3.1~3.31.)
+                    - generic [ref=e123]:
+                      - text: 2026-03-03
+                      - link "원문" [ref=e124] [cursor=pointer]:
+                        - /url: http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=/M0cP3cvxgdtO0@x/ZsdfKF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                        - text: 원문
+                        - img [ref=e125]
+                  - listitem [ref=e129]:
+                    - generic [ref=e130]: 병해충발생정보 제 2호 (2026.2.1~2.28.)
+                    - generic [ref=e131]:
+                      - text: 2026-02-02
+                      - link "원문" [ref=e132] [cursor=pointer]:
+                        - /url: http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=Gj95ART1TW36xCsbsQxA/aF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                        - text: 원문
+                        - img [ref=e133]
+        - generic [ref=e137]:
+          - generic [ref=e138]:
+            - generic [ref=e140]:
+              - heading "오늘 작업" [level=3] [ref=e141]
+              - link "전체" [ref=e142] [cursor=pointer]:
+                - /url: /tasks
+                - text: 전체
+                - img
+            - generic [ref=e143]:
+              - generic [ref=e144]:
+                - generic [ref=e145]:
+                  - generic [ref=e146]: 2순위
+                  - generic [ref=e147]: 병해충 위험 예보 근거 확인
+                - generic [ref=e148]: 농사로 병해충 발생정보 4건 확인
+                - generic [ref=e149]: 약 25분
+              - generic [ref=e150]:
+                - generic [ref=e151]:
+                  - generic [ref=e152]: 4순위
+                  - generic [ref=e153]: "농작업일정 확인: 벼 기계이앙재배"
+                - generic [ref=e154]: 논농사 농작업일정 기준으로 이번 주 적용 작업 선별 필요
+                - generic [ref=e155]: 약 20분
+              - generic [ref=e156]:
+                - generic [ref=e157]:
+                  - generic [ref=e158]: 5순위
+                  - generic [ref=e159]: "주간농사정보 확인: 주간농사정보 제 18호 (2026.5.4.~5.10.)"
+                - generic [ref=e160]: 농사로 주간농사정보 기준으로 이번 주 작업과 주의사항 확인 필요
+                - generic [ref=e161]: 약 15분
+          - generic [ref=e162]:
+            - heading "타임라인" [level=3] [ref=e164]:
+              - img [ref=e165]
+              - text: 타임라인
+            - generic [ref=e168]:
+              - generic [ref=e169]:
+                - generic [ref=e170]:
+                  - generic [ref=e171]: 위험
+                  - generic [ref=e172]: 2026. 5. 6. 오후 6:18:50
+                - generic [ref=e173]: 병해충 위험 예보
+                - generic [ref=e174]: 벼 병해충 위험 예보/확인 권고 · 위험도 25점 · 농사로 병해충 발생정보 4건 확인
+              - generic [ref=e175]:
+                - generic [ref=e176]:
+                  - generic [ref=e177]: 위험
+                  - generic [ref=e178]: 2026. 5. 6. 오후 6:18:48
+                - generic [ref=e179]: 날씨 위험 수집
+                - generic [ref=e180]: 위험도 0점 · 기상 위험 신호가 낮습니다.
+        - generic [ref=e181]:
+          - link "사진 판독 병징 사진으로 의심 후보 확인" [ref=e182] [cursor=pointer]:
+            - /url: /diagnosis
+            - img [ref=e184]
+            - generic [ref=e187]:
+              - generic [ref=e188]: 사진 판독
+              - generic [ref=e189]: 병징 사진으로 의심 후보 확인
+          - link "농약 안전사용지침 농사로 공식 자료 검색" [ref=e190] [cursor=pointer]:
+            - /url: /reports?tab=pesticide
+            - img [ref=e192]
+            - generic [ref=e195]:
+              - generic [ref=e196]: 농약 안전사용지침
+              - generic [ref=e197]: 농사로 공식 자료 검색
+          - link "상담 리포트 농업기술센터 상담용 자료 모음" [ref=e198] [cursor=pointer]:
+            - /url: /reports
+            - img [ref=e200]
+            - generic [ref=e203]:
+              - generic [ref=e204]: 상담 리포트
+              - generic [ref=e205]: 농업기술센터 상담용 자료 모음

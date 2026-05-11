@@ -1,0 +1,143 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T":
+    - list:
+      - listitem [ref=e446]:
+        - img [ref=e448]
+        - generic [ref=e451]: 공유 링크 복사는 HTTPS 또는 지원 브라우저에서 사용할 수 있습니다.
+  - generic [ref=e5]:
+    - banner [ref=e6]:
+      - button "Toggle Sidebar" [ref=e7] [cursor=pointer]:
+        - img
+        - generic [ref=e8]: Toggle Sidebar
+      - generic [ref=e9]:
+        - combobox [ref=e10] [cursor=pointer]:
+          - generic: Phase10 PNU 필지 · 벼
+          - img [ref=e11]
+        - button "동기화" [ref=e13] [cursor=pointer]:
+          - img
+    - main [ref=e14]:
+      - generic [ref=e253]:
+        - tablist [ref=e254]:
+          - tab "상담 리포트" [selected] [ref=e255] [cursor=pointer]
+          - tab "농약 안전사용지침" [ref=e256] [cursor=pointer]
+        - tabpanel "상담 리포트" [ref=e314]:
+          - generic [ref=e315]:
+            - generic [ref=e316]:
+              - generic [ref=e317]:
+                - heading "Phase10 PNU 필지 상담 패키지" [level=3] [ref=e318]
+                - generic [ref=e319]:
+                  - button "상담 리포트 생성" [ref=e320] [cursor=pointer]
+                  - button "인쇄" [ref=e321] [cursor=pointer]:
+                    - img
+                    - text: 인쇄
+                  - button "공유 링크" [active] [ref=e322] [cursor=pointer]:
+                    - img
+                    - text: 공유 링크
+                  - button "PDF 내보내기" [ref=e323] [cursor=pointer]
+              - generic [ref=e324]:
+                - generic [ref=e325]:
+                  - generic [ref=e326]: 1. 필지 정보
+                  - generic [ref=e327]:
+                    - paragraph [ref=e328]: Phase10 PNU 필지
+                    - paragraph [ref=e329]: 세종특별자치시 연기면 수산리
+                    - paragraph [ref=e330]: 면적 3,965.048㎡ · 위험도 25
+                - generic [ref=e331]:
+                  - generic [ref=e332]: 2. 작물 정보
+                  - generic [ref=e333]:
+                    - paragraph [ref=e334]: 벼
+                    - paragraph [ref=e335]: "생육 단계: 확실한 정보 없음"
+                - generic [ref=e336]:
+                  - generic [ref=e337]: 3. 최근 7일 날씨 요약
+                  - generic [ref=e338]:
+                    - paragraph [ref=e339]: "수집 건수: 1건"
+                    - paragraph [ref=e340]: "평균 기온: 21.9도"
+                    - paragraph [ref=e341]: "최고/최저: 21.9도 / 21.9도"
+                    - paragraph [ref=e342]: "누적 강수: 0.0mm"
+                    - paragraph [ref=e343]: "최대 풍속: 1.5m/s"
+                    - paragraph [ref=e344]: "마지막 수집: 2026. 5. 6. 오후 6:22:03"
+                - generic [ref=e345]:
+                  - generic [ref=e346]: 4. 최근 7일 위험도 변화
+                  - generic [ref=e348]:
+                    - generic [ref=e349]: 5. 6.
+                    - generic [ref=e350]: "25"
+                - generic [ref=e351]:
+                  - generic [ref=e352]: 5. 병징 사진 기록
+                  - generic [ref=e354]:
+                    - paragraph [ref=e355]: 깨씨무늬병 · high
+                    - paragraph [ref=e356]: tmp-fieldguard-diagnosis-test.png · 2026. 5. 6. 오후 6:30:23
+                - generic [ref=e357]:
+                  - generic [ref=e358]: 6. 완료/미완료 작업
+                  - generic [ref=e359]:
+                    - generic [ref=e360]:
+                      - generic [ref=e361]: 미완료
+                      - generic [ref=e362]: "3"
+                    - generic [ref=e363]:
+                      - generic [ref=e364]: 완료
+                      - generic [ref=e365]: "0"
+                    - generic [ref=e366]:
+                      - generic [ref=e367]: 진행 중
+                      - generic [ref=e368]: "0"
+                    - generic [ref=e369]:
+                      - generic [ref=e370]: 보류
+                      - generic [ref=e371]: "0"
+                - generic [ref=e372]:
+                  - generic [ref=e373]: 7. AI 의심 후보와 현장 체크리스트
+                  - generic [ref=e374]:
+                    - paragraph [ref=e375]: 깨씨무늬병
+                    - generic [ref=e376]:
+                      - generic [ref=e377]:
+                        - generic [ref=e378]: 완료
+                        - generic [ref=e379]: 농사로 공식 발생정보 원문 확인
+                      - generic [ref=e380]:
+                        - generic [ref=e381]: 완료
+                        - generic [ref=e382]: 최근 기온 및 강수량 확인
+                      - generic [ref=e383]:
+                        - generic [ref=e384]: 완료
+                        - generic [ref=e385]: 질소질 비료의 과다 시비 여부
+                      - generic [ref=e386]:
+                        - generic [ref=e387]: 완료
+                        - generic [ref=e388]: 주변 농가의 동일 증상 발생 여부
+                - generic [ref=e389]:
+                  - generic [ref=e390]: 8. 공식 자료 링크
+                  - generic [ref=e391]:
+                    - paragraph [ref=e392]: "재해예방 자료: 0건"
+                    - paragraph [ref=e393]: "병해충 발생정보: 4건"
+                    - paragraph [ref=e394]: "위험원인 출처: 4건"
+            - generic [ref=e395]:
+              - heading "공식 자료 링크" [level=3] [ref=e397]
+              - generic [ref=e398]:
+                - generic [ref=e399]:
+                  - generic [ref=e400]: 병해충발생정보 제 4호 (2026.4.1~4.30.)
+                  - generic [ref=e401]: 2026-04-07
+                  - link "원문 열기" [ref=e402] [cursor=pointer]:
+                    - /url: http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=khDTekIxZ7Vv/I6ELZ5WhqF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                    - text: 원문 열기
+                    - img [ref=e403]
+                - generic [ref=e407]:
+                  - generic [ref=e408]: 병해충발생정보 제 3호 (2026.3.1~3.31.)
+                  - generic [ref=e409]: 2026-03-03
+                  - link "원문 열기" [ref=e410] [cursor=pointer]:
+                    - /url: http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=/M0cP3cvxgdtO0@x/ZsdfKF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                    - text: 원문 열기
+                    - img [ref=e411]
+                - generic [ref=e415]:
+                  - generic [ref=e416]: 병해충발생정보 제 2호 (2026.2.1~2.28.)
+                  - generic [ref=e417]: 2026-02-02
+                  - link "원문 열기" [ref=e418] [cursor=pointer]:
+                    - /url: http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=Gj95ART1TW36xCsbsQxA/aF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                    - text: 원문 열기
+                    - img [ref=e419]
+                - generic [ref=e423]:
+                  - generic [ref=e424]: 병해충발생정보 제 1호 (2026.1.1~31.)
+                  - generic [ref=e425]: 2026-01-05
+                  - link "원문 열기" [ref=e426] [cursor=pointer]:
+                    - /url: http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=r5CA0yXrBIlfC0FalI58O6F1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                    - text: 원문 열기
+                    - img [ref=e427]
+            - generic [ref=e431]:
+              - heading "상담 리포트 기록" [level=3] [ref=e433]
+              - generic [ref=e443]:
+                - paragraph [ref=e444]: 2026. 5. 6. 오후 6:31:38
+                - paragraph [ref=e445]: "기간: 최근 7일"

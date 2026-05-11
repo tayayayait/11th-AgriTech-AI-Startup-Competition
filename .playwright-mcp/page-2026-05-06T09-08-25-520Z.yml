@@ -1,0 +1,92 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e4]:
+    - generic [ref=e8]:
+      - generic [ref=e10]:
+        - img [ref=e12]
+        - generic [ref=e16]:
+          - generic [ref=e17]: FieldGuard AI
+          - generic [ref=e18]: 현장 의사결정 보조
+      - generic [ref=e20]:
+        - generic [ref=e21]: 주 메뉴
+        - list [ref=e23]:
+          - listitem [ref=e24]:
+            - link "대시보드" [ref=e25] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e26]
+              - generic [ref=e31]: 대시보드
+          - listitem [ref=e32]:
+            - link "필지 지도" [ref=e33] [cursor=pointer]:
+              - /url: /fields/map
+              - img [ref=e34]
+              - generic [ref=e36]: 필지 지도
+          - listitem [ref=e37]:
+            - link "작업 카드" [ref=e38] [cursor=pointer]:
+              - /url: /tasks
+              - img [ref=e39]
+              - generic [ref=e42]: 작업 카드
+          - listitem [ref=e43]:
+            - link "사진 판독" [ref=e44] [cursor=pointer]:
+              - /url: /diagnosis
+              - img [ref=e45]
+              - generic [ref=e48]: 사진 판독
+          - listitem [ref=e49]:
+            - link "자료/상담" [ref=e50] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e51]
+              - generic [ref=e54]: 자료/상담
+          - listitem [ref=e55]:
+            - link "설정" [ref=e56] [cursor=pointer]:
+              - /url: /settings
+              - img [ref=e57]
+              - generic [ref=e60]: 설정
+    - generic [ref=e61]:
+      - banner [ref=e62]:
+        - button "Toggle Sidebar" [ref=e63] [cursor=pointer]:
+          - img
+          - generic [ref=e64]: Toggle Sidebar
+        - generic [ref=e65]: 2026년 5월 6일 (수)
+        - generic [ref=e66]:
+          - combobox [ref=e67] [cursor=pointer]:
+            - generic: Phase9 테스트 필지 · 벼
+            - img [ref=e68]
+          - generic [ref=e70]: 마지막 갱신 5월 6일 17:57
+          - button "동기화" [ref=e71] [cursor=pointer]:
+            - img
+      - main [ref=e72]:
+        - generic [ref=e74]:
+          - generic [ref=e75]:
+            - tablist [ref=e76]:
+              - tab "오늘 (1)" [selected] [ref=e77] [cursor=pointer]
+              - tab "이번 주 (2)" [ref=e78] [cursor=pointer]
+              - tab "완료 (0)" [ref=e79] [cursor=pointer]
+            - generic [ref=e80]: 공식 데이터 기반 자동 생성
+          - tabpanel "오늘 (1)" [ref=e81]:
+            - generic [ref=e83]:
+              - generic [ref=e84]:
+                - generic [ref=e85]:
+                  - generic [ref=e86]:
+                    - generic [ref=e87]: 2순위
+                    - generic [ref=e88]: 5월 6일 (수)
+                  - generic [ref=e89]: 병해충 위험 예보 근거 확인
+                - generic [ref=e90]:
+                  - img [ref=e91]
+                  - text: 25분
+              - paragraph [ref=e94]: 농사로 병해충 발생정보 4건 확인
+              - generic [ref=e95]:
+                - generic [ref=e96]:
+                  - checkbox "공식 발생정보 원문 확인" [ref=e97] [cursor=pointer]
+                  - generic [ref=e98]: 공식 발생정보 원문 확인
+                - generic [ref=e99]:
+                  - checkbox "잎 뒷면·줄기·생장점 확인" [ref=e100] [cursor=pointer]
+                  - generic [ref=e101]: 잎 뒷면·줄기·생장점 확인
+                - generic [ref=e102]:
+                  - checkbox "발견 위치와 사진 기록" [ref=e103] [cursor=pointer]
+                  - generic [ref=e104]: 발견 위치와 사진 기록
+              - button "근거 데이터 보기" [ref=e106] [cursor=pointer]:
+                - img [ref=e107]
+                - text: 근거 데이터 보기
+              - button "완료 처리 (0/3)" [disabled]
+          - tabpanel "완료 (0)"

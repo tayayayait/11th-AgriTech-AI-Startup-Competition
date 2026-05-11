@@ -1,0 +1,121 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e188]:
+    - banner [ref=e189]:
+      - button "Toggle Sidebar" [ref=e190] [cursor=pointer]:
+        - img
+        - generic [ref=e191]: Toggle Sidebar
+      - generic [ref=e192]:
+        - combobox [active] [ref=e193] [cursor=pointer]:
+          - generic: Phase10 PNU 필지 · 벼
+          - img [ref=e194]
+        - button "동기화" [ref=e196] [cursor=pointer]:
+          - img
+    - main [ref=e197]:
+      - generic [ref=e198]:
+        - tablist [ref=e199]:
+          - tab "상담 리포트" [selected] [ref=e200] [cursor=pointer]
+          - tab "농약 안전사용지침" [ref=e201] [cursor=pointer]
+        - tabpanel "상담 리포트" [ref=e202]:
+          - generic [ref=e203]:
+            - generic [ref=e204]:
+              - generic [ref=e205]:
+                - heading "Phase10 PNU 필지 상담 패키지" [level=3] [ref=e320]
+                - generic [ref=e207]:
+                  - button "상담 리포트 생성" [ref=e208] [cursor=pointer]
+                  - button "인쇄" [ref=e209] [cursor=pointer]:
+                    - img
+                    - text: 인쇄
+                  - button "공유 링크" [ref=e210] [cursor=pointer]:
+                    - img
+                    - text: 공유 링크
+                  - button "PDF 내보내기" [ref=e211] [cursor=pointer]
+              - generic [ref=e212]:
+                - generic [ref=e213]:
+                  - generic [ref=e214]: 1. 필지 정보
+                  - generic [ref=e215]:
+                    - paragraph [ref=e216]: Phase10 PNU 필지
+                    - paragraph [ref=e217]: 세종특별자치시 연기면 수산리
+                    - paragraph [ref=e218]: 면적 3,965.048㎡ · 위험도 25
+                - generic [ref=e219]:
+                  - generic [ref=e220]: 2. 작물 정보
+                  - generic [ref=e221]:
+                    - paragraph [ref=e222]: 벼
+                    - paragraph [ref=e223]: "생육 단계: 확실한 정보 없음"
+                - generic [ref=e224]:
+                  - generic [ref=e225]: 3. 최근 7일 날씨 요약
+                  - generic [ref=e321]:
+                    - paragraph [ref=e322]: "수집 건수: 1건"
+                    - paragraph [ref=e323]: "평균 기온: 21.9도"
+                    - paragraph [ref=e324]: "최고/최저: 21.9도 / 21.9도"
+                    - paragraph [ref=e325]: "누적 강수: 0.0mm"
+                    - paragraph [ref=e326]: "최대 풍속: 1.5m/s"
+                    - paragraph [ref=e327]: "마지막 수집: 2026. 5. 6. 오후 6:22:03"
+                - generic [ref=e233]:
+                  - generic [ref=e234]: 4. 최근 7일 위험도 변화
+                  - generic [ref=e329]:
+                    - generic [ref=e330]: 5. 6.
+                    - generic [ref=e331]: "25"
+                - generic [ref=e239]:
+                  - generic [ref=e240]: 5. 병징 사진 기록
+                  - paragraph [ref=e241]: 아직 기록된 사진이 없습니다. 병징 사진을 업로드하세요.
+                - generic [ref=e242]:
+                  - generic [ref=e243]: 6. 완료/미완료 작업
+                  - generic [ref=e244]:
+                    - generic [ref=e245]:
+                      - generic [ref=e246]: 미완료
+                      - generic [ref=e247]: "3"
+                    - generic [ref=e248]:
+                      - generic [ref=e249]: 완료
+                      - generic [ref=e250]: "0"
+                    - generic [ref=e251]:
+                      - generic [ref=e252]: 진행 중
+                      - generic [ref=e253]: "0"
+                    - generic [ref=e254]:
+                      - generic [ref=e255]: 보류
+                      - generic [ref=e256]: "0"
+                - generic [ref=e257]:
+                  - generic [ref=e258]: 7. AI 의심 후보와 현장 체크리스트
+                  - paragraph [ref=e259]: AI 의심 후보 기록이 없습니다.
+                - generic [ref=e260]:
+                  - generic [ref=e261]: 8. 공식 자료 링크
+                  - generic [ref=e262]:
+                    - paragraph [ref=e263]: "재해예방 자료: 0건"
+                    - paragraph [ref=e264]: "병해충 발생정보: 4건"
+                    - paragraph [ref=e265]: "위험원인 출처: 4건"
+            - generic [ref=e266]:
+              - heading "공식 자료 링크" [level=3] [ref=e268]
+              - generic [ref=e269]:
+                - generic [ref=e270]:
+                  - generic [ref=e271]: 병해충발생정보 제 4호 (2026.4.1~4.30.)
+                  - generic [ref=e272]: 2026-04-07
+                  - link "원문 열기" [ref=e273] [cursor=pointer]:
+                    - /url: http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=khDTekIxZ7Vv/I6ELZ5WhqF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                    - text: 원문 열기
+                    - img [ref=e274]
+                - generic [ref=e278]:
+                  - generic [ref=e279]: 병해충발생정보 제 3호 (2026.3.1~3.31.)
+                  - generic [ref=e280]: 2026-03-03
+                  - link "원문 열기" [ref=e281] [cursor=pointer]:
+                    - /url: http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=/M0cP3cvxgdtO0@x/ZsdfKF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                    - text: 원문 열기
+                    - img [ref=e282]
+                - generic [ref=e286]:
+                  - generic [ref=e287]: 병해충발생정보 제 2호 (2026.2.1~2.28.)
+                  - generic [ref=e288]: 2026-02-02
+                  - link "원문 열기" [ref=e289] [cursor=pointer]:
+                    - /url: http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=Gj95ART1TW36xCsbsQxA/aF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                    - text: 원문 열기
+                    - img [ref=e290]
+                - generic [ref=e294]:
+                  - generic [ref=e295]: 병해충발생정보 제 1호 (2026.1.1~31.)
+                  - generic [ref=e296]: 2026-01-05
+                  - link "원문 열기" [ref=e297] [cursor=pointer]:
+                    - /url: http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=r5CA0yXrBIlfC0FalI58O6F1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                    - text: 원문 열기
+                    - img [ref=e298]
+            - generic [ref=e302]:
+              - heading "상담 리포트 기록" [level=3] [ref=e304]
+              - paragraph [ref=e306]: 아직 생성된 상담 리포트가 없습니다.

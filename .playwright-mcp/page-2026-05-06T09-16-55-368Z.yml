@@ -1,0 +1,31 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T":
+    - list:
+      - listitem [ref=e320]:
+        - img [ref=e322]
+        - generic [ref=e325]: "완료: 병해충 위험 예보 근거 확인"
+        - button "취소" [ref=e326] [cursor=pointer]
+  - generic [ref=e5]:
+    - banner [ref=e6]:
+      - button "Toggle Sidebar" [ref=e7] [cursor=pointer]:
+        - img
+        - generic [ref=e8]: Toggle Sidebar
+      - generic [ref=e9]:
+        - combobox [ref=e10] [cursor=pointer]:
+          - generic: Phase9 테스트 필지 · 벼
+          - img [ref=e11]
+        - button "동기화" [ref=e13] [cursor=pointer]:
+          - img
+    - main [ref=e14]:
+      - generic [ref=e278]:
+        - generic [ref=e279]:
+          - tablist [ref=e280]:
+            - tab "오늘 (0)" [selected] [ref=e327] [cursor=pointer]
+            - tab "이번 주 (2)" [ref=e282] [cursor=pointer]
+            - tab "완료 (1)" [ref=e328] [cursor=pointer]
+          - generic [ref=e284]: 공식 데이터 기반 자동 생성
+        - tabpanel "오늘 (0)" [ref=e329]:
+          - paragraph [ref=e330]: 오늘 처리할 자동 작업 카드가 없습니다.
+        - tabpanel "완료 (1)"

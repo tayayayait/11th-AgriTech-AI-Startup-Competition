@@ -1,0 +1,58 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e5]:
+    - banner [ref=e6]:
+      - button "Toggle Sidebar" [ref=e7] [cursor=pointer]:
+        - img
+        - generic [ref=e8]: Toggle Sidebar
+      - generic [ref=e9]:
+        - combobox [ref=e10] [cursor=pointer]:
+          - generic: 필지 선택
+          - img [ref=e11]
+        - button "동기화" [ref=e13] [cursor=pointer]:
+          - img
+    - main [ref=e14]:
+      - generic [ref=e15]:
+        - tablist [ref=e16]:
+          - tab "상담 리포트" [ref=e17] [cursor=pointer]
+          - tab "농약 안전사용지침" [selected] [ref=e18] [cursor=pointer]
+        - tabpanel "농약 안전사용지침" [ref=e19]:
+          - generic [ref=e20]:
+            - note [ref=e21]:
+              - img [ref=e22]
+              - paragraph [ref=e24]: FieldGuard AI는 농약을 처방하지 않습니다. 실제 사용 전 농사로 공식 지침, 제품 라벨, 전문가 상담을 확인하세요.
+            - generic [ref=e25]:
+              - heading "공식 안전사용지침 확인" [level=3] [ref=e27]
+              - generic [ref=e28]:
+                - generic [ref=e29]:
+                  - generic [ref=e30]:
+                    - text: 작물명
+                    - textbox "작물명" [ref=e31]:
+                      - /placeholder: "예: 배추"
+                  - generic [ref=e32]:
+                    - text: 병해충명/적용대상
+                    - textbox "병해충명/적용대상" [ref=e33]:
+                      - /placeholder: "예: 노균병"
+                  - generic [ref=e34]:
+                    - text: 농약명
+                    - textbox "농약명" [ref=e35]:
+                      - /placeholder: "예: 만코제브"
+                  - generic [ref=e36]:
+                    - text: 안전사용기간 필터
+                    - combobox "안전사용기간 필터" [ref=e37] [cursor=pointer]:
+                      - generic: 전체
+                      - img [ref=e38]
+                - button "공식 자료 확인" [ref=e41] [cursor=pointer]
+            - generic [ref=e42]:
+              - generic [ref=e44]:
+                - heading "농사로 공식 지침" [level=3] [ref=e45]
+                - generic [ref=e46]: 공식 데이터 조회 불가
+              - paragraph [ref=e48]: 해당 조건의 공식 지침이 확인되지 않습니다.
+            - generic [ref=e49]:
+              - heading "안전사용기간/사용횟수 참고" [level=3] [ref=e51]
+              - paragraph [ref=e53]: 안전사용기간 데이터를 조회하는 중입니다.
+            - generic [ref=e55]:
+              - img [ref=e56]
+              - text: 농약 지침은 공식 자료 확인을 우선하며, 자동 처방을 제공하지 않습니다.

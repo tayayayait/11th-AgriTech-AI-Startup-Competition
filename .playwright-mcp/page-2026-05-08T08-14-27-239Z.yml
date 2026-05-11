@@ -1,0 +1,231 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e8]:
+    - generic [ref=e12]:
+      - generic [ref=e14]:
+        - img [ref=e16]
+        - generic [ref=e20]:
+          - generic [ref=e21]: FieldGuard AI
+          - generic [ref=e22]: 현장 의사결정 보조
+      - generic [ref=e24]:
+        - generic [ref=e25]: 주 메뉴
+        - list [ref=e27]:
+          - listitem [ref=e28]:
+            - link "대시보드" [ref=e29] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e30]
+              - generic [ref=e35]: 대시보드
+          - listitem [ref=e36]:
+            - link "필지 지도" [ref=e37] [cursor=pointer]:
+              - /url: /fields/map
+              - img [ref=e38]
+              - generic [ref=e40]: 필지 지도
+          - listitem [ref=e41]:
+            - link "작업 카드" [ref=e42] [cursor=pointer]:
+              - /url: /tasks
+              - img [ref=e43]
+              - generic [ref=e46]: 작업 카드
+          - listitem [ref=e47]:
+            - link "사진 판독" [ref=e48] [cursor=pointer]:
+              - /url: /diagnosis
+              - img [ref=e49]
+              - generic [ref=e52]: 사진 판독
+          - listitem [ref=e53]:
+            - link "자료/상담" [ref=e54] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e55]
+              - generic [ref=e58]: 자료/상담
+          - listitem [ref=e59]:
+            - link "설정" [ref=e60] [cursor=pointer]:
+              - /url: /settings
+              - img [ref=e61]
+              - generic [ref=e64]: 설정
+    - generic [ref=e65]:
+      - banner [ref=e66]:
+        - button "Toggle Sidebar" [ref=e67] [cursor=pointer]:
+          - img
+          - generic [ref=e68]: Toggle Sidebar
+        - generic [ref=e69]: 2026년 5월 8일 (금)
+        - generic [ref=e70]:
+          - combobox [ref=e71] [cursor=pointer]:
+            - generic: 경상북도 구미시 옥계동 밭 · 사과
+            - img [ref=e72]
+          - generic [ref=e74]: 마지막 갱신 5월 8일 17:00
+          - generic [ref=e75]:
+            - img [ref=e76]
+            - generic [ref=e80]: dbcdkwo629@naver.com
+          - button "동기화" [ref=e81] [cursor=pointer]:
+            - img
+      - main [ref=e82]:
+        - generic [ref=e83]:
+          - generic [ref=e84]:
+            - tablist [ref=e85]:
+              - tab "오늘 (1)" [ref=e86] [cursor=pointer]
+              - tab "이번 주 (0)" [active] [selected] [ref=e87] [cursor=pointer]
+              - tab "완료 (0)" [ref=e88] [cursor=pointer]
+            - generic [ref=e89]: 공식 데이터 기반 자동 생성
+          - tabpanel "오늘 (1)"
+          - tabpanel "이번 주 (0)" [ref=e119]:
+            - paragraph [ref=e121]: 이번 주 자동 작업 카드가 없습니다.
+            - generic [ref=e123]:
+              - region "이번 달 농작업일정" [ref=e124]:
+                - generic [ref=e125]:
+                  - img [ref=e126]
+                  - heading "이번 달 농작업일정" [level=2] [ref=e128]
+                - generic [ref=e130]: 농작업일정 API 조회 성공 + 이번 달 매칭 10건
+                - generic [ref=e131]:
+                  - generic [ref=e132]:
+                    - generic [ref=e133]:
+                      - generic [ref=e134]:
+                        - generic [ref=e135]: 과수
+                        - generic [ref=e136]: 사과
+                      - paragraph [ref=e137]: 농사로 농작업일정 API 기준 · 5월
+                    - generic [ref=e138]: 5월 10개
+                  - generic [ref=e139]:
+                    - generic [ref=e140]:
+                      - generic [ref=e141]: 이번 달 필요 항목
+                      - generic [ref=e142]: 5월
+                    - generic [ref=e143]:
+                      - generic [ref=e144]:
+                        - generic [ref=e145]: 생육과정
+                        - generic [ref=e146]: 6개
+                      - generic [ref=e147]:
+                        - generic [ref=e148]:
+                          - generic [ref=e149]: 4월 중-5월 상
+                          - generic [ref=e150]:
+                            - generic [ref=e152]: 개화
+                            - generic [ref=e153]: 현재 시기
+                            - generic [ref=e154]:
+                              - generic [ref=e155]: 확인할 일
+                              - list [ref=e156]:
+                                - listitem [ref=e157]: 개화 적용 여부 확인
+                                - listitem [ref=e158]: 필지 생육단계와 농작업일정 비교
+                                - listitem [ref=e159]: 필요 자재·장비·인력 준비 상태 확인
+                        - generic [ref=e160]:
+                          - generic [ref=e161]: 4월 하-9월 중
+                          - generic [ref=e162]:
+                            - generic [ref=e164]: 생장비대
+                            - generic [ref=e165]: 현재 시기
+                            - generic [ref=e166]:
+                              - generic [ref=e167]: 확인할 일
+                              - list [ref=e168]:
+                                - listitem [ref=e169]: 생장비대 적용 여부 확인
+                                - listitem [ref=e170]: 필지 생육단계와 농작업일정 비교
+                                - listitem [ref=e171]: 필요 자재·장비·인력 준비 상태 확인
+                        - generic [ref=e172]:
+                          - generic [ref=e173]: 5월 상-5월 하
+                          - generic [ref=e174]:
+                            - generic [ref=e176]: 꽃솎기, 열매솎기
+                            - generic [ref=e177]: 현재 시기
+                            - generic [ref=e178]:
+                              - generic [ref=e179]: 확인할 일
+                              - list [ref=e180]:
+                                - listitem [ref=e181]: 꽃솎기, 열매솎기 적용 여부 확인
+                                - listitem [ref=e182]: 필지 생육단계와 농작업일정 비교
+                                - listitem [ref=e183]: 필요 자재·장비·인력 준비 상태 확인
+                        - generic [ref=e184]:
+                          - generic [ref=e185]: 5월 하-8월 하
+                          - generic [ref=e186]:
+                            - generic [ref=e188]: 초생관리(예초)
+                            - generic [ref=e189]:
+                              - generic [ref=e190]: 확인할 일
+                              - list [ref=e191]:
+                                - listitem [ref=e192]: 초생관리(예초) 적용 여부 확인
+                                - listitem [ref=e193]: 필지 생육단계와 농작업일정 비교
+                                - listitem [ref=e194]: 필요 자재·장비·인력 준비 상태 확인
+                        - generic [ref=e195]:
+                          - generic [ref=e196]: 5월 중-5월 하
+                          - generic [ref=e197]:
+                            - generic [ref=e199]: 웃거름
+                            - generic [ref=e200]:
+                              - generic [ref=e201]: 확인할 일
+                              - list [ref=e202]:
+                                - listitem [ref=e203]: 웃거름 적용 여부 확인
+                                - listitem [ref=e204]: 필지 생육단계와 농작업일정 비교
+                                - listitem [ref=e205]: 필요 자재·장비·인력 준비 상태 확인
+                        - generic [ref=e206]:
+                          - generic [ref=e207]: 3월 중-9월 상
+                          - generic [ref=e208]:
+                            - generic [ref=e210]: 병해충 발생
+                            - generic [ref=e211]: 현재 시기
+                            - generic [ref=e212]:
+                              - generic [ref=e213]: 확인할 일
+                              - list [ref=e214]:
+                                - listitem [ref=e215]: 병해충 발생 적용 여부 확인
+                                - listitem [ref=e216]: 필지 생육단계와 농작업일정 비교
+                                - listitem [ref=e217]: 필요 자재·장비·인력 준비 상태 확인
+                    - generic [ref=e218]:
+                      - generic [ref=e219]:
+                        - generic [ref=e220]: 기상재해 및 예상 문제
+                        - generic [ref=e221]: 4개
+                      - generic [ref=e222]:
+                        - generic [ref=e223]:
+                          - generic [ref=e224]: 3월 중-5월 상
+                          - generic [ref=e225]:
+                            - generic [ref=e227]: 개화기저온, 강우, 고온
+                            - generic [ref=e228]: 현재 시기
+                            - generic [ref=e229]:
+                              - generic [ref=e230]: 확인할 일
+                              - list [ref=e231]:
+                                - listitem [ref=e232]: 기상 예보와 현장 상태 확인
+                                - listitem [ref=e233]: 피해 징후 기록
+                                - listitem [ref=e234]: 필요 시 보호·배수 조치 준비
+                        - generic [ref=e235]:
+                          - generic [ref=e236]: 5월 중-8월 중
+                          - generic [ref=e237]:
+                            - generic [ref=e239]: 여름철 가뭄, 고온
+                            - generic [ref=e240]:
+                              - generic [ref=e241]: 확인할 일
+                              - list [ref=e242]:
+                                - listitem [ref=e243]: 기상 예보와 현장 상태 확인
+                                - listitem [ref=e244]: 피해 징후 기록
+                                - listitem [ref=e245]: 필요 시 보호·배수 조치 준비
+                        - generic [ref=e246]:
+                          - generic [ref=e247]: 3월 중-5월 상
+                          - generic [ref=e248]:
+                            - generic [ref=e250]: 열매맺음 불량
+                            - generic [ref=e251]: 현재 시기
+                            - generic [ref=e252]:
+                              - generic [ref=e253]: 확인할 일
+                              - list [ref=e254]:
+                                - listitem [ref=e255]: 기상 예보와 현장 상태 확인
+                                - listitem [ref=e256]: 피해 징후 기록
+                                - listitem [ref=e257]: 필요 시 보호·배수 조치 준비
+                        - generic [ref=e258]:
+                          - generic [ref=e259]: 5월 중-8월 중
+                          - generic [ref=e260]:
+                            - generic [ref=e262]: 생육 및 과실비대 불량, 일소 피해, 진딧물, 응애 방제
+                            - generic [ref=e263]:
+                              - generic [ref=e264]: 확인할 일
+                              - list [ref=e265]:
+                                - listitem [ref=e266]: 기상 예보와 현장 상태 확인
+                                - listitem [ref=e267]: 피해 징후 기록
+                                - listitem [ref=e268]: 필요 시 보호·배수 조치 준비
+                  - link "첨부 자료 확인" [ref=e269] [cursor=pointer]:
+                    - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=@HIAUbYcbIW7i7NoZQYC77Dp1w/VGwS/8A8al7oQrKU9KolHxCN4Fta7hfMXElwF
+                    - text: 첨부 자료 확인
+                    - img [ref=e270]
+              - region "주간농사정보 근거 (이번 주)" [ref=e274]:
+                - generic "이번 주 농사 브리핑" [ref=e275]:
+                  - generic [ref=e276]:
+                    - generic [ref=e277]:
+                      - img [ref=e278]
+                      - heading "이번 주 농사 브리핑" [level=2] [ref=e280]
+                      - generic [ref=e281]: 요약 대기
+                    - button "이번주 주간농사정보 파일 요약" [ref=e282] [cursor=pointer]:
+                      - img
+                      - text: 요약
+                  - paragraph [ref=e283]: 아직 생성된 브리핑이 없습니다.
+                - generic [ref=e284]:
+                  - img [ref=e285]
+                  - heading "주간농사정보 근거 (이번 주)" [level=2] [ref=e287]
+                - generic [ref=e288]:
+                  - generic [ref=e289]: 주간농사정보 제 18호 (2026.5.4.~5.10.)
+                  - generic [ref=e290]: 2026-05-04 ~ 2026-05-10 · 등록 2026-04-29 · 배선아
+                  - link "공식 자료 확인" [ref=e291] [cursor=pointer]:
+                    - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=ABJzxyxUGheNpFTMoQfu3KF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                    - text: 공식 자료 확인
+                    - img [ref=e292]
+          - tabpanel "완료 (0)"

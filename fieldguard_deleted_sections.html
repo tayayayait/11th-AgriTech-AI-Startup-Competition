@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FieldGuard AI - 스마트 농업 위험 관리 솔루션</title>
+    
+    <!-- Pretendard Font -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+    
+    <!-- Iconify Solar Icons -->
+    <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Pretendard', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        zinc: {
+                            50: '#fafafa',
+                            100: '#f4f4f5',
+                            200: '#e4e4e7',
+                            300: '#d4d4d8',
+                            400: '#a1a1aa',
+                            500: '#71717a',
+                            600: '#52525b',
+                            700: '#3f3f46',
+                            800: '#27272a',
+                            900: '#18181b',
+                            950: '#09090b', // Base dark
+                        },
+                        lime: {
+                            400: '#a3e635', // Light accent
+                            500: '#84cc16',
+                            600: '#65a30d', // Primary CTA
+                            900: '#365314',
+                            950: '#1a2e05', // CTA background
+                        }
+                    },
+                    transitionTimingFunction: {
+                        'supa': 'cubic-bezier(0.16, 1, 0.3, 1)',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'marquee': 'marquee 40s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        },
+                        marquee: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* CSS-based Scroll Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px) scale(0.98);
+            filter: blur(5px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+        }
+        
+        /* Stagger delays */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* Hide scrollbar for clean look but keep functionality */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+
+        /* Ambient subtle noise for texture */
+        .noise-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.02;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Glass pill button inner shadow */
+        .btn-shadow {
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2), 0 4px 14px rgba(101, 163, 13, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-zinc-50 text-zinc-950 font-sans antialiased overflow-hidden">
+    <div class="noise-bg"></div>
+
+    <!-- Floating Navigation -->
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-2xl reveal active">
+        <div class="bg-white/70 backdrop-blur-2xl border border-zinc-200/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-full px-6 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-lime-600 text-white flex items-center justify-center">
+                    <iconify-icon icon="solar:leaf-bold-duotone" width="20"></iconify-icon>
+                </div>
+                <span class="font-bold text-lg tracking-tight">FieldGuard AI</span>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-600">
+                <a href="#features" class="hover:text-zinc-950 transition-colors duration-300">기능</a>
+                <a href="#proof" class="hover:text-zinc-950 transition-colors duration-300">성과</a>
+            </div>
+            <a href="#cta" class="bg-zinc-950 text-white text-sm font-medium px-5 py-2.5 rounded-full hover:bg-zinc-800 transition-colors duration-300">
+                무료 시작
+            </a>
+        </div>
+    </nav>
+
+    <!-- Snap Scroll Container -->
+    <!-- min-h-[100svh] ensures it works on mobile browsers with dynamic UI bars -->
+    <main class="h-[100svh] w-full overflow-y-scroll snap-y snap-mandatory relative">
+
+        <!-- 1. HERO SECTION -->
+        <section id="hero" class="h-[100svh] w-full snap-start flex flex-col justify-center relative px-4 sm:px-6 lg:px-8 pt-20">
+            <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 lg:gap-8 items-center h-full max-h-[800px]">
+                
+                <div class="flex flex-col items-start z-10">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-lime-600/10 text-lime-600 text-xs font-bold uppercase tracking-widest mb-8 reveal">
+                        <iconify-icon icon="solar:star-fall-bold-duotone" width="16"></iconify-icon>
+                        차세대 정밀 농업 솔루션
+                    </div>
+                    
+                    <h1 class="text-5xl sm:text-6xl lg:text-[5.5rem] font-bold tracking-tighter leading-[1.1] break-keep-all mb-6 reveal delay-100">
+                        자연의 <span class="text-transparent bg-clip-text bg-gradient-to-r from-lime-600 to-lime-400">변수</span>를<br />
+                        통제 가능한 데이터로.
+                    </h1>
+                    
+                    <p class="text-lg sm:text-xl text-zinc-500 leading-relaxed max-w-[28ch] sm:max-w-[34ch] break-keep-all mb-10 reveal delay-200">
+                        기후 변화 예측부터 수확량 분석까지. FieldGuard AI의 정밀한 알고리즘이 농업 현장의 모든 불확실성을 제어합니다.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto reveal delay-300">
+                        <button class="bg-lime-600 text-white btn-shadow rounded-full px-8 py-4 text-lg font-semibold flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-[0.98] transition-supa group">
+                            대시보드로 시작하기
+                            <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:translate-x-1 transition-transform">
+                                <iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon>
+                            </div>
+                        </button>
+                        <button class="bg-white border border-zinc-200 text-zinc-950 rounded-full px-8 py-4 text-lg font-semibold flex items-center justify-center gap-2 hover:bg-zinc-50 hover:scale-[1.02] active:scale-[0.98] transition-supa shadow-sm">
+                            <iconify-icon icon="solar:play-circle-linear" width="24"></iconify-icon>
+                            로그인
+                        </button>
+                    </div>
+                </div>
+
+                <div class="relative w-full h-[40vh] lg:h-full lg:min-h-[600px] rounded-[2.5rem] overflow-hidden reveal delay-200 shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1592982537447-6f204c32b50d?auto=format&fit=crop&w=1200&q=80" alt="스마트 농업 현장" class="absolute inset-0 w-full h-full object-cover" />
+                    <!-- Abstract UI Overlay -->
+                    <div class="absolute bottom-6 left-6 right-6 bg-white/80 backdrop-blur-xl border border-white/40 p-5 rounded-2xl shadow-lg transform translate-y-0 animate-float flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-lime-100 flex items-center justify-center text-lime-600">
+                            <iconify-icon icon="solar:cloud-water-bold-duotone" width="28"></iconify-icon>
+                        </div>
+                        <div>
+                            <p class="text-xs text-zinc-500 font-medium mb-1">토양 수분 레벨</p>
+                            <p class="text-lg font-bold text-zinc-950 leading-none">최적 상태 유지 중</p>
+                        </div>
+                        <div class="ml-auto flex -space-x-1">
+                            <div class="w-2 h-8 rounded-full bg-lime-600"></div>
+                            <div class="w-2 h-6 rounded-full bg-lime-400"></div>
+                            <div class="w-2 h-10 rounded-full bg-lime-300"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. SOCIAL PROOF / METRICS -->
+        <section id="proof" class="h-[100svh] w-full snap-start bg-white flex flex-col justify-center px-4 sm:px-6 lg:px-8 border-y border-zinc-100">
+            <div class="max-w-7xl mx-auto w-full text-center">
+                <h2 class="text-2xl sm:text-3xl font-semibold text-zinc-950 mb-16 break-keep-all reveal">
+                    글로벌 선도 기업들이 FieldGuard와 함께합니다
+                </h2>
+
+                <!-- Metrics Asymmetric Layout -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-20 divide-y md:divide-y-0 md:divide-x divide-zinc-100">
+                    <div class="flex flex-col items-center pt-8 md:pt-0 reveal delay-100">
+                        <span class="text-6xl lg:text-7xl font-black tracking-tighter text-zinc-950 mb-2">47,200<span class="text-lime-600">+</span></span>
+                        <span class="text-zinc-500 font-medium">관리 중인 농경지 (헥타르)</span>
+                    </div>
+                    <div class="flex flex-col items-center pt-8 md:pt-0 reveal delay-200">
+                        <span class="text-6xl lg:text-7xl font-black tracking-tighter text-zinc-950 mb-2">98.7<span class="text-lime-600">%</span></span>
+                        <span class="text-zinc-500 font-medium">기후 및 병해충 예측 정확도</span>
+                    </div>
+                    <div class="flex flex-col items-center pt-8 md:pt-0 reveal delay-300">
+                        <span class="text-6xl lg:text-7xl font-black tracking-tighter text-zinc-950 mb-2">2.3<span class="text-base text-zinc-400 ml-1 font-medium">초</span></span>
+                        <span class="text-zinc-500 font-medium">위험 요소 평균 감지 속도</span>
+                    </div>
+                </div>
+
+                <!-- Logo Marquee -->
+                <div class="relative w-full overflow-hidden flex items-center h-20 reveal delay-300 mask-edges">
+                    <div class="absolute w-[200px] h-full left-0 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+                    <div class="absolute w-[200px] h-full right-0 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+                    
+                    <div class="flex w-[200%] animate-marquee gap-16 items-center opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+                        <!-- Duplicated set for infinite loop -->
+                        <div class="flex gap-16 items-center min-w-max">
+                            <span class="text-2xl font-black tracking-widest uppercase">Luminous</span>
+                            <span class="text-2xl font-black tracking-tighter">BridgeWorks</span>
+                            <span class="text-2xl font-serif italic">Stellar Labs</span>
+                            <span class="text-2xl font-bold uppercase tracking-tight">Verify.</span>
+                            <span class="text-2xl font-medium tracking-widest">NEXT VISION</span>
+                            <span class="text-2xl font-bold">FlowCanvas</span>
+                        </div>
+                        <div class="flex gap-16 items-center min-w-max">
+                            <span class="text-2xl font-black tracking-widest uppercase">Luminous</span>
+                            <span class="text-2xl font-black tracking-tighter">BridgeWorks</span>
+                            <span class="text-2xl font-serif italic">Stellar Labs</span>
+                            <span class="text-2xl font-bold uppercase tracking-tight">Verify.</span>
+                            <span class="text-2xl font-medium tracking-widest">NEXT VISION</span>
+                            <span class="text-2xl font-bold">FlowCanvas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <style>
+                .mask-edges {
+                    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+                    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+                }
+            </style>
+        </section>
+
+        <!-- 3. FEATURES (Asymmetric Bento Grid) -->
+        <section id="features" class="h-[100svh] w-full snap-start bg-zinc-50 flex flex-col justify-center px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto w-full">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 lg:mb-16 gap-6 reveal">
+                    <div>
+                        <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 mb-4 break-keep-all leading-tight">
+                            현장의 직관을 넘어,<br />데이터가 증명하는 통찰.
+                        </h2>
+                        <p class="text-lg text-zinc-500 max-w-[40ch] break-keep-all">
+                            센서 데이터와 위성 이미지를 융합 분석하여 최적의 생육 환경을 제안합니다.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Bento Grid Container -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-[50vh] min-h-[500px]">
+                    
+                    <!-- Large Card (Span 8) -->
+                    <div class="md:col-span-8 bg-white rounded-[2rem] p-2 ring-1 ring-zinc-200/50 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] group hover:-translate-y-1 transition-supa reveal delay-100 relative overflow-hidden flex flex-col">
+                        <div class="absolute top-0 right-0 p-8 w-2/3 h-full flex justify-end">
+                             <img src="https://images.unsplash.com/photo-1628352081506-83c43123ed6d?auto=format&fit=crop&w=800&q=80" alt="실시간 기후 대시보드" class="w-full h-full object-cover rounded-2xl opacity-80 mix-blend-multiply filter grayscale group-hover:grayscale-0 transition-all duration-700">
+                        </div>
+                        <div class="relative z-10 p-8 flex flex-col h-full justify-end bg-gradient-to-r from-white via-white/90 to-transparent">
+                            <div class="w-14 h-14 rounded-2xl bg-zinc-100 flex items-center justify-center text-zinc-950 mb-6">
+                                <iconify-icon icon="solar:radar-bold-duotone" width="32"></iconify-icon>
+                            </div>
+                            <h3 class="text-2xl md:text-3xl font-bold text-zinc-950 mb-3">초정밀 기후 레이더</h3>
+                            <p class="text-zinc-500 max-w-[25ch] break-keep-all font-medium">
+                                농장 반경 1km 단위의 미기후를 실시간으로 분석하고 이상 기후 도래를 72시간 전 경고합니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Small Card Stack (Span 4) -->
+                    <div class="md:col-span-4 flex flex-col gap-6">
+                        <!-- Small Card 1 -->
+                        <div class="flex-1 bg-white rounded-[2rem] p-8 ring-1 ring-zinc-200/50 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] group hover:-translate-y-1 transition-supa reveal delay-200 flex flex-col justify-between">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-12 h-12 rounded-xl bg-lime-50 flex items-center justify-center text-lime-600">
+                                    <iconify-icon icon="solar:bug-bold-duotone" width="24"></iconify-icon>
+                                </div>
+                                <iconify-icon icon="solar:arrow-right-up-linear" width="24" class="text-zinc-300 group-hover:text-lime-600 transition-colors"></iconify-icon>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-zinc-950 mb-2">병해충 비전 감지</h3>
+                                <p class="text-sm text-zinc-500 break-keep-all">드론 촬영 이미지를 분석하여 잎사귀 단위의 초기 감염을 포착합니다.</p>
+                            </div>
+                        </div>
+                        <!-- Small Card 2 -->
+                        <div class="flex-1 bg-zinc-950 rounded-[2rem] p-8 ring-1 ring-zinc-800 shadow-xl group hover:-translate-y-1 transition-supa reveal delay-300 flex flex-col justify-between text-white relative overflow-hidden">
+                            <!-- Glow effect inside -->
+                            <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-lime-600/30 blur-3xl rounded-full"></div>
+                            
+                            <div class="flex justify-between items-start mb-4 relative z-10">
+                                <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-white backdrop-blur-md">
+                                    <iconify-icon icon="solar:chart-square-bold-duotone" width="24"></iconify-icon>
+                                </div>
+                            </div>
+                            <div class="relative z-10">
+                                <h3 class="text-xl font-bold mb-2">수확량 AI 예측</h3>
+                                <p class="text-sm text-zinc-400 break-keep-all">누적된 생육 데이터와 토양 상태를 기반으로 최종 수확량을 98% 정확도로 산출합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. CTA (Dark Mode Contrast) -->
+        <section id="cta" class="h-[100svh] w-full snap-start flex flex-col justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+            <!-- Deep Dark Background -->
+            <div class="absolute inset-0 bg-zinc-950"></div>
+            <!-- Radial Glow -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-lime-900/40 blur-[100px] rounded-full pointer-events-none"></div>
+
+            <div class="max-w-4xl mx-auto w-full text-center relative z-10">
+                <h2 class="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-white mb-6 break-keep-all leading-tight reveal">
+                    미래 농업의 기준,<br />
+                    지금 경험하세요.
+                </h2>
+                <p class="text-xl text-zinc-400 mb-12 break-keep-all reveal delay-100 max-w-[28ch] mx-auto font-medium">
+                    복잡한 설치 과정 없이 웹 브라우저 하나로 농장의 모든 지표를 모니터링할 수 있습니다.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center reveal delay-200">
+                    <button class="w-full sm:w-auto bg-lime-600 text-white shadow-[0_0_40px_rgba(101,163,13,0.3)] rounded-full px-10 py-5 text-xl font-bold flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-[0.98] transition-supa group">
+                        30일 무료 체험하기
+                        <div class="w-8 h-8 rounded-full bg-black/20 flex items-center justify-center group-hover:translate-x-1 transition-transform">
+                            <iconify-icon icon="solar:arrow-right-linear" width="20"></iconify-icon>
+                        </div>
+                    </button>
+                    <button class="w-full sm:w-auto text-white border border-zinc-700 rounded-full px-10 py-5 text-xl font-semibold hover:bg-zinc-800 transition-colors duration-300">
+                        영업팀 문의
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. FOOTER -->
+        <section class="h-auto min-h-[40vh] w-full snap-start bg-zinc-950 flex flex-col justify-end px-4 sm:px-6 lg:px-8 pb-12 pt-24 border-t border-zinc-900 z-20 relative">
+            <div class="max-w-7xl mx-auto w-full">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-16">
+                    <div>
+                        <div class="flex items-center gap-2 mb-4 text-white">
+                            <div class="w-8 h-8 rounded-full bg-lime-600 flex items-center justify-center">
+                                <iconify-icon icon="solar:leaf-bold-duotone" width="20"></iconify-icon>
+                            </div>
+                            <span class="font-bold text-xl tracking-tight">FieldGuard AI</span>
+                        </div>
+                        <p class="text-zinc-500 max-w-sm">데이터가 증명하는 미래 농업. 자연의 변수를 완벽히 통제하는 스마트 솔루션.</p>
+                    </div>
+                    
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white hover:border-lime-600 transition-all">
+                            <iconify-icon icon="solar:twitter-bold" width="18"></iconify-icon>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white hover:border-lime-600 transition-all">
+                            <iconify-icon icon="solar:buildings-bold" width="18"></iconify-icon>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-zinc-900 text-sm text-zinc-600 gap-4">
+                    <p>&copy; 2024 FieldGuard AI. All rights reserved.</p>
+                    <div class="flex gap-6">
+                        <a href="#" class="hover:text-zinc-300 transition-colors">이용약관</a>
+                        <a href="#" class="hover:text-zinc-300 transition-colors">개인정보처리방침</a>
+                        <a href="#" class="hover:text-zinc-300 transition-colors">도움말 센터</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Scroll Animation Observer -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: document.querySelector('main'), // Track inside the snap container
+                rootMargin: '0px',
+                threshold: 0.2
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Optional: Unobserve if you only want it to happen once
+                        // observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal').forEach((element) => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>

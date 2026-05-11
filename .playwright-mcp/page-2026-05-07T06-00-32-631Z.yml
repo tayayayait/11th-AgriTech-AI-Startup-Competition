@@ -1,0 +1,163 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - generic:
+          - img [ref=e5]
+          - img [ref=e6]
+          - img [ref=e7]
+          - img [ref=e8]
+          - img [ref=e9]
+          - img [ref=e10]
+          - img [ref=e11]
+          - img [ref=e12]
+          - generic:
+            - img [ref=e13]
+            - img [ref=e14]
+            - img [ref=e15]
+            - img [ref=e16]
+            - img [ref=e17]
+            - img [ref=e18]
+            - img [ref=e19]
+            - img [ref=e20]
+            - img [ref=e21]
+            - img [ref=e22]
+            - img [ref=e23]
+            - img [ref=e24]
+            - img [ref=e25]
+            - img [ref=e26]
+            - img [ref=e27]
+            - img [ref=e28]
+            - img [ref=e29]
+            - img [ref=e30]
+            - img [ref=e31]
+            - img [ref=e32]
+            - img [ref=e33]
+            - img [ref=e34]
+            - img [ref=e35]
+            - img [ref=e36]
+            - img [ref=e37]
+            - img [ref=e38]
+            - img [ref=e39]
+            - img [ref=e40]
+          - generic:
+            - img "주제도이미지" [ref=e41]
+            - img "주제도이미지" [ref=e42]
+            - img "주제도이미지" [ref=e43]
+            - img "주제도이미지" [ref=e44]
+            - img "주제도이미지" [ref=e45]
+            - img "주제도이미지" [ref=e46]
+          - generic:
+            - img "주제도이미지" [ref=e47]
+            - img "주제도이미지" [ref=e48]
+            - img "주제도이미지" [ref=e49]
+            - img "주제도이미지" [ref=e50]
+            - img "주제도이미지" [ref=e51]
+            - img "주제도이미지" [ref=e52]
+        - generic [ref=e54]:
+          - generic [ref=e55]: 본 시스템에서 제공하는 정보는 법적인 효력이 없으며, 참고용으로만 활용하시기 바랍니다
+          - img "국토지리정보원" [ref=e56]
+          - img "농림수산식품교육문화정보원" [ref=e57]
+          - img "농림축산식품부" [ref=e58]
+          - generic [ref=e59]: "시스템 문의 : 031-778-7728"
+          - text: (
+          - generic [ref=e60] [cursor=pointer]: 개인정보처리방침
+          - text: )
+        - generic [ref=e62]: 10 m
+      - generic [ref=e63]: 현재 항공지도는 국토지리정보원의 지도 서비스 상태에 따라 일부 늦게 보일 수 있습니다.
+    - generic:
+      - generic [ref=e64]:
+        - generic [ref=e65]:
+          - link "사이트 로고" [ref=e67] [cursor=pointer]:
+            - /url: "#Wrap"
+            - img "사이트 로고" [ref=e68]
+          - list [ref=e69]:
+            - listitem [ref=e70]:
+              - link "필지검색" [ref=e71] [cursor=pointer]:
+                - /url: "#Wrap"
+            - listitem [ref=e72]:
+              - link "팜맵활용" [ref=e73] [cursor=pointer]:
+                - /url: "#Wrap"
+            - listitem [ref=e74]:
+              - link "팜맵통계" [ref=e75] [cursor=pointer]:
+                - /url: "#Wrap"
+            - listitem [ref=e76]:
+              - button "OPEN API" [ref=e77] [cursor=pointer]
+        - generic [ref=e78]:
+          - generic [ref=e79] [cursor=pointer]:
+            - button "팜맵" [ref=e80]:
+              - generic [ref=e81]: 팜맵
+            - combobox "팜맵연도" [ref=e82]:
+              - option "2025" [selected]
+              - option "2024"
+              - option "2023"
+              - option "2022"
+              - option "2021"
+              - option "2020"
+              - option "2019"
+          - generic [ref=e83] [cursor=pointer]:
+            - button "지적도" [ref=e84]:
+              - generic [ref=e85]: 지적도
+            - combobox "지적연도" [ref=e86]:
+              - option "2025" [selected]
+              - option "2024"
+              - option "2023"
+              - option "2022"
+          - generic [ref=e87] [cursor=pointer]:
+            - button "항공" [ref=e88]:
+              - emphasis [ref=e90]: 항공
+            - combobox "항공사진연도" [ref=e91]:
+              - option "2024" [selected]
+              - option "2023"
+              - option "2022"
+              - option "2021"
+              - option "2020"
+              - option "2019"
+              - option "2018"
+              - option "2017"
+              - option "2016"
+              - option "2015"
+              - option "2014"
+              - option "2013"
+              - option "2012"
+              - option "2011"
+          - generic [ref=e93] [cursor=pointer]: 하이브리드
+        - generic [ref=e94]:
+          - list [ref=e95]:
+            - listitem [ref=e96]: 세종특별자치시
+            - listitem [ref=e97]: 반곡동
+          - list [ref=e98]:
+            - listitem [ref=e99]
+            - listitem [ref=e100]
+      - generic:
+        - generic: "- - - - - - - * *"
+      - generic [ref=e101]:
+        - button "주제도" [ref=e103] [cursor=pointer]:
+          - generic [ref=e104]: 주제도
+        - button "시계열" [ref=e106] [cursor=pointer]:
+          - generic [ref=e107]: 시계열
+        - generic [ref=e108]:
+          - button "반경분석" [ref=e109] [cursor=pointer]:
+            - generic [ref=e110]: 반경분석
+          - button "다필지" [ref=e111] [cursor=pointer]:
+            - generic [ref=e112]: 다필지
+        - button "측정" [ref=e114] [cursor=pointer]:
+          - generic [ref=e115]: 측정
+        - generic [ref=e116]:
+          - button "현위치" [ref=e117] [cursor=pointer]:
+            - generic [ref=e118]: 현위치
+          - button "확대" [ref=e119] [cursor=pointer]:
+            - generic [ref=e120]: 확대
+          - button "축소" [ref=e121] [cursor=pointer]:
+            - generic [ref=e122]: 축소
+          - button "초기화" [ref=e123] [cursor=pointer]:
+            - generic [ref=e124]: 초기화
+        - generic [ref=e125]:
+          - button "인쇄" [ref=e126] [cursor=pointer]:
+            - generic [ref=e127]: 인쇄
+          - button "이용안내" [ref=e128] [cursor=pointer]:
+            - generic [ref=e129]: 이용안내
+        - button "큰글씨" [ref=e131] [cursor=pointer]:
+          - generic [ref=e132]: 큰글씨
+  - text: · · · · · ·
+  - text: · · · · · · · ▶ ▶ ▶ ▶ ▶ ▶ ▶ ▶

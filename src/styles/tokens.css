@@ -1,0 +1,85 @@
+:root {
+  --background: 105 20% 96%;        /* #F6F8F4 */
+  --foreground: 140 18% 11%;        /* #17211B */
+
+  --card: 0 0% 100%;
+  --card-foreground: 140 18% 11%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 140 18% 11%;
+
+  --surface-muted: 130 15% 94%;     /* #EEF4EF */
+
+  --primary: 138 49% 28%;           /* #256D3A */
+  --primary-foreground: 0 0% 100%;
+  --primary-hover: 138 52% 24%;     /* #1D5A30 */
+
+  --secondary: 188 78% 27%;         /* #0F6B7A */
+  --secondary-foreground: 0 0% 100%;
+
+  --accent: 30 71% 41%;             /* #B46A1F */
+  --accent-foreground: 0 0% 100%;
+
+  --muted: 130 15% 94%;
+  --muted-foreground: 140 9% 39%;   /* #5D6B63 */
+
+  --destructive: 0 67% 42%;         /* #B91C1C */
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 132 12% 86%;            /* #D8E1DA */
+  --input: 132 12% 86%;
+  --ring: 138 49% 28%;
+
+  --radius: 0.5rem;
+
+  /* Risk palette */
+  --risk-low: 122 46% 33%;          /* #2E7D32 */
+  --risk-watch: 35 70% 39%;         /* #B7791F */
+  --risk-high: 18 86% 40%;          /* #C2410C */
+  --risk-critical: 0 67% 42%;       /* #B91C1C */
+  --risk-unknown: 215 14% 47%;      /* #64748B */
+
+  --info: 188 80% 27%;
+  --success: 138 71% 30%;           /* #15803D */
+  --warning: 39 87% 32%;            /* #A16207 */
+  --danger: 0 67% 42%;
+
+  --sidebar-background: 130 15% 94%;
+  --sidebar-foreground: 140 18% 11%;
+  --sidebar-primary: 138 49% 28%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 132 18% 90%;
+  --sidebar-accent-foreground: 140 18% 11%;
+  --sidebar-border: 132 12% 86%;
+  --sidebar-ring: 138 49% 28%;
+}
+
+.dark {
+  --background: 140 18% 8%;
+  --foreground: 105 20% 96%;
+  --card: 140 18% 11%;
+  --card-foreground: 105 20% 96%;
+  --popover: 140 18% 11%;
+  --popover-foreground: 105 20% 96%;
+  --primary: 138 49% 45%;
+  --primary-foreground: 140 18% 8%;
+  --secondary: 188 60% 35%;
+  --secondary-foreground: 105 20% 96%;
+  --muted: 140 10% 18%;
+  --muted-foreground: 132 10% 65%;
+  --accent: 30 60% 50%;
+  --accent-foreground: 140 18% 8%;
+  --destructive: 0 62% 50%;
+  --destructive-foreground: 105 20% 96%;
+  --border: 140 10% 22%;
+  --input: 140 10% 22%;
+  --ring: 138 49% 45%;
+  --sidebar-background: 140 18% 11%;
+  --sidebar-foreground: 105 20% 96%;
+  --sidebar-primary: 138 49% 45%;
+  --sidebar-primary-foreground: 140 18% 8%;
+  --sidebar-accent: 140 10% 18%;
+  --sidebar-accent-foreground: 105 20% 96%;
+  --sidebar-border: 140 10% 22%;
+  --sidebar-ring: 138 49% 45%;
+}

@@ -1,0 +1,926 @@
+<html>
+  <head>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+  	<link rel="shortcut icon" href="#">
+
+  	<style>
+        header .hd_top {width:100%;background:#244b6d;position:relative;height:50px;}
+        p {position:absolute;-ms-transform:translateY(-50%);-webkit-transform:translateY(-50%);transform:translateY(-50%);color:#ffffff;font-size:20px;left:550px;}
+        div.left {text-align:center;width:12%;float:left;box-sizing:border-box;background:#ffffff;}
+        div.right {width:88%;float:right;box-sizing:border-box;background:#ffffff;padding-left:10px;}
+        div.olControlScaleLine>div {color:white;border-color:white;border-width:medium;}
+        .attribution {color:black;margin:0px 10px -25px 0px;font-size:12px;font-weight:bold;text-shadow:-1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;text-align:right;}
+        .menu {padding-top:5px;padding-bottom:5px;font-size:small;}
+        .menu:hover {background-color:#7E7EB3;color:white;}
+		.button {border-top-left-radius:5px;border-bottom-left-radius:5px;border-top-right-radius:5px;border-bottom-right-radius:5px;border:1px solid #7E7EB3;background-color:#ffffff;color:#000000;padding:0px 4px 2px 4px;height:22px;}
+        .button:hover{color:white;background-color:#7E7EB3;}
+        textarea.pop {width:100%;height:200px;padding:10px;box-sizing:border-box;border:solid 2px #1E90FF;border-radius:5px;font-size:16px;resize:both;}
+		.tg  {border-collapse:collapse;border-spacing:0;width:1166px}
+		.tg td {border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:11px;overflow:hidden;padding:5px 5px;word-break:normal;}
+		.tg th {border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:11px;font-weight:normal;overflow:hidden;padding:5px 5px;}
+		.tg .tg-c3ow {border-color:inherit;text-align:center;vertical-align:top}
+	</style>
+
+	<title>팜맵 데이터API 테스트</title>
+
+ 	<script src="https://agis.epis.or.kr/ASD/pub2/js/jquery-3.4.1.js"></script>
+ 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
+	<script src="https://agis.epis.or.kr/ASD/js/lib/openlayers/OpenLayers.js"></script>
+	<script src="https://agis.epis.or.kr/ASD/js/lib/proj4js/proj4.js"></script>
+	
+	<!------------------------------------------------------------------------------ 
+		apiKey : 팜맵API Key 입력
+		domain : 팜맵API Key 발급시 입력한 domain 입력
+	-------------------------------------------------------------------------------->
+	<script src="https://agis.epis.or.kr/ASD/farmmapApi/farmapApi.do?apiKey=apiKey&domain=domain"></script>
+	
+	<script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+	
+	<script>
+	var _numberRegExp = /[^0-9]/g;
+	function numberOnly(n) {
+		if($.type(n) != "string") n = new String(n);
+		return n.replace(_numberRegExp, '');
+	}
+	
+	$(function(){
+		$("button[name='btnSend']").click(function(){
+			$.blockUI({message : "<h3>Please wait...</h3>"});
+		});
+		$(document).find(".numberVal").each(function(index, obj){
+			$(obj).bind("keyup",function(){$(this).val(numberOnly($(this).val()));});
+		});
+	});
+	
+	var apiKey = "apiKey";  //팜맵API Key 입력
+	var domain = "domain";  //팜맵API Key 발급시 입력한 domain 입력
+	
+	var map1;
+	var reqUrl;
+
+	function init() {
+		map1 = farmmapObj.init("mapDiv1");
+		reqUrl = farmmapObj.rootUri;
+		getButton('menuMFarmmapDataSeachPnu,formFarmmapDataSeachPnu');
+		$("#vectorClickDiv").draggable();
+		$("#baseAnalysisDiv").draggable();
+	}
+
+
+	function getFarmmapDataSeachPnu() {
+		var params = {};
+		params.pnu = $("#pnu1").val();
+		params.mapType = $("#mapType1").val();
+		params.columnType = $("#columnType1").val();
+		params.apiKey = apiKey;
+		params.domain = domain;
+		params.apiVersion = $("#apiVersion1").val();
+		
+		setTimeout(function() {
+			sendAjax("farmmapApi/getFarmmapDataSeachPnu.do",params,"searchCallback");
+		}, 500);
+	}
+
+	function getFarmmapDataSeachXY() {
+		var params = {};
+
+		params.x = $("#x21").val();
+		params.y = $("#y21").val();
+		params.mapType = $("#mapType21").val();
+		params.epsg = $("#epsg21").val();
+		params.columnType = $("#columnType21").val();
+		params.apiKey = apiKey;
+		params.domain = domain;
+		params.apiVersion = $("#apiVersion21").val();
+		
+		setTimeout(function() {
+			sendAjax("farmmapApi/getFarmmapDataSeachXY.do",params,"searchCallback");
+		}, 500);
+	}
+	
+	function getFarmmapDataSeachXYAndRelationLayer() {
+		getFarmmapDataSeachXY();
+		
+		setTimeout(
+			function() {
+				var pnu;
+				if(returnjson.input.mapType == "base") {
+					if(returnjson.input.columnType.toUpperCase() == "KOR") {
+						pnu = returnjson.output.farmmapData.data[0].필지고유번호;
+					} else {
+						pnu = returnjson.output.farmmapData.data[0].pnu;
+					}
+				} else {
+					if(returnjson.input.columnType.toUpperCase() == "KOR") {
+						pnu = returnjson.output.farmmapData.data[0].대표PNU;
+					} else {
+						pnu = returnjson.output.farmmapData.data[0].pnu;
+					}
+				}
+				var mapType = returnjson.input.mapType;
+				
+				var params = {};
+				params.pnu = pnu;
+				params.mapType = mapType;
+				params.columnType = $("#columnType21").val();
+				params.apiKey = apiKey;
+				params.domain = domain;
+				params.apiVersion = $("#apiVersion21").val();
+				
+				setTimeout(function() {
+					sendAjax("farmmapApi/getFarmmapDataSeachRelationLayer.do",params,"searchCallback");
+				}, 500);
+
+				setTimeout(
+					function(){
+						addVector();
+					}, 500
+				);
+			}, 300
+		);
+	}
+
+	function getFarmmapDataSeachRadius() {
+		var params = {};
+
+		params.x = $("#x31").val();
+		params.y = $("#y31").val();
+		params.mapType = $("#mapType31").val();
+		params.radius = $("#radius31").val();
+		params.epsg = $("#epsg31").val();
+		params.columnType = $("#columnType31").val();
+		params.apiKey = apiKey;
+		params.domain = domain;
+		params.apiVersion = $("#apiVersion31").val();
+		
+		setTimeout(function() {
+			sendAjax("farmmapApi/getFarmmapDataSeachRadius.do",params,"searchCallback");
+		}, 500);
+	}
+
+	function getFarmmapDataSeachBjdAndLandCode() {
+		var params = {};
+		params.bjdCd = $("#bjdCd4").val();
+		params.landCd = $("#landCd4").val();
+		params.mapType = $("#mapType4").val();
+		params.columnType = $("#columnType4").val();
+		params.apiKey = apiKey;
+		params.domain = domain;
+		params.apiVersion = $("#apiVersion4").val();
+		
+		setTimeout(function() {
+			sendAjax("farmmapApi/getFarmmapDataSeachBjdAndLandCode.do",params,"searchCallback");
+		}, 500);
+	}
+
+	function getFarmmapDataSeachBjdAndUpdateCode() {
+		var params = {};
+		params.bjdCd = $("#bjdCd5").val();
+		params.updateCd = $("#updateCd5").val();
+		params.mapType = $("#mapType5").val();
+		params.columnType = $("#columnType5").val();
+		params.apiKey = apiKey;
+		params.domain = domain;
+		params.apiVersion = $("#apiVersion5").val();
+		
+		setTimeout(function() {
+			sendAjax("farmmapApi/getFarmmapDataSeachBjdAndUpdateCode.do",params,"searchCallback");
+		}, 500);
+	}
+
+	function getFarmmapDataSeachBjdAndUpdateDate() {
+		var params = {};
+		params.bjdCd = $("#bjdCd6").val();
+		params.sWorkDate = $("#sWorkDate6").val();
+		params.eWorkDate = $("#eWorkDate6").val();
+		params.mapType = $("#mapType6").val();
+		params.columnType = $("#columnType6").val();
+		params.apiKey = apiKey;
+		params.domain = domain;
+		params.apiVersion = $("#apiVersion6").val();
+		
+		setTimeout(function() {
+			sendAjax("farmmapApi/getFarmmapDataSeachBjdAndUpdateDate.do",params,"searchCallback");
+		}, 500);
+	}
+
+	function getFarmmapDataSeachRelationLayer() {
+		var params = {};
+		params.pnu = $("#pnu7").val();
+		params.mapType = $("#mapType7").val();
+		params.columnType = $("#columnType7").val();
+		params.apiKey = apiKey;
+		params.domain = domain;
+		params.apiVersion = $("#apiVersion7").val();
+		
+		setTimeout(function() {
+			sendAjax("farmmapApi/getFarmmapDataSeachRelationLayer.do",params,"searchCallback");
+		}, 500);
+	}
+	
+	function getFarmmapDataSeachAnalysisBasePnu() {
+		var params = {};
+		params.pnus = $("#pnu8").val();
+		params.columnType = $("#columnType8").val();
+		params.apiKey = apiKey;
+		params.domain = domain;
+		
+		setTimeout(function() {
+			sendAjax("farmmapApi/getFarmmapDataSeachAnalysisBasePnu.do",params,"searchCallback2");
+		}, 500);
+	}
+	
+	function getFarmmapDataSeachAnalysisBaseAttr() {
+		var params = {};
+		params.bjdCd = $("#bjdCd9").val();
+		params.jimok = $("#jimok").val();
+		params.fromBaseArea = $("#fromBaseArea").val();
+		params.toBaseArea = $("#toBaseArea").val();
+		params.fromCnt = $("#fromCnt").val();
+		params.toCnt = $("#toCnt").val();
+		params.fromArea = $("#fromArea").val();
+		params.toArea = $("#toArea").val();
+		params.fromRatio = $("#fromRatio").val();
+		params.toRatio = $("#toRatio").val();
+		params.landCd = $("#landCd9").val();
+		params.columnType = $("#columnType9").val();
+		params.apiKey = apiKey;
+		params.domain = domain;
+		
+		setTimeout(function() {
+			sendAjax("farmmapApi/getFarmmapDataSeachAnalysisBaseAttr.do",params,"searchCallback2");
+		}, 500);
+	}
+	
+	function sendAjax(url, params, callback) {
+		$.ajax({
+			url : reqUrl + url,
+			dataType : "jsonp",
+			jsonpCallback : callback,
+			async : false,
+			type : "GET",
+			cache : false,
+			data : params,
+			error : function(XMLHttpRequest, textStatus, errorThrown){
+				$.unblockUI();
+			}
+		});
+	}
+
+	var returnjson;
+	function searchCallback(data) {
+		$.unblockUI();
+		
+		$('#vectorClickDiv').hide();
+		$('#baseAnalysisDiv').hide();
+		returnjson = data;
+		$("#info").val(JSON.stringify(data,null,4));
+
+		var layer = farmmapObj.getObject("layer", "vectorLayer", map1);
+
+		if(layer != null) {
+			farmmapObj.removeLayer("vectorLayer", map1);
+		}
+	}
+	
+	function searchCallback2(data) {
+		$.unblockUI();
+		
+		$('#vectorClickDiv').hide();
+		$('#baseAnalysisDiv').hide();
+		$("#info").val(JSON.stringify(data,null,4));
+		
+		if(data.status.result == "F") return false;
+
+		var analysisData = data.output.analysisData.data;
+		
+		var felem = $('#analysisBaseTbody');
+		felem.empty();
+		
+		var resultNames = "pnu,jimok,basearea,farm_cnt,farm_area,farm_ratio,cnt1,area1,ratio1,cnt2,area2,ratio2,cnt3,area3,ratio3,cnt4,area4,ratio4,cnt5,area5,ratio5,none_farm_cnt,none_farm_area,none_farm_ratio";
+		if(data.input.columnType == "KOR") {
+			resultNames = "필지고유번호,지목,지적면적,농경지수,경작면적,경작비율,논수,논면적,논비율,밭수,밭면적,밭비율,과수수,과수면적,과수비율,시설수,시설면적,시설비율,인삼수,인삼면적,인삼비율,비경지수,비경지면적,비경지비율";
+		}
+		resultNames = resultNames.split(",");
+		var dataCount = analysisData.length;
+		if(dataCount > 0) {
+			$.each(analysisData, function(index, row){
+				$(felem).append("<tr></tr>");
+				var relem = felem.children("tr")[index];
+				
+				if(index == 10) {
+					$(relem).append("<td colspan='25' style='border:1px solid #70b575;text-align:center;'>10건 출력후 이하 생략 (전체 : " + dataCount + "건)</td>");
+					return false;
+				}
+				
+				$(relem).append("<td style='border:1px solid #70b575;text-align:center;'>" + (index+1) + "</td>");
+				
+				for(var i=0; i<resultNames.length; i++) {
+					var resultName = resultNames[i];
+					var val = "-";
+					if(null != row[resultName] && "null" != row[resultName]){
+						if(resultName.includes("area") || resultName.includes("면적") || resultName.includes("ratio") || resultName.includes("비율")) {
+							val = Number(row[resultName]).toFixed(2);
+						} else {
+							val = row[resultName];
+						}
+					}
+					if(val == "0") {
+						$(relem).append("<td colspan='3' style='border:1px solid #70b575;text-align:center;'>-</td>");
+						i += 2;
+					} else {
+						$(relem).append("<td style='border:1px solid #70b575;text-align:center;'>"+val+"</td>");
+					}
+				}
+			});
+		} else {
+			$(felem).append("<tr></tr>");
+			var relem = felem.children("tr")[0];
+			$(relem).append("<td colspan='25' style='border:1px solid #70b575;text-align:center;'>검색결과가 없습니다.</td>");
+		}
+		$('#baseAnalysisDiv').show();
+	}
+	
+	function downloadExcel() {
+		var wb = XLSX.utils.table_to_book(document.getElementById('baseAnalysisTable'), {sheet:"result",raw:true});
+		XLSX.writeFile(wb, ('result.xlsx'));
+	}
+	
+	function addVector() {
+		var data = returnjson;
+		if(returnjson == null) return;
+
+		var layerName = "vectorLayer";
+		var layerOption = {
+			hover : false,
+			multiple : false,
+			toggle : true,
+			onSelect : vectorSelect2,
+			onUnselect : vectorUnselect2
+		}
+		farmmapObj.addVectorLayer(layerName, layerOption, map1);
+
+
+		var farmmapData;
+		if(data.output.farmmapData != null) {
+			farmmapData = data.output.farmmapData;
+			for(var k=0; k<farmmapData.data.length; k++) {
+
+				if(k > 300) break;
+
+				var feature = farmmapData.data[k];
+				var xy = feature.geometry[0].xy;
+
+				var id = "";
+				var label = "";
+				
+				if(data.input.mapType == "base") {
+					if(data.input.columnType.toUpperCase() == "KOR") {
+						id = feature.필지고유번호;
+						label = feature.필지고유번호;
+					} else {
+						id = feature.pnu;
+						label = feature.pnu;
+					}
+				} else {
+					if(data.input.columnType.toUpperCase() == "KOR") {
+						id = feature.팜맵ID;
+						label = feature.팜맵ID;
+					} else {
+						id = feature.id;
+						label = feature.id;
+					}
+				}
+
+				vectorOptions = {
+					id: id.toString()
+					,type: "polygon"
+					,xy: xy
+					,data: feature
+					,style: {
+							fillColor: "black",
+							fillOpacity: 0.5,
+							strokeWidth: 2,
+							strokeColor: "#ff0000",
+							strokeLinecap: "round",
+							fontSize: "12px",
+							fontColor: "black",
+							fontWeight: "bold",
+							label: label.toString(),
+							labelOutlineColor: "#ffffff",
+							labelOutlineWidth: 3
+					}
+				}
+				farmmapObj.addVector("vectorLayer", vectorOptions, map1);
+			}
+		}
+		
+		var sourceData;
+		if(data.output.source != null) {
+			sourceData = data.output.source;
+			for(var k=0; k<sourceData.data.length; k++) {
+
+				var feature = sourceData.data[k];
+				var xy = feature.geometry[0].xy;
+
+				var label = "";
+
+				if(data.input.mapType == "base") {
+					if(data.input.columnType.toUpperCase() == "KOR") {
+						label = feature.필지고유번호;
+					} else {
+						label = feature.pnu;
+					}
+				} else {
+					if(data.input.columnType.toUpperCase() == "KOR") {
+						label = feature.대표PNU;
+					} else {
+						label = feature.pnu;
+					}
+				}
+
+				vectorOptions = {
+					id: ("source_" + k).toString()
+					,type: "polygon"
+					,xy: xy
+					,data: feature
+					,style: {
+							fillColor: "#FFFFFF",
+							fillOpacity: 0.5,
+							strokeWidth: 5,
+							strokeColor: "#FFFFFF"
+							,fontSize: "12px",
+							fontColor: "black",
+							fontWeight: "bold",
+							label: label.toString(),
+							labelOutlineColor: "#ffffff",
+							labelOutlineWidth: 3
+					}
+				}
+				farmmapObj.addVector("vectorLayer", vectorOptions, map1);
+			}
+			sourceData = null;
+		}
+		
+		var targetData;
+		if(data.output.target != null) {
+			targetData = data.output.target;
+			for(var k=0; k<targetData.data.length; k++) {
+
+				var feature = targetData.data[k];
+				if(feature.result != undefined) {
+					alert(feature.result);
+				} else {
+					var xy = feature.geometry[0].xy;
+					var label = feature.rank_label != undefined ? feature.rank_label.toString() : feature.순위.toString();
+					
+					vectorOptions = {
+						id: "target_" + label.toString()
+						,type: "polygon"
+						,xy: xy
+						,data: feature
+						,style: {
+							fillColor: "black",
+							fillOpacity: 0.001,
+							strokeWidth: 2,
+							strokeColor: "#ff0000",
+							strokeLinecap: "round",
+							fontSize: "12px",
+							fontColor: "yellow",
+							fontWeight: "bold",
+							label: label,
+							labelOutlineColor: "blue",
+							labelOutlineWidth: 3
+						}
+					}
+					farmmapObj.addVector("vectorLayer", vectorOptions, map1);
+				}
+			}
+			targetData = null;
+		}
+		
+		if(farmmapObj.getObject("layer", "vectorLayer", map1).features.length > 0) {
+			map1.zoomToExtent(farmmapObj.getObject("layer", "vectorLayer", map1).features[0].geometry.getBounds());
+			map1.zoomTo(11);
+		}
+	}
+
+
+	function vectorSelect2(feature, flag) {
+		if(!flag) {
+			vectorUnselect2(farmmapObj.getObject("layer", "vectorLayer", map1).features[0]);
+		}
+		
+		if(feature.id != farmmapObj.getObject("layer", "vectorLayer", map1).features[0].id) {
+			feature.style.display='none';
+			feature.layer.redraw();
+		}
+		
+		feature.style.fillColor = "#0505f5";
+		feature.style.strokeColor = "yellow";
+		feature.style.strokeWidth = 5;
+		feature.style.display='';
+		feature.layer.redraw();
+
+		if(Object.keys(feature.data).length > 0) {
+			var data = feature.data;
+			var keys = Object.keys(data);
+			var text = "";
+			for(var i=0; i<keys.length; i++) {
+				var searchData = data[keys[i]];
+				text += keys[i] + " : " + data[keys[i]] + "\r\n";;
+			}
+			$("#vectorClickInfo").val(text);
+			$("#vectorClickDiv").show();
+		}
+	}
+
+	function vectorUnselect2(feature) {
+		if(feature.id.indexOf("source_") != -1) {
+			feature.style.fillColor = "#FFFFFF";
+			feature.style.strokeColor = "#FFFFFF";
+		} else {
+			feature.style.fillColor = "black";
+			feature.style.strokeColor = "#ff0000";
+			feature.style.strokeWidth = 2;
+		}
+		feature.layer.redraw();
+
+		$("#vectorClickDiv").hide();
+	}
+
+
+	function getSourceData() {
+		var layer = farmmapObj.getObject("layer", "vectorLayer", map1);
+
+		if(layer != null) {
+			for(var i=1; i<layer.features.length; i++) {
+				var feature = layer.features[i];
+				feature.style.fillColor = "black";
+				feature.style.strokeColor = "#ff0000";
+				feature.style.strokeWidth = 2;
+			}
+			vectorSelect2(layer.features[0]);
+		}
+	}
+	
+	function getButton(ids) {
+    	var menuId = ids.split(",")[0];
+    	var buttonId = ids.split(",")[1];
+    	
+    	var menuDivs = $("div[id^='menu']");
+        for (var i = 0; i < menuDivs.length; i++) {
+            if (menuDivs[i].id == menuId) {
+            	$(menuDivs[i]).css("background","#60caae");
+            	$(menuDivs[i]).css("color","#ffffff");
+            } else {
+            	$(menuDivs[i]).css("background","");
+            	$(menuDivs[i]).css("color","");
+            }
+        }
+    	
+        var buttonDivs = $("div[id^='form']");
+        for (var i = 0; i < buttonDivs.length; i++) {
+            if (buttonDivs[i].id == buttonId) {
+                $(buttonDivs[i]).show();
+            } else {
+                $(buttonDivs[i]).hide();
+            }
+        }
+    }
+	
+	function clearData() {
+		$('#info').val('');
+		
+		$('#vectorClickDiv').hide();
+		
+		returnjson = null;
+		
+		var layer = farmmapObj.getObject("layer", "vectorLayer", map1);
+
+		if(layer != null) {
+			farmmapObj.removeLayer("vectorLayer", map1);
+		}
+	}
+
+
+    </script>
+	</head>
+  <body onload="init()">
+  	<header>
+        <div class="hd_top">
+            <p>농식품 팜맵 데이터 API 서비스</p>
+        </div>
+    </header>
+    
+    <div>
+        <div class="left">
+            <br>
+            <hr>
+            <div id="menuMFarmmapDataSeachPnu" onClick="getButton('menuMFarmmapDataSeachPnu,formFarmmapDataSeachPnu')" class="menu">pnu 기반 데이터</div><hr>
+            <div id="menuFarmmapDataSeachXY" onClick="getButton('menuFarmmapDataSeachXY,formFarmmapDataSeachXY')" class="menu">좌표 기반 데이터</div><hr>
+            <div id="menuFarmmapDataSeachRadius" onClick="getButton('menuFarmmapDataSeachRadius,formFarmmapDataSeachRadius')" class="menu">중심좌표 + 반경검색</div><hr>
+            <div id="menuFarmmapDataSeachBjdAndLandCode" onClick="getButton('menuFarmmapDataSeachBjdAndLandCode,formFarmmapDataSeachBjdAndLandCode')" class="menu">읍면동리 + 농경지분류</div><hr>
+            <div id="menuFarmmapDataSeachBjdAndUpdateCode" onClick="getButton('menuFarmmapDataSeachBjdAndUpdateCode,formFarmmapDataSeachBjdAndUpdateCode')" class="menu">읍면동리 + 갱신유형</div><hr>
+            <div id="menuFarmmapDataSeachBjdAndUpdateDate" onClick="getButton('menuFarmmapDataSeachBjdAndUpdateDate,formFarmmapDataSeachBjdAndUpdateDate')" class="menu">읍면동리 + 갱신일자</div><hr>
+            <div id="menuFarmmapDataSeachRelationLayer" onClick="getButton('menuFarmmapDataSeachRelationLayer,formFarmmapDataSeachRelationLayer')" class="menu">팜맵 + 국토정보기본도</div><hr>
+            <div id="menuFarmmapDataSeachAnalysisBasePnu" onClick="getButton('menuFarmmapDataSeachAnalysisBasePnu,formFarmmapDataSeachAnalysisBasePnu')" class="menu">지적기반경작면적분석 PNU</div><hr>
+            <div id="menuFarmmapDataSeachAnalysisBaseAttr" onClick="getButton('menuFarmmapDataSeachAnalysisBaseAttr,formFarmmapDataSeachAnalysisBaseAttr')" class="menu">지적기반경작면적분석 조건</div><hr>
+        </div>
+    </div>
+  	
+  	<div class="right">
+  		<font size="2px">
+			<br>
+		</font>
+		
+		<div id="divForm">
+			<div id="formFarmmapDataSeachPnu" >
+		  		<font size="3px">
+					<br>
+				</font>
+				pnu : <input type="text" class="numberVal text" id="pnu1" name="pnu1" value="3611031024201550000"/>&nbsp;&nbsp;
+			  	mapType : 	<select id="mapType1">
+								<option value="farmmap">팜맵</option>
+								<option value="base">국토정보기본도</option>
+							</select>&nbsp;&nbsp;
+			  	columnType :  <select id="columnType1">
+								<option value="ENG">ENG</option>
+								<option value="KOR">KOR</option>
+							</select>&nbsp;&nbsp;
+				apiVersion :  <select id="apiVersion1">
+								<option value="v1">v1</option>
+								<option value="v2">v2</option>
+								<option value="v3">v3</option>
+							</select>&nbsp;&nbsp;
+			  	<button name="btnSend" type="button" class="button"  onclick="javascript:getFarmmapDataSeachPnu();">조회</button><hr>
+			</div>
+			
+			
+			<div id="formFarmmapDataSeachXY" >
+				EPSG 테스트 : X:127.2380545 / Y:36.5483953 [EPSG:4326]<br>
+			  	x : <input type="text" id="x21" name="x21" value="976555.97765681" size="15" />&nbsp;&nbsp;
+			  	y : <input type="text" id="y21" name="y21" value="1838993.1813686" size="15" />&nbsp;&nbsp;
+			  	epsg : <select id="epsg21">
+							<option value="EPSG:5179">EPSG:5179</option>
+							<option value="EPSG:3857">EPSG:3857</option>
+							<option value="EPSG:900913">EPSG:900913</option>
+							<option value="EPSG:4326">EPSG:4326</option>
+							<option value="EPSG:5185">EPSG:5185</option>
+							<option value="EPSG:5186">EPSG:5186</option>
+							<option value="EPSG:5187">EPSG:5187</option>
+							<option value="EPSG:5188">EPSG:5188</option>
+						</select>&nbsp;&nbsp;
+			  	mapType : 	<select id="mapType21">
+								<option value="farmmap">팜맵</option>
+								<option value="base">국토정보기본도</option>
+							</select>&nbsp;&nbsp;
+			  	columnType :  <select id="columnType21">
+								<option value="ENG">ENG</option>
+								<option value="KOR">KOR</option>
+							</select>&nbsp;&nbsp; 
+				apiVersion :  <select id="apiVersion21">
+								<option value="v1">v1</option>
+								<option value="v2">v2</option>
+								<option value="v3">v3</option>
+							</select>&nbsp;&nbsp;
+			  	<button name="btnSend" type="button" class="button"  onclick="javascript:getFarmmapDataSeachXY();">조회</button>&nbsp;
+			  	<button type="button" class="button"  onclick="javascript:getFarmmapDataSeachXYAndRelationLayer();">중첩레이어 조회</button><hr>
+			</div>
+			
+			<div id="formFarmmapDataSeachRadius" >
+				EPSG 테스트 :  X:14168824.258634876 / Y:4368166.534363985 [EPSG:3857]<br>
+			  	x : <input type="text" id="x31" name="x31" value="980359.07315681" size="15" />&nbsp;&nbsp;
+			  	y : <input type="text" id="y31" name="y31" value="1832434.6782686" size="15" />&nbsp;&nbsp;
+			  	epsg : <select id="epsg31">
+							<option value="EPSG:5179">EPSG:5179</option>
+							<option value="EPSG:3857">EPSG:3857</option>
+							<option value="EPSG:900913">EPSG:900913</option>
+							<option value="EPSG:4326">EPSG:4326</option>
+							<option value="EPSG:5185">EPSG:5185</option>
+							<option value="EPSG:5186">EPSG:5186</option>
+							<option value="EPSG:5187">EPSG:5187</option>
+							<option value="EPSG:5188">EPSG:5188</option>
+						</select>&nbsp;&nbsp;
+			  	radius : <input type="text" class="numberVal text" id="radius31" name="radius31" size="4" value="50"/>&nbsp;&nbsp;
+			  	mapType : 	<select id="mapType31">
+								<option value="farmmap">팜맵</option>
+								<option value="base">국토정보기본도</option>
+							</select>&nbsp;&nbsp;
+			  	columnType :  <select id="columnType31">
+								<option value="ENG">ENG</option>
+								<option value="KOR">KOR</option>
+							</select>&nbsp;&nbsp; 
+				apiVersion :  <select id="apiVersion31">
+								<option value="v1">v1</option>
+								<option value="v2">v2</option>
+								<option value="v3">v3</option>
+							</select>&nbsp;&nbsp;
+			  	<button name="btnSend" type="button" class="button"  onclick="javascript:getFarmmapDataSeachRadius();">조회</button> <hr>
+			</div>
+			
+			<div id="formFarmmapDataSeachBjdAndLandCode" >
+				<font size="3px">
+					<br>
+				</font>
+				bjdCd : <input type="text" class="numberVal text" id="bjdCd4" name="bjdCd4" size="8" value="3611034032"/>&nbsp;&nbsp;
+				landCd : <select id="landCd4">
+							<option value="01">논</option>
+							<option value="02">밭</option>
+							<option value="03">과수</option>
+							<option value="04">시설</option>
+							<option value="06">비경지</option>
+						</select>&nbsp;&nbsp;
+				mapType : 	<select id="mapType4">
+								<option value="farmmap">팜맵</option>
+								<option value="base">국토정보기본도</option>
+							</select>&nbsp;&nbsp;
+				columnType :  <select id="columnType4">
+								<option value="ENG">ENG</option>
+								<option value="KOR">KOR</option>
+							</select>&nbsp;&nbsp;
+				apiVersion :  <select id="apiVersion4">
+								<option value="v1">v1</option>
+								<option value="v2">v2</option>
+								<option value="v3">v3</option>
+							</select>&nbsp;&nbsp;
+				<button name="btnSend" type="button" class="button"  onclick="javascript:getFarmmapDataSeachBjdAndLandCode();">조회</button><hr>
+			</div>
+			
+			<div id="formFarmmapDataSeachBjdAndUpdateCode" >
+				<font size="3px">
+					<br>
+				</font>
+				bjdCd : <input type="text" class="numberVal text" id="bjdCd5" name="bjdCd5" size="8" value="2771038025"/>&nbsp;&nbsp;
+				updateCd : 	<select id="updateCd5">
+								<option value="01">신규</option>
+								<option value="02">삭제</option>
+								<option value="03">변경</option>
+							</select>&nbsp;&nbsp;
+				mapType : 	<select id="mapType5">
+								<option value="farmmap">팜맵</option>
+								<option value="base">국토정보기본도</option>
+							</select>&nbsp;&nbsp;
+				columnType :  <select id="columnType5">
+								<option value="ENG">ENG</option>
+								<option value="KOR">KOR</option>
+							</select>&nbsp;&nbsp;
+				apiVersion :  <select id="apiVersion5">
+								<option value="v1">v1</option>
+								<option value="v2">v2</option>
+								<option value="v3">v3</option>
+							</select>&nbsp;&nbsp;
+				<button name="btnSend" type="button" class="button"  onclick="javascript:getFarmmapDataSeachBjdAndUpdateCode();">조회</button><hr>
+			</div>
+			
+			<div id="formFarmmapDataSeachBjdAndUpdateDate" >
+				<font size="3px">
+					<br>
+				</font>
+				bjdCd : <input type="text" class="numberVal text" id="bjdCd6" name="bjdCd6" size="8" value="5011031026"/>&nbsp;&nbsp;
+				sWorkDate : <input type="text" class="numberVal text" id="sWorkDate6" name="sWorkDate6" size="5" value="20220101"/>&nbsp;&nbsp;
+				eWorkDate : <input type="text" class="numberVal text" id="eWorkDate6" name="eWorkDate6" size="5" value="20221231"/>&nbsp;&nbsp;
+				mapType : 	<select id="mapType6">
+								<option value="farmmap">팜맵</option>
+								<option value="base">국토정보기본도</option>
+							</select>&nbsp;&nbsp;
+				columnType :  <select id="columnType6">
+								<option value="ENG">ENG</option>
+								<option value="KOR">KOR</option>
+							</select>&nbsp;&nbsp;
+				apiVersion :  <select id="apiVersion6">
+								<option value="v1">v1</option>
+								<option value="v2">v2</option>
+								<option value="v3">v3</option>
+							</select>&nbsp;&nbsp;
+				<button name="btnSend" type="button" class="button"  onclick="javascript:getFarmmapDataSeachBjdAndUpdateDate();">조회</button><hr>
+			</div>
+			
+			<div id="formFarmmapDataSeachRelationLayer" >
+				<font size="3px">
+					<br>
+				</font>
+				pnu : <input type="text" class="numberVal text" id="pnu7" name="pnu7" value="3611034032100570001"/>&nbsp;&nbsp;
+				mapType : 	<select id="mapType7">
+								<option value="farmmap">팜맵</option>
+								<option value="base">국토정보기본도</option>
+							</select>&nbsp;&nbsp;
+				columnType :  <select id="columnType7">
+								<option value="ENG">ENG</option>
+								<option value="KOR">KOR</option>
+							</select>&nbsp;&nbsp; 
+				apiVersion :  <select id="apiVersion7">
+								<option value="v1">v1</option>
+								<option value="v2">v2</option>
+								<option value="v3">v3</option>
+							</select>&nbsp;&nbsp;
+				<button name="btnSend" type="button" class="button"  onclick="javascript:getFarmmapDataSeachRelationLayer();">조회</button>&nbsp;
+				<button type="button" class="button"  onclick="javascript:getSourceData();">기준데이터 속성조회</button><hr>
+			</div>
+			
+			<div id="formFarmmapDataSeachAnalysisBasePnu" >
+				<font size="3px">
+					<br>
+				</font>
+				pnus : <input type="text" id="pnu8" name="pnu8" value="3611034032100570001,3611034032100570002,3611034032100570003" style="width:470px;"/>&nbsp;&nbsp;
+				columnType :  <select id="columnType8">
+								<option value="ENG">ENG</option>
+								<option value="KOR">KOR</option>
+							</select>&nbsp;&nbsp; 
+				<button name="btnSend" type="button" class="button"  onclick="javascript:getFarmmapDataSeachAnalysisBasePnu();">조회</button><hr>
+			</div>
+			
+			<div id="formFarmmapDataSeachAnalysisBaseAttr" style="margin-top:-2px;">
+				bjdCd : <input type="text" id="bjdCd9" name="bjdCd9" size="8" value="3611034032"/>&nbsp;&nbsp;
+				지적면적 : <input type="text" class="numberVal text" id="fromBaseArea" name="fromBaseArea" size="3" value="100"/> ~ <input type="text" class="numberVal text" id="toBaseArea" name="toBaseArea" size="3" value="1000"/>&nbsp;&nbsp;
+				지목 : <input type="text" id="jimok" name="jimok" size="12" value="01,02,03,04,05,06"/>&nbsp;&nbsp;
+				농경지수 : <input type="text" class="numberVal text" id="fromCnt" name="fromCnt" size="2" value="1"/> ~ <input type="text" class="numberVal text" id="toCnt" name="toCnt" size="2" value="10"/>&nbsp;&nbsp;
+				경작면적 : <input type="text" class="numberVal text" id="fromArea" name="fromArea" size="2" value="100"/> ~ <input type="text" class="numberVal text" id="toArea" name="toArea" size="2" value="1000"/>&nbsp;&nbsp; <br>
+				경작비율 : <input type="text" class="numberVal text" id="fromRatio" name="fromRatio" size="2" value="10"/> ~ <input type="text" class="numberVal text" id="toRatio" name="toRatio" size="2" value="80"/>&nbsp;&nbsp;
+				농경지분류 : <input type="text" id="landCd9" name="landCd9" size="12" value="01,02,03,04,05,06"/>&nbsp;&nbsp;
+				columnType :  <select id="columnType9">
+								<option value="ENG">ENG</option>
+								<option value="KOR">KOR</option>
+							</select>&nbsp;&nbsp; 
+				<button name="btnSend" type="button" class="button"  onclick="javascript:getFarmmapDataSeachAnalysisBaseAttr();">조회</button><hr>
+			</div>
+		</div>
+		
+		<div id="infoDiv" style="width:28%;height:78%;position:absolute;right: 0px;">
+			<div id="listDiv" style="background-color:white; padding-left:10px; width:97%; height:54%;overflow-y:auto;" >
+				<font size="2px">
+				각 항목별 입력가능 코드 목록 <br>
+				1. mapType : farmmap (팜맵), base (국토정보기본도) <br>
+				2. x, y : epsg와 일치하는 좌표 <br>
+				3. radius : 0 ~ 1000 사이 숫자 <br>
+				4. landCd : 01 (논), 02 (밭), 03 (과수), 04 (시설), 06 (비경지) <br>
+				5. updateCd : 01 (신규), 02 (삭제), 03 (변경)<br>
+				6. bjdCd : 읍면동리 코드 숫자 10자리<br>
+				7. sWorkDate : 20210101 숫자 8자리<br>
+				8. eWorkDate : 20210101 숫자 8자리<br>
+				9. columnType : ENG, KOR [default : ENG]<br>
+				10. epsg : EPSG:3857, EPSG:900913, EPSG:4326, EPSG:5179, EPSG:5185, <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EPSG:5186, EPSG:5187, EPSG:5188 [default : EPSG:5179]<br>
+				11. apiVersion : v1(변경전 필드속성), v2(변경된 필드속성)
+				<br><br>
+				<팜맵 + 국토정보기본도><br>
+				mapType : farmmap (팜맵) --> 팜맵데이터 기준으로 중첩되는 국토정보기본도 조회<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;base (국토정보기본도) --> 국토정보기본도 기준으로 중첩되는 팜맵데이터 조회<br>
+				<br>
+				<지적기반팜맵분석><br>
+				1. pnus : 공백없이 [,]로 구분된 문자열. 각 pnu는 19자리 숫자만 입력.<br>
+				2. fromCnt,toCnt,fromArea,toArea,fromRatio,toRatio : 0 이상 숫자<br>
+				3. jimok, landCd : 공백없이 [,]로 구분된 문자. 세부코드는 [팜맵오픈API 명세서] 참조 <br>
+				</font>
+		  	</div>
+		
+			<div id="jsonDiv" style="background-color:white; padding-left:10px; width:97%; height:49%;" >
+				<button type="button" class="button"  onclick="javascript:addVector();">벡터그리기</button> &nbsp;<button type="button" class="button"  onclick="javascript:clearData();">지우기</button>
+				<textarea id="info" name="info" rows="33" style="width:98%;height:88%;">
+				</textarea>
+			</div>
+		</div>
+		
+		<div id="mapDiv1" style="height:80%;width:68%"></div>
+	
+		<div id="vectorClickDiv" style="width:400px; position:absolute; left:14%; top:150px; z-index:1006; display:none;" >
+			<div style="height:28px; background-color:#244b6d; color:white; padding-bottom:7px;">
+				<label style="padding:7px;position:absolute;">속성조회</label>
+	  			<button type="button" class="button"  onclick="javascript:$('#vectorClickDiv').hide();" style="position:absolute; right:5px; top:8px; z-index:999;">닫기</button>
+			</div>
+			<div>
+				<textarea id="vectorClickInfo" name="vectorClickInfo" rows="20" style="width:100%" class="pop"></textarea>
+			</div>
+	  	</div>
+	  	<div id="baseAnalysisDiv" style="border:2px solid black; background-color:white; position:absolute; width:1166px; left:4%; top:150px; z-index:1006; padding:10px; display:none;" >
+	  		<button type="button" class="button"  onclick="javascript:$('#baseAnalysisDiv').hide();" style="position:absolute; right:10px; top:5px; z-index:999;">닫기</button>
+	  		<button type="button" class="button"  onclick="javascript:downloadExcel();" style="position:absolute; right:50px; top:5px; z-index:999;">다운로드</button>
+	  		<table id="baseAnalysisTable" class="tg">
+	  			<caption>지적분석 상세</caption>
+	  			<colgroup>
+					<col style="width:3%" />
+					<col style="width:12%" /><col style="width:3%" /><col style="width:4%" />
+					<col style="width:4%" /><col style="width:4%" /><col style="width:3%" />
+					<col style="width:4%" /><col style="width:4%" /><col style="width:3%" />
+					<col style="width:4%" /><col style="width:4%" /><col style="width:3%" />
+					<col style="width:4%" /><col style="width:4%" /><col style="width:3%" />
+					<col style="width:4%" /><col style="width:4%" /><col style="width:3%" />
+					<col style="width:4%" /><col style="width:4%" /><col style="width:3%" />
+					<col style="width:4%" /><col style="width:4%" /><col style="width:4%" />
+				</colgroup>
+				<thead>
+				  	<tr style="position:sticky;top:0px;z-index:1;">
+						<th style="border:1px solid #70b575;background-color:#244b6d;color:white;" rowspan="2">목록</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;" colspan="3">지적</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;" colspan="3">농경지전체</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;" colspan="3">논</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;" colspan="3">밭</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;" colspan="3">과수</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;" colspan="3">시설</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;" colspan="3">인삼</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;" colspan="3">비경지</th>
+					</tr>
+					<tr style="position:sticky;top:18px;z-index:1;">
+						<th style="border:1px solid #70b575;background-color:#244b6d;color:white;">필지고유번호</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;">지목</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;">면적</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;">농경지<br>수</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;">경작<br>면적</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;">경작<br>비율</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;">농경지<br>수</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;">경작<br>면적</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;">경작<br>비율</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;">농경지<br>수</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;">경작<br>면적</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;">경작<br>비율</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;">농경지<br>수</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;">경작<br>면적</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;">경작<br>비율</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;">농경지<br>수</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;">경작<br>면적</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;">경작<br>비율</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;">농경지<br>수</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;">경작<br>면적</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;">경작<br>비율</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;">비경지<br>수</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;">비경지<br>면적</th><th style="border:1px solid #70b575;background-color:#244b6d;color:white;">비경지<br>비율</th>
+					</tr>
+				</thead>
+				<tbody id="analysisBaseTbody"></tbody>
+			</table>
+	  	</div>
+  	</div>
+  </body>
+</html>

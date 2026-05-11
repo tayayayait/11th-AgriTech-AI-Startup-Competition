@@ -1,0 +1,494 @@
+- generic:
+  - generic:
+    - list
+    - region "Notifications alt+T"
+    - generic:
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - img
+                  - generic:
+                    - generic: FieldGuard AI
+                    - generic: 현장 의사결정 보조
+              - generic:
+                - generic:
+                  - generic: 주 메뉴
+                  - generic:
+                    - list:
+                      - listitem:
+                        - link:
+                          - /url: /dashboard
+                          - img
+                          - generic: 대시보드
+                      - listitem:
+                        - link:
+                          - /url: /fields/map
+                          - img
+                          - generic: 필지 지도
+                      - listitem:
+                        - link:
+                          - /url: /tasks
+                          - img
+                          - generic: 작업 카드
+                      - listitem:
+                        - link:
+                          - /url: /diagnosis
+                          - img
+                          - generic: 사진 판독
+                      - listitem:
+                        - link:
+                          - /url: /reports
+                          - img
+                          - generic: 자료/상담
+                      - listitem:
+                        - link:
+                          - /url: /settings
+                          - img
+                          - generic: 설정
+        - generic:
+          - banner:
+            - button:
+              - img
+              - generic: Toggle Sidebar
+            - generic: 2026년 5월 7일 (목)
+            - generic:
+              - combobox:
+                - generic: 필지 선택
+                - img
+              - generic: 마지막 갱신 —
+              - button:
+                - img
+          - main:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - img
+                      - generic:
+                        - img
+                      - generic:
+                        - generic:
+                          - text: 본 시스템에서 제공하는 정보는 법적인 효력이 없으며, 참고용으로만 활용하시기 바랍니다
+                          - img
+                          - img
+                          - img
+                          - text: "시스템 문의 : 031-778-7728"
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic: F
+                      - generic:
+                        - generic: FARMMAP
+                        - generic: FieldGuard AI
+                    - generic:
+                      - generic: 팜맵 검색
+                      - generic: PNU
+                      - generic: 지역 조건
+                      - generic: 필지 등록
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                        - text: 팜맵 검색
+                      - button:
+                        - img
+                  - generic:
+                    - generic:
+                      - tablist:
+                        - tab: 주소
+                        - tab [selected]: 지역
+                      - tabpanel:
+                        - generic:
+                          - generic:
+                            - generic: 지역 *
+                            - button:
+                              - img
+                              - text: 코드 갱신
+                          - generic:
+                            - combobox:
+                              - generic: 경기도
+                              - img
+                            - combobox [expanded]:
+                              - generic: 시군구
+                              - img
+                            - combobox [disabled]:
+                              - generic: 읍면동
+                              - img
+                            - combobox [disabled]:
+                              - generic: 리
+                              - img
+                          - paragraph: 지역 코드 20,560건을 불러왔습니다.
+                        - generic:
+                          - generic:
+                            - generic: 번지
+                            - generic:
+                              - generic: 산
+                              - checkbox
+                          - generic:
+                            - generic:
+                              - text: 본번
+                              - textbox:
+                                - /placeholder: 본번
+                            - generic: ~
+                            - generic:
+                              - text: 부번
+                              - textbox:
+                                - /placeholder: 부번
+                        - generic:
+                          - text: 면적(m²)
+                          - generic:
+                            - textbox:
+                              - /placeholder: 최소
+                            - generic: ~
+                            - textbox:
+                              - /placeholder: 최대
+                        - generic:
+                          - text: 분류
+                          - combobox:
+                            - generic: 전체(논, 밭, 과수, 시설)
+                            - img
+                        - button [disabled]:
+                          - img
+                          - text: 검색하기
+                        - generic: 검색결과가 없습니다.
+                - complementary:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                        - text: 선택 필지 정보
+                      - paragraph: 지역 코드 20,560건을 불러왔습니다.
+                    - generic: "입력 방식: PNU 조회"
+                  - generic:
+                    - generic:
+                      - text: 필지명
+                      - textbox:
+                        - /placeholder: "예: 배추 - 해룡면"
+                        - text: 세종특별자치시 연기면 수산리 밭
+                    - generic:
+                      - text: 작물명
+                      - textbox:
+                        - /placeholder: "예: 배추"
+                    - button:
+                      - img
+                      - text: 선택한 필지 등록
+                  - generic:
+                    - generic:
+                      - generic: 좌표
+                      - generic: 36.5484105, 127.2381182
+                    - generic:
+                      - generic: PNU
+                      - generic: "3611031024201550000"
+                    - generic:
+                      - generic: 법정동주소
+                      - generic: 세종특별자치시 연기면 수산리
+                    - generic:
+                      - generic: 분류/면적
+                      - generic: 미입력
+  - listbox [ref=e727]:
+    - option "수원시" [active] [ref=e728]:
+      - generic [ref=e730]: 수원시
+    - option "상록구" [ref=e731]:
+      - generic [ref=e733]: 상록구
+    - option "일산동구" [ref=e734]:
+      - generic [ref=e736]: 일산동구
+    - option "일산서구" [ref=e737]:
+      - generic [ref=e739]: 일산서구
+    - option "처인구" [ref=e740]:
+      - generic [ref=e742]: 처인구
+    - option "기흥구" [ref=e743]:
+      - generic [ref=e745]: 기흥구
+    - option "수지구" [ref=e746]:
+      - generic [ref=e748]: 수지구
+    - option "화성시" [ref=e749]:
+      - generic [ref=e751]: 화성시
+    - option "광주시" [ref=e752]:
+      - generic [ref=e754]: 광주시
+    - option "양주시" [ref=e755]:
+      - generic [ref=e757]: 양주시
+    - option "포천시" [ref=e758]:
+      - generic [ref=e760]: 포천시
+    - option "여주시" [ref=e761]:
+      - generic [ref=e763]: 여주시
+    - option "안양시" [ref=e764]:
+      - generic [ref=e766]: 안양시
+    - option "만안구" [ref=e767]:
+      - generic [ref=e769]: 만안구
+    - option "동안구" [ref=e770]:
+      - generic [ref=e772]: 동안구
+    - option "부천시" [ref=e773]:
+      - generic [ref=e775]: 부천시
+    - option "광명시" [ref=e776]:
+      - generic [ref=e778]: 광명시
+    - option "평택시" [ref=e779]:
+      - generic [ref=e781]: 평택시
+    - option "동두천시" [ref=e782]:
+      - generic [ref=e784]: 동두천시
+    - option "장안구" [ref=e785]:
+      - generic [ref=e787]: 장안구
+    - option "단원구" [ref=e788]:
+      - generic [ref=e790]: 단원구
+    - option "안산시" [ref=e791]:
+      - generic [ref=e793]: 안산시
+    - option "고양시" [ref=e794]:
+      - generic [ref=e796]: 고양시
+    - option "덕양구" [ref=e797]:
+      - generic [ref=e799]: 덕양구
+    - option "과천시" [ref=e800]:
+      - generic [ref=e802]: 과천시
+    - option "구리시" [ref=e803]:
+      - generic [ref=e805]: 구리시
+    - option "남양주시" [ref=e806]:
+      - generic [ref=e808]: 남양주시
+    - option "오산시" [ref=e809]:
+      - generic [ref=e811]: 오산시
+    - option "시흥시" [ref=e812]:
+      - generic [ref=e814]: 시흥시
+    - option "군포시" [ref=e815]:
+      - generic [ref=e817]: 군포시
+    - option "권선구" [ref=e818]:
+      - generic [ref=e820]: 권선구
+    - option "의왕시" [ref=e821]:
+      - generic [ref=e823]: 의왕시
+    - option "하남시" [ref=e824]:
+      - generic [ref=e826]: 하남시
+    - option "용인시" [ref=e827]:
+      - generic [ref=e829]: 용인시
+    - option "파주시" [ref=e830]:
+      - generic [ref=e832]: 파주시
+    - option "이천시" [ref=e833]:
+      - generic [ref=e835]: 이천시
+    - option "안성시" [ref=e836]:
+      - generic [ref=e838]: 안성시
+    - option "김포시" [ref=e839]:
+      - generic [ref=e841]: 김포시
+    - option "팔달구" [ref=e842]:
+      - generic [ref=e844]: 팔달구
+    - option "연천군" [ref=e845]:
+      - generic [ref=e847]: 연천군
+    - option "가평군" [ref=e848]:
+      - generic [ref=e850]: 가평군
+    - option "양평군" [ref=e851]:
+      - generic [ref=e853]: 양평군
+    - option "영통구" [ref=e854]:
+      - generic [ref=e856]: 영통구
+    - option "성남시" [ref=e857]:
+      - generic [ref=e859]: 성남시
+    - option "수정구" [ref=e860]:
+      - generic [ref=e862]: 수정구
+    - option "중원구" [ref=e863]:
+      - generic [ref=e865]: 중원구
+    - option "분당구" [ref=e866]:
+      - generic [ref=e868]: 분당구
+    - option "의정부시" [ref=e869]:
+      - generic [ref=e871]: 의정부시
+    - img [ref=e873]

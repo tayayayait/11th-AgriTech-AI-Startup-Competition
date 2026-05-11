@@ -1,0 +1,437 @@
+- generic [active] [ref=e1]:
+  - link "콘텐츠 바로가기" [ref=e3] [cursor=pointer]:
+    - /url: "#contents"
+  - generic [ref=e4]:
+    - banner [ref=e5]:
+      - generic [ref=e7]:
+        - list [ref=e8]:
+          - listitem [ref=e9]:
+            - img "eg(전자정부)" [ref=e10]
+            - text: 이 누리집은 대한민국 공식 전자정부 누리집입니다.
+        - generic [ref=e11]:
+          - searchbox "검색어를 입력해 주세요" [ref=e12]
+          - button "검색" [ref=e13] [cursor=pointer]
+      - generic [ref=e14]:
+        - heading "공공데이터포털" [level=1] [ref=e15]:
+          - link "공공데이터포털" [ref=e16] [cursor=pointer]:
+            - /url: /index.do
+        - generic [ref=e17]:
+          - generic [ref=e18]:
+            - generic [ref=e20]:
+              - link "로그인" [ref=e21] [cursor=pointer]:
+                - /url: javascript:window.location.href='/uim/login/loginView.do';
+              - link "회원가입" [ref=e22] [cursor=pointer]:
+                - /url: javascript:window.location.href='/uim/login/signupView.do';
+            - generic [ref=e23]:
+              - link "사이트맵" [ref=e24] [cursor=pointer]:
+                - /url: javascript:window.location.href='/cmm/cmm/siteMap.do';
+              - link "ENGLISH" [ref=e25] [cursor=pointer]:
+                - /url: /en/index.do
+          - navigation [ref=e26]:
+            - list [ref=e27]:
+              - listitem [ref=e28]:
+                - link "데이터찾기" [ref=e29] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e30]:
+                - link "국가데이터맵" [ref=e31] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e32]:
+                - link "데이터요청" [ref=e33] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e34]:
+                - link "기업 공공데이터 문제해결 지원센터" [ref=e35] [cursor=pointer]:
+                  - /url: "#"
+                  - text: 기업 공공데이터
+                  - text: 문제해결 지원센터
+              - listitem [ref=e36]:
+                - link "데이터활용" [ref=e37] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e38]:
+                - link "정보공유" [ref=e39] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e40]:
+                - link "이용안내" [ref=e41] [cursor=pointer]:
+                  - /url: "#"
+    - generic [ref=e44]:
+      - generic [ref=e45]:
+        - heading "오픈API 상세" [level=2] [ref=e46]
+        - generic [ref=e47]:
+          - link "페이스북" [ref=e49] [cursor=pointer]:
+            - /url: "#"
+            - generic [ref=e50]: 페이스북
+          - button "트위터" [ref=e51] [cursor=pointer]:
+            - generic [ref=e52]: 트위터
+          - button "URL 복사" [ref=e53] [cursor=pointer]
+      - generic [ref=e54]:
+        - generic [ref=e55]:
+          - generic [ref=e56]:
+            - generic [ref=e57]: XML
+            - generic [ref=e58]: JSON
+            - paragraph [ref=e59]: 기상청_단기예보 조회서비스
+          - generic [ref=e60]: 초단기실황, 초단기예보, 단기((구)동네)예보, 예보버전 정보를 조회하는 서비스입니다. 초단기실황정보는 예보 구역에 대한 대표 AWS 관측값을, 초단기예보는 예보시점부터 6시간까지의 예보를, 단기예보는 예보기간을 글피까지 확장 및 예보단위를 상세화(3시간→1시간)하여 시공간적으로 세분화한 예보를 제공합니다. 단기예보는 예보기간과 구역을 시·공간적으로 세분화하여 발표하는 예보입니다. 지역별 시간별 차이로 인한 수요자의 불편을 최소화하기 위해 전국을 5km*5km 간격의 격자로 나누어 읍, 면, 동 단위의 행정구역 중심으로 상세한 날씨를 제공합니다.
+          - button "좋아요 선택 안함, 좋아요 선택한 사람 수 257" [ref=e61] [cursor=pointer]:
+            - generic [ref=e62]: 좋아요 선택 안함, 좋아요 선택한 사람 수
+            - text: "257"
+          - button "싫어요 선택 안함, 싫어요 선택한 사람 수 27" [ref=e63] [cursor=pointer]:
+            - generic [ref=e64]: 싫어요 선택 안함, 싫어요 선택한 사람 수
+            - text: "27"
+          - button "관심" [ref=e65] [cursor=pointer]: 관심
+          - link "활용신청" [ref=e68] [cursor=pointer]:
+            - /url: javascript:void(0)
+            - text: 활용신청
+        - generic [ref=e70]:
+          - generic [ref=e71]:
+            - generic [ref=e73]:
+              - heading "OpenAPI 정보" [level=3] [ref=e74]
+              - button " 메타데이터 다운로드" [ref=e76] [cursor=pointer]:
+                - generic [ref=e77]: 
+                - text: 메타데이터 다운로드
+              - button "오픈API 에러코드" [ref=e80] [cursor=pointer]:
+                - generic [ref=e81]: 
+                - text: 오픈API 에러코드
+            - generic [ref=e82]:
+              - link "데이터 개선요청" [ref=e83] [cursor=pointer]:
+                - /url: javascript:fn_callDataImproveReportPopup('', 'O', '15084084','uddi:18140ef2-28cf-4bc0-968a-9712b098fd45_202106281627', '')
+              - link "오류신고 및 문의" [ref=e84] [cursor=pointer]:
+                - /url: javascript:fn_callErrorReportPopup('', 'O', '15084084','uddi:18140ef2-28cf-4bc0-968a-9712b098fd45_202106281627', '');
+          - table "기상청_단기예보 조회서비스로 오픈 API 정보 표로 분류체계, 제공기관 등 정보를 나타냄" [ref=e85]:
+            - caption: 기상청_단기예보 조회서비스로 오픈 API 정보 표로 분류체계, 제공기관 등 정보를 나타냄
+            - rowgroup [ref=e86]:
+              - row "분류체계 과학기술 - 과학기술연구 제공기관 기상청" [ref=e87]:
+                - rowheader "분류체계" [ref=e88]
+                - cell "과학기술 - 과학기술연구" [ref=e89]
+                - rowheader "제공기관" [ref=e90]
+                - cell "기상청" [ref=e91]:
+                  - link "기상청" [ref=e92] [cursor=pointer]:
+                    - /url: /tcs/dss/selectDataSetList.do?dType=&keyword=&org=기상청&orgFilter=기상청&orgFullName=기상청&conditionType=search
+              - row "관리부서명 국가기후데이터센터 관리부서 전화번호 042-481-7480" [ref=e93]:
+                - rowheader "관리부서명" [ref=e94]
+                - cell "국가기후데이터센터" [ref=e95]
+                - rowheader "관리부서 전화번호" [ref=e96]
+                - cell "042-481-7480" [ref=e97]:
+                  - strong [ref=e98]: 042-481-7480
+              - row "API 유형 REST 데이터포맷 JSON+XML" [ref=e99]:
+                - rowheader "API 유형" [ref=e100]
+                - cell "REST" [ref=e101]
+                - rowheader "데이터포맷" [ref=e102]
+                - cell "JSON+XML" [ref=e103]
+              - row "활용신청 55560 키워드 단기예보,초단기실황,초단기예보,동네예보,읍면동" [ref=e104]:
+                - rowheader "활용신청" [ref=e105]
+                - cell "55560" [ref=e106]
+                - rowheader "키워드" [ref=e107]
+                - cell "단기예보,초단기실황,초단기예보,동네예보,읍면동" [ref=e108]
+              - row "등록일 2021-06-28 수정일 2026-03-26" [ref=e109]:
+                - rowheader "등록일" [ref=e110]
+                - cell "2021-06-28" [ref=e111]
+                - rowheader "수정일" [ref=e112]
+                - cell "2026-03-26" [ref=e113]
+              - 'row "비용부과유무 무료 신청가능 트래픽 개발계정 : 10,000 / 운영계정 : 활용사례 등록시 신청하면 트래픽 증가 가능" [ref=e114]':
+                - rowheader "비용부과유무" [ref=e115]
+                - cell "무료" [ref=e116]
+                - rowheader "신청가능 트래픽" [ref=e117]
+                - 'cell "개발계정 : 10,000 / 운영계정 : 활용사례 등록시 신청하면 트래픽 증가 가능" [ref=e118]'
+              - 'row "업데이트 주기 실시간 심의유형 개발단계 : 자동승인 / 운영단계 : 자동승인" [ref=e119]':
+                - rowheader "업데이트 주기" [ref=e120]
+                - cell "실시간" [ref=e121]
+                - rowheader "심의유형" [ref=e122]
+                - 'cell "개발단계 : 자동승인 / 운영단계 : 자동승인" [ref=e123]'
+              - row "공간범위 전국 시간범위 현재" [ref=e124]:
+                - rowheader "공간범위" [ref=e125]
+                - cell "전국" [ref=e126]
+                - rowheader "시간범위" [ref=e127]
+                - cell "현재" [ref=e128]
+              - 'row "이용허락범위 저작자표시 제3자 권리 포함 : 저작권 표시 저작자표시 공공저작물 : 출처표시 (제 1유형)" [ref=e129]':
+                - rowheader "이용허락범위" [ref=e130]
+                - 'cell "저작자표시 제3자 권리 포함 : 저작권 표시 저작자표시 공공저작물 : 출처표시 (제 1유형)" [ref=e131]':
+                  - generic [ref=e132]:
+                    - link "저작자표시" [ref=e133] [cursor=pointer]:
+                      - /url: http://ccl.cckorea.org/about/
+                      - img "저작자표시" [ref=e134]
+                    - generic [ref=e135]: "제3자 권리 포함 : 저작권 표시"
+                  - generic [ref=e136]:
+                    - link "저작자표시" [ref=e137] [cursor=pointer]:
+                      - /url: http://www.kogl.or.kr/info/license.do
+                      - img "저작자표시" [ref=e138]
+                    - generic [ref=e139]: "공공저작물 : 출처표시 (제 1유형)"
+              - row "참고문서 기상청41_단기예보 조회서비스_오픈API활용가이드_2510.zip" [ref=e140]:
+                - rowheader "참고문서" [ref=e141]
+                - cell "기상청41_단기예보 조회서비스_오픈API활용가이드_2510.zip" [ref=e142]:
+                  - link "기상청41_단기예보 조회서비스_오픈API활용가이드_2510.zip" [ref=e143] [cursor=pointer]:
+                    - /url: javascript:void(0)
+          - navigation [ref=e145]:
+            - list [ref=e146]:
+              - listitem [ref=e147]:
+                - link "상세기능" [ref=e148] [cursor=pointer]:
+                  - /url: "#tab_layer_detail_function"
+              - listitem [ref=e149]:
+                - link "활용사례" [ref=e150] [cursor=pointer]:
+                  - /url: "#tab_layer_prcuse_exam"
+              - listitem [ref=e151]:
+                - link "추천데이터" [ref=e152] [cursor=pointer]:
+                  - /url: "#tab_layer_recommend_data"
+          - generic [ref=e154]:
+            - heading "상세기능" [level=3] [ref=e155]
+            - generic [ref=e157]:
+              - generic [ref=e158] [cursor=pointer]: 목록
+              - combobox "목록 목록" [ref=e159]:
+                - option "초단기실황조회" [selected]
+                - option "초단기예보조회"
+                - option "단기예보조회"
+                - option "예보버전조회"
+              - button "조회" [ref=e160] [cursor=pointer]
+            - generic [ref=e161]:
+              - heading "실황정보를 조회하기 위해 발표일자, 발표시각, 예보지점 X 좌표, 예보지점 Y 좌표의 조회 조건으로 자료구분코드, 실황값, 발표일자, 발표시각, 예보지점 X 좌표, 예보지점 Y 좌표의 정보를 조회하는 기능" [level=4] [ref=e162]
+              - generic [ref=e163]:
+                - list [ref=e164]:
+                  - listitem [ref=e165]:
+                    - strong [ref=e166]: 활용승인 절차
+                    - text: "개발단계 : 자동승인 / 운영단계 : 자동승인"
+                  - listitem [ref=e167]:
+                    - strong [ref=e168]: 신청가능 트래픽
+                    - text: "개발계정 : 10,000 / 운영계정 : 활용사례 등록시 신청하면 트래픽 증가 가능"
+                  - listitem [ref=e169]:
+                    - strong [ref=e170]: 요청주소
+                    - text: http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst
+                  - listitem [ref=e171]:
+                    - strong [ref=e172]: 서비스URL
+                    - text: http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0
+                - link "활용신청" [ref=e174] [cursor=pointer]:
+                  - /url: javascript:void(0)
+                  - text: 활용신청
+              - heading "요청변수(Request Parameter)" [level=4] [ref=e176]
+              - table "항목명(국문),항목명(영문),항목설명 항목을 가진 요청변수(Request Parameter)표 입니다." [ref=e178]:
+                - caption: 항목명(국문),항목명(영문),항목설명 항목을 가진 요청변수(Request Parameter)표 입니다.
+                - rowgroup [ref=e186]:
+                  - row "항목명(국문) 항목명(영문) 항목크기 항목구분 샘플데이터 항목설명" [ref=e187]:
+                    - columnheader "항목명(국문)" [ref=e188]
+                    - columnheader "항목명(영문)" [ref=e189]
+                    - columnheader "항목크기" [ref=e190]
+                    - columnheader "항목구분" [ref=e191]
+                    - columnheader "샘플데이터" [ref=e192]
+                    - columnheader "항목설명" [ref=e193]
+                - rowgroup [ref=e194]:
+                  - row "서비스키 ServiceKey 4 필수 - 공공데이터포털에서 받은 인증키" [ref=e195]:
+                    - cell "서비스키" [ref=e196]
+                    - cell "ServiceKey" [ref=e197]
+                    - cell "4" [ref=e198]
+                    - cell "필수" [ref=e199]
+                    - cell "-" [ref=e200]
+                    - cell "공공데이터포털에서 받은 인증키" [ref=e201]
+                  - row "페이지 번호 pageNo 4 필수 1 페이지번호" [ref=e202]:
+                    - cell "페이지 번호" [ref=e203]
+                    - cell "pageNo" [ref=e204]
+                    - cell "4" [ref=e205]
+                    - cell "필수" [ref=e206]
+                    - cell "1" [ref=e207]
+                    - cell "페이지번호" [ref=e208]
+                  - row "한 페이지 결과 수 numOfRows 4 필수 1000 한 페이지 결과 수" [ref=e209]:
+                    - cell "한 페이지 결과 수" [ref=e210]
+                    - cell "numOfRows" [ref=e211]
+                    - cell "4" [ref=e212]
+                    - cell "필수" [ref=e213]
+                    - cell "1000" [ref=e214]
+                    - cell "한 페이지 결과 수" [ref=e215]
+                  - 'row "응답자료형식 dataType 4 옵션 XML 요청자료형식(XML/JSON) Default: XML" [ref=e216]':
+                    - cell "응답자료형식" [ref=e217]
+                    - cell "dataType" [ref=e218]
+                    - cell "4" [ref=e219]
+                    - cell "옵션" [ref=e220]
+                    - cell "XML" [ref=e221]
+                    - 'cell "요청자료형식(XML/JSON) Default: XML" [ref=e222]'
+                  - row "발표일자 base_date 8 필수 20210628 ‘21년 6월 28일 발표" [ref=e223]:
+                    - cell "발표일자" [ref=e224]
+                    - cell "base_date" [ref=e225]
+                    - cell "8" [ref=e226]
+                    - cell "필수" [ref=e227]
+                    - cell "20210628" [ref=e228]
+                    - cell "‘21년 6월 28일 발표" [ref=e229]
+                  - row "발표시각 base_time 4 필수 0600 06시 발표(정시단위)" [ref=e230]:
+                    - cell "발표시각" [ref=e231]
+                    - cell "base_time" [ref=e232]
+                    - cell "4" [ref=e233]
+                    - cell "필수" [ref=e234]
+                    - cell "0600" [ref=e235]
+                    - cell "06시 발표(정시단위)" [ref=e236]
+                  - row "예보지점 X 좌표 nx 2 필수 55 예보지점의 X 좌표값" [ref=e237]:
+                    - cell "예보지점 X 좌표" [ref=e238]
+                    - cell "nx" [ref=e239]
+                    - cell "2" [ref=e240]
+                    - cell "필수" [ref=e241]
+                    - cell "55" [ref=e242]
+                    - cell "예보지점의 X 좌표값" [ref=e243]
+                  - row "예보지점 Y 좌표 ny 2 필수 127 예보지점의 Y 좌표값" [ref=e244]:
+                    - cell "예보지점 Y 좌표" [ref=e245]
+                    - cell "ny" [ref=e246]
+                    - cell "2" [ref=e247]
+                    - cell "필수" [ref=e248]
+                    - cell "127" [ref=e249]
+                    - cell "예보지점의 Y 좌표값" [ref=e250]
+              - heading "출력결과(Response Element)" [level=4] [ref=e251]
+              - table "항목명(국문),항목명(영문),항목설명 항목을 가진 출력결과(Response Element)표 입니다." [ref=e253]:
+                - caption: 항목명(국문),항목명(영문),항목설명 항목을 가진 출력결과(Response Element)표 입니다.
+                - rowgroup [ref=e261]:
+                  - row "항목명(국문) 항목명(영문) 항목크기 항목구분 샘플데이터 항목설명" [ref=e262]:
+                    - columnheader "항목명(국문)" [ref=e263]
+                    - columnheader "항목명(영문)" [ref=e264]
+                    - columnheader "항목크기" [ref=e265]
+                    - columnheader "항목구분" [ref=e266]
+                    - columnheader "샘플데이터" [ref=e267]
+                    - columnheader "항목설명" [ref=e268]
+                - rowgroup [ref=e269]:
+                  - row "결과코드 resultCode 2 필수 00 결과코드" [ref=e270]:
+                    - cell "결과코드" [ref=e271]
+                    - cell "resultCode" [ref=e272]
+                    - cell "2" [ref=e273]
+                    - cell "필수" [ref=e274]
+                    - cell "00" [ref=e275]
+                    - cell "결과코드" [ref=e276]
+                  - row "결과메시지 resultMsg 50 필수 OK 결과메시지" [ref=e277]:
+                    - cell "결과메시지" [ref=e278]
+                    - cell "resultMsg" [ref=e279]
+                    - cell "50" [ref=e280]
+                    - cell "필수" [ref=e281]
+                    - cell "OK" [ref=e282]
+                    - cell "결과메시지" [ref=e283]
+                  - row "한 페이지 결과 수 numOfRows 4 필수 10 한 페이지 결과 수" [ref=e284]:
+                    - cell "한 페이지 결과 수" [ref=e285]
+                    - cell "numOfRows" [ref=e286]
+                    - cell "4" [ref=e287]
+                    - cell "필수" [ref=e288]
+                    - cell "10" [ref=e289]
+                    - cell "한 페이지 결과 수" [ref=e290]
+                  - row "페이지 번호 pageNo 4 필수 1 페이지번호" [ref=e291]:
+                    - cell "페이지 번호" [ref=e292]
+                    - cell "pageNo" [ref=e293]
+                    - cell "4" [ref=e294]
+                    - cell "필수" [ref=e295]
+                    - cell "1" [ref=e296]
+                    - cell "페이지번호" [ref=e297]
+                  - row "전체 결과 수 totalCount 4 필수 3 전체 결과 수" [ref=e298]:
+                    - cell "전체 결과 수" [ref=e299]
+                    - cell "totalCount" [ref=e300]
+                    - cell "4" [ref=e301]
+                    - cell "필수" [ref=e302]
+                    - cell "3" [ref=e303]
+                    - cell "전체 결과 수" [ref=e304]
+                  - row "데이터 타입 dataType 4 필수 XML 응답자료형식 (XML/JSON)" [ref=e305]:
+                    - cell "데이터 타입" [ref=e306]
+                    - cell "dataType" [ref=e307]
+                    - cell "4" [ref=e308]
+                    - cell "필수" [ref=e309]
+                    - cell "XML" [ref=e310]
+                    - cell "응답자료형식 (XML/JSON)" [ref=e311]
+                  - row "발표일자 baseDate 8 필수 20210628 ‘21년 6월 28일 발표" [ref=e312]:
+                    - cell "발표일자" [ref=e313]
+                    - cell "baseDate" [ref=e314]
+                    - cell "8" [ref=e315]
+                    - cell "필수" [ref=e316]
+                    - cell "20210628" [ref=e317]
+                    - cell "‘21년 6월 28일 발표" [ref=e318]
+                  - row "발표시각 baseTime 6 필수 0600 06시 발표(매 정시)" [ref=e319]:
+                    - cell "발표시각" [ref=e320]
+                    - cell "baseTime" [ref=e321]
+                    - cell "6" [ref=e322]
+                    - cell "필수" [ref=e323]
+                    - cell "0600" [ref=e324]
+                    - cell "06시 발표(매 정시)" [ref=e325]
+                  - row "예보지점 X 좌표 nx 2 필수 55 입력한 예보지점 X 좌표" [ref=e326]:
+                    - cell "예보지점 X 좌표" [ref=e327]
+                    - cell "nx" [ref=e328]
+                    - cell "2" [ref=e329]
+                    - cell "필수" [ref=e330]
+                    - cell "55" [ref=e331]
+                    - cell "입력한 예보지점 X 좌표" [ref=e332]
+                  - row "예보지점 Y 좌표 ny 2 필수 127 입력한 예보지점 Y 좌표" [ref=e333]:
+                    - cell "예보지점 Y 좌표" [ref=e334]
+                    - cell "ny" [ref=e335]
+                    - cell "2" [ref=e336]
+                    - cell "필수" [ref=e337]
+                    - cell "127" [ref=e338]
+                    - cell "입력한 예보지점 Y 좌표" [ref=e339]
+                  - row "자료구분코드 category 3 필수 RN1 자료구분코드" [ref=e340]:
+                    - cell "자료구분코드" [ref=e341]
+                    - cell "category" [ref=e342]
+                    - cell "3" [ref=e343]
+                    - cell "필수" [ref=e344]
+                    - cell "RN1" [ref=e345]
+                    - cell "자료구분코드" [ref=e346]
+                  - row "실황 값 obsrValue 2 필수 0 RN1, T1H, UUU, VVV, WSD 실수로 제공" [ref=e347]:
+                    - cell "실황 값" [ref=e348]
+                    - cell "obsrValue" [ref=e349]
+                    - cell "2" [ref=e350]
+                    - cell "필수" [ref=e351]
+                    - cell "0" [ref=e352]
+                    - cell "RN1, T1H, UUU, VVV, WSD 실수로 제공" [ref=e353]
+              - heading "샘플코드" [level=4] [ref=e354]
+              - generic [ref=e356]:
+                - button "Java" [ref=e357] [cursor=pointer]
+                - button "Javascript" [ref=e358] [cursor=pointer]
+                - button "C#" [ref=e359] [cursor=pointer]
+                - button "PHP" [ref=e360] [cursor=pointer]
+                - button "Curl" [ref=e361] [cursor=pointer]
+                - button "Objective-C" [ref=e362] [cursor=pointer]
+                - button "Python" [ref=e363] [cursor=pointer]
+                - button "Nodejs" [ref=e364] [cursor=pointer]
+                - button "R" [ref=e365] [cursor=pointer]
+        - text:  
+        - link "목록" [ref=e367] [cursor=pointer]:
+          - /url: javascript:void(0)
+    - complementary [ref=e368]:
+      - link "상단가기" [ref=e369] [cursor=pointer]:
+        - /url: "#top"
+    - contentinfo [ref=e370]:
+      - generic [ref=e371]:
+        - generic [ref=e372]:
+          - generic [ref=e373]:
+            - strong [ref=e375]: 공공데이터 개방문의
+            - link "1566-0025" [ref=e376] [cursor=pointer]:
+              - /url: tel:1566-0025
+          - link "운영자 메일상담" [ref=e378] [cursor=pointer]:
+            - /url: mailto:opendata_help@nia.or.kr
+            - text: 운영자 메일상담
+          - generic [ref=e380]:
+            - link "페이스북 공유" [ref=e381] [cursor=pointer]:
+              - /url: http://www.facebook.com/koreadataportal
+              - generic [ref=e382]: 페이스북 공유
+            - link "트위터 공유" [ref=e383] [cursor=pointer]:
+              - /url: https://twitter.com/koreadataportal
+              - generic [ref=e384]: 트위터 공유
+            - link "블로그 공유" [ref=e385] [cursor=pointer]:
+              - /url: http://blog.naver.com/nia_korea
+              - generic [ref=e386]: 블로그 공유
+        - generic [ref=e387]:
+          - list [ref=e388]:
+            - listitem [ref=e389]:
+              - link "이용약관" [ref=e390] [cursor=pointer]:
+                - /url: /ugs/selectPortalPolicyView.do#use_stplat
+            - listitem [ref=e391]:
+              - link "개인정보처리방침" [ref=e392] [cursor=pointer]:
+                - /url: /ugs/selectPortalPolicyView.do#indvdlinfo_process
+            - listitem [ref=e393]:
+              - link "공공데이터포털 소개" [ref=e394] [cursor=pointer]:
+                - /url: /ugs/selectPortalInfoView.do#portal_info
+            - listitem [ref=e395]:
+              - link "분쟁조정신청" [ref=e396] [cursor=pointer]:
+                - /url: /tcs/dor/insertTrublMdatReqstProcssView.do
+          - generic [ref=e397]:
+            - combobox "관련사이트 선택" [ref=e398]:
+              - option "행정안전부" [selected]
+              - option "공공데이터전략위원회"
+              - option "공공데이터분쟁조정위원회"
+              - option "오픈데이터포럼"
+              - option "오픈스퀘어-D"
+            - button "이동" [ref=e399] [cursor=pointer]
+        - generic:
+          - link "행정안전부" [ref=e401] [cursor=pointer]:
+            - /url: https://www.mois.go.kr/
+            - img "행정안전부" [ref=e402]
+          - generic [ref=e403]:
+            - generic [ref=e404]:
+              - paragraph [ref=e405]: (30112) 세종특별자치시 도움6로 42(어진동)
+              - paragraph [ref=e406]:
+                - text: "대표번호 :"
+                - link "1566-0025" [ref=e407] [cursor=pointer]:
+                  - /url: tel:1566-0025
+              - paragraph [ref=e408]: "문의시간 : 09:00~18:00 (월~금)"
+            - paragraph [ref=e410]: ⓒ행정안전부. All rights reserved.
+  - log [ref=e411]

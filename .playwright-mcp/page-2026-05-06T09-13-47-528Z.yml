@@ -1,0 +1,124 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e4]:
+    - generic [ref=e8]:
+      - generic [ref=e10]:
+        - img [ref=e12]
+        - generic [ref=e16]:
+          - generic [ref=e17]: FieldGuard AI
+          - generic [ref=e18]: 현장 의사결정 보조
+      - generic [ref=e20]:
+        - generic [ref=e21]: 주 메뉴
+        - list [ref=e23]:
+          - listitem [ref=e24]:
+            - link "대시보드" [ref=e25] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e26]
+              - generic [ref=e31]: 대시보드
+          - listitem [ref=e32]:
+            - link "필지 지도" [ref=e33] [cursor=pointer]:
+              - /url: /fields/map
+              - img [ref=e34]
+              - generic [ref=e36]: 필지 지도
+          - listitem [ref=e37]:
+            - link "작업 카드" [ref=e38] [cursor=pointer]:
+              - /url: /tasks
+              - img [ref=e39]
+              - generic [ref=e42]: 작업 카드
+          - listitem [ref=e43]:
+            - link "사진 판독" [ref=e44] [cursor=pointer]:
+              - /url: /diagnosis
+              - img [ref=e45]
+              - generic [ref=e48]: 사진 판독
+          - listitem [ref=e49]:
+            - link "자료/상담" [ref=e50] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e51]
+              - generic [ref=e54]: 자료/상담
+          - listitem [ref=e55]:
+            - link "설정" [ref=e56] [cursor=pointer]:
+              - /url: /settings
+              - img [ref=e57]
+              - generic [ref=e60]: 설정
+    - generic [ref=e61]:
+      - banner [ref=e62]:
+        - button "Toggle Sidebar" [ref=e63] [cursor=pointer]:
+          - img
+          - generic [ref=e64]: Toggle Sidebar
+        - generic [ref=e65]: 2026년 5월 6일 (수)
+        - generic [ref=e66]:
+          - combobox [ref=e67] [cursor=pointer]:
+            - generic: 필지 선택
+            - img [ref=e68]
+          - generic [ref=e70]: 마지막 갱신 —
+          - button "동기화" [ref=e71] [cursor=pointer]:
+            - img
+      - main [ref=e72]:
+        - generic [ref=e73]:
+          - tablist [ref=e74]:
+            - tab "상담 리포트" [selected] [ref=e75] [cursor=pointer]
+            - tab "농약 안전사용지침" [ref=e76] [cursor=pointer]
+          - tabpanel "상담 리포트" [ref=e77]:
+            - generic [ref=e78]:
+              - generic [ref=e79]:
+                - generic [ref=e80]:
+                  - heading "필지 상담 패키지" [level=3] [ref=e81]
+                  - generic [ref=e82]:
+                    - button "상담 리포트 생성" [disabled]
+                    - button "인쇄" [ref=e83] [cursor=pointer]:
+                      - img
+                      - text: 인쇄
+                    - button "공유 링크" [ref=e84] [cursor=pointer]:
+                      - img
+                      - text: 공유 링크
+                    - button "PDF 내보내기" [ref=e85] [cursor=pointer]
+                - generic [ref=e86]:
+                  - generic [ref=e87]:
+                    - generic [ref=e88]: 1. 필지 정보
+                    - paragraph [ref=e89]: 등록된 필지가 없습니다.
+                  - generic [ref=e90]:
+                    - generic [ref=e91]: 2. 작물 정보
+                    - generic [ref=e92]:
+                      - paragraph [ref=e93]: 확실한 정보 없음
+                      - paragraph [ref=e94]: "생육 단계: 확실한 정보 없음"
+                  - generic [ref=e95]:
+                    - generic [ref=e96]: 3. 최근 7일 날씨 요약
+                    - paragraph [ref=e97]: 기상 요약 데이터가 없습니다.
+                  - generic [ref=e98]:
+                    - generic [ref=e99]: 4. 최근 7일 위험도 변화
+                    - paragraph [ref=e100]: 위험도 변화 데이터가 없습니다.
+                  - generic [ref=e101]:
+                    - generic [ref=e102]: 5. 병징 사진 기록
+                    - paragraph [ref=e103]: 아직 기록된 사진이 없습니다. 병징 사진을 업로드하세요.
+                  - generic [ref=e104]:
+                    - generic [ref=e105]: 6. 완료/미완료 작업
+                    - generic [ref=e106]:
+                      - generic [ref=e107]:
+                        - generic [ref=e108]: 미완료
+                        - generic [ref=e109]: "0"
+                      - generic [ref=e110]:
+                        - generic [ref=e111]: 완료
+                        - generic [ref=e112]: "0"
+                      - generic [ref=e113]:
+                        - generic [ref=e114]: 진행 중
+                        - generic [ref=e115]: "0"
+                      - generic [ref=e116]:
+                        - generic [ref=e117]: 보류
+                        - generic [ref=e118]: "0"
+                  - generic [ref=e119]:
+                    - generic [ref=e120]: 7. AI 의심 후보와 현장 체크리스트
+                    - paragraph [ref=e121]: AI 의심 후보 기록이 없습니다.
+                  - generic [ref=e122]:
+                    - generic [ref=e123]: 8. 공식 자료 링크
+                    - generic [ref=e124]:
+                      - paragraph [ref=e125]: "재해예방 자료: 0건"
+                      - paragraph [ref=e126]: "병해충 발생정보: 0건"
+                      - paragraph [ref=e127]: "위험원인 출처: 0건"
+              - generic [ref=e128]:
+                - heading "공식 자료 링크" [level=3] [ref=e130]
+                - paragraph [ref=e132]: 공식 자료를 조회하는 중입니다.
+              - generic [ref=e133]:
+                - heading "상담 리포트 기록" [level=3] [ref=e135]
+                - paragraph [ref=e137]: 아직 생성된 상담 리포트가 없습니다.

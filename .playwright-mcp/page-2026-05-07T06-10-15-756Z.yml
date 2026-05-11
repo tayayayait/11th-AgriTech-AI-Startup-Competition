@@ -1,0 +1,176 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e4]:
+    - generic [ref=e8]:
+      - generic [ref=e10]:
+        - img [ref=e12]
+        - generic [ref=e16]:
+          - generic [ref=e17]: FieldGuard AI
+          - generic [ref=e18]: 현장 의사결정 보조
+      - generic [ref=e20]:
+        - generic [ref=e21]: 주 메뉴
+        - list [ref=e23]:
+          - listitem [ref=e24]:
+            - link "대시보드" [ref=e25] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e26]
+              - generic [ref=e31]: 대시보드
+          - listitem [ref=e32]:
+            - link "필지 지도" [ref=e33] [cursor=pointer]:
+              - /url: /fields/map
+              - img [ref=e34]
+              - generic [ref=e36]: 필지 지도
+          - listitem [ref=e37]:
+            - link "작업 카드" [ref=e38] [cursor=pointer]:
+              - /url: /tasks
+              - img [ref=e39]
+              - generic [ref=e42]: 작업 카드
+          - listitem [ref=e43]:
+            - link "사진 판독" [ref=e44] [cursor=pointer]:
+              - /url: /diagnosis
+              - img [ref=e45]
+              - generic [ref=e48]: 사진 판독
+          - listitem [ref=e49]:
+            - link "자료/상담" [ref=e50] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e51]
+              - generic [ref=e54]: 자료/상담
+          - listitem [ref=e55]:
+            - link "설정" [ref=e56] [cursor=pointer]:
+              - /url: /settings
+              - img [ref=e57]
+              - generic [ref=e60]: 설정
+    - generic [ref=e61]:
+      - banner [ref=e62]:
+        - button "Toggle Sidebar" [ref=e63] [cursor=pointer]:
+          - img
+          - generic [ref=e64]: Toggle Sidebar
+        - generic [ref=e65]: 2026년 5월 7일 (목)
+        - generic [ref=e66]:
+          - combobox [ref=e67] [cursor=pointer]:
+            - generic: 필지 선택
+            - img [ref=e68]
+          - generic [ref=e70]: 마지막 갱신 —
+          - button "동기화" [ref=e71] [cursor=pointer]:
+            - img
+      - main [ref=e72]:
+        - generic [ref=e74]:
+          - generic [ref=e78]:
+            - img [ref=e79]
+            - text: 팜맵 지도를 불러오는 중
+          - generic [ref=e82]:
+            - generic [ref=e83]:
+              - generic [ref=e84]: F
+              - generic [ref=e85]:
+                - generic [ref=e86]: FIELDMAP
+                - generic [ref=e87]: FieldGuard AI
+            - navigation [ref=e88]:
+              - generic [ref=e89]: 필지검색
+              - generic [ref=e90]: 팜맵활용
+              - generic [ref=e91]: 팜맵통계
+              - generic [ref=e92]: OPEN API
+            - generic [ref=e93]:
+              - button "팜맵 2025" [ref=e94] [cursor=pointer]:
+                - img
+                - generic [ref=e95]: 팜맵
+                - generic [ref=e96]: "2025"
+              - button "지적도 2025" [ref=e97] [cursor=pointer]:
+                - img
+                - generic [ref=e98]: 지적도
+                - generic [ref=e99]: "2025"
+              - button "항공 2024" [ref=e100] [cursor=pointer]:
+                - img
+                - generic [ref=e101]: 항공
+                - generic [ref=e102]: "2024"
+              - button "하이브리드" [ref=e103] [cursor=pointer]
+          - generic [ref=e104]:
+            - generic [ref=e106]:
+              - generic [ref=e107]:
+                - img [ref=e108]
+                - text: 팜맵 검색
+              - button "검색 초기화" [ref=e111] [cursor=pointer]:
+                - img
+            - generic [ref=e112]:
+              - generic [ref=e113]:
+                - tablist [ref=e114]:
+                  - tab "주소" [selected] [ref=e115] [cursor=pointer]
+                  - tab "PNU" [ref=e116] [cursor=pointer]
+                  - tab "지도 클릭" [ref=e117] [cursor=pointer]
+                  - tab "좌표" [ref=e118] [cursor=pointer]
+                - generic [ref=e120]:
+                  - text: 분류
+                  - combobox [ref=e121] [cursor=pointer]:
+                    - generic: 전체(논, 밭, 과수, 시설)
+                    - img [ref=e122]
+                - tabpanel "주소" [ref=e124]:
+                  - generic [ref=e125]:
+                    - text: 주소/PNU 검색
+                    - generic [ref=e126]:
+                      - combobox [ref=e127] [cursor=pointer]:
+                        - generic: 지번
+                        - img [ref=e128]
+                      - generic [ref=e130]:
+                        - img
+                        - textbox "주소, 법정동, 지번, PNU" [ref=e131]
+                    - paragraph [ref=e132]: 지역명, 법정동, 지번, PNU 일부를 입력하세요.
+              - generic [ref=e133]:
+                - generic [ref=e134]:
+                  - generic [ref=e135]:
+                    - text: 필지명
+                    - 'textbox "예: 배추 - 해룡면" [ref=e136]'
+                  - generic [ref=e137]:
+                    - text: 작물명
+                    - 'textbox "예: 배추" [ref=e138]'
+                - generic [ref=e139]:
+                  - generic [ref=e140]: 저장될 위치 정보
+                  - generic [ref=e141]: "좌표: 미입력"
+                  - generic [ref=e142]: "PNU: 미입력"
+                  - generic [ref=e143]: "법정동주소: 미입력"
+                  - generic [ref=e144]: "농경지분류: 미입력"
+                  - generic [ref=e145]: "면적: 미입력"
+            - generic [ref=e146]:
+              - button "선택한 필지 등록" [disabled]:
+                - img
+                - text: 선택한 필지 등록
+          - generic [ref=e147]:
+            - button "주제도" [ref=e148] [cursor=pointer]:
+              - img
+              - text: 주제도
+            - button "측정" [ref=e149] [cursor=pointer]:
+              - img
+              - text: 측정
+            - button "현위치" [ref=e150] [cursor=pointer]:
+              - img
+              - text: 현위치
+            - button "확대" [ref=e151] [cursor=pointer]:
+              - img
+              - text: 확대
+            - button "축소" [ref=e152] [cursor=pointer]:
+              - img
+              - text: 축소
+            - button "초기화" [ref=e153] [cursor=pointer]:
+              - img
+              - text: 초기화
+          - complementary [ref=e154]:
+            - generic [ref=e155]:
+              - generic [ref=e156]:
+                - generic [ref=e157]:
+                  - img [ref=e158]
+                  - text: 선택 필지 정보
+                - paragraph [ref=e161]: 주소, PNU, 지도 클릭, 좌표 중 하나로 위치를 선택하세요.
+              - generic [ref=e162]: "입력 방식: 주소 입력"
+            - generic [ref=e163]:
+              - generic [ref=e164]:
+                - generic [ref=e165]: 필지명
+                - generic [ref=e166]: 미입력
+              - generic [ref=e167]:
+                - generic [ref=e168]: 작물명
+                - generic [ref=e169]: 미입력
+              - generic [ref=e170]:
+                - generic [ref=e171]: 좌표
+                - generic [ref=e172]: 미입력
+              - generic [ref=e173]:
+                - generic [ref=e174]: 분류/면적
+                - generic [ref=e175]: 미입력

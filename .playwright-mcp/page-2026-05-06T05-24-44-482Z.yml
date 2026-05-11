@@ -1,0 +1,157 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e4]:
+    - generic [ref=e8]:
+      - generic [ref=e10]:
+        - img [ref=e12]
+        - generic [ref=e16]:
+          - generic [ref=e17]: FieldGuard AI
+          - generic [ref=e18]: 현장 의사결정 보조
+      - generic [ref=e20]:
+        - generic [ref=e21]: 주 메뉴
+        - list [ref=e23]:
+          - listitem [ref=e24]:
+            - link "대시보드" [ref=e25] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e26]
+              - generic [ref=e31]: 대시보드
+          - listitem [ref=e32]:
+            - link "필지 지도" [ref=e33] [cursor=pointer]:
+              - /url: /fields/map
+              - img [ref=e34]
+              - generic [ref=e36]: 필지 지도
+          - listitem [ref=e37]:
+            - link "작업 카드" [ref=e38] [cursor=pointer]:
+              - /url: /tasks
+              - img [ref=e39]
+              - generic [ref=e42]: 작업 카드
+          - listitem [ref=e43]:
+            - link "사진 판독" [ref=e44] [cursor=pointer]:
+              - /url: /diagnosis
+              - img [ref=e45]
+              - generic [ref=e48]: 사진 판독
+          - listitem [ref=e49]:
+            - link "자료/상담" [ref=e50] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e51]
+              - generic [ref=e54]: 자료/상담
+          - listitem [ref=e55]:
+            - link "설정" [ref=e56] [cursor=pointer]:
+              - /url: /settings
+              - img [ref=e57]
+              - generic [ref=e60]: 설정
+    - generic [ref=e61]:
+      - banner [ref=e62]:
+        - button "Toggle Sidebar" [ref=e63] [cursor=pointer]:
+          - img
+          - generic [ref=e64]: Toggle Sidebar
+        - generic [ref=e65]: 2026년 5월 6일 (수)
+        - generic [ref=e66]:
+          - combobox [ref=e67] [cursor=pointer]:
+            - generic: QA테스트-삭제대상 · 배추
+            - img [ref=e68]
+          - generic [ref=e70]: 마지막 갱신 5월 6일 14:20
+          - button "동기화" [ref=e71] [cursor=pointer]:
+            - img
+      - main [ref=e72]:
+        - generic [ref=e230]:
+          - tablist [ref=e231]:
+            - tab "상담 리포트" [ref=e232] [cursor=pointer]
+            - tab "농약 안전사용지침" [active] [selected] [ref=e233] [cursor=pointer]
+          - tabpanel "농약 안전사용지침" [ref=e316]:
+            - generic [ref=e317]:
+              - note [ref=e318]:
+                - img [ref=e319]
+                - paragraph [ref=e321]: FieldGuard AI는 농약을 처방하지 않습니다. 실제 사용 전 농사로 공식 지침, 제품 라벨, 전문가 상담을 확인하세요.
+              - generic [ref=e322]:
+                - heading "공식 안전사용지침 확인" [level=3] [ref=e324]
+                - generic [ref=e325]:
+                  - generic [ref=e326]:
+                    - generic [ref=e327]:
+                      - text: 작물명
+                      - textbox "작물명" [ref=e328]:
+                        - /placeholder: "예: 배추"
+                        - text: 배추
+                    - generic [ref=e329]:
+                      - text: 병해충명/적용대상
+                      - textbox "병해충명/적용대상" [ref=e330]:
+                        - /placeholder: "예: 노균병"
+                    - generic [ref=e331]:
+                      - text: 농약명
+                      - textbox "농약명" [ref=e332]:
+                        - /placeholder: "예: 만코제브"
+                    - generic [ref=e333]:
+                      - text: 안전사용기간 필터
+                      - combobox "안전사용기간 필터" [ref=e334] [cursor=pointer]:
+                        - generic: 전체
+                        - img [ref=e335]
+                  - button "공식 자료 확인" [ref=e338] [cursor=pointer]
+              - generic [ref=e339]:
+                - generic [ref=e341]:
+                  - heading "농사로 공식 지침" [level=3] [ref=e342]
+                  - generic [ref=e343]: 정상 수집
+                - generic [ref=e344]:
+                  - generic [ref=e345]:
+                    - generic [ref=e346]: (대만) 수출용 (배추) 농약안전사용지침(2026. 1.)
+                    - generic [ref=e347]: 배추 · 개정 2026.01 · 대만
+                    - link "원문 열기" [ref=e348] [cursor=pointer]:
+                      - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=hNhtSHa6VHnBBKJb0YacjqF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                      - text: 원문 열기
+                      - img [ref=e349]
+                  - generic [ref=e353]:
+                    - generic [ref=e354]: (일본) 수출용 (배추)농약안전사용지침 (2026. 1.)
+                    - generic [ref=e355]: 배추 · 개정 2026.01 · 일본
+                    - link "원문 열기" [ref=e356] [cursor=pointer]:
+                      - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=vOEaqBBJOGQWNZBdkxG09qF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                      - text: 원문 열기
+                      - img [ref=e357]
+                  - generic [ref=e361]:
+                    - generic [ref=e362]: (일본) 수출용 (브로콜리) 농약안전사용지침 ( 2025. 10.)
+                    - generic [ref=e363]: 브로콜리(녹색꽃양배추) · 개정 2025.10 · 일본
+                    - link "원문 열기" [ref=e364] [cursor=pointer]:
+                      - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=QpzUgE5astF99oGPbNcFd6F1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                      - text: 원문 열기
+                      - img [ref=e365]
+                  - generic [ref=e369]:
+                    - generic [ref=e370]: (일본) 수출용 (양배추)농약안전사용지침 (2025. 6.)
+                    - generic [ref=e371]: 양배추 · 개정 2025.06 · 일본
+                    - link "원문 열기" [ref=e372] [cursor=pointer]:
+                      - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=w6ke7I1zIbEiVDahxyrLDqF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                      - text: 원문 열기
+                      - img [ref=e373]
+                  - generic [ref=e377]:
+                    - generic [ref=e378]: (대만) 수출용 (양배추) 농약안전사용지침(2025. 6.)
+                    - generic [ref=e379]: 양배추 · 개정 2025.06 · 대만
+                    - link "원문 열기" [ref=e380] [cursor=pointer]:
+                      - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=8HkelCqgQZOWYfwz6Qh0UKF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                      - text: 원문 열기
+                      - img [ref=e381]
+                  - generic [ref=e385]:
+                    - generic [ref=e386]: (대만) 수출용 (배추) 농약안전사용지침 (2025. 1.)
+                    - generic [ref=e387]: 배추 · 개정 2025.01 · 대만
+                    - link "원문 열기" [ref=e388] [cursor=pointer]:
+                      - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=i7JKFITrlmZ2CPS/wngkl6F1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                      - text: 원문 열기
+                      - img [ref=e389]
+                  - generic [ref=e393]:
+                    - generic [ref=e394]: (대만) 수출용 (양배추) 농약안전사용지침(2016.8.신규설정)
+                    - generic [ref=e395]: 양배추 · 개정 2016.08 · 대만
+                    - link "원문 열기" [ref=e396] [cursor=pointer]:
+                      - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=SA867F@eE@xJ46vid8ZKO6F1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                      - text: 원문 열기
+                      - img [ref=e397]
+                  - generic [ref=e401]:
+                    - generic [ref=e402]: (대만) 수출용 (배추) 농약안전사용지침(2016.6.)
+                    - generic [ref=e403]: 배추 · 개정 2016.06 · 대만
+                    - link "원문 열기" [ref=e404] [cursor=pointer]:
+                      - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=eWDwEx85y4qfc7uV5iKA7aF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                      - text: 원문 열기
+                      - img [ref=e405]
+              - generic [ref=e409]:
+                - heading "안전사용기간/사용횟수 참고" [level=3] [ref=e411]
+                - paragraph [ref=e413]: 해당 조건의 공식 자료가 확인되지 않습니다.
+              - generic [ref=e415]:
+                - img [ref=e416]
+                - text: 농약 지침은 공식 자료 확인을 우선하며, 자동 처방을 제공하지 않습니다.

@@ -1,0 +1,154 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e4]:
+    - generic [ref=e8]:
+      - generic [ref=e10]:
+        - img [ref=e12]
+        - generic [ref=e16]:
+          - generic [ref=e17]: FieldGuard AI
+          - generic [ref=e18]: 현장 의사결정 보조
+      - generic [ref=e20]:
+        - generic [ref=e21]: 주 메뉴
+        - list [ref=e23]:
+          - listitem [ref=e24]:
+            - link "대시보드" [ref=e25] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e26]
+              - generic [ref=e31]: 대시보드
+          - listitem [ref=e32]:
+            - link "필지 지도" [ref=e33] [cursor=pointer]:
+              - /url: /fields/map
+              - img [ref=e34]
+              - generic [ref=e36]: 필지 지도
+          - listitem [ref=e37]:
+            - link "작업 카드" [ref=e38] [cursor=pointer]:
+              - /url: /tasks
+              - img [ref=e39]
+              - generic [ref=e42]: 작업 카드
+          - listitem [ref=e43]:
+            - link "사진 판독" [ref=e44] [cursor=pointer]:
+              - /url: /diagnosis
+              - img [ref=e45]
+              - generic [ref=e48]: 사진 판독
+          - listitem [ref=e49]:
+            - link "자료/상담" [ref=e50] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e51]
+              - generic [ref=e54]: 자료/상담
+          - listitem [ref=e55]:
+            - link "설정" [ref=e56] [cursor=pointer]:
+              - /url: /settings
+              - img [ref=e57]
+              - generic [ref=e60]: 설정
+    - generic [ref=e61]:
+      - banner [ref=e62]:
+        - button "Toggle Sidebar" [ref=e63] [cursor=pointer]:
+          - img
+          - generic [ref=e64]: Toggle Sidebar
+        - generic [ref=e65]: 2026년 5월 7일 (목)
+        - generic [ref=e66]:
+          - combobox [ref=e67] [cursor=pointer]:
+            - generic: 필지 선택
+            - img [ref=e68]
+          - generic [ref=e70]: 마지막 갱신 —
+          - button "동기화" [ref=e71] [cursor=pointer]:
+            - img
+      - main [ref=e72]:
+        - generic [ref=e74]:
+          - generic [ref=e78]:
+            - img [ref=e79]
+            - text: 팜맵 지도를 불러오는 중
+          - generic [ref=e82]:
+            - generic [ref=e83]:
+              - generic [ref=e84]: F
+              - generic [ref=e85]:
+                - generic [ref=e86]: FARMMAP
+                - generic [ref=e87]: FieldGuard AI
+            - generic [ref=e88]:
+              - generic [ref=e89]: 팜맵 PNU
+              - generic [ref=e90]: 좌표 조회
+              - generic [ref=e91]: 농경지분류
+              - generic [ref=e92]: 법정동코드
+          - generic [ref=e93]:
+            - generic [ref=e95]:
+              - generic [ref=e96]:
+                - img [ref=e97]
+                - text: 팜맵 검색
+              - button "검색 결과 초기화" [ref=e100] [cursor=pointer]:
+                - img
+            - generic [ref=e102]:
+              - tablist [ref=e103]:
+                - tab "주소" [selected] [ref=e104] [cursor=pointer]
+                - tab "PNU" [ref=e105] [cursor=pointer]
+                - tab "지도 클릭" [ref=e106] [cursor=pointer]
+                - tab "좌표" [ref=e107] [cursor=pointer]
+              - generic [ref=e109]:
+                - text: 분류
+                - combobox [ref=e110] [cursor=pointer]:
+                  - generic: 전체(논, 밭, 과수, 시설)
+                  - img [ref=e111]
+              - tabpanel "주소" [ref=e113]:
+                - generic [ref=e114]:
+                  - text: 법정동 검색
+                  - generic [ref=e115]:
+                    - generic [ref=e116]:
+                      - img
+                      - 'textbox "예: 구미시 옥계동" [ref=e117]'
+                    - button "법정동 검색" [ref=e118] [cursor=pointer]:
+                      - img
+                  - paragraph [ref=e119]: 법정동명을 입력해 행정표준코드 API에서 법정동코드를 조회하세요.
+                - generic [ref=e120]:
+                  - generic [ref=e121]: 지번 입력
+                  - generic [ref=e122]:
+                    - generic [ref=e123]:
+                      - text: 본번
+                      - textbox "155" [ref=e124]
+                    - generic [ref=e125]:
+                      - text: 부번
+                      - textbox "0" [ref=e126]
+                  - generic [ref=e127]:
+                    - checkbox "산 번지" [ref=e128] [cursor=pointer]
+                    - text: 산 번지
+                  - generic [ref=e129]:
+                    - generic [ref=e130]: 생성 PNU
+                    - generic [ref=e131]: 법정동과 본번을 입력하세요.
+                - generic [ref=e132]:
+                  - button "법정동+지번으로 PNU 조회" [disabled]:
+                    - img
+                    - text: 법정동+지번으로 PNU 조회
+                  - button "선택 법정동/분류로 필지목록 조회" [disabled]:
+                    - img
+                    - text: 선택 법정동/분류로 필지목록 조회
+          - complementary [ref=e133]:
+            - generic [ref=e134]:
+              - generic [ref=e135]:
+                - generic [ref=e136]:
+                  - img [ref=e137]
+                  - text: 선택 필지 정보
+                - paragraph [ref=e140]: 법정동명을 입력해 행정표준코드 API에서 법정동코드를 조회하세요.
+              - generic [ref=e141]: "입력 방식: 법정동+지번"
+            - generic [ref=e142]:
+              - generic [ref=e143]:
+                - text: 필지명
+                - 'textbox "예: 배추 - 해룡면" [ref=e144]'
+              - generic [ref=e145]:
+                - text: 작물명
+                - 'textbox "예: 배추" [ref=e146]'
+              - button "선택한 필지 등록" [disabled]:
+                - img
+                - text: 선택한 필지 등록
+            - generic [ref=e147]:
+              - generic [ref=e148]:
+                - generic [ref=e149]: 좌표
+                - generic [ref=e150]: 미입력
+              - generic [ref=e151]:
+                - generic [ref=e152]: PNU
+                - generic [ref=e153]: 미입력
+              - generic [ref=e154]:
+                - generic [ref=e155]: 법정동주소
+                - generic [ref=e156]: 미입력
+              - generic [ref=e157]:
+                - generic [ref=e158]: 분류/면적
+                - generic [ref=e159]: 미입력

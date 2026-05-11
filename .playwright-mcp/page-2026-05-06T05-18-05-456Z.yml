@@ -1,0 +1,150 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e4]:
+    - generic [ref=e8]:
+      - generic [ref=e10]:
+        - img [ref=e12]
+        - generic [ref=e16]:
+          - generic [ref=e17]: FieldGuard AI
+          - generic [ref=e18]: 현장 의사결정 보조
+      - generic [ref=e20]:
+        - generic [ref=e21]: 주 메뉴
+        - list [ref=e23]:
+          - listitem [ref=e24]:
+            - link "대시보드" [ref=e25] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e26]
+              - generic [ref=e31]: 대시보드
+          - listitem [ref=e32]:
+            - link "필지 지도" [active] [ref=e33] [cursor=pointer]:
+              - /url: /fields/map
+              - img [ref=e34]
+              - generic [ref=e36]: 필지 지도
+          - listitem [ref=e37]:
+            - link "작업 카드" [ref=e38] [cursor=pointer]:
+              - /url: /tasks
+              - img [ref=e39]
+              - generic [ref=e42]: 작업 카드
+          - listitem [ref=e43]:
+            - link "사진 판독" [ref=e44] [cursor=pointer]:
+              - /url: /diagnosis
+              - img [ref=e45]
+              - generic [ref=e48]: 사진 판독
+          - listitem [ref=e49]:
+            - link "자료/상담" [ref=e50] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e51]
+              - generic [ref=e54]: 자료/상담
+          - listitem [ref=e55]:
+            - link "설정" [ref=e56] [cursor=pointer]:
+              - /url: /settings
+              - img [ref=e57]
+              - generic [ref=e60]: 설정
+    - generic [ref=e61]:
+      - banner [ref=e62]:
+        - button "Toggle Sidebar" [ref=e63] [cursor=pointer]:
+          - img
+          - generic [ref=e64]: Toggle Sidebar
+        - generic [ref=e65]: 2026년 5월 6일 (수)
+        - generic [ref=e66]:
+          - combobox [ref=e67] [cursor=pointer]:
+            - generic: 벼 · 벼
+            - img [ref=e68]
+          - generic [ref=e70]: 마지막 갱신 5월 6일 14:06
+          - button "동기화" [ref=e71] [cursor=pointer]:
+            - img
+      - main [ref=e72]:
+        - generic [ref=e178]:
+          - generic [ref=e179]:
+            - heading "필터" [level=3] [ref=e181]
+            - generic [ref=e182]:
+              - generic [ref=e183]:
+                - text: 작물
+                - combobox [ref=e184] [cursor=pointer]:
+                  - generic: 전체
+                  - img [ref=e185]
+              - generic [ref=e187]:
+                - text: 위험 등급
+                - combobox [ref=e188] [cursor=pointer]:
+                  - generic: 전체
+                  - img [ref=e189]
+              - generic [ref=e191]: 검색 결과 1건
+          - generic [ref=e192]:
+            - generic [ref=e195]:
+              - generic [ref=e197]:
+                - generic:
+                  - generic:
+                    - img [ref=e198]
+                    - img [ref=e199]
+                    - img [ref=e200]
+                    - img [ref=e201]
+                    - img [ref=e202]
+                    - img [ref=e203]
+                    - img [ref=e204]
+                    - img [ref=e205]
+                    - img [ref=e206]
+                    - img [ref=e207]
+                    - img [ref=e208]
+                    - img [ref=e209]
+                    - img [ref=e210]
+                    - img [ref=e211]
+                    - img [ref=e212]
+                    - img [ref=e213]
+                    - img [ref=e214]
+                    - img [ref=e215]
+                    - img [ref=e216]
+                    - img [ref=e217]
+                    - img [ref=e218]
+                    - img [ref=e219]
+                    - img [ref=e220]
+                    - img [ref=e221]
+                    - img [ref=e222]
+                    - img [ref=e223]
+                    - img [ref=e224]
+                    - img [ref=e225]
+                    - img [ref=e226]
+                    - img [ref=e227]
+                    - img [ref=e228]
+                    - img [ref=e229]
+                    - img [ref=e230]
+                    - img [ref=e231]
+                    - img [ref=e232]
+                    - img [ref=e233]
+                    - img [ref=e234]
+                    - img [ref=e235]
+                    - img [ref=e236]
+                    - img [ref=e237]
+                  - img [ref=e238]
+                  - generic:
+                    - img [ref=e239]
+                    - img [ref=e240]
+                    - img [ref=e241]
+                    - img [ref=e242]
+                    - img [ref=e243]
+                    - img [ref=e244]
+                    - img [ref=e245]
+                    - img [ref=e246]
+                  - img [ref=e248]
+                - generic [ref=e250]:
+                  - text: 본 시스템에서 제공하는 정보는 법적인 효력이 없으며, 참고용으로만 활용하시기 바랍니다
+                  - img "국토지리정보원" [ref=e251]
+                  - img "농림수산식품교육문화정보원" [ref=e252]
+                  - img "농림축산식품부" [ref=e253]
+                  - text: "시스템 문의 : 031-778-7728"
+              - generic [ref=e254]:
+                - generic [ref=e255]:
+                  - img [ref=e256]
+                  - text: 팜맵 Open API
+                - generic [ref=e259]: 필지 1건 표시
+            - generic [ref=e262]:
+              - generic [ref=e263]:
+                - generic [ref=e264]: 벼
+                - generic [ref=e265]:
+                  - img [ref=e266]
+                  - generic [ref=e269]: 데이터 없음
+              - generic [ref=e270]: 벼 · 1,000㎡ (303평)
+              - generic [ref=e271]: 위험도 0 / 100
+              - link "상세 보기" [ref=e272] [cursor=pointer]:
+                - /url: /dashboard

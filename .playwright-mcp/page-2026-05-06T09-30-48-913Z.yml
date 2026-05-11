@@ -1,0 +1,75 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e5]:
+    - banner [ref=e6]:
+      - button "Toggle Sidebar" [ref=e7] [cursor=pointer]:
+        - img
+        - generic [ref=e8]: Toggle Sidebar
+      - generic [ref=e9]:
+        - combobox [ref=e10] [cursor=pointer]:
+          - generic: Phase10 PNU 필지 · 벼
+          - img [ref=e11]
+        - button "동기화" [ref=e13] [cursor=pointer]:
+          - img
+    - main [ref=e14]:
+      - generic [ref=e253]:
+        - tablist [ref=e254]:
+          - tab "상담 리포트" [ref=e255] [cursor=pointer]
+          - tab "농약 안전사용지침" [selected] [ref=e256] [cursor=pointer]
+        - tabpanel "농약 안전사용지침" [ref=e257]:
+          - generic [ref=e258]:
+            - note [ref=e259]:
+              - img [ref=e260]
+              - paragraph [ref=e262]: FieldGuard AI는 농약을 처방하지 않습니다. 실제 사용 전 농사로 공식 지침, 제품 라벨, 전문가 상담을 확인하세요.
+            - generic [ref=e264]: "농사로 `agchmSafeManualList`는 공식 안전사용지침 문서 접근용입니다. 수확 전 사용기간, 사용횟수, 희석배수는 현재 가이드 응답만으로 확정할 수 없으며 별도 공식 상세 DB 구축 또는 추가 공식 데이터가 필요합니다."
+            - generic [ref=e265]:
+              - heading "공식 안전사용지침 확인" [level=3] [ref=e267]
+              - generic [ref=e268]:
+                - generic [ref=e269]:
+                  - generic [ref=e270]:
+                    - text: 작물명
+                    - textbox "작물명" [ref=e271]:
+                      - /placeholder: "예: 배추"
+                      - text: 벼
+                  - generic [ref=e272]:
+                    - text: 병해충명/적용대상
+                    - textbox "병해충명/적용대상" [ref=e273]:
+                      - /placeholder: "예: 노균병"
+                      - text: 깨씨무늬병
+                  - generic [ref=e274]:
+                    - text: 농약명
+                    - textbox "농약명" [ref=e275]:
+                      - /placeholder: "예: 만코제브"
+                  - generic [ref=e276]:
+                    - text: 안전사용기간 필터
+                    - combobox "안전사용기간 필터" [ref=e277] [cursor=pointer]:
+                      - generic: 전체
+                      - img [ref=e278]
+                - button "공식 자료 확인" [ref=e281] [cursor=pointer]
+            - generic [ref=e282]:
+              - generic [ref=e284]:
+                - heading "농사로 공식 지침" [level=3] [ref=e285]
+                - generic [ref=e286]: 정상 수집
+              - generic [ref=e287]:
+                - generic [ref=e288]:
+                  - generic [ref=e289]: (중국) 수출용 (쌀) 농약안전사용지침(2026. 2.)
+                  - generic [ref=e290]: 논벼 · 개정 2026.02 · 중국
+                  - link "원문 열기" [ref=e291] [cursor=pointer]:
+                    - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=c/3PQJwrtmvlwPugYZmVzaF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                    - text: 원문 열기
+                    - img [ref=e292]
+                - generic [ref=e296]:
+                  - generic [ref=e297]: (미국) 수출용 (쌀) 농약안전사용 지침(2025. 11.)
+                  - generic [ref=e298]: 논벼 · 개정 2025.11 · 미국
+                  - link "원문 열기" [ref=e299] [cursor=pointer]:
+                    - /url: https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=bOIfrcQMJdExLnCj0mteh6F1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                    - text: 원문 열기
+                    - img [ref=e300]
+            - generic [ref=e304]:
+              - heading "안전사용기간/사용횟수 참고" [level=3] [ref=e306]
+              - paragraph [ref=e308]: 해당 조건의 공식 자료가 확인되지 않습니다.
+            - generic [ref=e310]:
+              - img [ref=e311]
+              - text: 농약 지침은 공식 자료 확인을 우선하며, 자동 처방을 제공하지 않습니다.

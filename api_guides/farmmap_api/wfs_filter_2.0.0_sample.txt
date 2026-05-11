@@ -1,0 +1,374 @@
+1. PropertyIsEqualTo
+<Filter>
+  <PropertyIsEqualTo matchCase="true">
+    <ValueReference>id</ValueReference>
+    <Literal>117401010000058</Literal>
+  </PropertyIsEqualTo>
+</Filter>
+
+https://agis.epis.or.kr/ASD/farmmapApi/wfs.do?service=wfs&
+version=2.0.0&
+request=GetFeature&
+typename=farm_map_api&
+propertyname=id,uid,fl_nm,pnu,ldcg_cd,stdg_cd,stdg_addr,shape&
+sortby=asc&
+startindex=0&
+count=10&
+srsname=EPSG:5179&
+apiKey=[apiKey]&
+domain=[domain]&
+outputformat=json&
+filter=%3CFilter%3E%0A%20%20%3CPropertyIsEqualTo%20matchCase%3D%22true%22%3E%0A%20%20%20%20%3CValueReference%3Eid%3C%2FValueReference%3E%0A%20%20%20%20%3CLiteral%3E117401010000058%3C%2FLiteral%3E%0A%20%20%3C%2FPropertyIsEqualTo%3E%0A%3C%2FFilter%3E
+
+
+2. PropertyIsNotEqualTo
+<Filter>
+  <PropertyIsNotEqualTo matchCase="true">
+    <ValueReference>id</ValueReference>
+    <Literal>117401010000058</Literal>
+  </PropertyIsNotEqualTo>
+</Filter>
+
+https://agis.epis.or.kr/ASD/farmmapApi/wfs.do?service=wfs&
+version=2.0.0&
+request=GetFeature&
+typename=farm_map_api&
+propertyname=id,uid,fl_nm,pnu,ldcg_cd,stdg_cd,stdg_addr,shape&
+sortby=asc&
+startindex=0&
+count=10&
+srsname=EPSG:5179&
+apiKey=[apiKey]&
+domain=[domain]&
+outputformat=json&
+filter=%3CFilter%3E%0A%20%20%3CPropertyIsNotEqualTo%20matchCase%3D%22true%22%3E%0A%20%20%20%20%3CValueReference%3Eid%3C%2FValueReference%3E%0A%20%20%20%20%3CLiteral%3E117401010000058%3C%2FLiteral%3E%0A%20%20%3C%2FPropertyIsNotEqualTo%3E%0A%3C%2FFilter%3E
+
+
+3. PropertyIsLessThan
+<Filter>
+  <PropertyIsLessThan matchCase="false">
+    <ValueReference>fl_ar</ValueReference>
+    <Literal>1000</Literal>
+  </PropertyIsLessThan>
+</Filter>
+
+https://agis.epis.or.kr/ASD/farmmapApi/wfs.do?service=wfs&
+version=2.0.0&
+request=GetFeature&
+typename=farm_map_api&
+propertyname=id,uid,fl_nm,pnu,ldcg_cd,stdg_cd,stdg_addr,shape&
+sortby=asc&
+startindex=0&
+count=10&
+srsname=EPSG:5179&
+apiKey=[apiKey]&
+domain=[domain]&
+outputformat=json&
+filter=%3CFilter%3E%0A%20%20%3CPropertyIsLessThan%20matchCase%3D%22false%22%3E%0A%20%20%20%20%3CValueReference%3Efl_ar%3C%2FValueReference%3E%0A%20%20%20%20%3CLiteral%3E1000%3C%2FLiteral%3E%0A%20%20%3C%2FPropertyIsLessThan%3E%0A%3C%2FFilter%3E
+
+
+4. PropertyIsLessThanOrEqualTo
+<Filter>
+  <PropertyIsLessThanOrEqualTo matchCase="false">
+    <ValueReference>fl_ar</ValueReference>
+    <Literal>1000</Literal>
+  </PropertyIsLessThanOrEqualTo>
+</Filter>
+
+https://agis.epis.or.kr/ASD/farmmapApi/wfs.do?service=wfs&
+version=2.0.0&
+request=GetFeature&
+typename=farm_map_api&
+propertyname=id,uid,fl_nm,pnu,ldcg_cd,stdg_cd,stdg_addr,shape&
+sortby=asc&
+startindex=0&
+count=10&
+srsname=EPSG:5179&
+apiKey=[apiKey]&
+domain=[domain]&
+outputformat=json&
+filter=%3CFilter%3E%0A%20%20%3CPropertyIsLessThanOrEqualTo%20matchCase%3D%22false%22%3E%0A%20%20%20%20%3CValueReference%3Efl_ar%3C%2FValueReference%3E%0A%20%20%20%20%3CLiteral%3E1000%3C%2FLiteral%3E%0A%20%20%3C%2FPropertyIsLessThanOrEqualTo%3E%0A%3C%2FFilter%3E
+
+
+5. PropertyIsGreaterThan
+<Filter>
+  <PropertyIsGreaterThan matchCase="true">
+    <ValueReference>fl_ar</ValueReference>
+    <Literal>1000</Literal>
+  </PropertyIsGreaterThan>
+</Filter>
+
+https://agis.epis.or.kr/ASD/farmmapApi/wfs.do?service=wfs&
+version=2.0.0&
+request=GetFeature&
+typename=farm_map_api&
+propertyname=id,uid,fl_nm,pnu,ldcg_cd,stdg_cd,stdg_addr,shape&
+sortby=asc&
+startindex=0&
+count=10&
+srsname=EPSG:5179&
+apiKey=[apiKey]&
+domain=[domain]&
+outputformat=json&
+filter=%3CFilter%3E%0A%20%20%3CPropertyIsGreaterThan%20matchCase%3D%22true%22%3E%0A%20%20%20%20%3CValueReference%3Efl_ar%3C%2FValueReference%3E%0A%20%20%20%20%3CLiteral%3E1000%3C%2FLiteral%3E%0A%20%20%3C%2FPropertyIsGreaterThan%3E%0A%3C%2FFilter%3E
+
+
+6. PropertyIsGreaterThanOrEqualTo
+<Filter>
+  <PropertyIsGreaterThanOrEqualTo matchCase="false">
+    <ValueReference>fl_ar</ValueReference>
+    <Literal>1000</Literal>
+  </PropertyIsGreaterThanOrEqualTo>
+</Filter>
+
+https://agis.epis.or.kr/ASD/farmmapApi/wfs.do?service=wfs&
+version=2.0.0&
+request=GetFeature&
+typename=farm_map_api&
+propertyname=id,uid,fl_nm,pnu,ldcg_cd,stdg_cd,stdg_addr,shape&
+sortby=asc&
+startindex=0&
+count=10&
+srsname=EPSG:5179&
+apiKey=[apiKey]&
+domain=[domain]&
+outputformat=json&
+filter=%3CFilter%3E%0A%20%20%3CPropertyIsGreaterThanOrEqualTo%20matchCase%3D%22false%22%3E%0A%20%20%20%20%3CValueReference%3Efl_ar%3C%2FValueReference%3E%0A%20%20%20%20%3CLiteral%3E1000%3C%2FLiteral%3E%0A%20%20%3C%2FPropertyIsGreaterThanOrEqualTo%3E%0A%3C%2FFilter%3E
+
+
+7. PropertyIsLike
+<Filter>
+  <PropertyIsLike wildCard="*" singleChar="_" escapeChar="\">
+    <ValueReference>pnu</ValueReference>
+    <Literal>361101190010114*</Literal>
+  </PropertyIsLike>
+</Filter>
+
+https://agis.epis.or.kr/ASD/farmmapApi/wfs.do?service=wfs&
+version=2.0.0&
+request=GetFeature&
+typename=farm_map_api&
+propertyname=id,uid,fl_nm,pnu,ldcg_cd,stdg_cd,stdg_addr,shape&
+sortby=asc&
+startindex=0&
+count=10&
+srsname=EPSG:5179&
+apiKey=[apiKey]&
+domain=[domain]&
+outputformat=json&
+filter=%3CFilter%3E%0A%20%20%3CPropertyIsLike%20wildCard%3D%22*%22%20singleChar%3D%22_%22%20escapeChar%3D%22%5C%22%3E%0A%20%20%20%20%3CValueReference%3Epnu%3C%2FValueReference%3E%0A%20%20%20%20%3CLiteral%3E361101190010114*%3C%2FLiteral%3E%0A%20%20%3C%2FPropertyIsLike%3E%0A%3C%2FFilter%3E
+
+
+8. PropertyIsNull
+<Filter>
+  <PropertyIsNull>
+    <ValueReference>sb_ldcg_cd</ValueReference>
+  </PropertyIsNull>
+</Filter>
+
+https://agis.epis.or.kr/ASD/farmmapApi/wfs.do?service=wfs&
+version=2.0.0&
+request=GetFeature&
+typename=farm_map_api&
+propertyname=id,uid,fl_nm,pnu,ldcg_cd,stdg_cd,stdg_addr,shape&
+sortby=asc&
+startindex=0&
+count=10&
+srsname=EPSG:5179&
+apiKey=[apiKey]&
+domain=[domain]&
+outputformat=json&
+filter=%3CFilter%3E%0A%20%20%3CPropertyIsNull%3E%0A%20%20%20%20%3CValueReference%3Esb_ldcg_cd%3C%2FValueReference%3E%0A%20%20%3C%2FPropertyIsNull%3E%0A%3C%2FFilter%3E
+
+
+9. PropertyIsBetween
+<Filter>
+  <PropertyIsBetween>
+    <ValueReference>fl_ar</ValueReference>
+    <LowerBoundary>
+      <Literal>2000</Literal>
+    </LowerBoundary>
+    <UpperBoundary>
+      <Literal>2500</Literal>
+    </UpperBoundary>
+  </PropertyIsBetween>
+</Filter>
+
+https://agis.epis.or.kr/ASD/farmmapApi/wfs.do?service=wfs&
+version=2.0.0&
+request=GetFeature&
+typename=farm_map_api&
+propertyname=id,uid,fl_nm,pnu,ldcg_cd,stdg_cd,stdg_addr,shape&
+sortby=asc&
+startindex=0&
+count=10&
+srsname=EPSG:5179&
+apiKey=[apiKey]&
+domain=[domain]&
+outputformat=json&
+filter=%3CFilter%3E%0A%20%20%3CPropertyIsBetween%3E%0A%20%20%20%20%3CValueReference%3Efl_ar%3C%2FValueReference%3E%0A%20%20%20%20%3CLowerBoundary%3E%0A%20%20%20%20%20%20%3CLiteral%3E2000%3C%2FLiteral%3E%0A%20%20%20%20%3C%2FLowerBoundary%3E%0A%20%20%20%20%3CUpperBoundary%3E%0A%20%20%20%20%20%20%3CLiteral%3E2500%3C%2FLiteral%3E%0A%20%20%20%20%3C%2FUpperBoundary%3E%0A%20%20%3C%2FPropertyIsBetween%3E%0A%3C%2FFilter%3E
+
+
+10. Intersects
+<Filter xmlns:gml="http://www.opengis.net/gml/3.2">
+  <Intersects>
+    <ValueReference>shape</ValueReference>
+    <gml:Point srsName="EPSG:5179">
+      <gml:pos>984692.0210907353 1830469.4351968889</gml:pos>
+    </gml:Point>
+  </Intersects>
+</Filter>
+
+https://agis.epis.or.kr/ASD/farmmapApi/wfs.do?service=wfs&
+version=2.0.0&
+request=GetFeature&
+typename=farm_map_api&
+propertyname=id,uid,fl_nm,pnu,ldcg_cd,stdg_cd,stdg_addr,shape&
+sortby=asc&
+startindex=0&
+count=10&
+srsname=EPSG:5179&
+apiKey=[apiKey]&
+domain=[domain]&
+outputformat=json&
+filter=%3CFilter%20xmlns%3Agml%3D%22http%3A%2F%2Fwww.opengis.net%2Fgml%2F3.2%22%3E%0A%20%20%3CIntersects%3E%0A%20%20%20%20%3CValueReference%3Eshape%3C%2FValueReference%3E%0A%20%20%20%20%3Cgml%3APoint%20srsName%3D%22EPSG%3A5179%22%3E%0A%20%20%20%20%20%20%3Cgml%3Apos%3E984692.0210907353%201830469.4351968889%3C%2Fgml%3Apos%3E%0A%20%20%20%20%3C%2Fgml%3APoint%3E%0A%20%20%3C%2FIntersects%3E%0A%3C%2FFilter%3E
+
+
+11. BBOX
+<Filter xmlns:gml="http://www.opengis.net/gml/3.2">
+  <BBOX>
+    <ValueReference>shape</ValueReference>
+    <gml:Envelope srsDimension="2" srsName="EPSG:5179">
+      <gml:lowerCorner>984691.0210907353 1830468.4351968889</gml:lowerCorner>
+      <gml:upperCorner>984692.0210907353 1830469.4351968889</gml:upperCorner>
+    </gml:Envelope>
+  </BBOX>
+</Filter>
+
+https://agis.epis.or.kr/ASD/farmmapApi/wfs.do?service=wfs&
+version=2.0.0&
+request=GetFeature&
+typename=farm_map_api&
+propertyname=id,uid,fl_nm,pnu,ldcg_cd,stdg_cd,stdg_addr,shape&
+sortby=asc&
+startindex=0&
+count=10&
+srsname=EPSG:5179&
+apiKey=[apiKey]&
+domain=[domain]&
+outputformat=json&
+filter=%3CFilter%20xmlns%3Agml%3D%22http%3A%2F%2Fwww.opengis.net%2Fgml%2F3.2%22%3E%0A%20%20%3CBBOX%3E%0A%20%20%20%20%3CValueReference%3Eshape%3C%2FValueReference%3E%0A%20%20%20%20%3Cgml%3AEnvelope%20srsDimension%3D%222%22%20srsName%3D%22EPSG%3A5179%22%3E%0A%20%20%20%20%20%20%3Cgml%3AlowerCorner%3E984691.0210907353%201830468.4351968889%3C%2Fgml%3AlowerCorner%3E%0A%20%20%20%20%20%20%3Cgml%3AupperCorner%3E984692.0210907353%201830469.4351968889%3C%2Fgml%3AupperCorner%3E%0A%20%20%20%20%3C%2Fgml%3AEnvelope%3E%0A%20%20%3C%2FBBOX%3E%0A%3C%2FFilter%3E
+
+
+12. AND
+<Filter>
+  <And>
+    <PropertyIsEqualTo matchCase="true">
+      <ValueReference>fl_nm</ValueReference>
+      <Literal>논</Literal>
+    </PropertyIsEqualTo>
+    <PropertyIsGreaterThan>
+      <ValueReference>fl_ar</ValueReference>
+      <Literal>1000</Literal>
+    </PropertyIsGreaterThan>
+  </And>
+</Filter>
+
+https://agis.epis.or.kr/ASD/farmmapApi/wfs.do?service=wfs&
+version=2.0.0&
+request=GetFeature&
+typename=farm_map_api&
+propertyname=id,uid,fl_nm,pnu,ldcg_cd,stdg_cd,stdg_addr,shape&
+sortby=asc&
+startindex=0&
+count=10&
+srsname=EPSG:5179&
+apiKey=[apiKey]&
+domain=[domain]&
+outputformat=json&
+filter=%3CFilter%3E%0A%20%20%3CAnd%3E%0A%20%20%20%20%3CPropertyIsEqualTo%20matchCase%3D%22true%22%3E%0A%20%20%20%20%20%20%3CValueReference%3Efl_nm%3C%2FValueReference%3E%0A%20%20%20%20%20%20%3CLiteral%3E%EB%85%BC%3C%2FLiteral%3E%0A%20%20%20%20%3C%2FPropertyIsEqualTo%3E%0A%20%20%20%20%3CPropertyIsGreaterThan%3E%0A%20%20%20%20%20%20%3CValueReference%3Efl_ar%3C%2FValueReference%3E%0A%20%20%20%20%20%20%3CLiteral%3E1000%3C%2FLiteral%3E%0A%20%20%20%20%3C%2FPropertyIsGreaterThan%3E%0A%20%20%3C%2FAnd%3E%0A%3C%2FFilter%3E
+
+
+13. Or
+<Filter>
+  <Or>
+    <PropertyIsEqualTo matchCase="true">
+      <ValueReference>fl_nm</ValueReference>
+      <Literal>논</Literal>
+    </PropertyIsEqualTo>
+    <PropertyIsEqualTo matchCase="true">
+      <ValueReference>fl_nm</ValueReference>
+      <Literal>밭</Literal>
+    </PropertyIsEqualTo>
+  </Or>
+</Filter>
+
+https://agis.epis.or.kr/ASD/farmmapApi/wfs.do?service=wfs&
+version=2.0.0&
+request=GetFeature&
+typename=farm_map_api&
+propertyname=id,uid,fl_nm,pnu,ldcg_cd,stdg_cd,stdg_addr,shape&
+sortby=asc&
+startindex=0&
+count=10&
+srsname=EPSG:5179&
+apiKey=[apiKey]&
+domain=[domain]&
+outputformat=json&
+filter=%3CFilter%3E%0A%20%20%3COr%3E%0A%20%20%20%20%3CPropertyIsEqualTo%20matchCase%3D%22true%22%3E%0A%20%20%20%20%20%20%3CValueReference%3Efl_nm%3C%2FValueReference%3E%0A%20%20%20%20%20%20%3CLiteral%3E%EB%85%BC%3C%2FLiteral%3E%0A%20%20%20%20%3C%2FPropertyIsEqualTo%3E%0A%20%20%20%20%3CPropertyIsEqualTo%20matchCase%3D%22true%22%3E%0A%20%20%20%20%20%20%3CValueReference%3Efl_nm%3C%2FValueReference%3E%0A%20%20%20%20%20%20%3CLiteral%3E%EB%B0%AD%3C%2FLiteral%3E%0A%20%20%20%20%3C%2FPropertyIsEqualTo%3E%0A%20%20%3C%2FOr%3E%0A%3C%2FFilter%3E
+
+
+14. Not
+<Filter>
+  <Not>
+    <PropertyIsEqualTo matchCase="true">
+      <ValueReference>fl_nm</ValueReference>
+      <Literal>논</Literal>
+    </PropertyIsEqualTo>
+  </Not>
+</Filter>
+
+https://agis.epis.or.kr/ASD/farmmapApi/wfs.do?service=wfs&
+version=2.0.0&
+request=GetFeature&
+typename=farm_map_api&
+propertyname=id,uid,fl_nm,pnu,ldcg_cd,stdg_cd,stdg_addr,shape&
+sortby=asc&
+startindex=0&
+count=10&
+srsname=EPSG:5179&
+apiKey=[apiKey]&
+domain=[domain]&
+outputformat=json&
+filter=%3CFilter%3E%0A%20%20%3CNot%3E%0A%20%20%20%20%3CPropertyIsEqualTo%20matchCase%3D%22true%22%3E%0A%20%20%20%20%20%20%3CValueReference%3Efl_nm%3C%2FValueReference%3E%0A%20%20%20%20%20%20%3CLiteral%3E%EB%85%BC%3C%2FLiteral%3E%0A%20%20%20%20%3C%2FPropertyIsEqualTo%3E%0A%20%20%3C%2FNot%3E%0A%3C%2FFilter%3E
+
+
+15. Spatial + Attribute
+<Filter xmlns:gml="http://www.opengis.net/gml/3.2">
+  <And>
+    <PropertyIsEqualTo matchCase="true">
+      <ValueReference>fl_nm</ValueReference>
+      <Literal>과수</Literal>
+    </PropertyIsEqualTo>
+    <Intersects>
+      <ValueReference>shape</ValueReference>
+        <gml:Point srsName="EPSG:5179">
+          <gml:pos>984692.0210907353 1830469.4351968889</gml:pos>
+      </gml:Point>
+    </Intersects>
+  </And>
+</Filter>
+
+https://agis.epis.or.kr/ASD/farmmapApi/wfs.do?service=wfs&
+version=2.0.0&
+request=GetFeature&
+typename=farm_map_api&
+propertyname=id,uid,fl_nm,pnu,ldcg_cd,stdg_cd,stdg_addr,shape&
+sortby=asc&
+startindex=0&
+count=10&
+srsname=EPSG:5179&
+apiKey=[apiKey]&
+domain=[domain]&
+outputformat=json&
+filter=%3CFilter%20xmlns%3Agml%3D%22http%3A%2F%2Fwww.opengis.net%2Fgml%2F3.2%22%3E%0A%20%20%3CAnd%3E%0A%20%20%20%20%3CPropertyIsEqualTo%20matchCase%3D%22true%22%3E%0A%20%20%20%20%20%20%3CValueReference%3Efl_nm%3C%2FValueReference%3E%0A%20%20%20%20%20%20%3CLiteral%3E%EA%B3%BC%EC%88%98%3C%2FLiteral%3E%0A%20%20%20%20%3C%2FPropertyIsEqualTo%3E%0A%20%20%20%20%3CIntersects%3E%0A%20%20%20%20%20%20%3CValueReference%3Eshape%3C%2FValueReference%3E%0A%20%20%20%20%20%20%20%20%3Cgml%3APoint%20srsName%3D%22EPSG%3A5179%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cgml%3Apos%3E984692.0210907353%201830469.4351968889%3C%2Fgml%3Apos%3E%0A%20%20%20%20%20%20%3C%2Fgml%3APoint%3E%0A%20%20%20%20%3C%2FIntersects%3E%0A%20%20%3C%2FAnd%3E%0A%3C%2FFilter%3E

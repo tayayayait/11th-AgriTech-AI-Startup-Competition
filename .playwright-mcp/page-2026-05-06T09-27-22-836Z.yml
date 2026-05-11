@@ -1,0 +1,169 @@
+- generic:
+  - generic:
+    - list
+    - region "Notifications alt+T"
+    - generic:
+      - generic:
+        - generic:
+          - banner:
+            - button:
+              - img
+              - generic: Toggle Sidebar
+            - generic:
+              - combobox:
+                - generic: Phase10 E2E 필지 · 벼
+                - img
+              - button:
+                - img
+          - main:
+            - generic:
+              - tablist:
+                - tab [selected]: 상담 리포트
+                - tab: 농약 안전사용지침
+              - tabpanel:
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading [level=3]: Phase10 E2E 필지 상담 패키지
+                      - generic:
+                        - button: 상담 리포트 생성
+                        - button:
+                          - img
+                          - text: 인쇄
+                        - button:
+                          - img
+                          - text: 공유 링크
+                        - button: PDF 내보내기
+                    - generic:
+                      - generic:
+                        - generic: 1. 필지 정보
+                        - generic:
+                          - paragraph: Phase10 E2E 필지
+                          - paragraph: 주소 정보 없음
+                          - paragraph: 면적 0㎡ · 위험도 25
+                      - generic:
+                        - generic: 2. 작물 정보
+                        - generic:
+                          - paragraph: 벼
+                          - paragraph: "생육 단계: 확실한 정보 없음"
+                      - generic:
+                        - generic: 3. 최근 7일 날씨 요약
+                        - generic:
+                          - paragraph: "수집 건수: 2건"
+                          - paragraph: "평균 기온: 21.9도"
+                          - paragraph: "최고/최저: 21.9도 / 21.9도"
+                          - paragraph: "누적 강수: 0.0mm"
+                          - paragraph: "최대 풍속: 1.5m/s"
+                          - paragraph: "마지막 수집: 2026. 5. 6. 오후 6:19:31"
+                      - generic:
+                        - generic: 4. 최근 7일 위험도 변화
+                        - generic:
+                          - generic:
+                            - generic: 5. 6.
+                            - generic: "25"
+                      - generic:
+                        - generic: 5. 병징 사진 기록
+                        - paragraph: 아직 기록된 사진이 없습니다. 병징 사진을 업로드하세요.
+                      - generic:
+                        - generic: 6. 완료/미완료 작업
+                        - generic:
+                          - generic:
+                            - generic: 미완료
+                            - generic: "3"
+                          - generic:
+                            - generic: 완료
+                            - generic: "0"
+                          - generic:
+                            - generic: 진행 중
+                            - generic: "0"
+                          - generic:
+                            - generic: 보류
+                            - generic: "0"
+                      - generic:
+                        - generic: 7. AI 의심 후보와 현장 체크리스트
+                        - paragraph: AI 의심 후보 기록이 없습니다.
+                      - generic:
+                        - generic: 8. 공식 자료 링크
+                        - generic:
+                          - paragraph: "재해예방 자료: 0건"
+                          - paragraph: "병해충 발생정보: 4건"
+                          - paragraph: "위험원인 출처: 4건"
+                  - generic:
+                    - generic:
+                      - heading [level=3]: 공식 자료 링크
+                    - generic:
+                      - generic:
+                        - generic: 병해충발생정보 제 4호 (2026.4.1~4.30.)
+                        - generic: 2026-04-07
+                        - link:
+                          - /url: http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=khDTekIxZ7Vv/I6ELZ5WhqF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                          - text: 원문 열기
+                          - img
+                      - generic:
+                        - generic: 병해충발생정보 제 3호 (2026.3.1~3.31.)
+                        - generic: 2026-03-03
+                        - link:
+                          - /url: http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=/M0cP3cvxgdtO0@x/ZsdfKF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                          - text: 원문 열기
+                          - img
+                      - generic:
+                        - generic: 병해충발생정보 제 2호 (2026.2.1~2.28.)
+                        - generic: 2026-02-02
+                        - link:
+                          - /url: http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=Gj95ART1TW36xCsbsQxA/aF1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                          - text: 원문 열기
+                          - img
+                      - generic:
+                        - generic: 병해충발생정보 제 1호 (2026.1.1~31.)
+                        - generic: 2026-01-05
+                        - link:
+                          - /url: http://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=r5CA0yXrBIlfC0FalI58O6F1juab8B2M@r/xMBcjs5BtyvGH/qhCuqmdMsUch4d/
+                          - text: 원문 열기
+                          - img
+                  - generic:
+                    - generic:
+                      - heading [level=3]: 상담 리포트 기록
+                    - generic:
+                      - paragraph: 아직 생성된 상담 리포트가 없습니다.
+  - dialog "주 메뉴" [active] [ref=e130]:
+    - heading "주 메뉴" [level=2] [ref=e131]
+    - paragraph [ref=e132]: FieldGuard AI 화면 이동 메뉴
+    - generic [ref=e133]:
+      - generic [ref=e135]:
+        - img [ref=e137]
+        - generic [ref=e141]:
+          - generic [ref=e142]: FieldGuard AI
+          - generic [ref=e143]: 현장 의사결정 보조
+      - generic [ref=e145]:
+        - generic [ref=e146]: 주 메뉴
+        - list [ref=e148]:
+          - listitem [ref=e149]:
+            - link "대시보드" [ref=e150] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e151]
+              - generic [ref=e156]: 대시보드
+          - listitem [ref=e157]:
+            - link "필지 지도" [ref=e158] [cursor=pointer]:
+              - /url: /fields/map
+              - img [ref=e159]
+              - generic [ref=e161]: 필지 지도
+          - listitem [ref=e162]:
+            - link "작업 카드" [ref=e163] [cursor=pointer]:
+              - /url: /tasks
+              - img [ref=e164]
+              - generic [ref=e167]: 작업 카드
+          - listitem [ref=e168]:
+            - link "사진 판독" [ref=e169] [cursor=pointer]:
+              - /url: /diagnosis
+              - img [ref=e170]
+              - generic [ref=e173]: 사진 판독
+          - listitem [ref=e174]:
+            - link "자료/상담" [ref=e175] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e176]
+              - generic [ref=e179]: 자료/상담
+          - listitem [ref=e180]:
+            - link "설정" [ref=e181] [cursor=pointer]:
+              - /url: /settings
+              - img [ref=e182]
+              - generic [ref=e185]: 설정

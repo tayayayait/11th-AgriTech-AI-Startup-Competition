@@ -1,0 +1,50 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e5]:
+    - banner [ref=e6]:
+      - button "Toggle Sidebar" [ref=e7] [cursor=pointer]:
+        - img
+        - generic [ref=e8]: Toggle Sidebar
+      - generic [ref=e9]:
+        - combobox [active] [ref=e10] [cursor=pointer]:
+          - generic: Phase10 PNU 필지 · 벼
+          - img [ref=e11]
+        - button "동기화" [ref=e13] [cursor=pointer]:
+          - img
+    - main [ref=e14]:
+      - generic [ref=e16]:
+        - generic [ref=e17]:
+          - tablist [ref=e18]:
+            - tab "오늘 (1)" [selected] [ref=e19] [cursor=pointer]
+            - tab "이번 주 (2)" [ref=e20] [cursor=pointer]
+            - tab "완료 (0)" [ref=e21] [cursor=pointer]
+          - generic [ref=e22]: 공식 데이터 기반 자동 생성
+        - tabpanel "오늘 (1)" [ref=e23]:
+          - generic [ref=e65]:
+            - generic [ref=e66]:
+              - generic [ref=e67]:
+                - generic [ref=e68]:
+                  - generic [ref=e69]: 2순위
+                  - generic [ref=e70]: 5월 6일 (수)
+                - generic [ref=e71]: 병해충 위험 예보 근거 확인
+              - generic [ref=e72]:
+                - img [ref=e73]
+                - text: 25분
+            - paragraph [ref=e76]: 농사로 병해충 발생정보 4건 확인
+            - generic [ref=e77]:
+              - generic [ref=e78]:
+                - checkbox "공식 발생정보 원문 확인" [ref=e79] [cursor=pointer]
+                - generic [ref=e80]: 공식 발생정보 원문 확인
+              - generic [ref=e81]:
+                - checkbox "잎 뒷면·줄기·생장점 확인" [ref=e82] [cursor=pointer]
+                - generic [ref=e83]: 잎 뒷면·줄기·생장점 확인
+              - generic [ref=e84]:
+                - checkbox "발견 위치와 사진 기록" [ref=e85] [cursor=pointer]
+                - generic [ref=e86]: 발견 위치와 사진 기록
+            - button "근거 데이터 보기" [ref=e88] [cursor=pointer]:
+              - img [ref=e89]
+              - text: 근거 데이터 보기
+            - button "완료 처리 (0/3)" [disabled]
+        - tabpanel "완료 (0)"

@@ -1,0 +1,140 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e8]:
+    - generic [ref=e12]:
+      - generic [ref=e14]:
+        - img [ref=e16]
+        - generic [ref=e20]:
+          - generic [ref=e21]: FieldGuard AI
+          - generic [ref=e22]: 현장 의사결정 보조
+      - generic [ref=e24]:
+        - generic [ref=e25]: 주 메뉴
+        - list [ref=e27]:
+          - listitem [ref=e28]:
+            - link "대시보드" [ref=e29] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e30]
+              - generic [ref=e35]: 대시보드
+          - listitem [ref=e36]:
+            - link "필지 지도" [ref=e37] [cursor=pointer]:
+              - /url: /fields/map
+              - img [ref=e38]
+              - generic [ref=e40]: 필지 지도
+          - listitem [ref=e41]:
+            - link "작업 카드" [ref=e42] [cursor=pointer]:
+              - /url: /tasks
+              - img [ref=e43]
+              - generic [ref=e46]: 작업 카드
+          - listitem [ref=e47]:
+            - link "사진 판독" [ref=e48] [cursor=pointer]:
+              - /url: /diagnosis
+              - img [ref=e49]
+              - generic [ref=e52]: 사진 판독
+          - listitem [ref=e53]:
+            - link "자료/상담" [ref=e54] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e55]
+              - generic [ref=e58]: 자료/상담
+          - listitem [ref=e59]:
+            - link "설정" [ref=e60] [cursor=pointer]:
+              - /url: /settings
+              - img [ref=e61]
+              - generic [ref=e64]: 설정
+    - generic [ref=e65]:
+      - banner [ref=e66]:
+        - button "Toggle Sidebar" [ref=e67] [cursor=pointer]:
+          - img
+          - generic [ref=e68]: Toggle Sidebar
+        - generic [ref=e69]: 2026년 5월 8일 (금)
+        - generic [ref=e70]:
+          - combobox [ref=e71] [cursor=pointer]:
+            - generic: 경상북도 구미시 옥계동 밭 · 사과
+            - img [ref=e72]
+          - generic [ref=e74]: 마지막 갱신 5월 8일 20:36
+          - generic [ref=e75]:
+            - img [ref=e76]
+            - generic [ref=e80]: dbcdkwo629@naver.com
+          - button "동기화" [ref=e81] [cursor=pointer]:
+            - img
+      - main [ref=e82]:
+        - generic [ref=e83]:
+          - generic [ref=e84]:
+            - generic [ref=e85]:
+              - heading "해야 할 작업" [level=1] [ref=e86]
+              - paragraph [ref=e87]: 2개 대기 중
+            - generic [ref=e88]: 공식 데이터 기반 자동 생성
+          - region "해야 할 작업" [ref=e89]:
+            - generic [ref=e91]:
+              - generic [ref=e92]:
+                - generic [ref=e93]:
+                  - generic [ref=e94]:
+                    - generic [ref=e95]: 5월 8일 (금)
+                    - generic [ref=e96]: 병해충
+                  - generic [ref=e97]: 병해충 위험 예보 근거 확인
+                - generic [ref=e98]:
+                  - img [ref=e99]
+                  - text: 25분
+              - paragraph [ref=e102]: 현재 KMA 조건상 병해충 위험 신호가 낮음
+              - generic [ref=e103]:
+                - generic [ref=e104]:
+                  - checkbox "공식 발생정보 원문 확인" [ref=e105] [cursor=pointer]
+                  - generic [ref=e106]: 공식 발생정보 원문 확인
+                - generic [ref=e107]:
+                  - checkbox "잎 뒷면·줄기·생장점 확인" [ref=e108] [cursor=pointer]
+                  - generic [ref=e109]: 잎 뒷면·줄기·생장점 확인
+                - generic [ref=e110]:
+                  - checkbox "발견 위치와 사진 기록" [ref=e111] [cursor=pointer]
+                  - generic [ref=e112]: 발견 위치와 사진 기록
+              - button "근거 데이터 보기" [ref=e114] [cursor=pointer]:
+                - img [ref=e115]
+                - text: 근거 데이터 보기
+              - button "완료 처리 (0/3)" [disabled]
+            - generic [ref=e118]:
+              - generic [ref=e119]:
+                - generic [ref=e120]:
+                  - generic [ref=e121]:
+                    - generic [ref=e122]: 5월 11일 (월)
+                    - generic [ref=e123]: 주간농사정보
+                  - generic [ref=e124]: 주간농사정보 기반 작업 실행
+                - generic [ref=e125]:
+                  - img [ref=e126]
+                  - text: 30분
+              - paragraph [ref=e129]: 포도 및 과수 개화기 물관리와 캠벨얼리 적정 엽과비 기준 안내
+              - generic [ref=e130]:
+                - generic [ref=e131]:
+                  - checkbox "과수 관수 시 한 번에 지속해서 주는 것보다 1~2시간 관수하고 일정 시간 멈추었다가 다시 관수하는 방법을 선택할 것" [ref=e132] [cursor=pointer]
+                  - generic [ref=e133]: 과수 관수 시 한 번에 지속해서 주는 것보다 1~2시간 관수하고 일정 시간 멈추었다가 다시 관수하는 방법을 선택할 것
+                - generic [ref=e134]:
+                  - checkbox "포도 재배 시 적정 엽수 확보를 통해 양분 분배를 조절하고 과실의 비대와 발육이 양호하도록 관리할 것" [ref=e135] [cursor=pointer]
+                  - generic [ref=e136]: 포도 재배 시 적정 엽수 확보를 통해 양분 분배를 조절하고 과실의 비대와 발육이 양호하도록 관리할 것
+                - generic [ref=e137]:
+                  - checkbox "주간농사정보 주의사항 확인" [ref=e138] [cursor=pointer]
+                  - generic [ref=e139]: 주간농사정보 주의사항 확인
+              - button "근거 데이터 보기" [ref=e141] [cursor=pointer]:
+                - img [ref=e142]
+                - text: 근거 데이터 보기
+              - button "완료 처리 (0/3)" [disabled]
+          - generic [ref=e145]:
+            - region "이번 달 농작업일정" [ref=e146]:
+              - generic [ref=e147]:
+                - img [ref=e148]
+                - heading "이번 달 농작업일정" [level=2] [ref=e150]
+              - generic [ref=e152]: 주간농사정보 기반 작업카드 생성됨
+              - paragraph [ref=e153]: 농작업일정 정보를 조회하는 중입니다.
+            - region "주간농사정보 근거 (이번 주)" [ref=e154]:
+              - generic "이번 주 농사 브리핑" [ref=e155]:
+                - generic [ref=e156]:
+                  - generic [ref=e157]:
+                    - img [ref=e158]
+                    - heading "이번 주 농사 브리핑" [level=2] [ref=e160]
+                    - generic [ref=e161]: 요약 대기
+                  - button "이번주 주간농사정보 파일 요약" [disabled]:
+                    - img
+                    - text: 요약
+                - paragraph [ref=e162]: 요약할 주간농사정보 PDF 링크가 없습니다.
+              - generic [ref=e163]:
+                - img [ref=e164]
+                - heading "주간농사정보 근거 (이번 주)" [level=2] [ref=e166]
+              - paragraph [ref=e167]: 주간농사정보를 조회하는 중입니다.

@@ -1,0 +1,84 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e4]:
+    - generic [ref=e8]:
+      - generic [ref=e10]:
+        - img [ref=e12]
+        - generic [ref=e16]:
+          - generic [ref=e17]: FieldGuard AI
+          - generic [ref=e18]: 현장 의사결정 보조
+      - generic [ref=e20]:
+        - generic [ref=e21]: 주 메뉴
+        - list [ref=e23]:
+          - listitem [ref=e24]:
+            - link "대시보드" [ref=e25] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e26]
+              - generic [ref=e31]: 대시보드
+          - listitem [ref=e32]:
+            - link "필지 지도" [ref=e33] [cursor=pointer]:
+              - /url: /fields/map
+              - img [ref=e34]
+              - generic [ref=e36]: 필지 지도
+          - listitem [ref=e37]:
+            - link "작업 카드" [ref=e38] [cursor=pointer]:
+              - /url: /tasks
+              - img [ref=e39]
+              - generic [ref=e42]: 작업 카드
+          - listitem [ref=e43]:
+            - link "사진 판독" [ref=e44] [cursor=pointer]:
+              - /url: /diagnosis
+              - img [ref=e45]
+              - generic [ref=e48]: 사진 판독
+          - listitem [ref=e49]:
+            - link "자료/상담" [ref=e50] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e51]
+              - generic [ref=e54]: 자료/상담
+          - listitem [ref=e55]:
+            - link "설정" [ref=e56] [cursor=pointer]:
+              - /url: /settings
+              - img [ref=e57]
+              - generic [ref=e60]: 설정
+    - generic [ref=e61]:
+      - banner [ref=e62]:
+        - button "Toggle Sidebar" [ref=e63] [cursor=pointer]:
+          - img
+          - generic [ref=e64]: Toggle Sidebar
+        - generic [ref=e65]: 2026년 5월 6일 (수)
+        - generic [ref=e66]:
+          - combobox [ref=e67] [cursor=pointer]:
+            - generic: 벼 · 벼
+            - img [ref=e68]
+          - generic [ref=e70]: 마지막 갱신 5월 6일 14:06
+          - button "동기화" [ref=e71] [cursor=pointer]:
+            - img
+      - main [ref=e72]:
+        - generic [ref=e74]:
+          - heading "필지 등록" [level=3] [ref=e76]
+          - generic [ref=e77]:
+            - generic [ref=e78]:
+              - generic [ref=e79]:
+                - text: 필지명
+                - 'textbox "예: 배추 - 해룡면" [ref=e80]'
+              - generic [ref=e81]:
+                - text: 작물명
+                - 'textbox "예: 배추" [ref=e82]'
+            - generic [ref=e83]:
+              - tablist [ref=e84]:
+                - tab "주소/지번" [ref=e85] [cursor=pointer]
+                - tab "PNU" [ref=e86] [cursor=pointer]
+                - tab "지도 선택" [ref=e87] [cursor=pointer]
+                - tab "좌표" [active] [selected] [ref=e88] [cursor=pointer]
+              - tabpanel "좌표" [ref=e107]:
+                - generic [ref=e108]:
+                  - generic [ref=e109]:
+                    - text: 위도 (33.0-39.5)
+                    - textbox "36.5" [ref=e110]
+                  - generic [ref=e111]:
+                    - text: 경도 (124.0-132.0)
+                    - textbox "127.5" [ref=e112]
+                - button "좌표로 등록" [ref=e113] [cursor=pointer]
+            - paragraph [ref=e93]: PNU 조회 시 팜맵 원천 데이터를 기반으로 주소/좌표를 자동 반영할 수 있습니다.

@@ -1,0 +1,157 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - navigation [ref=e6]:
+    - generic [ref=e7]:
+      - link "FieldGuard AI 홈" [ref=e8] [cursor=pointer]:
+        - /url: /
+        - img [ref=e10]
+        - generic [ref=e14]: FieldGuard AI
+      - link "대시보드로 이동" [ref=e15] [cursor=pointer]:
+        - /url: /dashboard
+        - generic [ref=e16]: 대시보드
+        - img [ref=e17]
+  - main [ref=e19]:
+    - generic [ref=e21]:
+      - generic [ref=e22]:
+        - generic [ref=e23]:
+          - img [ref=e24]
+          - text: 공공데이터 기반 농업 의사결정
+        - heading "현장 변수를 오늘의 작업으로 바꿉니다." [level=1] [ref=e27]:
+          - generic [ref=e28]: 현장 변수를
+          - generic [ref=e29]: 오늘의 작업으로
+          - generic [ref=e30]: 바꿉니다.
+        - paragraph [ref=e31]: FieldGuard AI는 필지별 기상 위험, 병해충 후보, 사진 진단, 작업 권고를 한 흐름으로 묶어 농가가 대시보드에서 바로 판단하도록 만든 현장형 서비스입니다.
+        - link "대시보드로 시작하기" [ref=e33] [cursor=pointer]:
+          - /url: /dashboard
+          - text: 대시보드로 시작하기
+          - img [ref=e35]
+      - generic [ref=e37]:
+        - generic "FieldGuard AI farmland drone loop" [ref=e38]
+        - generic [ref=e41]:
+          - img [ref=e43]
+          - generic [ref=e45]:
+            - paragraph [ref=e46]: 서울 기준 기상청 기상 실황
+            - generic [ref=e47]:
+              - generic [ref=e48]: 강수 0mm
+              - generic [ref=e49]: 기온 20.9도
+              - generic [ref=e50]: 풍속 3.3m/s
+              - generic [ref=e51]: 습도 65%
+            - paragraph [ref=e52]: 방제 전 점검 권고
+    - generic [ref=e58]:
+      - generic [ref=e59]:
+        - heading "홈에서 바로 이해하고, 대시보드에서 바로 실행합니다." [level=2] [ref=e60]
+        - paragraph [ref=e61]: 실제 서비스 흐름은 단순합니다. 필지를 등록하고, 위험을 확인하고, 오늘 할 일을 기록합니다.
+      - generic [ref=e62]:
+        - article [ref=e63]:
+          - generic [ref=e64]:
+            - generic [ref=e65]: "1"
+            - img [ref=e66]
+          - heading "필지 등록" [level=3] [ref=e69]
+          - paragraph [ref=e70]: 주소, 작물, 면적을 기준으로 현장 판단 단위를 고정합니다.
+        - article [ref=e71]:
+          - generic [ref=e72]:
+            - generic [ref=e73]: "2"
+            - img [ref=e74]
+          - heading "위험 확인" [level=3] [ref=e77]
+          - paragraph [ref=e78]: 기상 위험과 병해충 후보를 한 화면에서 비교합니다.
+        - article [ref=e79]:
+          - generic [ref=e80]:
+            - generic [ref=e81]: "3"
+            - img [ref=e82]
+          - heading "작업 실행" [level=3] [ref=e85]
+          - paragraph [ref=e86]: 권장 작업, 진단 결과, 리포트를 기록 흐름으로 남깁니다.
+      - generic [ref=e88]:
+        - generic [ref=e89]: 기상청 단기예보
+        - generic [ref=e90]: 농촌진흥청 농사로
+        - generic [ref=e91]: 국가농작물병해충관리시스템
+        - generic [ref=e92]: 팜맵 필지 정보
+        - generic [ref=e93]: 사진 진단 기록
+        - generic [ref=e94]: 작업 카드
+        - generic [ref=e95]: 기상청 단기예보
+        - generic [ref=e96]: 농촌진흥청 농사로
+        - generic [ref=e97]: 국가농작물병해충관리시스템
+        - generic [ref=e98]: 팜맵 필지 정보
+        - generic [ref=e99]: 사진 진단 기록
+        - generic [ref=e100]: 작업 카드
+    - generic [ref=e102]:
+      - generic [ref=e103]:
+        - heading "데이터가 흩어져 있으면 판단도 늦어집니다." [level=2] [ref=e104]
+        - paragraph [ref=e105]: FieldGuard AI는 농업 공공데이터와 현장 입력을 한 대시보드로 압축합니다.
+      - generic [ref=e106]:
+        - article [ref=e107]:
+          - generic [ref=e110]:
+            - generic [ref=e111]:
+              - heading "필지 위험 대시보드" [level=3] [ref=e112]
+              - paragraph [ref=e113]: 선택한 필지의 위험 점수, 기상 상태, 병해충 후보, 작업 카드를 같은 화면에서 확인합니다.
+            - generic [ref=e114]:
+              - generic [ref=e115]:
+                - generic [ref=e116]:
+                  - img [ref=e118]
+                  - generic [ref=e120]: 단기예보 80%
+                - generic [ref=e121]:
+                  - img [ref=e123]
+                  - generic [ref=e132]: 진딧물 주의보
+                - generic [ref=e133]:
+                  - img [ref=e135]
+                  - generic [ref=e137]: 기온 상승
+                - generic [ref=e138]:
+                  - img [ref=e140]
+                  - generic [ref=e144]: 김포 토마토 필지
+                - generic [ref=e147]: 마우스를 올려 데이터 압축
+              - generic [ref=e152]:
+                - generic [ref=e153]:
+                  - generic [ref=e154]:
+                    - img [ref=e156]
+                    - generic [ref=e160]:
+                      - generic [ref=e161]: 오늘의 통합 위험도
+                      - generic [ref=e162]: 김포 하우스 토마토 기준
+                  - generic [ref=e163]: 주의
+                - generic [ref=e164]:
+                  - generic [ref=e165]:
+                    - generic [ref=e166]: Score
+                    - generic [ref=e167]:
+                      - generic [ref=e168]: "72"
+                      - generic [ref=e169]: /100
+                  - generic [ref=e170]:
+                    - generic [ref=e171]:
+                      - img [ref=e172]
+                      - text: 강수·습도 상승
+                    - generic [ref=e177]: 방제 효율이 떨어질 수 있으니 점검 후 작업을 권장합니다.
+        - generic [ref=e178]:
+          - article [ref=e179]:
+            - img "위험 신호 대시보드" [ref=e180]
+            - generic [ref=e182]:
+              - heading "위험 신호 통합" [level=3] [ref=e184]
+              - generic [ref=e185]: 주의 1건
+            - generic [ref=e186]:
+              - paragraph [ref=e187]: 기상 데이터와 위험 정보를 한 화면에서 파악합니다.
+              - generic [ref=e188]:
+                - img [ref=e189]
+                - text: 잎곰팡이병 주의보
+          - article [ref=e191]:
+            - img "병해충 진단 예시" [ref=e192]
+            - generic [ref=e196]:
+              - img [ref=e197]
+              - text: 잎곰팡이병 88%
+            - generic [ref=e204]:
+              - heading "사진 기반 진단" [level=3] [ref=e206]
+              - img [ref=e207]
+            - paragraph [ref=e215]: 현장 사진으로 진단하고 조치 방법을 확인합니다.
+          - article [ref=e216]:
+            - img "작업 및 상담 흐름" [ref=e217]
+            - heading "작업·상담 흐름" [level=3] [ref=e221]
+            - generic [ref=e222]:
+              - paragraph [ref=e223]: 처방부터 작업 실행까지 하나의 워크플로우로 연결합니다.
+              - generic [ref=e224]:
+                - img [ref=e225]
+                - text: 현장 진단 완료
+    - generic [ref=e236]:
+      - heading "미래 농업의 기준, 지금 경험하세요." [level=2] [ref=e237]:
+        - text: 미래 농업의 기준,
+        - text: 지금 경험하세요.
+      - link "대시보드로 시작하기" [ref=e239] [cursor=pointer]:
+        - /url: /dashboard
+        - text: 대시보드로 시작하기
+        - img [ref=e240]

@@ -1,0 +1,386 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e4]:
+    - generic [ref=e8]:
+      - generic [ref=e10]:
+        - img [ref=e12]
+        - generic [ref=e16]:
+          - generic [ref=e17]: FieldGuard AI
+          - generic [ref=e18]: 현장 의사결정 보조
+      - generic [ref=e20]:
+        - generic [ref=e21]: 주 메뉴
+        - list [ref=e23]:
+          - listitem [ref=e24]:
+            - link "대시보드" [ref=e25] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e26]
+              - generic [ref=e31]: 대시보드
+          - listitem [ref=e32]:
+            - link "필지 지도" [ref=e33] [cursor=pointer]:
+              - /url: /fields/map
+              - img [ref=e34]
+              - generic [ref=e36]: 필지 지도
+          - listitem [ref=e37]:
+            - link "작업 카드" [ref=e38] [cursor=pointer]:
+              - /url: /tasks
+              - img [ref=e39]
+              - generic [ref=e42]: 작업 카드
+          - listitem [ref=e43]:
+            - link "사진 판독" [ref=e44] [cursor=pointer]:
+              - /url: /diagnosis
+              - img [ref=e45]
+              - generic [ref=e48]: 사진 판독
+          - listitem [ref=e49]:
+            - link "자료/상담" [ref=e50] [cursor=pointer]:
+              - /url: /reports
+              - img [ref=e51]
+              - generic [ref=e54]: 자료/상담
+          - listitem [ref=e55]:
+            - link "설정" [ref=e56] [cursor=pointer]:
+              - /url: /settings
+              - img [ref=e57]
+              - generic [ref=e60]: 설정
+    - generic [ref=e61]:
+      - banner [ref=e62]:
+        - button "Toggle Sidebar" [ref=e63] [cursor=pointer]:
+          - img
+          - generic [ref=e64]: Toggle Sidebar
+        - generic [ref=e65]: 2026년 5월 7일 (목)
+        - generic [ref=e66]:
+          - combobox [ref=e67] [cursor=pointer]:
+            - generic: 필지 선택
+            - img [ref=e68]
+          - generic [ref=e70]: 마지막 갱신 —
+          - button "동기화" [ref=e71] [cursor=pointer]:
+            - img
+      - main [ref=e72]:
+        - generic [ref=e74]:
+          - generic [ref=e155]:
+            - generic:
+              - generic:
+                - img [ref=e376]
+                - img [ref=e377]
+                - img [ref=e378]
+                - img [ref=e379]
+                - img [ref=e380]
+                - img [ref=e381]
+                - img [ref=e382]
+                - img [ref=e383]
+                - img [ref=e384]
+                - img [ref=e385]
+                - img [ref=e386]
+                - img [ref=e387]
+                - img [ref=e388]
+                - img [ref=e389]
+                - img [ref=e390]
+                - img [ref=e391]
+                - img [ref=e392]
+                - img [ref=e393]
+                - img [ref=e394]
+                - img [ref=e395]
+                - img [ref=e396]
+                - img [ref=e397]
+                - img [ref=e398]
+                - img [ref=e399]
+                - img [ref=e400]
+                - img [ref=e401]
+                - img [ref=e402]
+                - img [ref=e403]
+                - img [ref=e404]
+                - img [ref=e405]
+                - img [ref=e406]
+                - img [ref=e407]
+                - img [ref=e408]
+                - img [ref=e409]
+                - img [ref=e410]
+                - img [ref=e411]
+                - img [ref=e412]
+                - img [ref=e413]
+                - img [ref=e414]
+                - img [ref=e415]
+                - img [ref=e416]
+                - img [ref=e417]
+                - img [ref=e418]
+                - img [ref=e419]
+                - img [ref=e420]
+                - img [ref=e421]
+                - img [ref=e422]
+                - img [ref=e423]
+                - img [ref=e424]
+                - img [ref=e425]
+                - img [ref=e426]
+                - img [ref=e427]
+                - img [ref=e428]
+                - img [ref=e429]
+                - img [ref=e430]
+                - img [ref=e431]
+                - img [ref=e432]
+                - img [ref=e433]
+                - img [ref=e434]
+                - img [ref=e435]
+                - img [ref=e436]
+                - img [ref=e437]
+                - img [ref=e438]
+                - img [ref=e439]
+                - img [ref=e440]
+                - img [ref=e441]
+                - img [ref=e442]
+                - img [ref=e443]
+                - img [ref=e444]
+                - img [ref=e445]
+                - img [ref=e446]
+                - img [ref=e447]
+                - img [ref=e448]
+                - img [ref=e449]
+                - img [ref=e450]
+                - img [ref=e451]
+                - img [ref=e452]
+                - img [ref=e453]
+                - img [ref=e454]
+                - img [ref=e455]
+                - img [ref=e456]
+                - img [ref=e457]
+                - img [ref=e458]
+                - img [ref=e459]
+                - img [ref=e460]
+                - img [ref=e461]
+                - img [ref=e462]
+                - img [ref=e463]
+                - img [ref=e464]
+                - img [ref=e465]
+                - img [ref=e466]
+                - img [ref=e467]
+                - img [ref=e468]
+                - img [ref=e469]
+                - img [ref=e470]
+                - img [ref=e471]
+                - img [ref=e472]
+                - img [ref=e473]
+                - img [ref=e474]
+                - img [ref=e475]
+                - img [ref=e476]
+                - img [ref=e477]
+                - img [ref=e478]
+                - img [ref=e479]
+                - img [ref=e480]
+                - img [ref=e481]
+                - img [ref=e482]
+                - img [ref=e483]
+                - img [ref=e484]
+                - img [ref=e485]
+                - img [ref=e535]
+                - img [ref=e536]
+                - img [ref=e537]
+                - img [ref=e538]
+                - img [ref=e539]
+                - img [ref=e486]
+                - img [ref=e487]
+                - img [ref=e540]
+                - img [ref=e488]
+                - img [ref=e541]
+                - img [ref=e542]
+                - img [ref=e543]
+                - img [ref=e544]
+                - img [ref=e545]
+                - img [ref=e546]
+                - img [ref=e547]
+                - img [ref=e548]
+                - img [ref=e549]
+                - img [ref=e550]
+                - img [ref=e551]
+                - img [ref=e552]
+                - img [ref=e553]
+                - img [ref=e554]
+                - img [ref=e555]
+                - img [ref=e556]
+                - img [ref=e557]
+                - img [ref=e558]
+                - img [ref=e559]
+                - img [ref=e560]
+                - img [ref=e561]
+              - img [ref=e296]
+              - generic:
+                - img [ref=e489]
+                - img [ref=e490]
+                - img [ref=e491]
+                - img [ref=e492]
+                - img [ref=e493]
+                - img [ref=e494]
+                - img [ref=e495]
+                - img [ref=e496]
+                - img [ref=e497]
+                - img [ref=e498]
+                - img [ref=e499]
+                - img [ref=e500]
+                - img [ref=e501]
+                - img [ref=e502]
+                - img [ref=e503]
+                - img [ref=e504]
+                - img [ref=e505]
+                - img [ref=e506]
+                - img [ref=e507]
+                - img [ref=e508]
+                - img [ref=e509]
+                - img [ref=e510]
+                - img [ref=e511]
+                - img [ref=e512]
+                - img [ref=e562]
+                - img [ref=e513]
+                - img [ref=e563]
+                - img [ref=e564]
+                - img [ref=e565]
+                - img [ref=e566]
+                - img [ref=e567]
+                - img [ref=e568]
+                - img [ref=e569]
+                - img [ref=e570]
+                - img [ref=e571]
+                - img [ref=e572]
+                - img [ref=e573]
+                - img [ref=e574]
+                - img [ref=e575]
+                - img [ref=e576]
+                - img [ref=e577]
+                - img [ref=e578]
+                - img [ref=e579]
+                - img [ref=e580]
+                - img [ref=e581]
+                - img [ref=e582]
+                - img [ref=e583]
+                - img [ref=e584]
+                - img [ref=e585]
+                - img [ref=e586]
+                - img [ref=e587]
+                - img [ref=e588]
+                - img [ref=e589]
+                - img [ref=e590]
+                - img [ref=e591]
+                - img [ref=e592]
+                - img [ref=e593]
+                - img [ref=e594]
+                - img [ref=e595]
+                - img [ref=e596]
+                - img [ref=e597]
+                - img [ref=e598]
+                - img [ref=e599]
+              - img [ref=e601]
+            - generic [ref=e602]:
+              - text: 본 시스템에서 제공하는 정보는 법적인 효력이 없으며, 참고용으로만 활용하시기 바랍니다
+              - img "국토지리정보원" [ref=e603]
+              - img "농림수산식품교육문화정보원" [ref=e604]
+              - img "농림축산식품부" [ref=e605]
+              - text: "시스템 문의 : 031-778-7728"
+          - generic [ref=e82]:
+            - generic [ref=e83]:
+              - generic [ref=e84]: F
+              - generic [ref=e85]:
+                - generic [ref=e86]: FARMMAP
+                - generic [ref=e87]: FieldGuard AI
+            - generic [ref=e88]:
+              - generic [ref=e89]: 팜맵 검색
+              - generic [ref=e90]: PNU
+              - generic [ref=e91]: 지역 조건
+              - generic [ref=e92]: 필지 등록
+          - generic [ref=e93]:
+            - generic [ref=e95]:
+              - generic [ref=e96]:
+                - img [ref=e97]
+                - text: 팜맵 검색
+              - button "검색 결과 초기화" [ref=e100] [cursor=pointer]:
+                - img
+            - generic [ref=e102]:
+              - tablist [ref=e103]:
+                - tab "주소" [ref=e104] [cursor=pointer]
+                - tab "지역" [active] [selected] [ref=e105] [cursor=pointer]
+              - tabpanel "지역" [ref=e606]:
+                - generic [ref=e607]:
+                  - generic [ref=e608]:
+                    - generic [ref=e609]: 지역 *
+                    - button "코드 갱신" [ref=e610] [cursor=pointer]:
+                      - img
+                      - text: 코드 갱신
+                  - generic [ref=e611]:
+                    - combobox "시도" [disabled] [ref=e612]:
+                      - generic: 시도
+                      - img [ref=e613]
+                    - combobox "시군구" [disabled] [ref=e615]:
+                      - generic: 시군구
+                      - img [ref=e616]
+                    - combobox "읍면동" [disabled] [ref=e618]:
+                      - generic: 읍면동
+                      - img [ref=e619]
+                    - combobox "리" [disabled] [ref=e621]:
+                      - generic: 리
+                      - img [ref=e622]
+                  - paragraph [ref=e624]: 필지목록 1건
+                - generic [ref=e625]:
+                  - generic [ref=e626]:
+                    - generic [ref=e627]: 번지
+                    - generic [ref=e628]:
+                      - generic [ref=e629]: 산
+                      - checkbox "산" [ref=e630] [cursor=pointer]
+                  - generic [ref=e631]:
+                    - generic [ref=e632]:
+                      - text: 본번
+                      - textbox "본번" [ref=e633]
+                    - generic [ref=e634]: ~
+                    - generic [ref=e635]:
+                      - text: 부번
+                      - textbox "부번" [ref=e636]
+                - generic [ref=e637]:
+                  - text: 면적(m²)
+                  - generic [ref=e638]:
+                    - textbox "최소" [ref=e639]
+                    - generic [ref=e640]: ~
+                    - textbox "최대" [ref=e641]
+                - generic [ref=e642]:
+                  - text: 분류
+                  - combobox [ref=e643] [cursor=pointer]:
+                    - generic: 전체(논, 밭, 과수, 시설)
+                    - img [ref=e644]
+                - button "검색하기" [disabled]:
+                  - img
+                  - text: 검색하기
+                - generic [ref=e646]:
+                  - generic [ref=e647]:
+                    - generic [ref=e648]: 필지목록(1건)
+                    - generic [ref=e649]: 분류명
+                  - button "세종특별자치시 연기면 수산리 3611031024201550000 · 밭 · 3,965.048㎡ 36.5484105, 127.2381182" [ref=e650] [cursor=pointer]:
+                    - generic [ref=e651]:
+                      - generic [ref=e652]: 세종특별자치시 연기면 수산리
+                      - img [ref=e653]
+                    - generic [ref=e656]: 3611031024201550000 · 밭 · 3,965.048㎡
+                    - generic [ref=e657]: 36.5484105, 127.2381182
+          - complementary [ref=e128]:
+            - generic [ref=e129]:
+              - generic [ref=e130]:
+                - generic [ref=e131]:
+                  - img [ref=e658]
+                  - text: 선택 필지 정보
+                - paragraph [ref=e135]: 필지목록 1건
+              - generic [ref=e136]: "입력 방식: PNU 조회"
+            - generic [ref=e137]:
+              - generic [ref=e138]:
+                - text: 필지명
+                - 'textbox "예: 배추 - 해룡면" [ref=e139]': 세종특별자치시 연기면 수산리 밭
+              - generic [ref=e140]:
+                - text: 작물명
+                - 'textbox "예: 배추" [ref=e141]'
+              - button "선택한 필지 등록" [disabled]:
+                - img
+                - text: 선택한 필지 등록
+            - generic [ref=e142]:
+              - generic [ref=e143]:
+                - generic [ref=e144]: 좌표
+                - generic [ref=e145]: 36.5484105, 127.2381182
+              - generic [ref=e146]:
+                - generic [ref=e147]: PNU
+                - generic [ref=e148]: "3611031024201550000"
+              - generic [ref=e149]:
+                - generic [ref=e150]: 법정동주소
+                - generic [ref=e151]: 세종특별자치시 연기면 수산리
+              - generic [ref=e152]:
+                - generic [ref=e153]: 분류/면적
+                - generic [ref=e154]: 밭 · 3,965.048㎡
