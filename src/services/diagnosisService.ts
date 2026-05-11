@@ -379,7 +379,7 @@ function rankDiagnosisReferencesForPhoto(
       referenceParts,
     };
   });
-  const MIN_REQUESTED_PART_SCORE = 3;
+  const MIN_REQUESTED_PART_SCORE = 2;
   const filteredReferences = rankedReferences.filter((item) =>
     item.referenceParts.size === 0 ||
     (
@@ -744,12 +744,19 @@ export async function runPhotoDiagnosis(input: RunDiagnosisInput): Promise<Diagn
   );
   input.onCandidateReferences?.(candidateReferences);
 
+  if (!candidateReferences.length && hadCandidateReferencesBeforePartFilter) {
+    // 부위 필터로 후보가 전부 걸러지면, 필터 없이 전체 후보를 Gemini에게 넘겨서 AI가 직접 판단
+    candidateReferences = rankDiagnosisReferencesByAppearance(
+      appearanceResult.appearanceAssessment,
+      input.candidateReferences ?? await getNpmsPhotoDiagnosisReferences(input.cropName.trim(), PHOTO_DIAGNOSIS_REFERENCE_LIMIT),
+    );
+    input.onCandidateReferences?.(candidateReferences);
+  }
+
   if (!candidateReferences.length) {
     return createAppearanceOnlyResult(
       appearanceResult,
-      hadCandidateReferencesBeforePartFilter
-        ? "촬영 부위와 맞는 NCPMS 후보 없음. 촬영 부위를 확인하거나 해당 부위를 다시 촬영하세요."
-        : "NCPMS 후보 없음. 작물명을 확인한 뒤 다시 시도하세요.",
+      "NCPMS 후보 없음. 작물명을 확인한 뒤 다시 시도하세요.",
     );
   }
 

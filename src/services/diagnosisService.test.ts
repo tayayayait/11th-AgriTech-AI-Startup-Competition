@@ -549,47 +549,52 @@ describe("runPhotoDiagnosis", () => {
     expect(result.candidates[0].sourceCandidateId).toBe("FT040603:SVC05:D00004216");
   });
 
-  it("returns appearance-only result when all NCPMS references are unrelated to the photographed fruit part", async () => {
-    analyzeWithGeminiMock.mockResolvedValueOnce(grapeMoldAppearanceResponse);
+  it("passes all candidates to Gemini when body-part filter removes every candidate", async () => {
+    analyzeWithGeminiMock
+      .mockResolvedValueOnce(grapeMoldAppearanceResponse)
+      .mockResolvedValueOnce(emptyComparisonResponse);
     const onCandidateReferences = vi.fn();
+
+    const allLeafAndBranchRefs = [
+      {
+        id: "FT040603:SVC05:D00004205",
+        name: "갈색무늬병",
+        kind: "disease" as const,
+        cropName: "포도",
+        category: "병생태",
+        thumbImg: null,
+        detailServiceCode: "SVC05" as const,
+        detailKey: "D00004205",
+        sections: [{ title: "병 증상", content: "성숙된 잎에 등황색 내지 흑갈색의 병반이 형성된다." }],
+        images: [],
+      },
+      {
+        id: "FT040603:SVC05:D00009999",
+        name: "가지마름병",
+        kind: "disease" as const,
+        cropName: "포도",
+        category: "병생태",
+        thumbImg: null,
+        detailServiceCode: "SVC05" as const,
+        detailKey: "D00009999",
+        sections: [{ title: "병 증상", content: "가지와 줄기에 갈색 궤양이 생기고 마른다." }],
+        images: [],
+      },
+    ];
 
     const result = await runPhotoDiagnosis({
       bodyPart: "열매",
       cropName: "포도",
       files: [{ mimeType: "image/jpeg", data: "base64" }],
-      candidateReferences: [
-        {
-          id: "FT040603:SVC05:D00004205",
-          name: "갈색무늬병",
-          kind: "disease" as const,
-          cropName: "포도",
-          category: "병생태",
-          thumbImg: null,
-          detailServiceCode: "SVC05" as const,
-          detailKey: "D00004205",
-          sections: [{ title: "병 증상", content: "성숙된 잎에 등황색 내지 흑갈색의 병반이 형성된다." }],
-          images: [],
-        },
-        {
-          id: "FT040603:SVC05:D00009999",
-          name: "가지마름병",
-          kind: "disease" as const,
-          cropName: "포도",
-          category: "병생태",
-          thumbImg: null,
-          detailServiceCode: "SVC05" as const,
-          detailKey: "D00009999",
-          sections: [{ title: "병 증상", content: "가지와 줄기에 갈색 궤양이 생기고 마른다." }],
-          images: [],
-        },
-      ],
+      candidateReferences: allLeafAndBranchRefs,
       onCandidateReferences,
     });
 
-    expect(analyzeWithGeminiMock).toHaveBeenCalledTimes(1);
-    expect(onCandidateReferences).toHaveBeenCalledWith([]);
-    expect(result.candidates).toEqual([]);
-    expect(result.limitations).toContain("촬영 부위와 맞는 NCPMS 후보 없음. 촬영 부위를 확인하거나 해당 부위를 다시 촬영하세요.");
+    // 부위 필터로 전부 걸러져도 전체 후보를 Gemini에게 넘겨서 AI가 판단
+    expect(analyzeWithGeminiMock.mock.calls.length).toBeGreaterThanOrEqual(2);
+    // onCandidateReferences가 전체 후보로 다시 호출됨
+    const lastCallArgs = onCandidateReferences.mock.calls[onCandidateReferences.mock.calls.length - 1]?.[0];
+    expect(lastCallArgs?.length).toBeGreaterThan(0);
   });
 
   it("asks Gemini to select the closest NCPMS candidate when comparison returns no candidate", async () => {
