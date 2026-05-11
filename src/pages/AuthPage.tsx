@@ -45,6 +45,29 @@ export default function AuthPage() {
     setNoticeMessage(null);
   }, [mode]);
 
+  // ── 자동 로그인: 페이지 진입 시 기본 계정으로 즉시 로그인 시도 ──
+  useEffect(() => {
+    if (isLoading || user || submitting) return;
+    if (!email.trim() || password.length < 6) return;
+
+    let cancelled = false;
+    setSubmitting(true);
+
+    signIn({ email, password })
+      .then(() => {
+        if (!cancelled) navigate(redirectPath, { replace: true });
+      })
+      .catch((error) => {
+        if (!cancelled) setErrorMessage(toErrorMessage(error));
+      })
+      .finally(() => {
+        if (!cancelled) setSubmitting(false);
+      });
+
+    return () => { cancelled = true; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading]);
+
   if (!isLoading && user) {
     return <Navigate to={redirectPath} replace />;
   }
