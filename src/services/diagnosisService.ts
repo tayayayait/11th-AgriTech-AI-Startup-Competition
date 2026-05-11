@@ -26,7 +26,7 @@ interface RunDiagnosisInput {
 
 const DIAGNOSIS_MAX_OUTPUT_TOKENS = [1200, 1800];
 const PHOTO_DIAGNOSIS_REFERENCE_LIMIT = 16;
-const FALLBACK_REFERENCE_MATCH_THRESHOLD = 5;
+const FALLBACK_REFERENCE_MATCH_THRESHOLD = 10;
 
 type PlantPartKey = "leaf" | "fruit" | "stem" | "root" | "flower";
 
@@ -110,7 +110,7 @@ const APPEARANCE_MATCH_GROUPS: AppearanceMatchGroup[] = [
   {
     name: "부패/썩음",
     appearanceTerms: ["부패", "썩", "물러", "무름"],
-    referenceTerms: ["부패", "썩", "무름", "물러", "과실", "과경"],
+    referenceTerms: ["부패", "썩", "무름", "물러"],
     weight: 4,
     check: "부패가 과실 표면인지 꼭지/과경 주변인지 확인하세요.",
   },
@@ -157,8 +157,8 @@ function kindLabel(reference: NpmsDiagnosisReference): string {
 
 function summarizeReference(reference: NpmsDiagnosisReference, index: number): string {
   const sections = reference.sections
-    .slice(0, 3)
-    .map((section) => `${section.title}: ${section.content.slice(0, 160)}`)
+    .slice(0, 5)
+    .map((section) => `${section.title}: ${section.content.slice(0, 300)}`)
     .join(" / ");
 
   return [
@@ -266,7 +266,7 @@ function resolveRequestedPlantParts(
   ].join(" "));
 }
 
-function isActionOrPreventionSection(title: string): boolean {
+function isNonSymptomSection(title: string): boolean {
   const normalized = normalizeMatchText(title);
   return normalized.includes("방제") ||
     normalized.includes("예방") ||
@@ -274,19 +274,30 @@ function isActionOrPreventionSection(title: string): boolean {
     normalized.includes("농약") ||
     normalized.includes("처리") ||
     normalized.includes("prvn") ||
-    normalized.includes("prevent");
+    normalized.includes("prevent") ||
+    normalized.includes("전염경로") ||
+    normalized.includes("전염") ||
+    normalized.includes("발생생태") ||
+    normalized.includes("생태정보") ||
+    normalized.includes("분포정보") ||
+    normalized.includes("검역");
+}
+
+/** @deprecated Use isNonSymptomSection instead. Kept for backward compatibility with Diagnosis.tsx. */
+function isActionOrPreventionSection(title: string): boolean {
+  return isNonSymptomSection(title);
 }
 
 function buildReferencePlantPartText(reference: NpmsDiagnosisReference): string {
-  const evidenceSections = reference.sections
-    .filter((section) => !isActionOrPreventionSection(section.title))
+  const symptomSections = reference.sections
+    .filter((section) => !isNonSymptomSection(section.title))
     .flatMap((section) => [section.title, section.content]);
   const imageTexts = reference.images.flatMap((image) => [image.title, image.category ?? ""]);
 
   return [
     reference.name,
     reference.category,
-    ...evidenceSections,
+    ...symptomSections,
     ...imageTexts,
   ].join(" ");
 }
@@ -368,10 +379,12 @@ function rankDiagnosisReferencesForPhoto(
       referenceParts,
     };
   });
+  const MIN_REQUESTED_PART_SCORE = 3;
   const filteredReferences = rankedReferences.filter((item) =>
     item.referenceParts.size === 0 ||
     (
       hasIntersection(requestedParts, item.referenceParts) &&
+      item.requestedPartScore >= MIN_REQUESTED_PART_SCORE &&
       item.requestedPartScore >= item.competingPartScore
     ),
   );
@@ -488,6 +501,7 @@ function buildComparisonPrompt(
     "candidateId는 반드시 아래 NCPMS 후보 목록의 candidateId 중 하나여야 합니다.",
     "name은 후보 목록의 이름을 그대로 사용하세요. 자유롭게 병명이나 해충명을 만들지 마세요.",
     "촬영 부위와 명확히 맞지 않는 전용 후보는 후보 목록에서 제외되어 있습니다. 응답에서도 촬영 부위와 다른 전용 후보를 만들지 마세요.",
+    `촬영 부위가 '${bodyPart}'입니다. 이 부위에 발생하는 병해충만 후보로 선택하세요. 예: 열매 사진이면 줄기/잎/뿌리 전용 병해충은 후보로 선택하지 마세요.`,
     "사진에서 NCPMS 후보와 연결되는 병징, 변색, 벌레, 피해 흔적이 확인되지 않으면 후보를 억지로 고르지 마세요.",
     `그 경우 candidates는 빈 배열로 두고 limitations에 '${NO_VISIBLE_SYMPTOM_LIMITATION}'를 넣으세요.`,
     "appearanceAssessment는 1차 외관 분석과 같은 의미를 유지하세요.",
@@ -521,6 +535,7 @@ function buildAiCandidateSelectionPrompt(
     "후보를 고를 경우 candidateId와 name은 반드시 아래 NCPMS 후보 목록 중 하나를 그대로 사용하세요.",
     "목록 밖 병명이나 해충명은 만들 수 없습니다.",
     "촬영 부위와 명확히 맞지 않는 전용 후보는 후보 목록에서 제외되어 있습니다. 응답에서도 촬영 부위와 다른 전용 후보를 만들지 마세요.",
+    `촬영 부위가 '${bodyPart}'입니다. 이 부위에 주로 나타나는 병해충만 후보로 고르세요. 다른 부위(줄기, 잎, 뿌리 등) 전용 병해충은 제외하세요.`,
     "확정 진단이 아닙니다. 사진상 양상과 공식 후보가 어느 정도 가까운지 low 또는 medium confidence로 표현하세요.",
     "사진상 외관 이상과 어떤 후보도 의미적으로 맞지 않으면 candidates는 빈 배열로 두세요.",
     "반드시 JSON 객체만 출력하세요. markdown, 설명문, 코드블록은 금지입니다.",
@@ -760,10 +775,10 @@ export async function runPhotoDiagnosis(input: RunDiagnosisInput): Promise<Diagn
       signal: input.signal,
     })
     : null;
-  const evidenceFallbackResult = comparisonResult.candidates.length === 0 && !aiSelectionResult
-    ? createEvidenceFallbackResult(appearanceResult, candidateReferences)
-    : null;
-  const finalComparisonResult = aiSelectionResult ?? evidenceFallbackResult ?? comparisonResult;
+  // T4: 키워드 매칭 Fallback 비활성화 — Gemini의 의미적 판단을 존중합니다.
+  // 이전에는 Gemini가 적절한 후보를 선택하지 못해도 키워드 매칭으로 관련 없는
+  // 병명을 강제 표시했으나, 이는 부위와 무관한 오진의 근본 원인이었습니다.
+  const finalComparisonResult = aiSelectionResult ?? comparisonResult;
 
   return attachNpmsOfficialSources(
     mergeAppearanceWithComparison(appearanceResult, finalComparisonResult),
