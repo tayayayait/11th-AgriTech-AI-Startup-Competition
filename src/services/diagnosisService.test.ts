@@ -619,7 +619,7 @@ describe("runPhotoDiagnosis", () => {
     expect(result.limitations).not.toContain(NO_VISIBLE_SYMPTOM_EVIDENCE_LIMITATION);
   });
 
-  it("returns Gemini judgment (empty candidates) instead of keyword fallback when Gemini keeps returning empty candidates", async () => {
+  it("uses evidence fallback when Gemini keeps returning empty candidates but NCPMS symptoms strongly match", async () => {
     analyzeWithGeminiMock
       .mockResolvedValueOnce(appleRotAppearanceResponse)
       .mockResolvedValueOnce(emptyComparisonResponse)
@@ -632,9 +632,15 @@ describe("runPhotoDiagnosis", () => {
       candidateReferences: appleRotReferences,
     });
 
-    // T4: Fallback 비활성화 — Gemini가 후보를 선택하지 못하면 후보 없음으로 반환
-    expect(result.candidates).toEqual([]);
-    expect(result.limitations.length).toBeGreaterThan(0);
+    expect(result.candidates).toHaveLength(1);
+    expect(result.candidates[0]).toMatchObject({
+      name: "갈색무늬썩음병",
+      confidenceBand: "낮음",
+    });
+    expect(result.candidates[0].visualReasons.join(" ")).toContain("부패/썩음");
+    expect(result.limitations).toContain(
+      "Gemini 후보 선택이 비어 있어 외관 근거와 NCPMS 상세 증상 텍스트가 겹치는 공식 후보를 낮은 신뢰도로 제시합니다.",
+    );
   });
 
   it("returns a limited result instead of failing when the first Gemini step never returns parseable JSON", async () => {

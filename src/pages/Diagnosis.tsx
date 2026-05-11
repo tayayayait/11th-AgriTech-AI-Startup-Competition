@@ -1,13 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { AlertCircle, CheckCircle2, ChevronDown, ExternalLink, Loader2, RotateCcw, Trash2, Upload, XCircle } from "lucide-react";
+import { AlertCircle, CheckCircle2, ChevronDown, ExternalLink, Loader2, Maximize2, RotateCcw, Trash2, Upload, XCircle } from "lucide-react";
 import { AiDisclaimer } from "@/components/AiDisclaimer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
@@ -30,13 +31,7 @@ import {
 } from "@/services/diagnosisRecordService";
 import { runPhotoDiagnosis } from "@/services/diagnosisService";
 import type { NpmsDiagnosisReference, NpmsPestDetailImage } from "@/services/npmsPestService";
-import {
-  getPsisPesticideRegistrations,
-} from "@/services/psisPesticideRegistrationService";
-import {
-  getRepresentativePesticideOptions,
-  type PesticideRepresentativeOption,
-} from "@/services/psisPesticideRecommendationService";
+
 import { toast } from "sonner";
 
 type DiagnosisStatus =
@@ -65,6 +60,77 @@ const BODY_PART_OPTIONS = [
   "열매",
   "줄기/뿌리",
   "전체/기타",
+];
+
+type OfficialImagePlantPart = "leaf" | "fruit" | "stem" | "root" | "flower";
+
+interface OfficialImagePartDefinition {
+  key: OfficialImagePlantPart;
+  terms: string[];
+}
+
+interface NpmsImageRelevanceContext {
+  bodyPart?: string | null;
+  appearanceAssessment?: DiagnosisResult["appearanceAssessment"];
+  candidate?: DiagnosisResult["candidates"][number];
+}
+
+const OFFICIAL_IMAGE_PART_DEFINITIONS: OfficialImagePartDefinition[] = [
+  {
+    key: "leaf",
+    terms: ["잎", "엽", "엽병", "잎자루", "잎몸", "leaf", "leaves", "foliage"],
+  },
+  {
+    key: "fruit",
+    terms: ["열매", "과실", "과육", "과피", "과면", "과경", "과심", "fruit", "fruits", "berry", "berries"],
+  },
+  {
+    key: "stem",
+    terms: ["줄기", "가지", "수간", "주간", "수피", "목질부", "stem", "stems", "branch", "branches", "trunk", "shoot", "canker"],
+  },
+  {
+    key: "root",
+    terms: ["뿌리", "근부", "근권", "근경", "root", "roots"],
+  },
+  {
+    key: "flower",
+    terms: ["꽃", "화기", "개화", "꽃잎", "화방", "flower", "flowers", "blossom", "bloom"],
+  },
+];
+
+const OFFICIAL_IMAGE_SYMPTOM_TERMS = [
+  "증상",
+  "병징",
+  "피해",
+  "부패",
+  "썩",
+  "곰팡",
+  "균사",
+  "변색",
+  "갈변",
+  "갈색",
+  "흑갈",
+  "반점",
+  "병반",
+  "무늬",
+  "상처",
+  "균열",
+  "시듦",
+  "시들",
+  "마름",
+  "해충",
+  "벌레",
+  "충",
+  "구멍",
+  "symptom",
+  "lesion",
+  "damage",
+  "rot",
+  "mold",
+  "discolor",
+  "brown",
+  "spot",
+  "wilt",
 ];
 
 const MIME_BY_EXTENSION: Record<string, string> = {
@@ -223,7 +289,151 @@ function shouldShowAppearanceAssessment(assessment: DiagnosisResult["appearanceA
     assessment.recommendedActions.length > 0;
 }
 
-function getNpmsDisplayImages(reference: NpmsDiagnosisReference | null): NpmsPestDetailImage[] {
+function normalizeOfficialImageMatchText(value: string): string {
+  return value.replace(/\s+/g, "").toLowerCase();
+}
+
+function countOfficialImageTermOccurrences(text: string, term: string): number {
+  const normalizedTerm = normalizeOfficialImageMatchText(term);
+  if (!normalizedTerm) return 0;
+
+  let count = 0;
+  let fromIndex = 0;
+  while (fromIndex < text.length) {
+    const index = text.indexOf(normalizedTerm, fromIndex);
+    if (index < 0) break;
+    count += 1;
+    fromIndex = index + normalizedTerm.length;
+  }
+  return count;
+}
+
+function detectOfficialImagePartScores(text: string): Map<OfficialImagePlantPart, number> {
+  const normalized = normalizeOfficialImageMatchText(text);
+  const scores = new Map<OfficialImagePlantPart, number>();
+  if (!normalized) return scores;
+
+  for (const definition of OFFICIAL_IMAGE_PART_DEFINITIONS) {
+    let score = 0;
+    for (const term of definition.terms) {
+      score += countOfficialImageTermOccurrences(normalized, term);
+    }
+    if (score > 0) scores.set(definition.key, score);
+  }
+
+  return scores;
+}
+
+function detectOfficialImageParts(text: string): Set<OfficialImagePlantPart> {
+  return new Set(detectOfficialImagePartScores(text).keys());
+}
+
+function officialImagePartIntersectionCount(
+  left: Set<OfficialImagePlantPart>,
+  right: Set<OfficialImagePlantPart>,
+): number {
+  let count = 0;
+  for (const item of left) {
+    if (right.has(item)) count += 1;
+  }
+  return count;
+}
+
+function buildOfficialImageText(image: NpmsPestDetailImage): string {
+  return normalizeOfficialImageMatchText([image.title, image.category ?? ""].join(" "));
+}
+
+function buildOfficialImageContextText(context: NpmsImageRelevanceContext): string {
+  return normalizeOfficialImageMatchText([
+    context.bodyPart ?? "",
+    ...(context.appearanceAssessment?.issueLabels ?? []),
+    context.appearanceAssessment?.summary ?? "",
+    ...(context.appearanceAssessment?.visualReasons ?? []),
+    ...(context.appearanceAssessment?.recommendedActions ?? []),
+    context.candidate?.name ?? "",
+    context.candidate?.summary ?? "",
+    ...(context.candidate?.visualReasons ?? []),
+    ...(context.candidate?.nextChecks ?? []),
+  ].join(" "));
+}
+
+function scoreOfficialImageRelevance(
+  image: NpmsPestDetailImage,
+  context: NpmsImageRelevanceContext,
+  isFallbackThumb: boolean,
+): number {
+  const imageText = buildOfficialImageText(image);
+  const bodyPartParts = detectOfficialImageParts(context.bodyPart ?? "");
+  const contextText = buildOfficialImageContextText(context);
+  const contextParts = detectOfficialImageParts(contextText);
+  const preferredParts = bodyPartParts.size > 0 ? bodyPartParts : contextParts;
+  const imageParts = detectOfficialImageParts(imageText);
+  let score = 0;
+
+  if (preferredParts.size > 0) {
+    const matchedPartCount = officialImagePartIntersectionCount(preferredParts, imageParts);
+    if (matchedPartCount > 0) {
+      score += matchedPartCount * 40;
+    } else if (imageParts.size > 0) {
+      score -= 24;
+    }
+  }
+
+  if (imageText.includes("증상") || imageText.includes("병징") || imageText.includes("피해") || imageText.includes("symptom") || imageText.includes("lesion")) {
+    score += 8;
+  }
+
+  for (const term of OFFICIAL_IMAGE_SYMPTOM_TERMS) {
+    const normalizedTerm = normalizeOfficialImageMatchText(term);
+    if (normalizedTerm && contextText.includes(normalizedTerm) && imageText.includes(normalizedTerm)) {
+      score += 4;
+    }
+  }
+
+  if (isFallbackThumb) score -= 4;
+
+  return score;
+}
+
+function getNpmsDisplayImages(
+  reference: NpmsDiagnosisReference | null,
+  context: NpmsImageRelevanceContext = {},
+): NpmsPestDetailImage[] {
+  if (!reference) return [];
+  const seen = new Set<string>();
+  const images: Array<{ image: NpmsPestDetailImage; index: number; isFallbackThumb: boolean }> = [];
+
+  for (const image of reference.images ?? []) {
+    if (!image.url || seen.has(image.url)) continue;
+    seen.add(image.url);
+    images.push({ image, index: images.length, isFallbackThumb: false });
+  }
+
+  if (reference.thumbImg && !seen.has(reference.thumbImg)) {
+    images.push({
+      image: {
+        url: reference.thumbImg,
+        title: `${reference.name} 대표 이미지`,
+        category: reference.category,
+      },
+      index: images.length,
+      isFallbackThumb: true,
+    });
+  }
+
+  return images
+    .map((item) => ({
+      ...item,
+      score: scoreOfficialImageRelevance(item.image, context, item.isFallbackThumb),
+    }))
+    .sort((a, b) => b.score - a.score || a.index - b.index)
+    .slice(0, 4)
+    .map((item) => item.image);
+}
+
+function getAllNpmsImages(
+  reference: NpmsDiagnosisReference | null,
+): NpmsPestDetailImage[] {
   if (!reference) return [];
   const seen = new Set<string>();
   const images: NpmsPestDetailImage[] = [];
@@ -235,19 +445,27 @@ function getNpmsDisplayImages(reference: NpmsDiagnosisReference | null): NpmsPes
   }
 
   if (reference.thumbImg && !seen.has(reference.thumbImg)) {
-    images.unshift({
+    images.push({
       url: reference.thumbImg,
       title: `${reference.name} 대표 이미지`,
       category: reference.category,
     });
   }
 
-  return images.slice(0, 4);
+  return images;
 }
 
 function NpmsImageGallery({ images }: { images: NpmsPestDetailImage[] }) {
+  if (images.length === 0) {
+    return (
+      <div className="mt-2 rounded-md border border-dashed p-6 text-center text-sm text-muted-foreground">
+        등록된 공식 사진이 없습니다.
+      </div>
+    );
+  }
+
   return (
-    <div className="mt-2 grid gap-3 lg:grid-cols-2">
+    <div className="mt-2 grid gap-3 sm:grid-cols-2">
       {images.map((image) => (
         <figure key={image.url} className="overflow-hidden rounded-md border bg-card">
           <div className="flex h-56 items-center justify-center bg-surface-muted sm:h-64 xl:h-72">
@@ -277,12 +495,35 @@ function isNpmsActionSection(title: string): boolean {
 }
 
 function splitNpmsActionContent(content: string): string[] {
-  const lines = content
-    .split(/\n+/)
+  const rawLines = content.split(/\n+/).map(l => l.trim()).filter(Boolean);
+  const mergedLines: string[] = [];
+
+  for (const line of rawLines) {
+    if (mergedLines.length === 0) {
+      mergedLines.push(line);
+      continue;
+    }
+
+    const prevLine = mergedLines[mergedLines.length - 1];
+    const isListItem = /^[\s·ㆍ•*-]/.test(line) || /^\d+\./.test(line);
+    const prevEndsWithPunctuation = /[.!?]['"]?\)?$/.test(prevLine);
+
+    if (!isListItem && !prevEndsWithPunctuation) {
+      mergedLines[mergedLines.length - 1] += ` ${line}`;
+    } else {
+      mergedLines.push(line);
+    }
+  }
+
+  const lines = mergedLines
     .map((line) => line.replace(/^[\s·ㆍ•*-]+/, "").trim())
     .filter(Boolean);
 
-  if (lines.length > 1) return lines.slice(0, 4);
+  if (lines.length > 1) {
+    return lines.slice(0, 4).map((line) => 
+      line.length > 220 ? `${line.slice(0, 220).trim()}...` : line
+    );
+  }
 
   const oneLine = lines[0] ?? content.trim();
   if (!oneLine) return [];
@@ -302,132 +543,6 @@ function getNpmsActionSections(reference: NpmsDiagnosisReference | null): Array<
     .slice(0, 3);
 }
 
-function officialPesticideValue(value: string | null | undefined): string {
-  return value?.trim() || "확실한 정보 없음";
-}
-
-function DiagnosisPesticideItem({ option }: { option: PesticideRepresentativeOption }) {
-  const item = option.representativeItem;
-  const brandSummary = option.brandNames.length > 1
-    ? `${option.brandNames.slice(0, 3).join(", ")}${option.brandNames.length > 3 ? ` 외 ${option.brandNames.length - 3}개` : ""}`
-    : "대표 상표 1개";
-
-  return (
-    <div className="rounded-md border bg-background p-2">
-      <div className="flex flex-wrap items-start justify-between gap-2">
-        <div>
-          <div className="text-sm font-medium">{option.farmerTitle}</div>
-          <div className="text-xs text-muted-foreground">{option.groupName}</div>
-        </div>
-        {option.useName && <Badge variant="outline">{option.useName}</Badge>}
-      </div>
-      <div className="mt-2 rounded-md bg-surface-muted p-2 text-xs">
-        <div className="text-muted-foreground">먼저 확인할 이유</div>
-        <div className="mt-1 font-medium">{option.whySelected}</div>
-      </div>
-      <div className="mt-2 grid gap-1 text-xs sm:grid-cols-2">
-        <div>
-          <span className="text-muted-foreground">사용 기준 </span>
-          {option.plainUse}
-        </div>
-        <div>
-          <span className="text-muted-foreground">안전 기준 </span>
-          {option.safetyNote}
-        </div>
-        <div>
-          <span className="text-muted-foreground">상표 후보 </span>
-          {brandSummary}
-        </div>
-        <div>
-          <span className="text-muted-foreground">희석/사용량 </span>
-          <span>{officialPesticideValue(option.officialDilution)}</span>
-        </div>
-        <div>
-          <span className="text-muted-foreground">공식 기준 </span>
-          {officialPesticideValue(option.officialPreHarvestInterval)} / {officialPesticideValue(option.officialMaxUseCount)}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function DiagnosisPesticideRegistrationSummary({
-  cropName,
-  targetKeyword,
-}: {
-  cropName: string;
-  targetKeyword: string;
-}) {
-  const normalizedCropName = cropName.trim();
-  const normalizedTarget = targetKeyword.trim();
-  const enabled = normalizedCropName.length > 0 && normalizedTarget.length > 0;
-  const {
-    data,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["diagnosis-psis-pesticide-registrations", normalizedCropName, normalizedTarget],
-    enabled,
-    queryFn: async () => {
-      const result = await getPsisPesticideRegistrations({
-        cropName: normalizedCropName,
-        targetKeyword: normalizedTarget,
-        displayCount: 50,
-      });
-      return getRepresentativePesticideOptions({
-        items: result.items,
-        cropName: normalizedCropName,
-        targetKeyword: normalizedTarget,
-        maxOptions: 3,
-      });
-    },
-    staleTime: 24 * 60 * 60 * 1000,
-  });
-
-  const options = data?.options ?? [];
-
-  return (
-    <div className="mt-3 rounded-md border border-secondary/25 bg-secondary/5 p-3">
-      <div className="flex flex-wrap items-start justify-between gap-2">
-        <div>
-          <div className="text-sm font-medium text-secondary">공식 등록농약 후보</div>
-          <p className="mt-0.5 text-xs text-muted-foreground">
-            PSIS 등록정보 기준입니다. 확정 진단/자동 처방이 아닙니다.
-          </p>
-        </div>
-        <Button asChild size="sm" variant="outline">
-          <Link
-            to={buildPesticideGuideReportUrl({
-              cropName: normalizedCropName,
-              targetKeyword: normalizedTarget,
-            })}
-          >
-            전체 보기
-            <ExternalLink className="h-3 w-3" />
-          </Link>
-        </Button>
-      </div>
-
-      <div className="mt-3 space-y-2">
-        {!enabled && (
-          <p className="text-sm text-muted-foreground">작물명과 후보명이 있어야 등록농약 후보를 조회할 수 있습니다.</p>
-        )}
-        {enabled && isLoading && (
-          <p className="text-sm text-muted-foreground">등록농약 후보를 조회하는 중입니다.</p>
-        )}
-        {enabled && !isLoading && error && (
-          <p className="text-sm text-muted-foreground">등록농약 후보를 불러오지 못했습니다. 농약 안전/등록정보 탭에서 다시 확인하세요.</p>
-        )}
-        {enabled && !isLoading && !error && options.length === 0 && (
-          <p className="text-sm text-muted-foreground">이 후보명으로 확인된 등록농약 후보가 없습니다.</p>
-        )}
-        {options.map((option) => (
-          <DiagnosisPesticideItem key={option.id} option={option} />
-        ))}
-      </div>
-    </div>
-  );
-}
 
 const diagnosisHistoryDateFormatter = new Intl.DateTimeFormat("ko-KR", {
   timeZone: "Asia/Seoul",
@@ -460,10 +575,12 @@ function getHistorySummary(record: DiagnosisRecordHistoryItem): string {
 function DiagnosisResultCard({
   result,
   cropName,
+  bodyPart,
   referenceById,
 }: {
   result: DiagnosisResult;
   cropName: string;
+  bodyPart?: string | null;
   referenceById: Map<string, NpmsDiagnosisReference>;
 }) {
   const appearanceAssessment = result.appearanceAssessment;
@@ -537,7 +654,11 @@ function DiagnosisResultCard({
         {result.candidates.slice(0, 3).map((candidate, index) => {
           const reference = candidate.sourceCandidateId ? referenceById.get(candidate.sourceCandidateId) : null;
           const primaryCheck = candidate.nextChecks[0] ?? "현장에서 병징 위치와 확산 범위를 확인하세요.";
-          const ncpmsImages = getNpmsDisplayImages(reference ?? null);
+          const ncpmsImages = getNpmsDisplayImages(reference ?? null, {
+            appearanceAssessment,
+            bodyPart,
+            candidate,
+          });
           const ncpmsActionSections = getNpmsActionSections(reference ?? null);
 
           return (
@@ -552,10 +673,12 @@ function DiagnosisResultCard({
                 </Badge>
               </div>
 
-              {ncpmsImages.length > 0 && (
+              {ncpmsImages.length > 0 && (() => {
+                const allNcpmsImages = getAllNpmsImages(reference ?? null);
+                return (
                 <div className="mt-3 overflow-hidden rounded-md border">
                   <div className="flex items-center justify-between border-b bg-muted/40 px-3 py-2 text-xs font-medium text-muted-foreground">
-                    <span>NCPMS 공식 대표 사진</span>
+                    <span>NCPMS 공식 연관 사진</span>
                     {ncpmsImages[0].category && <span>{ncpmsImages[0].category}</span>}
                   </div>
                   <div className="bg-surface-muted p-2">
@@ -566,8 +689,28 @@ function DiagnosisResultCard({
                       loading="lazy"
                     />
                   </div>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="ghost" size="sm" className="w-full rounded-none border-t text-xs text-muted-foreground">
+                        <Maximize2 className="mr-1.5 h-3 w-3" />
+                        상세보기 (관련 사진 {allNcpmsImages.length}장)
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="max-h-[90vh] max-w-3xl overflow-y-auto">
+                      <DialogHeader>
+                        <DialogTitle>{candidate.name} — NCPMS 공식 사진</DialogTitle>
+                        {reference && (
+                          <p className="text-sm text-muted-foreground">
+                            {reference.cropName} · {reference.category}
+                          </p>
+                        )}
+                      </DialogHeader>
+                      <NpmsImageGallery images={allNcpmsImages} />
+                    </DialogContent>
+                  </Dialog>
                 </div>
-              )}
+                );
+              })()}
 
               <div className="mt-3 rounded-md bg-muted/40 p-2 text-sm">
                 <span className="text-xs font-medium text-muted-foreground">확인 항목</span>
@@ -646,6 +789,7 @@ function DiagnosisResultCard({
                   )}
                 </div>
               </details>
+
 
               <Button asChild variant="outline" className="mt-3 w-full sm:w-auto">
                 <Link
@@ -735,6 +879,7 @@ function DiagnosisHistoryDetails({
         <DiagnosisResultCard
           result={record.result}
           cropName={historyCropName}
+          bodyPart={record.bodyPart}
           referenceById={historyReferenceById}
         />
         <DiagnosisHistoryChecklistCard checklist={record.checklist} />
@@ -1212,7 +1357,10 @@ export default function Diagnosis() {
         {result && (
           <Card>
             <CardHeader className="pb-3 flex flex-row items-center justify-between">
-              <CardTitle className="text-base">사진 판독 결과</CardTitle>
+              <div className="flex items-center gap-2">
+                <CardTitle className="text-base">사진 판독 결과</CardTitle>
+                <Badge variant={statusBadgeVariant(status)}>{statusLabel(status)}</Badge>
+              </div>
               <Button variant="outline" size="sm" onClick={resetAnalysisOutput}>
                 <RotateCcw className="mr-1.5 h-4 w-4" />
                 새로운 판독
@@ -1281,7 +1429,11 @@ export default function Diagnosis() {
               {result.candidates.slice(0, 3).map((candidate, index) => {
                 const reference = candidate.sourceCandidateId ? referenceById.get(candidate.sourceCandidateId) : null;
                 const primaryCheck = candidate.nextChecks[0] ?? "현장에서 병징 위치와 확산 범위를 확인하세요.";
-                const ncpmsImages = getNpmsDisplayImages(reference ?? null);
+                const ncpmsImages = getNpmsDisplayImages(reference ?? null, {
+                  appearanceAssessment,
+                  bodyPart,
+                  candidate,
+                });
                 const ncpmsActionSections = getNpmsActionSections(reference ?? null);
                 return (
                   <div key={`${candidate.name}-${index}`} className="rounded-md border p-3">
@@ -1295,10 +1447,12 @@ export default function Diagnosis() {
                       </Badge>
                     </div>
 
-                    {ncpmsImages.length > 0 && (
+                    {ncpmsImages.length > 0 && (() => {
+                      const allNcpmsImages = getAllNpmsImages(reference ?? null);
+                      return (
                       <div className="mt-3 overflow-hidden rounded-md border">
                         <div className="flex items-center justify-between border-b bg-muted/40 px-3 py-2 text-xs font-medium text-muted-foreground">
-                          <span>NCPMS 공식 대표 사진</span>
+                          <span>NCPMS 공식 연관 사진</span>
                           {ncpmsImages[0].category && <span>{ncpmsImages[0].category}</span>}
                         </div>
                         <div className="bg-surface-muted p-2">
@@ -1309,8 +1463,28 @@ export default function Diagnosis() {
                             loading="lazy"
                           />
                         </div>
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <Button variant="ghost" size="sm" className="w-full rounded-none border-t text-xs text-muted-foreground">
+                              <Maximize2 className="mr-1.5 h-3 w-3" />
+                              상세보기 (관련 사진 {allNcpmsImages.length}장)
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent className="max-h-[90vh] max-w-3xl overflow-y-auto">
+                            <DialogHeader>
+                              <DialogTitle>{candidate.name} — NCPMS 공식 사진</DialogTitle>
+                              {reference && (
+                                <p className="text-sm text-muted-foreground">
+                                  {reference.cropName} · {reference.category}
+                                </p>
+                              )}
+                            </DialogHeader>
+                            <NpmsImageGallery images={allNcpmsImages} />
+                          </DialogContent>
+                        </Dialog>
                       </div>
-                    )}
+                      );
+                    })()}
 
                     <div className="mt-3 rounded-md bg-muted/40 p-2 text-sm">
                       <span className="text-xs font-medium text-muted-foreground">확인 항목</span>
@@ -1389,6 +1563,7 @@ export default function Diagnosis() {
                         )}
                       </div>
                     </details>
+
 
                     <Button asChild variant="outline" className="mt-3 w-full sm:w-auto">
                       <Link

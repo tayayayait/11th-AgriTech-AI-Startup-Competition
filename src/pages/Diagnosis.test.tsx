@@ -420,6 +420,110 @@ describe("Diagnosis upload warnings", () => {
     expect(screen.getByText("Inspect neighboring fruit.")).toBeVisible();
   });
 
+  it("prioritizes NCPMS official images that match the diagnosed plant part", async () => {
+    getDiagnosisRecordHistoryByFieldMock.mockResolvedValueOnce([
+      {
+        id: "diagnosis-1",
+        createdAt: "2026-05-09T01:02:03.000Z",
+        expiresAt: "2026-06-08T01:02:03.000Z",
+        cropName: "apple",
+        bodyPart: "fruit",
+        imageUrl: "data:image/jpeg;base64,ZmFrZQ==",
+        imageName: "saved-apple.jpg",
+        confidenceBand: "low",
+        fieldSnapshot: {
+          id: "field-1",
+          name: "Gumi apple field",
+          cropName: "apple",
+        },
+        result: {
+          disclaimer: "AI diagnosis disclaimer",
+          appearanceAssessment: {
+            status: "abnormal",
+            confidenceBand: "low",
+            issueLabels: ["rot", "brown discoloration"],
+            summary: "Internal fruit rot is visible.",
+            visualReasons: ["brown fruit flesh"],
+            recommendedActions: ["compare the damaged fruit section"],
+          },
+          candidates: [
+            {
+              sourceCandidateId: "candidate-1",
+              name: "white rot",
+              confidenceBand: "low",
+              summary: "Candidate text overlaps with fruit rot symptoms.",
+              visualReasons: ["fruit rot", "brown discoloration"],
+              weatherReasons: [],
+              nextChecks: ["Compare the fruit lesion with NCPMS fruit photos."],
+              officialSources: [],
+            },
+          ],
+          limitations: [],
+          recommendedPhotos: [],
+          fieldChecklist: [],
+        },
+        candidates: [
+          {
+            sourceCandidateId: "candidate-1",
+            name: "white rot",
+            confidenceBand: "low",
+            summary: "Candidate text overlaps with fruit rot symptoms.",
+            visualReasons: ["fruit rot", "brown discoloration"],
+            weatherReasons: [],
+            nextChecks: ["Compare the fruit lesion with NCPMS fruit photos."],
+            officialSources: [],
+          },
+        ],
+        references: [
+          {
+            id: "candidate-1",
+            name: "white rot",
+            kind: "disease",
+            cropName: "apple",
+            category: "disease ecology",
+            thumbImg: null,
+            detailServiceCode: "SVC05",
+            detailKey: "candidate-1",
+            sections: [{ title: "병 증상", content: "fruit rot and brown discoloration" }],
+            images: [
+              {
+                url: "https://ncpms.example/stem.jpg",
+                title: "white rot stem canker",
+                category: "stem",
+              },
+              {
+                url: "https://ncpms.example/fruit.jpg",
+                title: "white rot fruit symptom",
+                category: "fruit symptom",
+              },
+            ],
+          } satisfies NpmsDiagnosisReference,
+        ],
+        checklist: [],
+      } as never,
+    ]);
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <Diagnosis />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText("Gumi apple field")).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Gumi apple field 판독 기록 상세 보기" }));
+
+    expect(screen.getByAltText("white rot fruit symptom")).toHaveAttribute(
+      "src",
+      "https://ncpms.example/fruit.jpg",
+    );
+    expect(screen.queryByAltText("white rot stem canker")).not.toBeInTheDocument();
+  });
+
   it("deletes a saved diagnosis history item when the trash button is clicked", async () => {
     getDiagnosisRecordHistoryByFieldMock.mockResolvedValueOnce([
       {

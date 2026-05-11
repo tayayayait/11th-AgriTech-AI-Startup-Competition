@@ -768,7 +768,7 @@ function OfficialPhotoSelectionPanel({
               ref={listRef}
               aria-label="NCPMS official photo candidates"
               className="grid gap-3"
-              style={{ gridTemplateColumns: `repeat(auto-fill, minmax(${photoCardMinWidth}px, 1fr))` }}
+              style={{ gridTemplateColumns: `repeat(auto-fit, minmax(${photoCardMinWidth}px, 1fr))` }}
             >
               {visibleCandidates.map((candidate, index) => (
                 <li key={candidate.id} className="min-w-0">

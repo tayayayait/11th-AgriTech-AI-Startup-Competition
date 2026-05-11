@@ -782,10 +782,10 @@ export async function runPhotoDiagnosis(input: RunDiagnosisInput): Promise<Diagn
       signal: input.signal,
     })
     : null;
-  // T4: 키워드 매칭 Fallback 비활성화 — Gemini의 의미적 판단을 존중합니다.
-  // 이전에는 Gemini가 적절한 후보를 선택하지 못해도 키워드 매칭으로 관련 없는
-  // 병명을 강제 표시했으나, 이는 부위와 무관한 오진의 근본 원인이었습니다.
-  const finalComparisonResult = aiSelectionResult ?? comparisonResult;
+  const evidenceFallbackResult = comparisonResult.candidates.length === 0 && !aiSelectionResult
+    ? createEvidenceFallbackResult(appearanceResult, candidateReferences)
+    : null;
+  const finalComparisonResult = aiSelectionResult ?? evidenceFallbackResult ?? comparisonResult;
 
   return attachNpmsOfficialSources(
     mergeAppearanceWithComparison(appearanceResult, finalComparisonResult),

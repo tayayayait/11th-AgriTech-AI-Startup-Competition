@@ -416,7 +416,7 @@ describe("Reports AI consultation", () => {
     expect(within(items[0]).getByText("SVC05")).toBeInTheDocument();
     expect(within(items[0]).getByText("D00000001")).toBeInTheDocument();
     expect(screen.queryByText("Candidate 9")).not.toBeInTheDocument();
-    await waitFor(() => expect(getNpmsPestImageCandidatesMock).toHaveBeenCalledWith("Peach", 8));
+    await waitFor(() => expect(getNpmsPestImageCandidatesMock).toHaveBeenCalledWith("Peach", 40));
   });
 
   it("resizes NCPMS official photo cards with Ctrl mouse wheel", async () => {
