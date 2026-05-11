@@ -27,8 +27,8 @@ export default function AuthPage() {
   const location = useLocation();
   const { user, isLoading, signIn, signUp } = useAuth();
   const [mode, setMode] = useState<AuthMode>("signin");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("dbcdkwo629@naver.com");
+  const [password, setPassword] = useState("12341234");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [noticeMessage, setNoticeMessage] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
