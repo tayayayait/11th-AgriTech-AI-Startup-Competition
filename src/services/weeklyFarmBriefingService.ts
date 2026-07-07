@@ -186,9 +186,6 @@ function getWeeklyFarmBriefingFallbackSourceUrl(weeklyInfo: NongsaroWeeklyInfo):
 }
 
 export function getWeeklyFarmBriefingPdfSourceUrl(weeklyInfo: NongsaroWeeklyInfo): string | null {
-  const sourceUrl = cleanString(weeklyInfo.sourceUrl);
-  if (sourceUrl && hasPdfExtension(weeklyInfo.sourceFileName)) return sourceUrl;
-
   return uniqueCleanStrings([weeklyInfo.sourceUrl, ...weeklyInfo.downUrlList]).find(hasPdfExtension) ?? null;
 }
 

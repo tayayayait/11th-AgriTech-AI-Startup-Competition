@@ -79,7 +79,6 @@ vi.mock("@/services/weeklyFarmBriefingService", () => ({
     sourceFileName?: string | null;
   }) => {
     const sourceUrl = weeklyInfo.sourceUrl?.trim() || null;
-    if (sourceUrl && weeklyInfo.sourceFileName?.trim().toLowerCase().endsWith(".pdf")) return sourceUrl;
     const candidates = [sourceUrl, ...(weeklyInfo.downUrlList ?? [])]
       .filter((value): value is string => Boolean(value?.trim()));
     return candidates.find((value) => /\.pdf(?:$|[?#&=])/i.test(decodeURIComponent(value))) ?? null;

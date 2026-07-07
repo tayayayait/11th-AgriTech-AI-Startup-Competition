@@ -661,6 +661,25 @@ describe("weekly farm briefing service", () => {
     });
   });
 
+  it("does not trust a PDF file name when the weekly download URL is not a PDF URL", async () => {
+    const briefing = await getWeeklyFarmBriefing({
+      cropName: "포도",
+      weeklyInfo: weeklyInfo({
+        sourceKey: "url:https://www.nongsaro.go.kr/fileDownload.do?fileId=weekly-27",
+        sourceUrl: "https://www.nongsaro.go.kr/fileDownload.do?fileId=weekly-27",
+        downUrlList: ["https://www.nongsaro.go.kr/fileDownload.do?fileId=weekly-27"],
+        sourceFileName: "week-27.pdf",
+      }),
+    });
+
+    expect(invokeApiAdapter).not.toHaveBeenCalled();
+    expect(briefing).toMatchObject({
+      cacheStatus: "unavailable",
+      errorCode: "unsupported_weekly_document",
+      sourceUrl: "https://www.nongsaro.go.kr/fileDownload.do?fileId=weekly-27",
+    });
+  });
+
   it("uses a PDF from the download list when the primary weekly document is not a PDF", async () => {
     const invokeApiAdapterMock = vi.mocked(invokeApiAdapter);
     invokeApiAdapterMock.mockResolvedValueOnce({
