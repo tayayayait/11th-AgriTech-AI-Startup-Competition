@@ -697,14 +697,12 @@ describe("Diagnosis upload warnings", () => {
       "https://ncpms.rda.go.kr/detail-gray-mold.jpg",
     );
     expect(officialImage).toHaveClass("object-contain");
-    expect(await screen.findByText("공식 등록농약 후보")).toBeInTheDocument();
-    expect(await screen.findByText("팡파르")).toBeInTheDocument();
-    expect(screen.getByText("2000배 -")).toBeInTheDocument();
-    await waitFor(() => expect(getPsisPesticideRegistrationsMock).toHaveBeenCalledWith(expect.objectContaining({
-      cropName: "사과",
-      targetKeyword: "잿빛곰팡이병",
-      displayCount: 50,
-    })));
+    const pesticideGuideLink = screen
+      .getAllByRole("link")
+      .find((link) => link.getAttribute("href")?.startsWith("/reports?"));
+    expect(pesticideGuideLink).toHaveAttribute("href", expect.stringContaining("tab=pesticide"));
+    expect(pesticideGuideLink).toHaveAttribute("href", expect.stringContaining("crop="));
+    expect(pesticideGuideLink).toHaveAttribute("href", expect.stringContaining("target="));
     await waitFor(() => {
       expect(saveDiagnosisRecordMock).toHaveBeenCalledWith(
         expect.objectContaining({

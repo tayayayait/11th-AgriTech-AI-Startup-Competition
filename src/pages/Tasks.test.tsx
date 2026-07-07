@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import Tasks from "@/pages/Tasks";
 import { getLatestWeatherRisk, getPestRisks } from "@/services/dashboardService";
 import { getWeeklyFarmInfos } from "@/services/nongsaroWeeklyService";
@@ -157,6 +157,8 @@ function mockMonthlyWorkSchedule() {
 
 describe("Tasks weekly farm briefing", () => {
   beforeEach(() => {
+    vi.useFakeTimers({ toFake: ["Date"] });
+    vi.setSystemTime(new Date("2026-05-12T00:00:00.000+09:00"));
     vi.clearAllMocks();
     getTaskCardsByFieldMock.mockResolvedValue([]);
     getLatestWeatherRiskMock.mockResolvedValue(null);
@@ -222,6 +224,10 @@ describe("Tasks weekly farm briefing", () => {
       fetchedAt: "2026-05-07T12:00:00.000Z",
       cacheStatus: "fresh",
     });
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
   });
 
   it("generates the weekly PDF briefing only after the user clicks the summary button", async () => {

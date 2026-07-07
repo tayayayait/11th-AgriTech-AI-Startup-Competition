@@ -46,6 +46,9 @@ export async function invokeEdgeFunction<TResponse, TRequest>(
 ): Promise<TResponse> {
   const { data, error } = await supabase.functions.invoke(functionName, {
     body,
+    headers: {
+      "Content-Type": "application/json",
+    },
     signal: options?.signal,
     timeout: options?.timeout,
   });
