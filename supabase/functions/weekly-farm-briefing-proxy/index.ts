@@ -9,6 +9,7 @@ import {
   readUpstreamBody,
   requireEnv,
 } from "@shared/http.ts";
+import { shouldReturnDegradedWeeklyBriefing } from "./errorPolicy.ts";
 
 const GEMINI_BASE_URL = Deno.env.get("GEMINI_BASE_URL") ?? "https://generativelanguage.googleapis.com";
 const DEFAULT_GEMINI_MODEL = Deno.env.get("GEMINI_WEEKLY_BRIEFING_MODEL") ?? "gemini-3-flash-preview";
@@ -363,7 +364,7 @@ Deno.serve(async (request) => {
       data: upstreamBody,
     });
   } catch (error) {
-    if (error instanceof ProxyError && error.code === "upstream_timeout" && context) {
+    if (error instanceof ProxyError && shouldReturnDegradedWeeklyBriefing(error.code) && context) {
       return degradedResponse(context, error);
     }
     return handleProxyError(error);

@@ -72,6 +72,8 @@ Gemini는 독립적으로 작업 카드를 만들지 않는다. 공식 API와 �
 
 Supabase Edge Function의 약 30초 실행 제한을 넘기지 않기 위해 PDF 다운로드와 Gemini 호출은 각각 제한된 timeout 예산 안에서 처리한다. Gemini 호출은 26초까지 허용해 정상 생성 가능성을 높이되, 응답이 계속 지연되면 함수는 플랫폼 504까지 기다리지 않고 `status: "degraded"` 응답을 반환한다. Flash 모델은 사고 토큰을 함께 쓰므로 PDF 브리핑의 JSON 응답은 `maxOutputTokens: 3000`으로 둔다.
 
+Edge Function은 다운로드 결과가 PDF 시그니처(`%PDF`)가 아닌 경우에도 HTTP 415를 브라우저로 그대로 반환하지 않고 `status: "degraded"`, `errorCode: "unsupported_weekly_document"` 응답을 반환한다. 이렇게 해야 농사로가 HWPX/HTML 첨부를 반환하는 주간 자료에서도 브라우저 콘솔의 실패 POST를 만들지 않고 원문 확인 fallback을 표시할 수 있다.
+
 프론트엔드는 API 응답을 Supabase `weekly_farm_infos`에 upsert한다. 중복 기준은 정규화된 파일 URL이 있으면 `url:{downUrl}`, 없으면 `meta:{subject|regDt|fileName}`이다. 저장 필드는 `subject`, `writer_nm`, `reg_dt`, `period_start`, `period_end`, `down_url`, `down_url_list`, `file_name`, `summary_status`, `summary_text`, `summary_payload`, `created_at`, `updated_at`이다.
 
 성공한 기본 브리핑은 같은 Supabase 행의 `summary_status=ready`, `summary_text`, `summary_payload`, `summary_model`, `summary_fetched_at`으로 저장한다. 기본 브리핑 키는 `sourceKey + periodStart + periodEnd + cropName`이고, 평상시 `weatherIncidentKey`는 `normal`이다. 최종 `contextKey`는 `baseBriefingKey + weatherIncidentKey` 구조의 JSON 문자열이다. 사용자가 `요약` 버튼을 누르기 전에는 Gemini를 호출하지 않는다. 화면 재진입 또는 새로고침 후에는 같은 PDF 기간과 작물의 기본 브리핑을 재사용한다.
