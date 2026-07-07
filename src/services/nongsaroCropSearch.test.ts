@@ -213,6 +213,7 @@ describe("Nongsaro crop search fallback", () => {
           regDt: "2026-05-07",
           writerNm: "농촌진흥청",
           downUrl: "http://www.nongsaro.go.kr/week-19.pdf",
+          downUrlList: "http://www.nongsaro.go.kr/week-19.hwpx|http://www.nongsaro.go.kr/week-19.hwp|http://www.nongsaro.go.kr/week-19.pdf",
           fileName: "week-19.pdf",
         },
         {
@@ -232,6 +233,11 @@ describe("Nongsaro crop search fallback", () => {
       publishedAt: "2026-05-07",
       periodStart: "2026-05-11",
       periodEnd: "2026-05-17",
+      downUrlList: [
+        "https://www.nongsaro.go.kr/week-19.hwpx",
+        "https://www.nongsaro.go.kr/week-19.hwp",
+        "https://www.nongsaro.go.kr/week-19.pdf",
+      ],
       isCurrent: true,
       isNew: true,
     });

@@ -79,8 +79,18 @@ vi.mock("@/services/weeklyFarmBriefingService", () => ({
     sourceFileName?: string | null;
   }) => {
     const sourceUrl = weeklyInfo.sourceUrl?.trim() || null;
-    const candidates = [sourceUrl, ...(weeklyInfo.downUrlList ?? [])]
-      .filter((value): value is string => Boolean(value?.trim()));
+    const candidates: string[] = [];
+    for (const value of [sourceUrl, ...(weeklyInfo.downUrlList ?? [])]) {
+      const trimmed = value?.trim();
+      if (trimmed && !candidates.includes(trimmed)) candidates.push(trimmed);
+    }
+    const fileNames = (weeklyInfo.sourceFileName ?? "")
+      .split("|")
+      .map((item) => item.trim())
+      .filter(Boolean);
+    for (let index = 0; index < fileNames.length; index += 1) {
+      if (/\.pdf$/i.test(fileNames[index]) && candidates[index]) return candidates[index];
+    }
     return candidates.find((value) => /\.pdf(?:$|[?#&=])/i.test(decodeURIComponent(value))) ?? null;
   }),
 }));
@@ -300,7 +310,24 @@ describe("Tasks weekly farm briefing", () => {
     expect(await screen.findByText("복숭아 주간 브리핑")).toBeInTheDocument();
   });
 
-  it("disables weekly PDF summary when the current weekly document has no PDF source", async () => {
+  it("falls back to an AI reference briefing when the current weekly document has no PDF source", async () => {
+    getWeeklyFarmBriefingMock.mockResolvedValueOnce({
+      relevant: false,
+      headline: "복숭아 주간농사정보 PDF 분석 불가",
+      summaryBullets: ["현재 주간농사정보 자료가 PDF 형식이 아니어서 원문 분석을 실행하지 못했습니다."],
+      actionBullets: [],
+      cautionBullets: ["공식 원문 자료를 직접 확인하고, AI 참고 브리핑은 공식 근거가 아닌 보조 판단으로만 사용하세요."],
+      evidenceSnippets: [],
+      cropName: "복숭아",
+      cropGroup: "과수",
+      sourceTitle: "주간농사정보 제27호",
+      sourceUrl: "https://www.nongsaro.go.kr/week-27.hwpx",
+      publishedAt: "2026-06-30",
+      model: "gemini-3-flash-preview",
+      fetchedAt: "2026-07-07T00:00:00.000Z",
+      cacheStatus: "unavailable",
+      errorCode: "unsupported_weekly_document",
+    });
     getWeeklyFarmInfosMock.mockResolvedValueOnce([
       {
         id: "weekly-27",
@@ -325,12 +352,61 @@ describe("Tasks weekly farm briefing", () => {
     renderTasks();
 
     const button = await screen.findByRole("button", { name: "이번주 주간농사정보 파일 요약" });
-    expect(button).toBeDisabled();
+    expect(button).not.toBeDisabled();
     fireEvent.click(button);
 
-    expect(getWeeklyFarmBriefingMock).not.toHaveBeenCalled();
-    expect(screen.getByText("요약을 지원하는 주간농사정보 PDF 자료가 없습니다. 원문 자료를 확인하세요."))
+    await waitFor(() => {
+      expect(getWeeklyFarmBriefingMock).toHaveBeenCalledTimes(1);
+    });
+    expect(getWeeklyFarmBriefingMock).toHaveBeenCalledWith(expect.objectContaining({
+      cropName: "복숭아",
+      weeklyInfo: expect.objectContaining({
+        title: "주간농사정보 제27호",
+        sourceUrl: "https://www.nongsaro.go.kr/week-27.hwpx",
+      }),
+      forceRefresh: true,
+    }));
+    expect(await screen.findByText("복숭아 AI 참고 농사 브리핑")).toBeInTheDocument();
+    expect(screen.getByText("현재 자료가 PDF 형식이 아니어서 원문 분석 대신 AI 참고 브리핑을 표시합니다."))
       .toBeInTheDocument();
+    expect(screen.getByText("공식 PDF 근거가 없어 AI 참고로만 표시합니다.")).toBeInTheDocument();
+    expect(generateWeeklyFarmAlternativeBriefingMock).toHaveBeenCalledWith(expect.objectContaining({
+      cropName: "복숭아",
+      field: expect.objectContaining({ growthStage: "착과기" }),
+    }));
+  });
+
+  it("links the weekly evidence card directly to the PDF attachment when Nongsaro lists HWPX first", async () => {
+    getWeeklyFarmInfosMock.mockResolvedValueOnce([
+      {
+        id: "weekly-19",
+        sourceKey: "url:https://www.nongsaro.go.kr/download?ep=hwpx",
+        title: "주간농사정보 제19호",
+        publishedAt: "2026-05-07",
+        writer: "농촌진흥청",
+        periodStart: "2026-05-11",
+        periodEnd: "2026-05-17",
+        sourceUrl: "https://www.nongsaro.go.kr/download?ep=hwpx",
+        downUrlList: [
+          "https://www.nongsaro.go.kr/download?ep=hwpx",
+          "https://www.nongsaro.go.kr/download?ep=hwp",
+          "https://www.nongsaro.go.kr/download?ep=pdf",
+        ],
+        sourceFileName: "week-19.hwpx|week-19.hwp|week-19.pdf",
+        hitCount: null,
+        summaryStatus: "pending",
+        summaryText: null,
+        summaryPayload: null,
+        isCurrent: true,
+        isNew: false,
+      },
+    ]);
+
+    renderTasks();
+
+    const pdfLink = await screen.findByRole("link", { name: /PDF 자료 확인/ });
+    expect(pdfLink).toHaveAttribute("href", "https://www.nongsaro.go.kr/download?ep=pdf");
+    expect(screen.queryByRole("link", { name: /^공식 자료 확인/ })).not.toBeInTheDocument();
   });
 
   it("shows a stored weekly briefing again without requiring another summary click", async () => {

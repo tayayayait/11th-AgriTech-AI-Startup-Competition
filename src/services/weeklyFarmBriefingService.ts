@@ -181,12 +181,24 @@ function uniqueCleanStrings(values: Array<string | null | undefined>): string[] 
   return unique;
 }
 
+function splitWeeklyFileNames(value: string | null | undefined): string[] {
+  return (value ?? "")
+    .split("|")
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
 function getWeeklyFarmBriefingFallbackSourceUrl(weeklyInfo: NongsaroWeeklyInfo): string | null {
   return uniqueCleanStrings([weeklyInfo.sourceUrl, ...weeklyInfo.downUrlList])[0] ?? null;
 }
 
 export function getWeeklyFarmBriefingPdfSourceUrl(weeklyInfo: NongsaroWeeklyInfo): string | null {
-  return uniqueCleanStrings([weeklyInfo.sourceUrl, ...weeklyInfo.downUrlList]).find(hasPdfExtension) ?? null;
+  const urls = uniqueCleanStrings([weeklyInfo.sourceUrl, ...weeklyInfo.downUrlList]);
+  const fileNames = splitWeeklyFileNames(weeklyInfo.sourceFileName);
+  for (let index = 0; index < fileNames.length; index += 1) {
+    if (hasPdfExtension(fileNames[index]) && urls[index]) return urls[index];
+  }
+  return urls.find(hasPdfExtension) ?? null;
 }
 
 function finiteNumber(value: number | null | undefined): number | null {
@@ -571,12 +583,23 @@ function buildUnavailableBriefing(input: {
   sourceUrl: string;
   errorCode: string;
 }): WeeklyFarmBriefing {
+  const unsupportedDocument = input.errorCode === "unsupported_weekly_document";
   return {
-    relevant: true,
-    headline: `${input.cropName} 주간농사정보 AI 요약 지연`,
-    summaryBullets: ["PDF 요약 요청이 제한 시간 안에 완료되지 않았습니다."],
+    relevant: !unsupportedDocument,
+    headline: unsupportedDocument
+      ? `${input.cropName} 주간농사정보 PDF 분석 불가`
+      : `${input.cropName} 주간농사정보 AI 요약 지연`,
+    summaryBullets: [
+      unsupportedDocument
+        ? "현재 주간농사정보 자료가 PDF 형식이 아니어서 원문 분석을 실행하지 못했습니다."
+        : "PDF 요약 요청이 제한 시간 안에 완료되지 않았습니다.",
+    ],
     actionBullets: [],
-    cautionBullets: ["원문 PDF를 직접 확인해 최신 주간농사정보를 확인하세요."],
+    cautionBullets: [
+      unsupportedDocument
+        ? "공식 원문 자료를 직접 확인하고, AI 참고 브리핑은 공식 근거가 아닌 보조 판단으로만 사용하세요."
+        : "원문 자료를 직접 확인해 최신 주간농사정보를 확인하세요.",
+    ],
     weatherBullets: [],
     pestRiskBullets: [],
     irrigationBullets: [],

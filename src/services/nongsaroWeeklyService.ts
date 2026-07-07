@@ -74,7 +74,7 @@ const normalizeDateKey = (value: string | null | undefined): string | null => {
 
 const normalizeUrlList = (item: Record<string, string>, primaryUrl: string | null): string[] => {
   const rawList = toCleanString(item.downUrlList);
-  const values = rawList ? rawList.split(/[\n,]+/) : [];
+  const values = rawList ? rawList.split(/[\n,|]+/) : [];
   const urls = values
     .map((value) => normalizeNongsaroUrl(value))
     .filter((value): value is string => Boolean(value));

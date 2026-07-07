@@ -11,7 +11,7 @@
 | 날씨 기반 작업 | 기상청_단기예보 조회서비스 | 초단기실황조회, 단기예보조회 | 강수, 습도, 풍속, 기온 기준으로 오늘 처리할 현장 점검 작업 생성 |
 | 병해충 기반 작업 | NCPMS 병해충 검색 Open API 및 기존 병해충 위험 데이터 | 통합검색/상세정보 기반 위험 후보 | 병해충 위험 근거 확인, 현장 사진 기록, 공식 자료 확인 작업 생성 |
 | 농작업일정 기반 자료 | 농사로 Open API - 농작업일정 | `workScheduleGrpList`, `workScheduleLst`, `workScheduleDtl`, `workScheduleEraInfoJsonLst`, 보조로 `workScheduleEraInfoLst` | 작물 그룹과 콘텐츠 번호를 찾고, 현재 한국 날짜 기준 이번 달에 걸치는 월/상중하 작업명(`opertNm`)을 하단 농작업일정 섹션에 표시 |
-| 주간농사정보 브리핑 | 농사로 Open API - 주간농사정보 + Gemini API | `weekFarmInfoList`, `weekly-farm-briefing-proxy` | 최신 PDF를 Gemini 문서 처리로 읽고 선택 작물/작물군 관련 내용만 쉬운 말로 요약 |
+| 주간농사정보 브리핑 | 농사로 Open API - 주간농사정보 + Gemini API | `weekFarmInfoList`, `weekly-farm-briefing-proxy` | `fileName`/`downUrlList`의 PDF 첨부를 Gemini 문서 처리로 읽고 선택 작물/작물군 관련 내용만 쉬운 말로 요약 |
 | 주간농사정보 참고자료 | 농사로 Open API - 주간농사정보 + Supabase `weekly_farm_infos` | `weekFarmInfoList` | 제목의 적용 기간(`periodStart~periodEnd`)을 파싱해 현재 KST 주간 자료를 유지 표시 |
 | AI 정리 레이어 | Gemini API | `gemini-proxy` 경유 | 공식 API 근거 카드의 문장 정리 보조. 기본 자동 작업 생성 근거로는 사용하지 않음 |
 
@@ -68,7 +68,7 @@ Gemini는 독립적으로 작업 카드를 만들지 않는다. 공식 API와 �
 
 단, 현재 주간 자료 판단에는 등록일(`regDt`)을 쓰지 않는다. `주간농사정보 제 19호 (2026.5.11.~5.17.)`처럼 제목의 괄호 안 날짜 범위를 파싱해 `periodStart=2026-05-11`, `periodEnd=2026-05-17`로 저장하고, 한국 시간 기준 오늘이 이 범위 안에 있을 때만 현재 주간 자료로 표시한다. 종료일에 연도가 생략된 경우 시작일의 연도를 사용한다.
 
-대신 최신 자료의 `sourceUrl` 또는 `downUrlList`에서 PDF URL 후보를 확인할 수 있을 때만 화면에 `요약` 버튼을 활성화한다. `fileName`만 PDF처럼 보여도 다운로드 URL에서 PDF 후보가 확인되지 않으면 프록시 호출을 만들지 않는다. PDF가 아닌 HWPX/HTML 첨부만 있으면 프론트엔드가 `weekly-farm-briefing-proxy` 호출을 만들지 않고 원문 확인 안내를 표시한다. 사용자가 `요약` 버튼을 누른 경우에는 저장된 요약과 로컬 캐시를 건너뛰고 `weekly-farm-briefing-proxy`가 PDF를 서버에서 다시 다운로드해 Gemini 문서 처리 기능에 `application/pdf` inline data로 전달한다. 화면 재진입처럼 사용자가 직접 누르지 않은 로딩에서는 저장 요약을 먼저 재사용한다. 기본 PDF 요약 요청에는 raw KMA 기상값을 캐시 키나 프롬프트 입력으로 직접 넣지 않는다. 모델은 응답 지연을 줄이기 위해 `gemini-3-flash-preview`를 사용한다.
+최신 자료의 `sourceUrl` 또는 `downUrlList`에서 원문 URL 후보가 있으면 화면에 `요약` 버튼을 활성화한다. 농사로 주간농사정보는 `fileName`과 `downUrlList`를 `|`로 구분해 HWPX, HWP, PDF 첨부를 함께 내려줄 수 있고, 다운로드 URL 자체에는 확장자가 없을 수 있다. 따라서 PDF 후보는 URL 확장자가 아니라 같은 인덱스의 `fileName`이 PDF인지로 우선 판정한다. PDF 후보가 있으면 사용자가 `요약` 버튼을 누른 경우 저장된 요약과 로컬 캐시를 건너뛰고 `weekly-farm-briefing-proxy`가 PDF를 서버에서 다시 다운로드해 Gemini 문서 처리 기능에 `application/pdf` inline data로 전달한다. PDF 첨부가 없거나 다운로드 결과가 PDF가 아니면 프론트엔드는 원문 분석 불가 상태를 표시하고 `generateWeeklyFarmAlternativeBriefing`으로 AI 참고 브리핑을 생성한다. 화면 재진입처럼 사용자가 직접 누르지 않은 로딩에서는 저장 요약을 먼저 재사용한다. 기본 PDF 요약 요청에는 raw KMA 기상값을 캐시 키나 프롬프트 입력으로 직접 넣지 않는다. 모델은 응답 지연을 줄이기 위해 `gemini-3-flash-preview`를 사용한다.
 
 Supabase Edge Function의 약 30초 실행 제한을 넘기지 않기 위해 PDF 다운로드와 Gemini 호출은 각각 제한된 timeout 예산 안에서 처리한다. Gemini 호출은 26초까지 허용해 정상 생성 가능성을 높이되, 응답이 계속 지연되면 함수는 플랫폼 504까지 기다리지 않고 `status: "degraded"` 응답을 반환한다. Flash 모델은 사고 토큰을 함께 쓰므로 PDF 브리핑의 JSON 응답은 `maxOutputTokens: 3000`으로 둔다.
 
@@ -80,7 +80,7 @@ Edge Function은 다운로드 결과가 PDF 시그니처(`%PDF`)가 아닌 경�
 
 날씨 변화는 `detectCriticalWeatherIncident()`에서 특이기상 사건으로 판정된 경우에만 브리핑 키에 반영한다. 현재 공통 기준은 `30mm 이상 강수`, `14m/s 이상 강풍`, `35℃ 이상 고온`, `0℃ 이하 저온`, `10mm 이상 강수 + 90% 이상 습도 + 20~30℃` 조합이다. 평상시 작은 기상값 변화는 `normal`로 유지해 PDF 전체 요약을 다시 생성하지 않는다. 특이기상 발생 시에는 `heavy_rain:2026-05-09:high` 같은 사건 키를 붙이고, 기존 PDF 요약에 위험 보정 bullet만 추가한다. 이 보정은 PDF 재요약이 아니라 현재 기상 위험을 화면과 작업 카드 생성에 반영하기 위한 별도 레이어다.
 
-최신 요약 생성이 실패하면 같은 원문에 대한 이전 성공 요약을 `이전 요약` 상태로 표시하고, 캐시가 없으면 `요약 지연` 상태와 원문 PDF 링크를 표시한다. 이 상태의 브리핑은 `actionBullets`가 비어 있어 자동 작업 카드 생성 근거로 쓰이지 않는다.
+최신 요약 생성이 실패하면 같은 원문에 대한 이전 성공 요약을 `이전 요약` 상태로 표시하고, 캐시가 없으면 `요약 지연` 상태와 원문 자료 링크를 표시한다. 원문이 PDF가 아닌 `unsupported_weekly_document` 상태이면 `AI 참고` 상태로 전환하고 공식 근거가 아닌 보조 판단 브리핑을 표시한다. 이 상태의 기본 브리핑은 `actionBullets`가 비어 있어 자동 작업 카드 생성 근거로 쓰이지 않는다.
 
 브리핑 규칙:
 

@@ -654,39 +654,22 @@ describe("weekly farm briefing service", () => {
 
     expect(invokeApiAdapter).not.toHaveBeenCalled();
     expect(briefing).toMatchObject({
-      headline: "포도 주간농사정보 AI 요약 지연",
+      relevant: false,
+      headline: "포도 주간농사정보 PDF 분석 불가",
+      summaryBullets: ["현재 주간농사정보 자료가 PDF 형식이 아니어서 원문 분석을 실행하지 못했습니다."],
       cacheStatus: "unavailable",
       errorCode: "unsupported_weekly_document",
       sourceUrl: "https://www.nongsaro.go.kr/week-27.hwpx",
     });
   });
 
-  it("does not trust a PDF file name when the weekly download URL is not a PDF URL", async () => {
-    const briefing = await getWeeklyFarmBriefing({
-      cropName: "포도",
-      weeklyInfo: weeklyInfo({
-        sourceKey: "url:https://www.nongsaro.go.kr/fileDownload.do?fileId=weekly-27",
-        sourceUrl: "https://www.nongsaro.go.kr/fileDownload.do?fileId=weekly-27",
-        downUrlList: ["https://www.nongsaro.go.kr/fileDownload.do?fileId=weekly-27"],
-        sourceFileName: "week-27.pdf",
-      }),
-    });
-
-    expect(invokeApiAdapter).not.toHaveBeenCalled();
-    expect(briefing).toMatchObject({
-      cacheStatus: "unavailable",
-      errorCode: "unsupported_weekly_document",
-      sourceUrl: "https://www.nongsaro.go.kr/fileDownload.do?fileId=weekly-27",
-    });
-  });
-
-  it("uses a PDF from the download list when the primary weekly document is not a PDF", async () => {
+  it("uses an opaque download URL when the paired weekly file name is PDF", async () => {
     const invokeApiAdapterMock = vi.mocked(invokeApiAdapter);
     invokeApiAdapterMock.mockResolvedValueOnce({
       source: "gemini",
       model: WEEKLY_BRIEFING_MODEL,
       fetchedAt: "2026-07-07T09:45:00.000Z",
-      sourceUrl: "https://www.nongsaro.go.kr/week-27.pdf",
+      sourceUrl: "https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=pdf",
       sourceTitle: "주간농사정보 제27호",
       publishedAt: "2026-06-30",
       data: {
@@ -702,15 +685,10 @@ describe("weekly farm briefing service", () => {
     const briefing = await getWeeklyFarmBriefing({
       cropName: "포도",
       weeklyInfo: weeklyInfo({
-        sourceKey: "url:https://www.nongsaro.go.kr/week-27.hwpx",
-        title: "주간농사정보 제27호",
-        publishedAt: "2026-06-30",
-        sourceUrl: "https://www.nongsaro.go.kr/week-27.hwpx",
-        downUrlList: [
-          "https://www.nongsaro.go.kr/week-27.hwpx",
-          "https://www.nongsaro.go.kr/week-27.pdf",
-        ],
-        sourceFileName: "week-27.hwpx",
+        sourceKey: "url:https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=pdf",
+        sourceUrl: "https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=pdf",
+        downUrlList: ["https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=pdf"],
+        sourceFileName: "week-27.pdf",
       }),
     });
 
@@ -718,13 +696,63 @@ describe("weekly farm briefing service", () => {
       "gemini",
       "weekly-farm-briefing-proxy",
       expect.objectContaining({
-        sourceUrl: "https://www.nongsaro.go.kr/week-27.pdf",
+        sourceUrl: "https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=pdf",
       }),
       expect.objectContaining({ timeout: 30000 }),
     );
     expect(briefing).toMatchObject({
       headline: "포도 27호 브리핑",
-      sourceUrl: "https://www.nongsaro.go.kr/week-27.pdf",
+      cacheStatus: "fresh",
+      sourceUrl: "https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=pdf",
+    });
+  });
+
+  it("uses a PDF from the paired download list when the primary weekly document is HWPX", async () => {
+    const invokeApiAdapterMock = vi.mocked(invokeApiAdapter);
+    invokeApiAdapterMock.mockResolvedValueOnce({
+      source: "gemini",
+      model: WEEKLY_BRIEFING_MODEL,
+      fetchedAt: "2026-07-07T09:45:00.000Z",
+      sourceUrl: "https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=pdf",
+      sourceTitle: "주간농사정보 제27호",
+      publishedAt: "2026-06-30",
+      data: {
+        relevant: true,
+        headline: "포도 27호 브리핑",
+        summaryBullets: ["포도 과수원 배수와 병해충 예찰을 확인합니다."],
+        actionBullets: ["포도 생육 상태를 확인합니다."],
+        cautionBullets: ["원문 근거를 확인합니다."],
+        evidenceSnippets: ["포도 과원 관리"],
+      },
+    });
+
+    const briefing = await getWeeklyFarmBriefing({
+      cropName: "포도",
+      weeklyInfo: weeklyInfo({
+        sourceKey: "url:https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=hwpx",
+        title: "주간농사정보 제27호",
+        publishedAt: "2026-06-30",
+        sourceUrl: "https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=hwpx",
+        downUrlList: [
+          "https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=hwpx",
+          "https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=hwp",
+          "https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=pdf",
+        ],
+        sourceFileName: "week-27.hwpx|week-27.hwp|week-27.pdf",
+      }),
+    });
+
+    expect(invokeApiAdapterMock).toHaveBeenCalledWith(
+      "gemini",
+      "weekly-farm-briefing-proxy",
+      expect.objectContaining({
+        sourceUrl: "https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=pdf",
+      }),
+      expect.objectContaining({ timeout: 30000 }),
+    );
+    expect(briefing).toMatchObject({
+      headline: "포도 27호 브리핑",
+      sourceUrl: "https://www.nongsaro.go.kr/portal/contentsFileDownload.do?ep=pdf",
       cacheStatus: "fresh",
     });
   });

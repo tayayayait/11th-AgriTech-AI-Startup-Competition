@@ -264,18 +264,33 @@ export default function Tasks() {
     () => (latestWeeklyInfo ? getWeeklyFarmBriefingPdfSourceUrl(latestWeeklyInfo) : null),
     [latestWeeklyInfo],
   );
+  const latestWeeklyBriefingSourceUrl = useMemo(() => {
+    if (!latestWeeklyInfo) return null;
+    const candidates = [
+      latestWeeklyPdfSourceUrl,
+      latestWeeklyInfo.sourceUrl,
+      ...latestWeeklyInfo.downUrlList,
+    ];
+    for (const candidate of candidates) {
+      const trimmed = candidate?.trim();
+      if (trimmed) return trimmed;
+    }
+    return null;
+  }, [latestWeeklyInfo, latestWeeklyPdfSourceUrl]);
   const latestWeeklyBriefingKey = useMemo(() => {
-    if (!selected?.crop_name || !latestWeeklyPdfSourceUrl) return null;
+    if (!selected?.crop_name || !latestWeeklyInfo || !latestWeeklyBriefingSourceUrl) return null;
     return [
       selected.crop_name,
       latestWeeklyInfo.sourceKey,
-      latestWeeklyPdfSourceUrl,
+      latestWeeklyBriefingSourceUrl,
+      latestWeeklyPdfSourceUrl ? "pdf" : "fallback",
       latestWeeklyInfo.publishedAt ?? "",
       latestWeeklyInfo.title,
       latestWeeklyInfo.periodStart ?? "",
       latestWeeklyInfo.periodEnd ?? "",
     ].join("|");
   }, [
+    latestWeeklyBriefingSourceUrl,
     latestWeeklyInfo?.periodEnd,
     latestWeeklyInfo?.periodStart,
     latestWeeklyInfo?.publishedAt,
@@ -345,6 +360,7 @@ export default function Tasks() {
       "weekly-farm-briefing",
       selected?.crop_name,
       latestWeeklyInfo?.sourceKey,
+      latestWeeklyBriefingSourceUrl,
       latestWeeklyPdfSourceUrl,
       latestWeeklyInfo?.publishedAt,
       latestWeeklyInfo?.title,
@@ -445,6 +461,8 @@ export default function Tasks() {
       ? "이전 요약"
       : activeWeeklyBriefing?.cacheStatus === "cached"
         ? "저장 요약"
+        : activeWeeklyBriefing?.errorCode === "unsupported_weekly_document"
+          ? "AI 참고"
         : activeWeeklyBriefing?.cacheStatus === "unavailable"
           ? "요약 지연"
           : activeWeeklyBriefing && !activeWeeklyBriefing.relevant
@@ -531,6 +549,12 @@ export default function Tasks() {
   const activeBriefingPestRiskBullets = activeWeeklyBriefing?.pestRiskBullets ?? [];
   const activeBriefingIrrigationBullets = activeWeeklyBriefing?.irrigationBullets ?? [];
   const activeBriefingGrowthBullets = activeWeeklyBriefing?.growthManagementBullets ?? [];
+  const activeWeeklyBriefingIsUnsupportedDocument =
+    activeWeeklyBriefing?.errorCode === "unsupported_weekly_document";
+  const shouldLoadAlternativeBriefing =
+    !!activeWeeklyBriefing &&
+    (!activeWeeklyBriefing.relevant || activeWeeklyBriefingIsUnsupportedDocument) &&
+    (activeWeeklyBriefing.cacheStatus !== "unavailable" || activeWeeklyBriefingIsUnsupportedDocument);
   const {
     data: alternativeBriefing = null,
     isFetching: alternativeBriefingLoading,
@@ -546,9 +570,7 @@ export default function Tasks() {
     ],
     enabled:
       !!selected?.crop_name &&
-      !!activeWeeklyBriefing &&
-      !activeWeeklyBriefing.relevant &&
-      activeWeeklyBriefing.cacheStatus !== "unavailable",
+      shouldLoadAlternativeBriefing,
     queryFn: ({ signal }) =>
       generateWeeklyFarmAlternativeBriefing({
         cropName: selected!.crop_name,
@@ -801,7 +823,7 @@ export default function Tasks() {
                     variant="outline"
                     size="sm"
                     aria-label="이번주 주간농사정보 파일 요약"
-                    disabled={!latestWeeklyPdfSourceUrl || weeklyBriefingLoading}
+                    disabled={!latestWeeklyBriefingSourceUrl || weeklyBriefingLoading}
                     onClick={requestWeeklyBriefingSummary}
                   >
                     <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
@@ -809,19 +831,27 @@ export default function Tasks() {
                   </Button>
                 </div>
                 {weeklyBriefingLoading && (
-                  <p className="text-sm text-muted-foreground">주간농사정보 PDF를 읽고 요약하는 중입니다.</p>
+                  <p className="text-sm text-muted-foreground">
+                    {latestWeeklyPdfSourceUrl
+                      ? "주간농사정보 PDF를 읽고 요약하는 중입니다."
+                      : "주간농사정보 자료 형식을 확인하고 AI 참고 브리핑을 준비하는 중입니다."}
+                  </p>
                 )}
                 {weeklyBriefingShouldLoad && weeklyBriefingError && (
                   <p className="text-sm text-muted-foreground">
-                    주간농사정보 PDF 요약을 만들지 못했습니다. 원문 자료를 확인하세요.
+                    주간농사정보 브리핑을 만들지 못했습니다. 원문 자료를 확인하세요.
                   </p>
                 )}
-                {!weeklyBriefingLoading && !weeklyBriefingError && !latestWeeklyInfo?.sourceUrl && (
-                  <p className="text-sm text-muted-foreground">요약할 주간농사정보 PDF 링크가 없습니다.</p>
+                {!weeklyBriefingLoading && !weeklyBriefingError && !latestWeeklyBriefingSourceUrl && (
+                  <p className="text-sm text-muted-foreground">요약할 주간농사정보 자료 링크가 없습니다.</p>
                 )}
-                {!weeklyBriefingLoading && !weeklyBriefingError && latestWeeklyInfo?.sourceUrl && !latestWeeklyPdfSourceUrl && (
+                {!weeklyBriefingLoading &&
+                  !weeklyBriefingError &&
+                  latestWeeklyBriefingSourceUrl &&
+                  !latestWeeklyPdfSourceUrl &&
+                  !weeklyBriefingShouldLoad && (
                   <p className="text-sm text-muted-foreground">
-                    요약을 지원하는 주간농사정보 PDF 자료가 없습니다. 원문 자료를 확인하세요.
+                    현재 자료는 PDF가 아니므로 원문 분석 대신 AI 참고 브리핑을 생성합니다.
                   </p>
                 )}
                 {!weeklyBriefingShouldLoad && latestWeeklyPdfSourceUrl && (
@@ -836,7 +866,9 @@ export default function Tasks() {
                     )}
                     {activeWeeklyBriefing.cacheStatus === "unavailable" && (
                       <p className="text-sm text-muted-foreground">
-                        AI 요약 생성이 지연되어 원문 PDF 확인이 필요합니다.
+                        {activeWeeklyBriefingIsUnsupportedDocument
+                          ? "현재 자료가 PDF 형식이 아니어서 원문 분석 대신 AI 참고 브리핑을 표시합니다."
+                          : "AI 요약 생성이 지연되어 원문 자료 확인이 필요합니다."}
                       </p>
                     )}
                     <div>
@@ -848,20 +880,22 @@ export default function Tasks() {
                         </span>
                       </div>
                       <p className="mt-2 text-sm font-medium">{activeWeeklyBriefing.headline}</p>
-                      {!activeWeeklyBriefing.relevant && activeWeeklyBriefing.cacheStatus !== "unavailable" && (
+                      {!activeWeeklyBriefing.relevant && (
                         <p className="mt-1 text-xs text-muted-foreground">
-                          선택 작물과 직접 관련된 내용이 원문에서 확인되지 않았습니다.
+                          {activeWeeklyBriefingIsUnsupportedDocument
+                            ? "공식 PDF 근거가 없어 AI 참고로만 표시합니다."
+                            : "선택 작물과 직접 관련된 내용이 원문에서 확인되지 않았습니다."}
                         </p>
                       )}
                     </div>
-                    {!activeWeeklyBriefing.relevant && alternativeBriefingLoading && (
+                    {shouldLoadAlternativeBriefing && alternativeBriefingLoading && (
                       <p className="text-sm text-muted-foreground">
                         공식 주간농사정보 근거가 없어 AI 참고 브리핑을 생성하는 중입니다.
                       </p>
                     )}
-                    {!activeWeeklyBriefing.relevant && alternativeBriefingError && (
+                    {shouldLoadAlternativeBriefing && alternativeBriefingError && (
                       <p className="text-sm text-muted-foreground">
-                        AI 참고 브리핑을 생성하지 못했습니다. 원문 PDF와 현장 상태를 직접 확인하세요.
+                        AI 참고 브리핑을 생성하지 못했습니다. 원문 자료와 현장 상태를 직접 확인하세요.
                       </p>
                     )}
                     {alternativeBriefing && (
@@ -1043,7 +1077,7 @@ export default function Tasks() {
                       rel="noreferrer"
                       className="inline-flex items-center gap-1 text-xs text-secondary hover:underline"
                     >
-                      원문 PDF 확인 <ExternalLink className="h-3 w-3" />
+                      {activeWeeklyBriefing.sourceUrl.toLowerCase().includes(".pdf") ? "원문 PDF 확인" : "원문 자료 확인"} <ExternalLink className="h-3 w-3" />
                     </a>
                   </div>
                 )}
@@ -1059,26 +1093,31 @@ export default function Tasks() {
               {!weeklyLoading && currentWeeklyInfos.length === 0 && (
                 <p className="text-sm text-muted-foreground">현재 주간 기간에 해당하는 공식 자료가 없습니다.</p>
               )}
-              {!weeklyLoading && currentWeeklyInfos.map((item) => (
-                <div key={item.sourceKey} className="rounded-md border p-3">
-                  <div className="font-medium">{item.title}</div>
-                  <div className="mt-1 text-xs text-muted-foreground">
-                    {formatWeeklyInfoPeriod(item)}
-                    {item.publishedAt ? ` · 등록 ${item.publishedAt}` : ""}
-                    {item.writer ? ` · ${item.writer}` : ""}
+              {!weeklyLoading && currentWeeklyInfos.map((item) => {
+                const pdfSourceUrl = getWeeklyFarmBriefingPdfSourceUrl(item);
+                const sourceUrl = pdfSourceUrl ?? item.sourceUrl;
+
+                return (
+                  <div key={item.sourceKey} className="rounded-md border p-3">
+                    <div className="font-medium">{item.title}</div>
+                    <div className="mt-1 text-xs text-muted-foreground">
+                      {formatWeeklyInfoPeriod(item)}
+                      {item.publishedAt ? ` · 등록 ${item.publishedAt}` : ""}
+                      {item.writer ? ` · ${item.writer}` : ""}
+                    </div>
+                    {sourceUrl && (
+                      <a
+                        href={sourceUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="mt-2 inline-flex items-center gap-1 text-xs text-secondary hover:underline"
+                      >
+                        {pdfSourceUrl ? "PDF 자료 확인" : "공식 자료 확인"} <ExternalLink className="h-3 w-3" />
+                      </a>
+                    )}
                   </div>
-                  {item.sourceUrl && (
-                    <a
-                      href={item.sourceUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="mt-2 inline-flex items-center gap-1 text-xs text-secondary hover:underline"
-                    >
-                      공식 자료 확인 <ExternalLink className="h-3 w-3" />
-                    </a>
-                  )}
-                </div>
-              ))}
+                );
+              })}
             </section>
         </CardContent>
       </Card>
