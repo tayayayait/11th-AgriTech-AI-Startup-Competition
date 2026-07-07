@@ -68,7 +68,7 @@ Gemini는 독립적으로 작업 카드를 만들지 않는다. 공식 API와 �
 
 단, 현재 주간 자료 판단에는 등록일(`regDt`)을 쓰지 않는다. `주간농사정보 제 19호 (2026.5.11.~5.17.)`처럼 제목의 괄호 안 날짜 범위를 파싱해 `periodStart=2026-05-11`, `periodEnd=2026-05-17`로 저장하고, 한국 시간 기준 오늘이 이 범위 안에 있을 때만 현재 주간 자료로 표시한다. 종료일에 연도가 생략된 경우 시작일의 연도를 사용한다.
 
-대신 최신 PDF 링크가 있으면 화면에 `요약` 버튼을 표시한다. 사용자가 `요약` 버튼을 누른 경우에는 저장된 요약과 로컬 캐시를 건너뛰고 `weekly-farm-briefing-proxy`가 PDF를 서버에서 다시 다운로드해 Gemini 문서 처리 기능에 `application/pdf` inline data로 전달한다. 화면 재진입처럼 사용자가 직접 누르지 않은 로딩에서는 저장 요약을 먼저 재사용한다. 기본 PDF 요약 요청에는 raw KMA 기상값을 캐시 키나 프롬프트 입력으로 직접 넣지 않는다. 모델은 응답 지연을 줄이기 위해 `gemini-3-flash-preview`를 사용한다.
+대신 최신 자료의 `fileName` 또는 `downUrlList`에서 PDF 후보를 확인할 수 있을 때만 화면에 `요약` 버튼을 활성화한다. PDF가 아닌 HWPX/HTML 첨부만 있으면 프론트엔드가 `weekly-farm-briefing-proxy` 호출을 만들지 않고 원문 확인 안내를 표시한다. 사용자가 `요약` 버튼을 누른 경우에는 저장된 요약과 로컬 캐시를 건너뛰고 `weekly-farm-briefing-proxy`가 PDF를 서버에서 다시 다운로드해 Gemini 문서 처리 기능에 `application/pdf` inline data로 전달한다. 화면 재진입처럼 사용자가 직접 누르지 않은 로딩에서는 저장 요약을 먼저 재사용한다. 기본 PDF 요약 요청에는 raw KMA 기상값을 캐시 키나 프롬프트 입력으로 직접 넣지 않는다. 모델은 응답 지연을 줄이기 위해 `gemini-3-flash-preview`를 사용한다.
 
 Supabase Edge Function의 약 30초 실행 제한을 넘기지 않기 위해 PDF 다운로드와 Gemini 호출은 각각 제한된 timeout 예산 안에서 처리한다. Gemini 호출은 26초까지 허용해 정상 생성 가능성을 높이되, 응답이 계속 지연되면 함수는 플랫폼 504까지 기다리지 않고 `status: "degraded"` 응답을 반환한다. Flash 모델은 사고 토큰을 함께 쓰므로 PDF 브리핑의 JSON 응답은 `maxOutputTokens: 3000`으로 둔다.
 

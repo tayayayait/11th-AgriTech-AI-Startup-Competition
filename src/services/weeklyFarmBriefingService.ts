@@ -155,6 +155,43 @@ function cleanString(value: string | null | undefined): string | null {
   return trimmed ? trimmed : null;
 }
 
+function safeDecodeUriComponent(value: string): string {
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value;
+  }
+}
+
+function hasPdfExtension(value: string | null | undefined): boolean {
+  const trimmed = cleanString(value);
+  if (!trimmed) return false;
+
+  const decoded = safeDecodeUriComponent(trimmed).toLowerCase();
+  const pathWithoutQuery = decoded.split(/[?#]/, 1)[0];
+  return pathWithoutQuery.endsWith(".pdf") || /\.pdf(?:$|[?#&=])/i.test(decoded);
+}
+
+function uniqueCleanStrings(values: Array<string | null | undefined>): string[] {
+  const unique: string[] = [];
+  for (const value of values) {
+    const cleaned = cleanString(value);
+    if (cleaned && !unique.includes(cleaned)) unique.push(cleaned);
+  }
+  return unique;
+}
+
+function getWeeklyFarmBriefingFallbackSourceUrl(weeklyInfo: NongsaroWeeklyInfo): string | null {
+  return uniqueCleanStrings([weeklyInfo.sourceUrl, ...weeklyInfo.downUrlList])[0] ?? null;
+}
+
+export function getWeeklyFarmBriefingPdfSourceUrl(weeklyInfo: NongsaroWeeklyInfo): string | null {
+  const sourceUrl = cleanString(weeklyInfo.sourceUrl);
+  if (sourceUrl && hasPdfExtension(weeklyInfo.sourceFileName)) return sourceUrl;
+
+  return uniqueCleanStrings([weeklyInfo.sourceUrl, ...weeklyInfo.downUrlList]).find(hasPdfExtension) ?? null;
+}
+
 function finiteNumber(value: number | null | undefined): number | null {
   return typeof value === "number" && Number.isFinite(value) ? value : null;
 }
@@ -620,8 +657,10 @@ function withRuntimeContextAndIncident(
 
 export async function getWeeklyFarmBriefing(input: GetWeeklyFarmBriefingInput): Promise<WeeklyFarmBriefing | null> {
   const cropName = input.cropName.trim();
-  const sourceUrl = input.weeklyInfo.sourceUrl?.trim();
-  if (!cropName || !sourceUrl) return null;
+  const sourceUrl = getWeeklyFarmBriefingPdfSourceUrl(input.weeklyInfo);
+  const fallbackSourceUrl = getWeeklyFarmBriefingFallbackSourceUrl(input.weeklyInfo);
+  const cacheSourceUrl = sourceUrl ?? fallbackSourceUrl;
+  if (!cropName || !cacheSourceUrl) return null;
 
   const profile = getNongsaroCropSearchProfile(cropName);
   const cropGroup = profile.weeklyKeywords.find((keyword) => keyword !== profile.canonicalName) ?? null;
@@ -636,7 +675,7 @@ export async function getWeeklyFarmBriefing(input: GetWeeklyFarmBriefingInput): 
   const cacheKey = getWeeklyBriefingCacheKey(
     normalizedCropName,
     cropGroup,
-    sourceUrl,
+    cacheSourceUrl,
     input.weeklyInfo.publishedAt,
     baseContextKey,
   );
@@ -667,6 +706,22 @@ export async function getWeeklyFarmBriefing(input: GetWeeklyFarmBriefingInput): 
         contextKey,
       });
     }
+  }
+
+  if (!sourceUrl) {
+    return buildUnavailableBriefing({
+      cropName: normalizedCropName,
+      cropGroup,
+      fieldContext,
+      weatherContext,
+      contextKey,
+      baseBriefingKey,
+      weatherIncidentKey,
+      weatherIncident,
+      weeklyInfo: input.weeklyInfo,
+      sourceUrl: cacheSourceUrl,
+      errorCode: "unsupported_weekly_document",
+    });
   }
 
   let response: WeeklyFarmBriefingProxyResponse;

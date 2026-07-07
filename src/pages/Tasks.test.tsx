@@ -73,6 +73,17 @@ vi.mock("@/services/taskService", () => ({
 
 vi.mock("@/services/weeklyFarmBriefingService", () => ({
   getWeeklyFarmBriefing: vi.fn(),
+  getWeeklyFarmBriefingPdfSourceUrl: vi.fn((weeklyInfo: {
+    sourceUrl?: string | null;
+    downUrlList?: string[];
+    sourceFileName?: string | null;
+  }) => {
+    const sourceUrl = weeklyInfo.sourceUrl?.trim() || null;
+    if (sourceUrl && weeklyInfo.sourceFileName?.trim().toLowerCase().endsWith(".pdf")) return sourceUrl;
+    const candidates = [sourceUrl, ...(weeklyInfo.downUrlList ?? [])]
+      .filter((value): value is string => Boolean(value?.trim()));
+    return candidates.find((value) => /\.pdf(?:$|[?#&=])/i.test(decodeURIComponent(value))) ?? null;
+  }),
 }));
 
 vi.mock("@/services/weeklyFarmAlternativeBriefingService", () => ({
@@ -288,6 +299,39 @@ describe("Tasks weekly farm briefing", () => {
       }),
     );
     expect(await screen.findByText("복숭아 주간 브리핑")).toBeInTheDocument();
+  });
+
+  it("disables weekly PDF summary when the current weekly document has no PDF source", async () => {
+    getWeeklyFarmInfosMock.mockResolvedValueOnce([
+      {
+        id: "weekly-27",
+        sourceKey: "url:https://www.nongsaro.go.kr/week-27.hwpx",
+        title: "주간농사정보 제27호",
+        publishedAt: "2026-06-30",
+        writer: "농촌진흥청",
+        periodStart: "2026-07-06",
+        periodEnd: "2026-07-12",
+        sourceUrl: "https://www.nongsaro.go.kr/week-27.hwpx",
+        downUrlList: ["https://www.nongsaro.go.kr/week-27.hwpx"],
+        sourceFileName: "week-27.hwpx",
+        hitCount: null,
+        summaryStatus: "pending",
+        summaryText: null,
+        summaryPayload: null,
+        isCurrent: true,
+        isNew: false,
+      },
+    ]);
+
+    renderTasks();
+
+    const button = await screen.findByRole("button", { name: "이번주 주간농사정보 파일 요약" });
+    expect(button).toBeDisabled();
+    fireEvent.click(button);
+
+    expect(getWeeklyFarmBriefingMock).not.toHaveBeenCalled();
+    expect(screen.getByText("요약을 지원하는 주간농사정보 PDF 자료가 없습니다. 원문 자료를 확인하세요."))
+      .toBeInTheDocument();
   });
 
   it("shows a stored weekly briefing again without requiring another summary click", async () => {

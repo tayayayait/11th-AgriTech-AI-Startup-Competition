@@ -641,6 +641,75 @@ describe("weekly farm briefing service", () => {
     });
   });
 
+  it("does not invoke the proxy when the weekly document has no PDF source", async () => {
+    const briefing = await getWeeklyFarmBriefing({
+      cropName: "포도",
+      weeklyInfo: weeklyInfo({
+        sourceKey: "url:https://www.nongsaro.go.kr/week-27.hwpx",
+        sourceUrl: "https://www.nongsaro.go.kr/week-27.hwpx",
+        downUrlList: ["https://www.nongsaro.go.kr/week-27.hwpx"],
+        sourceFileName: "week-27.hwpx",
+      }),
+    });
+
+    expect(invokeApiAdapter).not.toHaveBeenCalled();
+    expect(briefing).toMatchObject({
+      headline: "포도 주간농사정보 AI 요약 지연",
+      cacheStatus: "unavailable",
+      errorCode: "unsupported_weekly_document",
+      sourceUrl: "https://www.nongsaro.go.kr/week-27.hwpx",
+    });
+  });
+
+  it("uses a PDF from the download list when the primary weekly document is not a PDF", async () => {
+    const invokeApiAdapterMock = vi.mocked(invokeApiAdapter);
+    invokeApiAdapterMock.mockResolvedValueOnce({
+      source: "gemini",
+      model: WEEKLY_BRIEFING_MODEL,
+      fetchedAt: "2026-07-07T09:45:00.000Z",
+      sourceUrl: "https://www.nongsaro.go.kr/week-27.pdf",
+      sourceTitle: "주간농사정보 제27호",
+      publishedAt: "2026-06-30",
+      data: {
+        relevant: true,
+        headline: "포도 27호 브리핑",
+        summaryBullets: ["포도 과수원 배수와 병해충 예찰을 확인합니다."],
+        actionBullets: ["포도 생육 상태를 확인합니다."],
+        cautionBullets: ["원문 근거를 확인합니다."],
+        evidenceSnippets: ["포도 과원 관리"],
+      },
+    });
+
+    const briefing = await getWeeklyFarmBriefing({
+      cropName: "포도",
+      weeklyInfo: weeklyInfo({
+        sourceKey: "url:https://www.nongsaro.go.kr/week-27.hwpx",
+        title: "주간농사정보 제27호",
+        publishedAt: "2026-06-30",
+        sourceUrl: "https://www.nongsaro.go.kr/week-27.hwpx",
+        downUrlList: [
+          "https://www.nongsaro.go.kr/week-27.hwpx",
+          "https://www.nongsaro.go.kr/week-27.pdf",
+        ],
+        sourceFileName: "week-27.hwpx",
+      }),
+    });
+
+    expect(invokeApiAdapterMock).toHaveBeenCalledWith(
+      "gemini",
+      "weekly-farm-briefing-proxy",
+      expect.objectContaining({
+        sourceUrl: "https://www.nongsaro.go.kr/week-27.pdf",
+      }),
+      expect.objectContaining({ timeout: 30000 }),
+    );
+    expect(briefing).toMatchObject({
+      headline: "포도 27호 브리핑",
+      sourceUrl: "https://www.nongsaro.go.kr/week-27.pdf",
+      cacheStatus: "fresh",
+    });
+  });
+
   it("returns an unavailable briefing state when the proxy fails and no cache exists", async () => {
     const invokeApiAdapterMock = vi.mocked(invokeApiAdapter);
     invokeApiAdapterMock.mockRejectedValueOnce(

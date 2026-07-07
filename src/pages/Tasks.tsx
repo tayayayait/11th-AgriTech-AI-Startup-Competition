@@ -23,7 +23,10 @@ import {
   type NongsaroWorkScheduleLookup,
 } from "@/services/nongsaroWorkScheduleService";
 import { generateAndSaveTaskCardsForField } from "@/services/taskGenerationService";
-import { getWeeklyFarmBriefing } from "@/services/weeklyFarmBriefingService";
+import {
+  getWeeklyFarmBriefing,
+  getWeeklyFarmBriefingPdfSourceUrl,
+} from "@/services/weeklyFarmBriefingService";
 import { generateWeeklyFarmAlternativeBriefing } from "@/services/weeklyFarmAlternativeBriefingService";
 import {
   filterVisibleWorkVideoRecommendations,
@@ -257,12 +260,16 @@ export default function Tasks() {
     refetchInterval: WEEKLY_INFO_REFETCH_MS,
   });
   const latestWeeklyInfo = weeklyInfos.find((item) => item.isCurrent) ?? null;
+  const latestWeeklyPdfSourceUrl = useMemo(
+    () => (latestWeeklyInfo ? getWeeklyFarmBriefingPdfSourceUrl(latestWeeklyInfo) : null),
+    [latestWeeklyInfo],
+  );
   const latestWeeklyBriefingKey = useMemo(() => {
-    if (!selected?.crop_name || !latestWeeklyInfo?.sourceUrl) return null;
+    if (!selected?.crop_name || !latestWeeklyPdfSourceUrl) return null;
     return [
       selected.crop_name,
       latestWeeklyInfo.sourceKey,
-      latestWeeklyInfo.sourceUrl,
+      latestWeeklyPdfSourceUrl,
       latestWeeklyInfo.publishedAt ?? "",
       latestWeeklyInfo.title,
       latestWeeklyInfo.periodStart ?? "",
@@ -273,8 +280,8 @@ export default function Tasks() {
     latestWeeklyInfo?.periodStart,
     latestWeeklyInfo?.publishedAt,
     latestWeeklyInfo?.sourceKey,
-    latestWeeklyInfo?.sourceUrl,
     latestWeeklyInfo?.title,
+    latestWeeklyPdfSourceUrl,
     selected?.crop_name,
   ]);
   const [requestedWeeklyBriefingKey, setRequestedWeeklyBriefingKey] = useState<string | null>(null);
@@ -338,7 +345,7 @@ export default function Tasks() {
       "weekly-farm-briefing",
       selected?.crop_name,
       latestWeeklyInfo?.sourceKey,
-      latestWeeklyInfo?.sourceUrl,
+      latestWeeklyPdfSourceUrl,
       latestWeeklyInfo?.publishedAt,
       latestWeeklyInfo?.title,
       latestWeeklyInfo?.periodStart,
@@ -794,7 +801,7 @@ export default function Tasks() {
                     variant="outline"
                     size="sm"
                     aria-label="이번주 주간농사정보 파일 요약"
-                    disabled={!latestWeeklyInfo?.sourceUrl || weeklyBriefingLoading}
+                    disabled={!latestWeeklyPdfSourceUrl || weeklyBriefingLoading}
                     onClick={requestWeeklyBriefingSummary}
                   >
                     <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
@@ -812,7 +819,12 @@ export default function Tasks() {
                 {!weeklyBriefingLoading && !weeklyBriefingError && !latestWeeklyInfo?.sourceUrl && (
                   <p className="text-sm text-muted-foreground">요약할 주간농사정보 PDF 링크가 없습니다.</p>
                 )}
-                {!weeklyBriefingShouldLoad && latestWeeklyInfo?.sourceUrl && (
+                {!weeklyBriefingLoading && !weeklyBriefingError && latestWeeklyInfo?.sourceUrl && !latestWeeklyPdfSourceUrl && (
+                  <p className="text-sm text-muted-foreground">
+                    요약을 지원하는 주간농사정보 PDF 자료가 없습니다. 원문 자료를 확인하세요.
+                  </p>
+                )}
+                {!weeklyBriefingShouldLoad && latestWeeklyPdfSourceUrl && (
                   <p className="text-sm text-muted-foreground">아직 생성된 브리핑이 없습니다.</p>
                 )}
                 {activeWeeklyBriefing && (
