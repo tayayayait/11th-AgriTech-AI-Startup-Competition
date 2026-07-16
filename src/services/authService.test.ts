@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { FIELDGUARD_OWNER_ID, supabase } from "@/integrations/supabase/client";
-import { claimAnonymousWorkspace, signInWithEmail } from "@/services/authService";
+import { claimAnonymousWorkspace, restoreAuthenticatedWorkspace, signInWithEmail } from "@/services/authService";
 
 vi.mock("@/integrations/supabase/client", () => ({
   FIELDGUARD_OWNER_ID: "11111111-1111-4111-8111-111111111111",
@@ -74,5 +74,18 @@ describe("authService", () => {
     ).rejects.toThrow("invalid credentials");
 
     expect(rpcMock).not.toHaveBeenCalled();
+  });
+
+  it("claims the anonymous workspace when an authenticated session is restored", async () => {
+    rpcMock.mockResolvedValueOnce({
+      data: { claimed_fields: 1 },
+      error: null,
+    } as never);
+
+    await restoreAuthenticatedWorkspace({ user: { id: "user-1" } } as never);
+
+    expect(rpcMock).toHaveBeenCalledWith("claim_fieldguard_anonymous_workspace", {
+      anonymous_owner_id: FIELDGUARD_OWNER_ID,
+    });
   });
 });

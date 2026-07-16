@@ -11,6 +11,7 @@ import { useSelectedField } from "@/context/SelectedFieldContext";
 import {
   getNongsaroSchedulePeriod,
   isNongsaroScheduleEraInPeriods,
+  splitTasksByDueDate,
 } from "@/domain/tasks/taskCardEngine";
 import { normalizeHtmlText } from "@/domain/text/html";
 import type { TaskCard, TaskCheck, TaskSource } from "@/domain/tasks/types";
@@ -514,8 +515,14 @@ export default function Tasks() {
         })),
         workSchedules,
         weeklyInfos,
-        briefing: activeWeeklyBriefing,
-        includeWorkScheduleTasks: false,
+        briefing: activeWeeklyBriefing
+          ? {
+              ...activeWeeklyBriefing,
+              periodStart: latestWeeklyInfo?.periodStart ?? null,
+              periodEnd: latestWeeklyInfo?.periodEnd ?? null,
+            }
+          : null,
+        includeWorkScheduleTasks: true,
       }),
     staleTime: TASK_STALE_MS,
     retry: 1,
@@ -533,8 +540,11 @@ export default function Tasks() {
   }, [activeWeeklyBriefing?.cacheStatus, qc, selected?.crop_name]);
 
   const pending = tasks.filter((task) => task.status === "pending");
-  const visiblePending = pending.filter((task) => !taskSourceKinds(task).includes("농작업일정"));
+  const visiblePending = pending;
   const actionableTasks = [...visiblePending].sort((left, right) => dueTime(left) - dueTime(right));
+  const splitTasks = splitTasksByDueDate(actionableTasks);
+  const todayTasks = splitTasks.today.slice(0, 3);
+  const upcomingTasks = splitTasks.upcoming.slice(0, 3);
   const currentMonthScheduleEraCount = workSchedules.reduce(
     (count, schedule) => count + schedule.eras.filter((era) => isEraInMonth(era, currentSchedulePeriod.month)).length,
     0,
@@ -626,8 +636,8 @@ export default function Tasks() {
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-base font-semibold">해야 할 작업</h1>
-          <p className="text-xs text-muted-foreground">{actionableTasks.length}개 대기 중</p>
+          <h1 id="today-tasks-title" className="text-base font-semibold">해야 할 작업</h1>
+          <p className="text-xs text-muted-foreground">{todayTasks.length}개 대기 중</p>
         </div>
         <div className="text-xs text-muted-foreground">
           {generationLoading && "작업 카드 갱신 중"}
@@ -636,15 +646,29 @@ export default function Tasks() {
         </div>
       </div>
 
-      <section className="grid gap-3 md:grid-cols-2" aria-label="해야 할 작업">
+      <section className="grid gap-3 md:grid-cols-2" aria-labelledby="today-tasks-title">
         {taskLoading && <p className="text-sm text-muted-foreground">작업 카드를 불러오는 중입니다.</p>}
-        {actionableTasks.map((task) => (
+        {todayTasks.map((task) => (
           <TaskCardView key={task.id} task={task} onChecksChange={saveChecks} onComplete={complete} />
         ))}
-        {!taskLoading && actionableTasks.length === 0 && (
+        {!taskLoading && todayTasks.length === 0 && (
           <p className="text-sm text-muted-foreground">해야 할 작업 카드가 없습니다.</p>
         )}
       </section>
+
+      {upcomingTasks.length > 0 && (
+        <section className="space-y-3" aria-labelledby="upcoming-tasks-title">
+          <div>
+            <h2 id="upcoming-tasks-title" className="text-sm font-semibold">이번 주 예정 작업</h2>
+            <p className="text-xs text-muted-foreground">오늘 이후 예정된 작업입니다.</p>
+          </div>
+          <div className="grid gap-3 md:grid-cols-2">
+            {upcomingTasks.map((task) => (
+              <TaskCardView key={task.id} task={task} onChecksChange={saveChecks} onComplete={complete} />
+            ))}
+          </div>
+        </section>
+      )}
 
       <Card>
         <CardContent className="space-y-6 p-4">

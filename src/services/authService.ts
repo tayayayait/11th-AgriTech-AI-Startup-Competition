@@ -52,6 +52,11 @@ export async function claimAnonymousWorkspace(
   return { claimedFields: getClaimedFieldCount(data as WorkspaceClaimRpcPayload) };
 }
 
+export async function restoreAuthenticatedWorkspace(session: Session | null): Promise<void> {
+  if (!session) return;
+  await claimAnonymousWorkspace();
+}
+
 export async function getCurrentAuthSession(): Promise<Session | null> {
   const { data, error } = await supabase.auth.getSession();
   if (error) throw error;

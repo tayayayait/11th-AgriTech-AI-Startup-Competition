@@ -72,8 +72,14 @@ function toSubCategory(item: Record<string, string>): SubCategory | null {
 function normalizeMaybeUrl(value: string | null | undefined): string | null {
   const raw = clean(value);
   if (!raw) return null;
-  if (/^https?:\/\//i.test(raw)) return raw;
-  return normalizeNongsaroUrl(raw);
+
+  try {
+    const url = new URL(raw, "https://www.nongsaro.go.kr");
+    if (url.protocol === "http:") url.protocol = "https:";
+    return url.toString();
+  } catch {
+    return normalizeNongsaroUrl(raw);
+  }
 }
 
 function normalizeVideo(item: Record<string, string>): CropEbookVideo | null {

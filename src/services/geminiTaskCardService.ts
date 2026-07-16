@@ -10,6 +10,25 @@ export interface TaskCardRefinement {
   sourceNames: string[];
 }
 
+export function applyTaskCardRefinements(
+  drafts: TaskCardDraft[],
+  refinements: TaskCardRefinement[],
+): TaskCardDraft[] {
+  const refinementByTitle = new Map(refinements.map((refinement) => [refinement.title, refinement]));
+
+  return drafts.map((draft) => {
+    const refinement = refinementByTitle.get(draft.title);
+    if (!refinement) return draft;
+
+    return {
+      ...draft,
+      reason: refinement.reason,
+      checks: refinement.checks.map((label) => ({ label, done: false })),
+      priority: Math.max(1, Math.min(5, refinement.priority)),
+    };
+  });
+}
+
 export interface BuildTaskCardRefinementPromptInput {
   cropName: string;
   todayIso: string;

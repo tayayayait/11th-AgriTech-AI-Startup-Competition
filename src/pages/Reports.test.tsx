@@ -396,7 +396,6 @@ describe("Reports AI consultation", () => {
     await waitFor(() => expect(getPsisPesticideRegistrationsMock).toHaveBeenCalledWith(expect.objectContaining({
       cropName: "토마토",
       targetKeyword: "궤양병",
-      itemKeyword: undefined,
     })));
   });
 
@@ -424,7 +423,6 @@ describe("Reports AI consultation", () => {
     await waitFor(() => expect(getPsisPesticideRegistrationsMock).toHaveBeenCalledWith(expect.objectContaining({
       cropName: "포도",
       targetKeyword: "흰빛썩음병",
-      itemKeyword: undefined,
     })));
   });
 

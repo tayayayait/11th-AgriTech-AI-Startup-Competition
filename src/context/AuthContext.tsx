@@ -4,6 +4,7 @@ import type { Session, User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import {
   getCurrentAuthSession,
+  restoreAuthenticatedWorkspace,
   signInWithEmail,
   signOut as signOutFromSupabase,
   signUpWithEmail,
@@ -46,7 +47,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     let active = true;
 
     getCurrentAuthSession()
-      .then((currentSession) => {
+      .then(async (currentSession) => {
+        if (!active) return;
+        await restoreAuthenticatedWorkspace(currentSession);
         if (!active) return;
         setSession(currentSession);
         setAuthError(null);

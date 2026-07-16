@@ -1,10 +1,53 @@
 import { describe, expect, it } from "vitest";
 import {
+  applyTaskCardRefinements,
   buildTaskCardRefinementPrompt,
   parseTaskCardRefinementFromGeminiResponse,
 } from "@/services/geminiTaskCardService";
 
 describe("gemini task card service", () => {
+  it("applies only exact candidate refinements and preserves deterministic fields", () => {
+    const result = applyTaskCardRefinements(
+      [
+        {
+          priority: 3,
+          title: "deterministic task",
+          reason: "official reason",
+          checks: [{ label: "official check", done: false }],
+          durationMin: 20,
+          sources: [{ name: "official source", url: "https://example.test/source" }],
+          dueInDays: 3,
+        },
+      ],
+      [
+        {
+          title: "deterministic task",
+          reason: "refined reason",
+          checks: ["refined check"],
+          priority: 2,
+          sourceNames: ["official source"],
+        },
+        {
+          title: "hallucinated new task",
+          reason: "unsupported reason",
+          checks: ["unsupported check"],
+          priority: 1,
+          sourceNames: [],
+        },
+      ],
+    );
+
+    expect(result).toHaveLength(1);
+    expect(result[0]).toMatchObject({
+      title: "deterministic task",
+      reason: "refined reason",
+      priority: 2,
+      dueInDays: 3,
+      sources: [{ name: "official source", url: "https://example.test/source" }],
+      checks: [{ label: "refined check", done: false }],
+    });
+  });
+
   it("builds a grounded prompt from deterministic task cards and official sources", () => {
     const prompt = buildTaskCardRefinementPrompt({
       cropName: "tomato",

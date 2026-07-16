@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildTaskCardDrafts, getNongsaroSchedulePeriod } from "@/domain/tasks/taskCardEngine";
+import { buildTaskCardDrafts, getNongsaroSchedulePeriod, splitTasksByDueDate } from "@/domain/tasks/taskCardEngine";
 
 const lowWeatherRisk = {
   score: 0,
@@ -12,6 +12,19 @@ const lowWeatherRisk = {
 };
 
 describe("task card engine", () => {
+  it("splits pending tasks by their KST due date", () => {
+    const tasks = [
+      { id: "today", due_at: "2026-07-16T00:00:00.000Z" },
+      { id: "upcoming", due_at: "2026-07-18T15:00:00.000Z" },
+      { id: "legacy", due_at: null },
+    ];
+
+    const result = splitTasksByDueDate(tasks, new Date("2026-07-16T12:00:00+09:00"));
+
+    expect(result.today.map((task) => task.id)).toEqual(["today", "legacy"]);
+    expect(result.upcoming.map((task) => task.id)).toEqual(["upcoming"]);
+  });
+
   it("creates urgent today tasks from weather and pest risk", () => {
     const tasks = buildTaskCardDrafts({
       cropName: "벼",
@@ -131,7 +144,8 @@ describe("task card engine", () => {
       "농작업일정 실행: 꽃송이 다듬기",
       "농작업일정 실행: 봉지 씌우기",
     ]);
-    expect(tasks[0]).toMatchObject({ priority: 3, dueInDays: 3 });
+    expect(tasks[0]).toMatchObject({ priority: 3, dueInDays: 0 });
+    expect(tasks[1]).toMatchObject({ priority: 4, dueInDays: 4 });
     expect(tasks[0].reason).toContain("5월 상");
     expect(tasks[0].reason).toContain("무가온");
     expect(tasks[0].sources).toEqual(
@@ -223,7 +237,7 @@ describe("task card engine", () => {
 
     expect(tasks).toHaveLength(1);
     expect(tasks[0]).toMatchObject({
-      priority: 3,
+      priority: 4,
       title: "농작업일정 실행: 봉지 씌우기",
       dueInDays: 3,
     });
@@ -276,6 +290,7 @@ describe("task card engine", () => {
     expect(tasks).toHaveLength(1);
     expect(tasks[0].title).toBe("농작업일정 실행: 봉지 씌우기");
     expect(tasks[0].reason).toContain("5월 중");
+    expect(tasks[0].dueInDays).toBe(0);
   });
 
   it("falls back to same-month work schedule eras outside the next 7 days at lower priority", () => {
@@ -313,7 +328,7 @@ describe("task card engine", () => {
     expect(tasks[0]).toMatchObject({
       priority: 4,
       title: "농작업일정 실행: 봉지 씌우기",
-      dueInDays: 5,
+      dueInDays: 10,
     });
   });
 
@@ -351,5 +366,73 @@ describe("task card engine", () => {
       "농작업일정 실행: 작업 2",
       "농작업일정 실행: 작업 3",
     ]);
+  });
+
+  it("keeps an untriggered rain-response schedule as an upcoming condition check", () => {
+    const tasks = buildTaskCardDrafts({
+      cropName: "복숭아",
+      today: new Date("2026-07-17T00:00:00.000+09:00"),
+      weatherRisk: lowWeatherRisk,
+      pestRisks: [],
+      workSchedules: [
+        {
+          sourceId: "peach-1",
+          title: "복숭아",
+          cropName: "복숭아",
+          detailText: null,
+          fileUrl: null,
+          eras: [
+            {
+              operationName: "장마, 집중호우시 배수대책",
+              farmWorkFlag: "재해대책",
+              beginMonth: 7,
+              endMonth: 8,
+              beginEra: "상",
+              endEra: "하",
+              requiredMonth: 1,
+              infoType: "주요농작업",
+              videoUrl: null,
+            },
+          ],
+        },
+      ],
+      weeklyInfos: [],
+    });
+
+    expect(tasks).toHaveLength(1);
+    expect(tasks[0]).toMatchObject({
+      priority: 4,
+      title: "농작업일정 확인: 장마, 집중호우시 배수대책",
+      dueInDays: 1,
+    });
+    expect(tasks[0].reason).toContain("현재 기상 조건에서는 즉시 실행 대상이 아닙니다");
+  });
+
+  it("creates one current-period task card per weekly briefing action when no work schedule exists", () => {
+    const tasks = buildTaskCardDrafts({
+      cropName: "복숭아",
+      today: new Date("2026-07-17T00:00:00.000+09:00"),
+      weatherRisk: lowWeatherRisk,
+      pestRisks: [],
+      workSchedules: [],
+      weeklyInfos: [],
+      briefing: {
+        headline: "복숭아 이번 주 관리",
+        actionBullets: ["조생종 숙도를 확인합니다.", "열과 발생 여부를 확인합니다."],
+        cautionBullets: ["약제는 등록 여부를 확인합니다."],
+        sourceTitle: "주간농사정보 제29호",
+        sourceUrl: "https://example.test/week.pdf",
+        publishedAt: "2026-07-13",
+        periodStart: "2026-07-13",
+        periodEnd: "2026-07-19",
+      },
+    });
+
+    expect(tasks.map((task) => task.title)).toEqual([
+      "주간농사정보 실행: 조생종 숙도를 확인합니다.",
+      "주간농사정보 실행: 열과 발생 여부를 확인합니다.",
+    ]);
+    expect(tasks.every((task) => task.dueInDays === 0)).toBe(true);
+    expect(tasks.every((task) => task.checks.length === 1)).toBe(true);
   });
 });

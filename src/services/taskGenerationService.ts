@@ -11,7 +11,11 @@ import {
   getSummarizedPestDetail,
 } from "@/services/npmsPestService";
 import { toTaskCard } from "@/services/taskService";
-import { extractChecksFromDetailText } from "@/services/geminiTaskCardService";
+import {
+  applyTaskCardRefinements,
+  extractChecksFromDetailText,
+  refineTaskCardsWithGemini,
+} from "@/services/geminiTaskCardService";
 
 export interface GenerateTaskCardsForFieldInput extends BuildTaskCardDraftsInput {
   fieldId: string;
@@ -31,7 +35,7 @@ const toDateKey = (isoString: string | null): string => {
   return new Date(timestamp).toLocaleDateString("en-CA", { timeZone: "Asia/Seoul" });
 };
 
-const GENERATED_TITLE_PREFIXES = ["농작업일정 확인:", "농작업일정 실행:", "주간농사정보 확인:", "주간농사정보 기반 작업 실행"];
+const GENERATED_TITLE_PREFIXES = ["농작업일정 확인:", "농작업일정 실행:", "주간농사정보 확인:", "주간농사정보 실행:", "주간농사정보 기반 작업 실행"];
 
 const deletePendingGeneratedTasks = async (fieldId: string, titles: string[]): Promise<void> => {
   if (titles.length > 0) {
@@ -105,12 +109,26 @@ export const generateAndSaveTaskCardsForField = async (
     }
   }
 
-  const titles = drafts.map((draft) => draft.title);
+  let refinedDrafts = drafts;
+  if (drafts.length > 0) {
+    try {
+      const refinements = await refineTaskCardsWithGemini({
+        cropName: input.cropName,
+        todayIso: today.toISOString(),
+        drafts,
+      });
+      refinedDrafts = applyTaskCardRefinements(drafts, refinements);
+    } catch {
+      // Deterministic candidates remain the safe fallback when Gemini is unavailable.
+    }
+  }
+
+  const titles = refinedDrafts.map((draft) => draft.title);
   await deletePendingGeneratedTasks(input.fieldId, titles);
 
-  if (drafts.length === 0) return [];
+  if (refinedDrafts.length === 0) return [];
 
-  const draftsWithDueAt = drafts.map((draft) => ({
+  const draftsWithDueAt = refinedDrafts.map((draft) => ({
     draft,
     dueAt: toDueAt(today, draft.dueInDays),
   }));

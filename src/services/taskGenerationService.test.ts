@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { supabase } from "@/integrations/supabase/client";
+import { refineTaskCardsWithGemini } from "@/services/geminiTaskCardService";
 import { generateAndSaveTaskCardsForField } from "@/services/taskGenerationService";
 
 vi.mock("@/integrations/supabase/client", () => ({
@@ -8,7 +9,17 @@ vi.mock("@/integrations/supabase/client", () => ({
   },
 }));
 
+vi.mock("@/services/geminiTaskCardService", async () => {
+  const actual = await vi.importActual<typeof import("@/services/geminiTaskCardService")>("@/services/geminiTaskCardService");
+  return {
+    ...actual,
+    extractChecksFromDetailText: vi.fn(),
+    refineTaskCardsWithGemini: vi.fn(),
+  };
+});
+
 const supabaseFromMock = vi.mocked(supabase.from);
+const refineTaskCardsWithGeminiMock = vi.mocked(refineTaskCardsWithGemini);
 
 function makeQueryBuilder() {
   const builder = {
@@ -27,6 +38,7 @@ function makeQueryBuilder() {
 describe("generateAndSaveTaskCardsForField", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    refineTaskCardsWithGeminiMock.mockResolvedValue([]);
   });
 
   it("replaces generated pending cards and inserts due dates/checklists/sources", async () => {
@@ -94,6 +106,55 @@ describe("generateAndSaveTaskCardsForField", () => {
           status: "pending",
           checks: expect.arrayContaining([expect.objectContaining({ label: "배수로 막힘 확인", done: false })]),
           sources: expect.arrayContaining([expect.objectContaining({ name: "KMA 날씨 위험도" })]),
+        }),
+      ]),
+    );
+  });
+
+  it("keeps deterministic task candidates when Gemini refinement fails", async () => {
+    const taskBuilder = makeQueryBuilder();
+    taskBuilder.eq.mockImplementation((column: string, value?: string) => {
+      if (column === "status" && value === "done") {
+        return Promise.resolve({ data: [], error: null }) as never;
+      }
+      if (column === "status" && value === "pending") {
+        return Promise.resolve({ data: null, error: null }) as never;
+      }
+      return taskBuilder;
+    });
+    taskBuilder.insert.mockReturnValue({
+      select: () => ({
+        order: async () => ({ data: [], error: null }),
+      }),
+    } as never);
+    supabaseFromMock.mockReturnValue(taskBuilder as never);
+    refineTaskCardsWithGeminiMock.mockRejectedValueOnce(new Error("Gemini unavailable"));
+
+    const saved = await generateAndSaveTaskCardsForField({
+      fieldId: "field-1",
+      cropName: "grape",
+      today: new Date("2026-05-06T00:00:00.000Z"),
+      weatherRisk: {
+        score: 82,
+        summary: "rain 32mm",
+        precipitation: 32,
+        temperature: 24,
+        wind: 4,
+        humidity: 55,
+        collectedAt: "2026-05-06T07:00:00.000Z",
+      },
+      pestRisks: [],
+      workSchedules: [],
+      weeklyInfos: [],
+    });
+
+    expect(saved).toEqual([]);
+    expect(refineTaskCardsWithGeminiMock).toHaveBeenCalledTimes(1);
+    expect(taskBuilder.insert).toHaveBeenCalledWith(
+      expect.arrayContaining([
+        expect.objectContaining({
+          field_id: "field-1",
+          due_at: "2026-05-06T00:00:00.000Z",
         }),
       ]),
     );

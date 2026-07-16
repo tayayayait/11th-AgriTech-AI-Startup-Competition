@@ -61,6 +61,8 @@ export interface TaskEngineBriefing {
   sourceTitle: string;
   sourceUrl: string | null;
   publishedAt: string | null;
+  periodStart?: string | null;
+  periodEnd?: string | null;
 }
 
 export interface TaskCardDraftCheck {
@@ -247,6 +249,34 @@ const getKstMonthDay = (date: Date): { month: number; day: number } => {
   };
 };
 
+export const getKstDateKey = (date: Date): string => {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Asia/Seoul",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(date);
+  const year = parts.find((part) => part.type === "year")?.value ?? String(date.getFullYear());
+  const month = parts.find((part) => part.type === "month")?.value ?? String(date.getMonth() + 1).padStart(2, "0");
+  const day = parts.find((part) => part.type === "day")?.value ?? String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
+export const isTaskDueToday = (dueAt: string | null, today = new Date()): boolean => {
+  if (!dueAt) return true;
+  const dueDate = new Date(dueAt);
+  if (Number.isNaN(dueDate.getTime())) return true;
+  return getKstDateKey(dueDate) === getKstDateKey(today);
+};
+
+export const splitTasksByDueDate = <T extends { due_at: string | null }>(
+  tasks: T[],
+  today = new Date(),
+): { today: T[]; upcoming: T[] } => ({
+  today: tasks.filter((task) => isTaskDueToday(task.due_at, today)),
+  upcoming: tasks.filter((task) => !isTaskDueToday(task.due_at, today)),
+});
+
 export const getNongsaroSchedulePeriod = (date: Date): NongsaroSchedulePeriod => {
   const { month, day } = getKstMonthDay(date);
   const era: NongsaroScheduleEraSegment = day <= 10 ? "상" : day <= 20 ? "중" : "하";
@@ -366,7 +396,7 @@ const isMonthInRange = (month: number, beginMonth: number | null, endMonth: numb
 interface WorkScheduleCandidate {
   schedule: TaskEngineWorkSchedule;
   era: TaskEngineWorkScheduleEra;
-  matchType: "period" | "month";
+  matchType: "current" | "upcoming" | "month";
 }
 
 const scheduleEraRangeLabel = (era: TaskEngineWorkScheduleEra): string => {
@@ -391,9 +421,11 @@ const scheduleEraRangeLabel = (era: TaskEngineWorkScheduleEra): string => {
 const collectWorkScheduleCandidates = (
   cropName: string,
   workSchedules: TaskEngineWorkSchedule[],
+  currentPeriod: NongsaroSchedulePeriod,
   weekPeriods: NongsaroSchedulePeriod[],
 ): WorkScheduleCandidate[] => {
-  const periodMatches: WorkScheduleCandidate[] = [];
+  const currentMatches: WorkScheduleCandidate[] = [];
+  const upcomingMatches: WorkScheduleCandidate[] = [];
   const monthMatches: WorkScheduleCandidate[] = [];
   const weekMonths = new Set(weekPeriods.map((period) => period.month));
 
@@ -403,8 +435,13 @@ const collectWorkScheduleCandidates = (
 
   for (const schedule of sortedSchedules) {
     for (const era of schedule.eras) {
+      if (isNongsaroScheduleEraInPeriods(era, [currentPeriod])) {
+        currentMatches.push({ schedule, era, matchType: "current" });
+        continue;
+      }
+
       if (isNongsaroScheduleEraInPeriods(era, weekPeriods)) {
-        periodMatches.push({ schedule, era, matchType: "period" });
+        upcomingMatches.push({ schedule, era, matchType: "upcoming" });
         continue;
       }
 
@@ -414,6 +451,7 @@ const collectWorkScheduleCandidates = (
     }
   }
 
+  const periodMatches = [...currentMatches, ...upcomingMatches];
   const candidates = periodMatches.length > 0 ? periodMatches : monthMatches;
   const seen = new Set<string>();
 
@@ -435,34 +473,84 @@ const collectWorkScheduleCandidates = (
     .slice(0, 3);
 };
 
+const daysUntilScheduleEra = (
+  today: Date,
+  era: TaskEngineWorkScheduleEra,
+  maxDays = 60,
+): number | null => {
+  for (let offset = 1; offset <= maxDays; offset += 1) {
+    const period = getNongsaroSchedulePeriod(new Date(today.getTime() + offset * MS_PER_DAY));
+    if (isNongsaroScheduleEraInPeriods(era, [period])) return offset;
+  }
+  return null;
+};
+
+type WorkScheduleWeatherCondition = "rain" | "wind" | "heat" | "cold";
+
+const getWorkScheduleWeatherCondition = (operationName: string): WorkScheduleWeatherCondition | null => {
+  const text = normalizeMatchText(operationName);
+  if (/(장마|집중호우|강수|폭우|배수|침수)/.test(text)) return "rain";
+  if (/(강풍|태풍|돌풍)/.test(text)) return "wind";
+  if (/(고온|폭염)/.test(text)) return "heat";
+  if (/(저온|서리|동해)/.test(text)) return "cold";
+  return null;
+};
+
+const isWorkScheduleWeatherConditionTriggered = (
+  condition: WorkScheduleWeatherCondition,
+  weatherRisk: TaskEngineWeatherRisk | null,
+): boolean => {
+  if (!weatherRisk) return false;
+  if (condition === "rain") return (weatherRisk.precipitation ?? 0) >= 20;
+  if (condition === "wind") return (weatherRisk.wind ?? 0) >= 9;
+  if (condition === "heat") return (weatherRisk.temperature ?? Number.NEGATIVE_INFINITY) >= 33;
+  return (weatherRisk.temperature ?? Number.POSITIVE_INFINITY) <= 0;
+};
+
 const buildWorkScheduleTask = (
   cropName: string,
   workSchedules: TaskEngineWorkSchedule[],
   today: Date,
+  weatherRisk: TaskEngineWeatherRisk | null,
 ): TaskCardDraft[] => {
   const weekPeriods = getNongsaroScheduleWeekPeriods(today);
   const currentPeriod = getNongsaroSchedulePeriod(today);
   const weekPeriodText = formatSchedulePeriodRange(weekPeriods);
-  const candidates = collectWorkScheduleCandidates(cropName, workSchedules, weekPeriods);
+  const candidates = collectWorkScheduleCandidates(cropName, workSchedules, currentPeriod, weekPeriods);
 
   return candidates.map(({ schedule, era, matchType }) => {
-    const exactMatch = matchType === "period";
+    const currentMatch = matchType === "current";
     const workFlagText = era.farmWorkFlag ? `${era.farmWorkFlag} · ` : "";
     const currentPeriodText = `${currentPeriod.month}월 ${currentPeriod.era}`;
     const eraRangeText = scheduleEraRangeLabel(era);
     const operationName = normalizeHtmlSingleLineText(era.operationName) ?? era.operationName.trim();
+    const weatherCondition = getWorkScheduleWeatherCondition(operationName);
+    const needsConditionReview = currentMatch
+      && weatherCondition !== null
+      && !isWorkScheduleWeatherConditionTriggered(weatherCondition, weatherRisk);
+    const dueInDays = currentMatch
+      ? needsConditionReview ? 1 : 0
+      : daysUntilScheduleEra(today, era) ?? 5;
 
     return {
-      priority: exactMatch ? 3 : 4,
-      title: `농작업일정 실행: ${operationName}`,
-      reason: exactMatch
-        ? `${schedule.cropName} ${workFlagText}이번 주(${weekPeriodText})와 겹치는 농사로 농작업일정(${schedule.title})의 ${eraRangeText} 작업입니다.`
-        : `${schedule.cropName} ${workFlagText}${currentPeriodText}부터 7일 안에 정확히 걸치는 작업이 없어 같은 달 농작업일정(${schedule.title})의 ${eraRangeText} 작업을 낮은 우선순위로 표시합니다.`,
-      checks: [
-        check(`${operationName} 적용 여부 확인`),
-        check("필지 생육단계와 농작업일정 비교"),
-        check("필요 자재·장비·인력 준비 상태 확인"),
-      ],
+      priority: currentMatch && !needsConditionReview ? 3 : 4,
+      title: `${needsConditionReview ? "농작업일정 확인" : "농작업일정 실행"}: ${operationName}`,
+      reason: needsConditionReview
+        ? `${schedule.cropName} ${workFlagText}${eraRangeText} 조건부 작업이지만 현재 기상 조건에서는 즉시 실행 대상이 아닙니다. 내일 공식 예보를 다시 확인합니다.`
+        : currentMatch
+        ? `${schedule.cropName} ${workFlagText}현재 ${currentPeriodText}와 겹치는 농사로 농작업일정(${schedule.title})의 ${eraRangeText} 작업입니다.`
+        : `${schedule.cropName} ${workFlagText}이번 주(${weekPeriodText})의 ${eraRangeText} 시작일까지 ${dueInDays}일 남은 농사로 농작업일정(${schedule.title}) 작업입니다.`,
+      checks: needsConditionReview
+        ? [
+            check("기상청 강수·풍속 예보 확인"),
+            check("작업 실행 조건 충족 여부 판단"),
+            check(`조건 충족 시 ${operationName} 준비`),
+          ]
+        : [
+            check(`${operationName} 적용 여부 확인`),
+            check("필지 생육단계와 농작업일정 비교"),
+            check("필요 자재·장비·인력 준비 상태 확인"),
+          ],
       durationMin: 20,
       sources: [
         {
@@ -481,19 +569,29 @@ const buildWorkScheduleTask = (
             ]
           : []),
       ],
-      dueInDays: exactMatch ? 3 : 5,
+      dueInDays,
       detailText: schedule.detailText,
     };
   });
 };
 
-const buildBriefingTasks = (briefing: TaskEngineBriefing | null): TaskCardDraft[] => {
-  if (!briefing || briefing.actionBullets.length === 0) return [];
+const briefingDueInDays = (briefing: TaskEngineBriefing, today: Date): number | null => {
+  const todayKey = getKstDateKey(today);
+  const start = briefing.periodStart ?? null;
+  const end = briefing.periodEnd ?? null;
 
-  const checks = briefing.actionBullets.map((bullet) => check(bullet));
-  if (briefing.cautionBullets.length > 0) {
-    checks.push(check("주간농사정보 주의사항 확인"));
-  }
+  if (end && todayKey > end) return null;
+  if (!start || todayKey >= start) return 0;
+
+  const startDate = new Date(`${start}T00:00:00+09:00`);
+  const todayDate = new Date(`${todayKey}T00:00:00+09:00`);
+  return Math.max(1, Math.ceil((startDate.getTime() - todayDate.getTime()) / MS_PER_DAY));
+};
+
+const buildBriefingTasks = (briefing: TaskEngineBriefing | null, today: Date): TaskCardDraft[] => {
+  if (!briefing || briefing.actionBullets.length === 0) return [];
+  const dueInDays = briefingDueInDays(briefing, today);
+  if (dueInDays === null) return [];
 
   const source: TaskCardDraftSource = {
     name: briefing.sourceTitle,
@@ -501,32 +599,39 @@ const buildBriefingTasks = (briefing: TaskEngineBriefing | null): TaskCardDraft[
     collectedAt: briefing.publishedAt ?? undefined,
   };
 
-  return [
-    {
+  return briefing.actionBullets.slice(0, 3).map((bullet) => {
+    const action = normalizeHtmlSingleLineText(bullet) ?? bullet.trim();
+    return {
       priority: 3,
-      title: "주간농사정보 기반 작업 실행",
-      reason: briefing.headline,
-      checks: checks.slice(0, 5),
-      durationMin: 30,
+      title: `주간농사정보 실행: ${action}`,
+      reason: briefing.cautionBullets[0]
+        ? `${briefing.headline} · 주의: ${briefing.cautionBullets[0]}`
+        : briefing.headline,
+      checks: [check(action)],
+      durationMin: 20,
       sources: [source],
-      dueInDays: 3,
-    },
-  ];
+      dueInDays,
+    };
+  });
 };
 
 export const buildTaskCardDrafts = (input: BuildTaskCardDraftsInput): TaskCardDraft[] => {
   const today = input.today ?? new Date();
   const workScheduleTasks = input.includeWorkScheduleTasks === false
     ? []
-    : buildWorkScheduleTask(input.cropName, input.workSchedules, today);
+    : buildWorkScheduleTask(input.cropName, input.workSchedules, today, input.weatherRisk);
+  const briefingTasks = workScheduleTasks.length > 0
+    ? []
+    : buildBriefingTasks(input.briefing ?? null, today);
   const tasks = [
-    ...buildBriefingTasks(input.briefing ?? null),
+    ...briefingTasks,
     ...buildWeatherTasks(input.weatherRisk),
     ...buildPestTask(input.pestRisks),
     ...workScheduleTasks,
   ];
 
-  return tasks
-    .sort((a, b) => a.priority - b.priority)
-    .slice(0, 8);
+  const sortedTasks = tasks.sort((a, b) => a.priority - b.priority);
+  const todayTasks = sortedTasks.filter((task) => task.dueInDays === 0).slice(0, 3);
+  const upcomingTasks = sortedTasks.filter((task) => task.dueInDays > 0).slice(0, 3);
+  return [...todayTasks, ...upcomingTasks];
 };

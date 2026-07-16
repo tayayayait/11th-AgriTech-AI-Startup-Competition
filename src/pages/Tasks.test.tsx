@@ -562,6 +562,49 @@ describe("Tasks weekly farm briefing", () => {
     expect(await screen.findByText("새 복숭아 주간 브리핑")).toBeInTheDocument();
   });
 
+  it("places tasks due today separately from upcoming task cards", async () => {
+    getTaskCardsByFieldMock.mockResolvedValue([
+      {
+        id: "today-task",
+        field_id: "field-1",
+        priority: 1,
+        title: "today-action",
+        reason: "today reason",
+        duration_min: 20,
+        due_at: "2026-05-11T15:00:00.000Z",
+        checks: [],
+        sources: [{ name: "official source" }],
+        status: "pending",
+        completed_at: null,
+      },
+      {
+        id: "upcoming-task",
+        field_id: "field-1",
+        priority: 3,
+        title: "upcoming-action",
+        reason: "upcoming reason",
+        duration_min: 20,
+        due_at: "2026-05-14T15:00:00.000Z",
+        checks: [],
+        sources: [{ name: "official source" }],
+        status: "pending",
+        completed_at: null,
+      },
+    ]);
+
+    renderTasks();
+
+    const todayTask = await screen.findByText("today-action");
+    const upcomingTask = await screen.findByText("upcoming-action");
+    const todaySection = todayTask.closest("section");
+    const upcomingSection = document.querySelector('[aria-labelledby="upcoming-tasks-title"]');
+
+    expect(todaySection).toContainElement(todayTask);
+    expect(todaySection).not.toContainElement(upcomingTask);
+    expect(upcomingSection).toContainElement(upcomingTask);
+    expect(upcomingSection).not.toContainElement(todayTask);
+  });
+
   it("separates weekly task cards from farm schedule API match failures", async () => {
     const dueAt = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString();
     getTaskCardsByFieldMock.mockResolvedValue([
@@ -631,7 +674,7 @@ describe("Tasks weekly farm briefing", () => {
     }));
   });
 
-  it("shows official farm schedule data in the monthly section without a top task card", async () => {
+  it("shows an official farm schedule task in the upcoming task section", async () => {
     const dueAt = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString();
     getTaskCardsByFieldMock.mockResolvedValue([
       {
@@ -691,8 +734,14 @@ describe("Tasks weekly farm briefing", () => {
     expect(screen.getByText("봉오리따기,꽃솎기,열매솎기")).toBeInTheDocument();
     expect(screen.getByText("확인할 일")).toBeInTheDocument();
     expect(screen.getByText("첨부 자료 확인")).toBeInTheDocument();
-    expect(screen.getByText("해야 할 작업 카드가 없습니다.")).toBeInTheDocument();
-    expect(screen.queryByText("농작업일정 실행: 봉오리따기,꽃솎기,열매솎기")).not.toBeInTheDocument();
+    expect(screen.getByText("이번 주 예정 작업")).toBeInTheDocument();
+    expect(screen.getByText("농작업일정 실행: 봉오리따기,꽃솎기,열매솎기")).toBeInTheDocument();
+    expect(screen.queryByText("해야 할 작업 카드가 없습니다.")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(generateAndSaveTaskCardsForFieldMock).toHaveBeenCalledWith(
+        expect.objectContaining({ includeWorkScheduleTasks: true }),
+      );
+    });
     expect(screen.queryByText("농작업일정 API 기반 작업카드 생성됨")).not.toBeInTheDocument();
   });
 

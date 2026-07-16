@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { normalizeNongsaroUrl } from "@/domain/nongsaro/common";
 import type { Tables, TablesInsert } from "@/integrations/supabase/types";
 import { supabase } from "@/integrations/supabase/client";
 import {
@@ -189,7 +190,7 @@ function rowToRecommendation(row: WorkVideoRecommendationRow): WorkVideoRecommen
     videoTitle: row.video_title,
     videoOriginInstt: row.video_origin_instt,
     videoLink: row.video_link,
-    videoImg: row.video_img,
+    videoImg: normalizeNongsaroUrl(row.video_img),
     matchScore: row.match_score,
     matchType: normalizeMatchType(row.match_type),
     reason: row.reason,

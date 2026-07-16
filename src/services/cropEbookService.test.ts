@@ -142,4 +142,36 @@ describe("cropEbookService", () => {
     expect(result.subCategoryCode).toBe("PEACH");
     expect(result.videos).toEqual([]);
   });
+
+  it("upgrades insecure Nongsaro thumbnail URLs before browser rendering", async () => {
+    fetchNongsaroMock.mockImplementation(async (_serviceName, operationName) => {
+      if (operationName === "mainCategoryList") {
+        return nongsaroResponse(operationName, [{ mainCategoryCode: "200", mainCategoryNm: "fruit" }]);
+      }
+
+      if (operationName === "middleCategoryList") {
+        return nongsaroResponse(operationName, [{ middleCategoryCode: "210", middleCategoryNm: "stone fruit" }]);
+      }
+
+      if (operationName === "subCategoryList") {
+        return nongsaroResponse(operationName, [{ subCategoryCode: "PEACH", subCategoryNm: "peach" }]);
+      }
+
+      if (operationName === "videoList") {
+        return nongsaroResponse(operationName, [
+          {
+            videoTitle: "peach thinning",
+            videoLink: "https://example.test/peach-thinning",
+            videoImg: "http://www.nongsaro.go.kr/image/peach-thinning.jpg",
+          },
+        ]);
+      }
+
+      throw new Error(`Unexpected operation: ${operationName}`);
+    });
+
+    const result = await getCropEbookVideosForCrop("peach");
+
+    expect(result.videos[0]?.videoImg).toBe("https://www.nongsaro.go.kr/image/peach-thinning.jpg");
+  });
 });
