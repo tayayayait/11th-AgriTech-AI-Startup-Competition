@@ -9,6 +9,7 @@ import {
   getWeatherRisksForLastDays,
 } from "@/services/reportService";
 import { getKstDateKey } from "@/domain/nongsaro/weeklyFarmInfo";
+import type { TaskStatus } from "@/domain/tasks/types";
 
 type ConsultationMessageRow = Tables<"consultation_messages">;
 type ConsultationThreadRow = Tables<"consultation_threads">;
@@ -61,6 +62,17 @@ export interface ConsultationWeatherSummary {
   latestAt: string | null;
 }
 
+export interface ConsultationTaskSnapshot {
+  id: string;
+  title: string;
+  status: TaskStatus;
+  priority: number;
+  dueAt: string | null;
+  reason: string | null;
+  durationMin: number | null;
+  incompleteChecks: string[];
+}
+
 export interface ConsultationContextSnapshot {
   generatedAt: string;
   field: {
@@ -89,6 +101,7 @@ export interface ConsultationContextSnapshot {
     inProgress: number;
     deferred: number;
   };
+  tasks: ConsultationTaskSnapshot[];
 }
 
 export interface ConsultationWeeklyBriefingSummary {
@@ -274,6 +287,9 @@ function buildPrompt(input: {
     "일상적인 대화, 인사, 감사, 짧은 잡담에는 자연스럽고 간결하게 답하며 상담 보고서 형식을 강제로 붙이지 않는다.",
     "일반적인 농업 질문에는 알고 있는 범위의 일반 지식을 설명하고, 현재 필지 컨텍스트와 관련되면 해당 데이터를 함께 반영한다.",
     "필지 상태 판단이나 작업 우선순위 질문에는 필요한 경우에만 '현재 판단', '확인할 것', '오늘 할 일', '주의사항' 순서로 작성한다.",
+    "미완료 작업을 언급할 때는 taskSummary의 개수만 반복하지 말고 tasks에 있는 정확한 작업명과 작업 이유, 상태, 우선순위, 예정일을 사용한다.",
+    "tasks에 작업 상세가 있으면 작업 개수만 말하지 않는다. 작업명을 모르면 추측하지 말고 작업 목록 확인이 필요하다고 안내한다.",
+    "오늘 할 일을 제안할 때 tasks의 실제 작업명과 현재 기상·필지 상태를 연결해 설명한다.",
     "필지 컨텍스트의 weeklyBriefing은 사용자가 '요약' 버튼으로 생성한 이번 주 농사 브리핑이다. 값이 없으면 브리핑 근거는 없다고 말한다.",
     "모르면 추측하지 말고 '확실한 정보 없음'이라고 답한다.",
     "병해충 확정 진단, 농약 자동 처방, 희석배수/사용량 임의 안내는 금지한다.",
@@ -490,6 +506,18 @@ export async function getConsultationContextSnapshot(field: ConsultationFieldLik
       checklist: record.checklist,
     })),
     taskSummary,
+    tasks: taskRows
+      .filter((task) => task.status === "pending" || task.status === "in_progress" || task.status === "deferred")
+      .map((task) => ({
+        id: task.id,
+        title: task.title,
+        status: task.status,
+        priority: task.priority,
+        dueAt: task.dueAt,
+        reason: task.reason,
+        durationMin: task.durationMin,
+        incompleteChecks: task.checks.filter((check) => !check.done).map((check) => check.label),
+      })),
   };
 }
 

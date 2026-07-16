@@ -197,6 +197,18 @@ describe("Reports AI consultation", () => {
       },
       diagnoses: [],
       taskSummary: { pending: 1, done: 0, inProgress: 0, deferred: 0 },
+      tasks: [
+        {
+          id: "task-pending-1",
+          title: "포도밭 관수",
+          status: "pending",
+          priority: 1,
+          dueAt: "2026-05-09T18:00:00Z",
+          reason: "고온과 무강수로 수분 스트레스가 우려됨",
+          durationMin: 30,
+          incompleteChecks: ["토양 수분 확인"],
+        },
+      ],
     });
     sendConsultationMessageMock.mockResolvedValue({
       answer: "현재 판단: 확실한 정보 없음",
@@ -232,6 +244,15 @@ describe("Reports AI consultation", () => {
     expect(screen.queryByText("**오늘 할 일**")).not.toBeInTheDocument();
     expect(screen.queryByText("[주의사항]")).not.toBeInTheDocument();
     expect(screen.queryByText(/\* \*\*/)).not.toBeInTheDocument();
+  });
+
+  it("renders the exact pending task details alongside the AI answer", async () => {
+    renderReports();
+
+    expect(await screen.findByText("연결된 작업")).toBeInTheDocument();
+    expect(screen.getByText("포도밭 관수")).toBeInTheDocument();
+    expect(screen.getByText(/고온과 무강수로 수분 스트레스/)).toBeInTheDocument();
+    expect(screen.getByText(/우선순위 1/)).toBeInTheDocument();
   });
 
   it("이전 상담을 선택하면 해당 스레드의 대화 기록을 조회한다", async () => {

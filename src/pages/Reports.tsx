@@ -68,6 +68,19 @@ function formatKoDateTime(value: string | null | undefined): string {
   return parsed.toLocaleString("ko-KR", { timeZone: "Asia/Seoul" });
 }
 
+function formatKoDate(value: string | null | undefined): string {
+  if (!value) return "기한 미지정";
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) return "기한 미지정";
+  return parsed.toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" });
+}
+
+function taskStatusLabel(status: ConsultationContextSnapshot["tasks"][number]["status"]): string {
+  if (status === "in_progress") return "진행 중";
+  if (status === "deferred") return "보류";
+  return "대기";
+}
+
 function formatNumber(value: number | null | undefined, suffix = ""): string {
   if (value == null || Number.isNaN(value)) return "확실한 정보 없음";
   return `${value.toLocaleString("ko-KR")}${suffix}`;
@@ -229,7 +242,48 @@ function ConsultationAnswerItems({
   );
 }
 
-function ConsultationAnswer({ content }: { content: string }) {
+function ConsultationLinkedTasks({ tasks }: { tasks: ConsultationContextSnapshot["tasks"] }) {
+  if (tasks.length === 0) return null;
+
+  return (
+    <div data-testid="consultation-linked-tasks" className="mt-3 rounded-xl border border-violet-200/80 bg-violet-50/55 p-3">
+      <div className="mb-2 flex items-center gap-2 text-sm font-semibold text-violet-900">
+        <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-violet-100 text-violet-700" aria-hidden="true">
+          <ClipboardCheck className="h-3.5 w-3.5" />
+        </span>
+        연결된 작업
+      </div>
+      <div className="space-y-2">
+        {tasks.map((task) => (
+          <div key={task.id} className="rounded-lg border border-violet-100 bg-background/80 px-3 py-2.5">
+            <div className="font-semibold text-foreground">{task.title}</div>
+            {task.reason && <div className="mt-1 text-xs leading-5 text-muted-foreground">{task.reason}</div>}
+            <div className="mt-2 flex flex-wrap gap-x-2 gap-y-1 text-[11px] text-violet-800">
+              <span>우선순위 {task.priority}</span>
+              <span>·</span>
+              <span>{taskStatusLabel(task.status)}</span>
+              <span>·</span>
+              <span>{formatKoDate(task.dueAt)}</span>
+            </div>
+            {task.incompleteChecks.length > 0 && (
+              <div className="mt-1 text-[11px] text-muted-foreground">
+                확인 항목: {task.incompleteChecks.join(", ")}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ConsultationAnswer({
+  content,
+  tasks,
+}: {
+  content: string;
+  tasks: ConsultationContextSnapshot["tasks"];
+}) {
   const sections = parseConsultationAnswer(content);
 
   return (
@@ -265,6 +319,7 @@ function ConsultationAnswer({ content }: { content: string }) {
               </div>
             )}
             <ConsultationAnswerItems section={section} markerClass={style.markerClass} />
+            {section.heading === "오늘 할 일" && <ConsultationLinkedTasks tasks={tasks} />}
           </section>
         );
       })}
@@ -275,9 +330,11 @@ function ConsultationAnswer({ content }: { content: string }) {
 function ConsultationMessages({
   messages,
   isSending,
+  context,
 }: {
   messages: ConsultationMessage[];
   isSending: boolean;
+  context: ConsultationContextSnapshot | null | undefined;
 }) {
   if (messages.length === 0 && !isSending) {
     return (
@@ -322,7 +379,7 @@ function ConsultationMessages({
                     </div>
                     <span className="text-[11px] text-muted-foreground">{formatKoDateTime(message.createdAt)}</span>
                   </div>
-                  <ConsultationAnswer content={message.content} />
+                  <ConsultationAnswer content={message.content} tasks={context?.tasks ?? []} />
                 </>
               )}
             </div>
@@ -628,7 +685,7 @@ function ConsultationPanel() {
             <p className="text-xs text-muted-foreground">선택 상담: {activeThread?.title ?? "새 상담"}</p>
           </CardHeader>
           <CardContent className="space-y-4">
-            <ConsultationMessages messages={messages} isSending={sendMutation.isPending} />
+            <ConsultationMessages messages={messages} isSending={sendMutation.isPending} context={contextSnapshot} />
             <form onSubmit={onSubmit} className="space-y-3">
               <Textarea
                 value={question}

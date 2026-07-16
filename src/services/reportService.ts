@@ -45,6 +45,7 @@ export interface ReportTaskCardItem {
   reason: string | null;
   status: string;
   priority: number;
+  dueAt: string | null;
   durationMin: number | null;
   completedAt: string | null;
   checks: ReportTaskCheck[];
@@ -96,6 +97,7 @@ function mapTaskCard(row: TaskCardRow): ReportTaskCardItem {
     reason: row.reason,
     status: row.status,
     priority: row.priority,
+    dueAt: row.due_at,
     durationMin: row.duration_min,
     completedAt: row.completed_at,
     checks: toTaskChecks(row.checks),

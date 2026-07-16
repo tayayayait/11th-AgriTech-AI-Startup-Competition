@@ -161,7 +161,47 @@ function setupSupabaseStore(overrides: Partial<SupabaseStore> = {}) {
 
     if (table === "task_cards") {
       const result = {
-        data: [{ status: "pending" }, { status: "pending" }, { status: "done" }],
+        data: [
+          {
+            id: "task-pending-1",
+            field_id: field.id,
+            priority: 1,
+            title: "포도밭 관수",
+            reason: "고온과 무강수로 수분 스트레스가 우려됨",
+            duration_min: 30,
+            due_at: "2026-05-09T18:00:00Z",
+            checks: [{ label: "토양 수분 확인", done: false }],
+            sources: [],
+            status: "pending",
+            completed_at: null,
+          },
+          {
+            id: "task-pending-2",
+            field_id: field.id,
+            priority: 2,
+            title: "대기 작업 확인",
+            reason: "등록된 작업의 진행 상태 확인 필요",
+            duration_min: 15,
+            due_at: null,
+            checks: [],
+            sources: [],
+            status: "pending",
+            completed_at: null,
+          },
+          {
+            id: "task-done-1",
+            field_id: field.id,
+            priority: 3,
+            title: "완료 작업",
+            reason: null,
+            duration_min: null,
+            due_at: null,
+            checks: [],
+            sources: [],
+            status: "done",
+            completed_at: "2026-05-08T18:00:00Z",
+          },
+        ],
         error: null,
       };
       return {
@@ -363,6 +403,29 @@ describe("consultationService", () => {
     expect(snapshot).not.toHaveProperty("riskRecords");
   });
 
+  it("필지 컨텍스트에 미완료 작업의 실제 상세 정보를 포함한다", async () => {
+    setupSupabaseStore();
+
+    const snapshot = await getConsultationContextSnapshot(field);
+
+    expect(snapshot.tasks).toEqual([
+      expect.objectContaining({
+        id: "task-pending-1",
+        title: "포도밭 관수",
+        status: "pending",
+        priority: 1,
+        dueAt: "2026-05-09T18:00:00Z",
+        reason: "고온과 무강수로 수분 스트레스가 우려됨",
+        incompleteChecks: ["토양 수분 확인"],
+      }),
+      expect.objectContaining({
+        id: "task-pending-2",
+        title: "대기 작업 확인",
+        status: "pending",
+      }),
+    ]);
+  });
+
   it("Gemini 질문 전달 시 선택 상담 스레드의 최근 대화와 필지 컨텍스트를 포함하고 메시지를 저장한다", async () => {
     const store = setupSupabaseStore({
       threads: [
@@ -477,6 +540,36 @@ describe("consultationService", () => {
     expect(prompt).toContain("일반적인 농업 지식");
     expect(prompt).toContain("필지 정보와 일반 지식을 구분");
     expect(prompt).toContain("현재 필지 컨텍스트");
+  });
+
+  it("includes exact pending task details and prevents count-only guidance", async () => {
+    setupSupabaseStore({
+      threads: [
+        {
+          id: "thread-tasks",
+          field_id: field.id,
+          title: "새 상담",
+          created_at: "2026-05-09T04:00:00Z",
+          updated_at: "2026-05-09T04:00:00Z",
+          expires_at: "2026-06-08T04:00:00Z",
+        },
+      ],
+    });
+
+    await sendConsultationMessage({
+      field,
+      threadId: "thread-tasks",
+      question: "오늘 어떤 작업을 하는 게 좋을까요?",
+    });
+
+    const request = analyzeWithGeminiMock.mock.calls[0][0] as {
+      contents: Array<{ parts: Array<{ text: string }> }>;
+    };
+    const prompt = request.contents[0].parts[0].text;
+    expect(prompt).toContain("포도밭 관수");
+    expect(prompt).toContain("고온과 무강수로 수분 스트레스가 우려됨");
+    expect(prompt).toContain("작업명과 작업 이유");
+    expect(prompt).toContain("작업 개수만");
   });
 
   it("선택 필지가 없으면 상담 요청을 거부한다", async () => {
