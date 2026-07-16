@@ -421,6 +421,64 @@ describe("consultationService", () => {
     expect(result.answer).toBe("AI 답변");
   });
 
+  it("allows natural everyday conversation without forcing a farm report format", async () => {
+    setupSupabaseStore({
+      threads: [
+        {
+          id: "thread-casual",
+          field_id: field.id,
+          title: "새 상담",
+          created_at: "2026-05-09T04:00:00Z",
+          updated_at: "2026-05-09T04:00:00Z",
+          expires_at: "2026-06-08T04:00:00Z",
+        },
+      ],
+    });
+
+    await sendConsultationMessage({
+      field,
+      threadId: "thread-casual",
+      question: "안녕하세요",
+    });
+
+    const request = analyzeWithGeminiMock.mock.calls[0][0] as {
+      contents: Array<{ parts: Array<{ text: string }> }>;
+    };
+    const prompt = request.contents[0].parts[0].text;
+    expect(prompt).toContain("일상적인 대화");
+    expect(prompt).toContain("질문 유형에 따라 답변 형식");
+    expect(prompt).toContain("강제로 붙이지 않는다");
+  });
+
+  it("combines general agricultural knowledge with the selected field context", async () => {
+    setupSupabaseStore({
+      threads: [
+        {
+          id: "thread-general",
+          field_id: field.id,
+          title: "새 상담",
+          created_at: "2026-05-09T04:00:00Z",
+          updated_at: "2026-05-09T04:00:00Z",
+          expires_at: "2026-06-08T04:00:00Z",
+        },
+      ],
+    });
+
+    await sendConsultationMessage({
+      field,
+      threadId: "thread-general",
+      question: "포도 재배에서 적정 습도가 어떻게 되나요?",
+    });
+
+    const request = analyzeWithGeminiMock.mock.calls[0][0] as {
+      contents: Array<{ parts: Array<{ text: string }> }>;
+    };
+    const prompt = request.contents[0].parts[0].text;
+    expect(prompt).toContain("일반적인 농업 지식");
+    expect(prompt).toContain("필지 정보와 일반 지식을 구분");
+    expect(prompt).toContain("현재 필지 컨텍스트");
+  });
+
   it("선택 필지가 없으면 상담 요청을 거부한다", async () => {
     await expect(
       sendConsultationMessage({

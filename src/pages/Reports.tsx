@@ -13,6 +13,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { AiDisclaimer } from "@/components/AiDisclaimer";
 import { useSelectedField } from "@/context/SelectedFieldContext";
+import { parseConsultationAnswer, type ConsultationAnswerSection } from "@/domain/ai/consultationAnswer";
 import { PESTICIDE_DISCLAIMER } from "@/lib/copy";
 import {
   getPesticideLookups,
@@ -42,7 +43,7 @@ import {
   getRepresentativePesticideOptions,
   type PesticideRepresentativeOption,
 } from "@/services/psisPesticideRecommendationService";
-import { Bot, Camera, ExternalLink, FileText, ImageIcon, Loader2, MessageSquare, Plus, Send, Trash2, UserRound } from "lucide-react";
+import { AlertTriangle, Bot, Camera, CheckCircle2, ClipboardCheck, ExternalLink, FileText, ImageIcon, Info, Loader2, MessageSquare, Plus, Send, Sparkles, Trash2, UserRound, type LucideIcon } from "lucide-react";
 import { toast } from "sonner";
 
 type SourceStatus = "connected" | "delayed" | "unavailable" | "rate_limited";
@@ -153,6 +154,124 @@ function FieldSummaryCard({ context }: { context: ConsultationContextSnapshot | 
   );
 }
 
+interface ConsultationAnswerStyle {
+  icon: LucideIcon;
+  containerClass: string;
+  iconClass: string;
+  markerClass: string;
+}
+
+const DEFAULT_CONSULTATION_ANSWER_STYLE: ConsultationAnswerStyle = {
+  icon: Info,
+  containerClass: "border-slate-200/80 bg-slate-50/60",
+  iconClass: "bg-slate-100 text-slate-600",
+  markerClass: "bg-slate-400",
+};
+
+function getConsultationAnswerStyle(heading: string | null): ConsultationAnswerStyle {
+  if (heading === "현재 판단") {
+    return {
+      icon: Sparkles,
+      containerClass: "border-emerald-200/80 bg-emerald-50/65",
+      iconClass: "bg-emerald-100 text-emerald-700",
+      markerClass: "bg-emerald-500",
+    };
+  }
+  if (heading === "확인할 것") {
+    return {
+      icon: ClipboardCheck,
+      containerClass: "border-sky-200/80 bg-sky-50/65",
+      iconClass: "bg-sky-100 text-sky-700",
+      markerClass: "bg-sky-500",
+    };
+  }
+  if (heading === "오늘 할 일") {
+    return {
+      icon: CheckCircle2,
+      containerClass: "border-amber-200/80 bg-amber-50/70",
+      iconClass: "bg-amber-100 text-amber-700",
+      markerClass: "bg-amber-500",
+    };
+  }
+  if (heading === "주의사항") {
+    return {
+      icon: AlertTriangle,
+      containerClass: "border-rose-200/80 bg-rose-50/65",
+      iconClass: "bg-rose-100 text-rose-700",
+      markerClass: "bg-rose-500",
+    };
+  }
+  return DEFAULT_CONSULTATION_ANSWER_STYLE;
+}
+
+function ConsultationAnswerItems({
+  section,
+  markerClass,
+}: {
+  section: ConsultationAnswerSection;
+  markerClass: string;
+}) {
+  if (section.items.length === 0) return null;
+
+  return (
+    <ul className="space-y-2.5">
+      {section.items.map((item, index) => (
+        <li key={`${item.label ?? "item"}-${index}`} className="flex gap-2.5 leading-6 text-foreground/90">
+          <span className={`mt-[0.65rem] h-1.5 w-1.5 shrink-0 rounded-full ${markerClass}`} aria-hidden="true" />
+          <span>
+            {item.label && <span className="font-semibold text-foreground">{item.label}</span>}
+            {item.label && item.text && <span className="mx-1 text-muted-foreground">·</span>}
+            {item.text}
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function ConsultationAnswer({ content }: { content: string }) {
+  const sections = parseConsultationAnswer(content);
+
+  return (
+    <div data-testid="consultation-answer" className="space-y-2.5">
+      {sections.map((section, index) => {
+        const style = getConsultationAnswerStyle(section.heading);
+        const SectionIcon = style.icon;
+
+        if (!section.heading) {
+          return (
+            <div key={`plain-${index}`} className="space-y-2 leading-6 text-foreground/90">
+              {section.paragraphs.map((paragraph, paragraphIndex) => (
+                <p key={`${paragraph}-${paragraphIndex}`}>{paragraph}</p>
+              ))}
+              <ConsultationAnswerItems section={section} markerClass={style.markerClass} />
+            </div>
+          );
+        }
+
+        return (
+          <section key={`${section.heading}-${index}`} className={`rounded-xl border p-3.5 shadow-sm ${style.containerClass}`}>
+            <div className="mb-2.5 flex items-center gap-2.5">
+              <span className={`flex h-8 w-8 items-center justify-center rounded-lg ${style.iconClass}`} aria-hidden="true">
+                <SectionIcon className="h-4 w-4" />
+              </span>
+              <h4 className="text-sm font-semibold tracking-tight text-foreground">{section.heading}</h4>
+            </div>
+            {section.paragraphs.length > 0 && (
+              <div className="space-y-2 leading-6 text-foreground/90">
+                {section.paragraphs.map((paragraph, paragraphIndex) => (
+                  <p key={`${paragraph}-${paragraphIndex}`}>{paragraph}</p>
+                ))}
+              </div>
+            )}
+            <ConsultationAnswerItems section={section} markerClass={style.markerClass} />
+          </section>
+        );
+      })}
+    </div>
+  );
+}
+
 function ConsultationMessages({
   messages,
   isSending,
@@ -163,7 +282,7 @@ function ConsultationMessages({
   if (messages.length === 0 && !isSending) {
     return (
       <div className="rounded-md border border-dashed p-6 text-sm text-muted-foreground">
-        현재 필지에 대해 질문하세요. 예: "지금 물을 줘야 할까요?", "잎에 반점이 있는데 무엇을 확인해야 하나요?"
+        필지 관련 질문부터 일상적인 대화까지 편하게 물어보세요. 필요하면 현재 필지·작물·기상 정보를 함께 반영합니다.
       </div>
     );
   }
@@ -171,20 +290,44 @@ function ConsultationMessages({
   return (
     <ScrollArea className="h-[390px] pr-3">
       <div className="space-y-3">
-        {messages.map((message) => (
-          <div
-            key={message.id}
-            className={message.role === "user" ? "ml-auto max-w-[86%] rounded-md bg-primary px-3 py-2 text-sm text-primary-foreground" : "max-w-[90%] rounded-md border bg-background px-3 py-2 text-sm"}
-          >
-            <div className="mb-1 flex items-center gap-1 text-xs opacity-80">
-              {message.role === "user" ? <UserRound className="h-3 w-3" /> : <Bot className="h-3 w-3" />}
-              {message.role === "user" ? "농업인" : "FieldGuard AI"}
-              <span>·</span>
-              <span>{formatKoDateTime(message.createdAt)}</span>
+        {messages.map((message) => {
+          const isUser = message.role === "user";
+
+          return (
+            <div
+              key={message.id}
+              className={isUser ? "ml-auto max-w-[86%] rounded-md bg-primary px-3 py-2 text-sm text-primary-foreground" : "max-w-[94%] overflow-hidden rounded-2xl border border-emerald-100/80 bg-gradient-to-br from-background via-background to-emerald-50/60 px-4 py-3 text-sm shadow-sm"}
+            >
+              {isUser ? (
+                <>
+                  <div className="mb-1 flex items-center gap-1 text-xs opacity-80">
+                    <UserRound className="h-3 w-3" />
+                    농업인
+                    <span>·</span>
+                    <span>{formatKoDateTime(message.createdAt)}</span>
+                  </div>
+                  <div className="whitespace-pre-wrap leading-6">{message.content}</div>
+                </>
+              ) : (
+                <>
+                  <div className="mb-3 flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-2">
+                      <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-100 text-emerald-700" aria-hidden="true">
+                        <Bot className="h-4 w-4" />
+                      </span>
+                      <div>
+                        <div className="font-semibold tracking-tight text-foreground">FieldGuard AI</div>
+                        <div className="text-[11px] text-muted-foreground">필지 맞춤 답변</div>
+                      </div>
+                    </div>
+                    <span className="text-[11px] text-muted-foreground">{formatKoDateTime(message.createdAt)}</span>
+                  </div>
+                  <ConsultationAnswer content={message.content} />
+                </>
+              )}
             </div>
-            <div className="whitespace-pre-wrap leading-6">{message.content}</div>
-          </div>
-        ))}
+          );
+        })}
         {isSending && (
           <div className="max-w-[90%] rounded-md border bg-background px-3 py-2 text-sm">
             <div className="flex items-center gap-2 text-muted-foreground">

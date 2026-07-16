@@ -135,7 +135,17 @@ describe("Reports AI consultation", () => {
           },
         ];
       }
-      return [];
+      return [
+        {
+          id: "recent-msg-1",
+          fieldId: "field-1",
+          threadId: "thread-new",
+          role: "assistant",
+          content: "**오늘 할 일**\n\n* **수분 공급**: 고온으로 인한 시듦을 방지하기 위해 적절한 관수를 고려해 보세요.\n\n**[주의사항]**\n\n- **더위 관리**: 한낮의 작업은 피하세요.",
+          contextSnapshot: {},
+          createdAt: "2026-05-09T04:51:00.000Z",
+        },
+      ];
     });
     createConsultationThreadMock.mockResolvedValue({
       id: "thread-created",
@@ -210,6 +220,18 @@ describe("Reports AI consultation", () => {
     expect(await screen.findByText("이전 병해 상담")).toBeInTheDocument();
     expect(screen.queryByText("상담 기록/요약")).not.toBeInTheDocument();
     expect(screen.queryByRole("button", { name: "상담 요약 생성" })).not.toBeInTheDocument();
+  });
+
+  it("renders AI markdown answers as readable sections without visible markdown markers", async () => {
+    renderReports();
+
+    expect(await screen.findByRole("heading", { name: "오늘 할 일" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "주의사항" })).toBeInTheDocument();
+    expect(screen.getByText("수분 공급")).toBeInTheDocument();
+    expect(screen.getByText(/고온으로 인한 시듦을 방지/)).toBeInTheDocument();
+    expect(screen.queryByText("**오늘 할 일**")).not.toBeInTheDocument();
+    expect(screen.queryByText("[주의사항]")).not.toBeInTheDocument();
+    expect(screen.queryByText(/\* \*\*/)).not.toBeInTheDocument();
   });
 
   it("이전 상담을 선택하면 해당 스레드의 대화 기록을 조회한다", async () => {
