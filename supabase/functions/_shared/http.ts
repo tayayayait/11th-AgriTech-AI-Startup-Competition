@@ -5,7 +5,7 @@ type QueryValue = string | number | boolean | null | undefined;
 
 export const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-fieldguard-owner-id",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-fieldguard-owner-id, x-fieldguard-ingest-token",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 

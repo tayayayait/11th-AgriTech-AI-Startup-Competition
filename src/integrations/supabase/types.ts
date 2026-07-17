@@ -1,4 +1,4 @@
-export type Json =
+﻿export type Json =
   | string
   | number
   | boolean
@@ -11,31 +11,6 @@ export type Database = {
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "14.5"
-  }
-  graphql_public: {
-    Tables: {
-      [_ in never]: never
-    }
-    Views: {
-      [_ in never]: never
-    }
-    Functions: {
-      graphql: {
-        Args: {
-          extensions?: Json
-          operationName?: string
-          query?: string
-          variables?: Json
-        }
-        Returns: Json
-      }
-    }
-    Enums: {
-      [_ in never]: never
-    }
-    CompositeTypes: {
-      [_ in never]: never
-    }
   }
   public: {
     Tables: {
@@ -392,6 +367,283 @@ export type Database = {
           pre_harvest_days?: number | null
           source_url?: string | null
           target?: string
+        }
+        Relationships: []
+      }
+      psis_pesticide_media: {
+        Row: {
+          alt_text: string | null
+          byte_size: number | null
+          content_sha256: string | null
+          created_at: string
+          height: number | null
+          id: string
+          image_url: string
+          is_primary: boolean
+          last_verified_at: string | null
+          license_note: string | null
+          match_confidence: number | null
+          match_method: string | null
+          mime_type: string | null
+          pesti_code: string
+          source_image_url: string | null
+          source_label: string | null
+          source_type: string
+          source_url: string
+          storage_object_path: string | null
+          updated_at: string
+          verification_status: string
+          width: number | null
+        }
+        Insert: {
+          alt_text?: string | null
+          byte_size?: number | null
+          content_sha256?: string | null
+          created_at?: string
+          height?: number | null
+          id?: string
+          image_url: string
+          is_primary?: boolean
+          last_verified_at?: string | null
+          license_note?: string | null
+          match_confidence?: number | null
+          match_method?: string | null
+          mime_type?: string | null
+          pesti_code: string
+          source_image_url?: string | null
+          source_label?: string | null
+          source_type: string
+          source_url: string
+          storage_object_path?: string | null
+          updated_at?: string
+          verification_status?: string
+          width?: number | null
+        }
+        Update: {
+          alt_text?: string | null
+          byte_size?: number | null
+          content_sha256?: string | null
+          created_at?: string
+          height?: number | null
+          id?: string
+          image_url?: string
+          is_primary?: boolean
+          last_verified_at?: string | null
+          license_note?: string | null
+          match_confidence?: number | null
+          match_method?: string | null
+          mime_type?: string | null
+          pesti_code?: string
+          source_image_url?: string | null
+          source_label?: string | null
+          source_type?: string
+          source_url?: string
+          storage_object_path?: string | null
+          updated_at?: string
+          verification_status?: string
+          width?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "psis_pesticide_media_pesti_code_fkey"
+            columns: ["pesti_code"]
+            isOneToOne: false
+            referencedRelation: "psis_pesticide_products"
+            referencedColumns: ["pesti_code"]
+          },
+        ]
+      }
+      psis_pesticide_products: {
+        Row: {
+          active_ingredient: string | null
+          brand_name: string
+          company_name: string | null
+          created_at: string
+          first_registered_on: string | null
+          first_seen_at: string
+          fish_toxicity_code: string | null
+          item_name: string
+          last_seen_at: string
+          manufacture_type: string | null
+          mechanism: string | null
+          pesti_code: string
+          registered_component_quantity: string | null
+          source_hash: string
+          source_payload: Json
+          source_service_code: string
+          toxicity_code: string | null
+          toxicity_name: string | null
+          updated_at: string
+        }
+        Insert: {
+          active_ingredient?: string | null
+          brand_name: string
+          company_name?: string | null
+          created_at?: string
+          first_registered_on?: string | null
+          first_seen_at: string
+          fish_toxicity_code?: string | null
+          item_name: string
+          last_seen_at: string
+          manufacture_type?: string | null
+          mechanism?: string | null
+          pesti_code: string
+          registered_component_quantity?: string | null
+          source_hash: string
+          source_payload?: Json
+          source_service_code: string
+          toxicity_code?: string | null
+          toxicity_name?: string | null
+          updated_at?: string
+        }
+        Update: {
+          active_ingredient?: string | null
+          brand_name?: string
+          company_name?: string | null
+          created_at?: string
+          first_registered_on?: string | null
+          first_seen_at?: string
+          fish_toxicity_code?: string | null
+          item_name?: string
+          last_seen_at?: string
+          manufacture_type?: string | null
+          mechanism?: string | null
+          pesti_code?: string
+          registered_component_quantity?: string | null
+          source_hash?: string
+          source_payload?: Json
+          source_service_code?: string
+          toxicity_code?: string | null
+          toxicity_name?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      psis_pesticide_registrations: {
+        Row: {
+          created_at: string
+          crop_code: string | null
+          crop_group_code: string | null
+          crop_group_name: string | null
+          crop_name: string | null
+          dilution: string | null
+          disease_use_seq: string
+          first_seen_at: string
+          last_seen_at: string
+          max_use_count: string | null
+          max_uses: number | null
+          pesti_code: string
+          pre_harvest_days: number | null
+          pre_harvest_interval: string | null
+          source_hash: string
+          source_payload: Json
+          source_service_code: string
+          target_name: string | null
+          updated_at: string
+          use_method: string | null
+          use_name: string | null
+        }
+        Insert: {
+          created_at?: string
+          crop_code?: string | null
+          crop_group_code?: string | null
+          crop_group_name?: string | null
+          crop_name?: string | null
+          dilution?: string | null
+          disease_use_seq: string
+          first_seen_at: string
+          last_seen_at: string
+          max_use_count?: string | null
+          max_uses?: number | null
+          pesti_code: string
+          pre_harvest_days?: number | null
+          pre_harvest_interval?: string | null
+          source_hash: string
+          source_payload?: Json
+          source_service_code: string
+          target_name?: string | null
+          updated_at?: string
+          use_method?: string | null
+          use_name?: string | null
+        }
+        Update: {
+          created_at?: string
+          crop_code?: string | null
+          crop_group_code?: string | null
+          crop_group_name?: string | null
+          crop_name?: string | null
+          dilution?: string | null
+          disease_use_seq?: string
+          first_seen_at?: string
+          last_seen_at?: string
+          max_use_count?: string | null
+          max_uses?: number | null
+          pesti_code?: string
+          pre_harvest_days?: number | null
+          pre_harvest_interval?: string | null
+          source_hash?: string
+          source_payload?: Json
+          source_service_code?: string
+          target_name?: string | null
+          updated_at?: string
+          use_method?: string | null
+          use_name?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "psis_pesticide_registrations_pesti_code_fkey"
+            columns: ["pesti_code"]
+            isOneToOne: false
+            referencedRelation: "psis_pesticide_products"
+            referencedColumns: ["pesti_code"]
+          },
+        ]
+      }
+      psis_pesticide_sync_runs: {
+        Row: {
+          completed_at: string
+          error_code: string | null
+          error_message: string | null
+          id: string
+          product_count: number
+          registration_count: number
+          request_params: Json
+          service_code: string
+          skipped_count: number
+          source_item_count: number
+          started_at: string
+          status: string
+          trigger_type: string
+        }
+        Insert: {
+          completed_at: string
+          error_code?: string | null
+          error_message?: string | null
+          id?: string
+          product_count?: number
+          registration_count?: number
+          request_params?: Json
+          service_code: string
+          skipped_count?: number
+          source_item_count?: number
+          started_at: string
+          status: string
+          trigger_type?: string
+        }
+        Update: {
+          completed_at?: string
+          error_code?: string | null
+          error_message?: string | null
+          id?: string
+          product_count?: number
+          registration_count?: number
+          request_params?: Json
+          service_code?: string
+          skipped_count?: number
+          source_item_count?: number
+          started_at?: string
+          status?: string
+          trigger_type?: string
         }
         Relationships: []
       }
@@ -828,9 +1080,6 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
-  graphql_public: {
-    Enums: {},
-  },
   public: {
     Enums: {
       confidence_band_enum: ["high", "medium", "low"],

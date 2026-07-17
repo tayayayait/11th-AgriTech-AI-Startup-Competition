@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { BookOpen, CalendarDays, ChevronDown, Clock, ExternalLink, Sparkles } from "lucide-react";
+import { BookOpen, CalendarDays, ChevronDown, Clock, Download, ExternalLink, Loader2, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -23,6 +23,7 @@ import {
   getWorkScheduleLookupForCrop,
   type NongsaroWorkScheduleLookup,
 } from "@/services/nongsaroWorkScheduleService";
+import { downloadReadableNongsaroSchedule } from "@/services/nongsaroReadableScheduleService";
 import { generateAndSaveTaskCardsForField } from "@/services/taskGenerationService";
 import {
   getWeeklyFarmBriefing,
@@ -171,6 +172,50 @@ function groupScheduleEras(eras: WorkScheduleEraView[]): Array<{ label: string; 
 function formatDetailPreview(detailText: string | null): string | null {
   if (!detailText) return null;
   return detailText.length > 240 ? `${detailText.slice(0, 240)}...` : detailText;
+}
+
+function ReadableScheduleDownloadButton({
+  sourceUrl,
+  sourceFileName,
+  title,
+}: {
+  sourceUrl: string;
+  sourceFileName: string | null;
+  title: string;
+}) {
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  const handleDownload = async () => {
+    setIsDownloading(true);
+    try {
+      const fileName = await downloadReadableNongsaroSchedule({
+        sourceUrl,
+        sourceFileName,
+        title,
+      });
+      toast.success(`${fileName} 다운로드를 시작했습니다.`);
+    } catch {
+      toast.error("내용 파일을 만들지 못했습니다. 원본 HWPX를 이용해 주세요.");
+    } finally {
+      setIsDownloading(false);
+    }
+  };
+
+  return (
+    <Button
+      type="button"
+      variant="outline"
+      size="sm"
+      aria-label="농작업일정 내용 파일 다운로드"
+      disabled={isDownloading}
+      onClick={() => void handleDownload()}
+    >
+      {isDownloading
+        ? <Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden="true" />
+        : <Download className="h-3.5 w-3.5" aria-hidden="true" />}
+      {isDownloading ? "파일 만드는 중" : "내용 파일 다운로드"}
+    </Button>
+  );
 }
 
 function videoMatchTypeLabel(matchType: WorkVideoRecommendation["matchType"]): string {
@@ -816,14 +861,32 @@ export default function Tasks() {
                     )}
 
                     {item.fileUrl && (
-                      <a
-                        href={item.fileUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="mt-2 inline-flex items-center gap-1 text-xs text-secondary hover:underline"
-                      >
-                        첨부 자료 확인 <ExternalLink className="h-3 w-3" />
-                      </a>
+                      /\.hwpx$/i.test(item.fileName ?? "") ? (
+                        <div className="mt-3 flex flex-wrap items-center gap-3">
+                          <ReadableScheduleDownloadButton
+                            sourceUrl={item.fileUrl}
+                            sourceFileName={item.fileName}
+                            title={item.title}
+                          />
+                          <a
+                            href={item.fileUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-secondary hover:underline"
+                          >
+                            원본 HWPX <ExternalLink className="h-3 w-3" aria-hidden="true" />
+                          </a>
+                        </div>
+                      ) : (
+                        <a
+                          href={item.fileUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="mt-2 inline-flex items-center gap-1 text-xs text-secondary hover:underline"
+                        >
+                          첨부 자료 확인 <ExternalLink className="h-3 w-3" aria-hidden="true" />
+                        </a>
+                      )
                     )}
                   </div>
                 );

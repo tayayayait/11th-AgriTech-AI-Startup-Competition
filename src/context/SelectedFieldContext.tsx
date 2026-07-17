@@ -89,7 +89,7 @@ export function SelectedFieldProvider({ children }: { children: React.ReactNode 
     queryFn: getUserPreferences,
   });
 
-  const { data: fieldsData = [], isLoading, isFetching, refetch: refetchFields } = useQuery({
+  const { data: fieldsData = [], isLoading, isFetching } = useQuery({
     queryKey: ["fields", user?.id],
     enabled: !!user,
     queryFn: getFieldsSortedByRiskScore,
@@ -140,8 +140,8 @@ export function SelectedFieldProvider({ children }: { children: React.ReactNode 
   ]);
 
   const refetch = useCallback(() => {
-    void refetchFields();
-  }, [refetchFields]);
+    void qc.invalidateQueries();
+  }, [qc]);
 
   const selected = useMemo(
     () => fields.find((field) => field.id === selectedId) ?? null,

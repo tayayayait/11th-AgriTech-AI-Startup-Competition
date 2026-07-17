@@ -278,9 +278,20 @@ describe("Reports AI consultation", () => {
     renderReports();
 
     fireEvent.click(await screen.findByRole("button", { name: "상담 삭제: 이전 병해 상담" }));
+    fireEvent.click(await screen.findByRole("button", { name: "삭제하기" }));
 
     await waitFor(() => expect(deleteConsultationThreadMock).toHaveBeenCalledWith("field-1", "thread-old"));
     await waitFor(() => expect(screen.queryByText("이전 병해 상담")).not.toBeInTheDocument());
+  });
+
+  it("삭제 확인 전에는 상담 기록을 삭제하지 않는다", async () => {
+    renderReports();
+
+    fireEvent.click(await screen.findByRole("button", { name: "상담 삭제: 이전 병해 상담" }));
+
+    expect(deleteConsultationThreadMock).not.toHaveBeenCalled();
+    expect(await screen.findByRole("alertdialog")).toBeInTheDocument();
+    expect(screen.getByText("상담 기록을 삭제할까요?")).toBeInTheDocument();
   });
 
   it("질문 전송 시 현재 선택된 상담 스레드 id를 함께 보낸다", async () => {

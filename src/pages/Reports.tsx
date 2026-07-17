@@ -12,6 +12,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { AiDisclaimer } from "@/components/AiDisclaimer";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { useSelectedField } from "@/context/SelectedFieldContext";
 import { parseConsultationAnswer, type ConsultationAnswerSection } from "@/domain/ai/consultationAnswer";
 import { PESTICIDE_DISCLAIMER } from "@/lib/copy";
@@ -43,7 +53,12 @@ import {
   getRepresentativePesticideOptions,
   type PesticideRepresentativeOption,
 } from "@/services/psisPesticideRecommendationService";
-import { AlertTriangle, Bot, Camera, CheckCircle2, ClipboardCheck, ExternalLink, FileText, ImageIcon, Info, Loader2, MessageSquare, Plus, Send, Sparkles, Trash2, UserRound, type LucideIcon } from "lucide-react";
+import {
+  buildPesticideQuickSummary,
+  resolvePesticideProductMedia,
+} from "@/services/pesticidePresentation";
+import { getVerifiedPesticideMedia } from "@/services/pesticideMediaService";
+import { AlertTriangle, Bot, Camera, CheckCircle2, ChevronDown, ClipboardCheck, Clock3, Droplets, ExternalLink, FileText, ImageIcon, ImageOff, Info, Loader2, MessageSquare, PackageSearch, Plus, Send, ShieldCheck, Sparkles, Sprout, Trash2, UserRound, type LucideIcon } from "lucide-react";
 import { toast } from "sonner";
 
 type SourceStatus = "connected" | "delayed" | "unavailable" | "rate_limited";
@@ -415,68 +430,104 @@ function ChatThreadList({
   isCreating: boolean;
   deletingThreadId: string | null;
 }) {
+  const [pendingDeletionThread, setPendingDeletionThread] = useState<ConsultationThread | null>(null);
+
+  function requestDelete(thread: ConsultationThread) {
+    setPendingDeletionThread(thread);
+  }
+
+  function confirmDelete() {
+    if (!pendingDeletionThread) return;
+    onDelete(pendingDeletionThread.id);
+    setPendingDeletionThread(null);
+  }
+
   return (
-    <Card>
-      <CardHeader className="pb-3">
-        <div className="flex items-center justify-between gap-2">
-          <div>
-            <CardTitle className="text-base">상담 기록</CardTitle>
-            <CardDescription>최근 상담부터 표시합니다.</CardDescription>
-          </div>
-          <Button size="sm" onClick={onNew} disabled={isCreating}>
-            {isCreating ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Plus className="h-3.5 w-3.5" />}
-            새 채팅
-          </Button>
-        </div>
-      </CardHeader>
-      <CardContent>
-        {threads.length === 0 ? (
-          <div className="rounded-md border border-dashed p-4 text-sm text-muted-foreground">
-            저장된 상담이 없습니다. 새 채팅으로 시작하세요.
-          </div>
-        ) : (
-          <ScrollArea className="h-[390px] pr-2">
-            <div className="space-y-2">
-              {threads.map((thread) => {
-                const selected = thread.id === selectedThreadId;
-                return (
-                  <div key={thread.id} className="group flex items-stretch gap-1">
-                    <Button
-                      type="button"
-                      variant={selected ? "secondary" : "ghost"}
-                      className="h-auto min-w-0 flex-1 justify-start px-3 py-2 text-left"
-                      onClick={() => onSelect(thread.id)}
-                    >
-                      <MessageSquare className="mt-0.5 h-4 w-4 shrink-0" />
-                      <span className="min-w-0">
-                        <span className="block truncate font-medium">{thread.title}</span>
-                        <span className="block text-xs text-muted-foreground">{formatKoDateTime(thread.updatedAt)}</span>
-                      </span>
-                    </Button>
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="icon"
-                      className="h-auto w-9 shrink-0 text-muted-foreground hover:text-destructive"
-                      aria-label={`상담 삭제: ${thread.title}`}
-                      onClick={() => onDelete(thread.id)}
-                      disabled={deletingThreadId === thread.id}
-                    >
-                      {deletingThreadId === thread.id ? (
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                      ) : (
-                        <Trash2 className="h-4 w-4" />
-                      )}
-                    </Button>
-                  </div>
-                );
-              })}
+    <>
+      <Card>
+        <CardHeader className="pb-3">
+          <div className="flex items-center justify-between gap-2">
+            <div>
+              <CardTitle className="text-base">상담 기록</CardTitle>
+              <CardDescription>최근 상담부터 표시합니다.</CardDescription>
             </div>
-          </ScrollArea>
-        )}
-        <p className="mt-3 text-xs text-muted-foreground">상담 데이터는 마지막 활동 기준 30일 후 자동 삭제됩니다.</p>
-      </CardContent>
-    </Card>
+            <Button size="sm" onClick={onNew} disabled={isCreating}>
+              {isCreating ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Plus className="h-3.5 w-3.5" />}
+              새 채팅
+            </Button>
+          </div>
+        </CardHeader>
+        <CardContent>
+          {threads.length === 0 ? (
+            <div className="rounded-md border border-dashed p-4 text-sm text-muted-foreground">
+              저장된 상담이 없습니다. 새 채팅으로 시작하세요.
+            </div>
+          ) : (
+            <ScrollArea className="h-[390px] pr-2">
+              <div className="space-y-2">
+                {threads.map((thread) => {
+                  const selected = thread.id === selectedThreadId;
+                  return (
+                    <div key={thread.id} className="group flex items-stretch gap-1">
+                      <Button
+                        type="button"
+                        variant={selected ? "secondary" : "ghost"}
+                        className="h-auto min-w-0 flex-1 justify-start px-3 py-2 text-left"
+                        onClick={() => onSelect(thread.id)}
+                      >
+                        <MessageSquare className="mt-0.5 h-4 w-4 shrink-0" />
+                        <span className="min-w-0">
+                          <span className="block truncate font-medium">{thread.title}</span>
+                          <span className="block text-xs text-muted-foreground">{formatKoDateTime(thread.updatedAt)}</span>
+                        </span>
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        className="h-auto w-9 shrink-0 text-muted-foreground hover:text-destructive"
+                        aria-label={`상담 삭제: ${thread.title}`}
+                        onClick={() => requestDelete(thread)}
+                        disabled={deletingThreadId === thread.id}
+                      >
+                        {deletingThreadId === thread.id ? (
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                        ) : (
+                          <Trash2 className="h-4 w-4" />
+                        )}
+                      </Button>
+                    </div>
+                  );
+                })}
+              </div>
+            </ScrollArea>
+          )}
+          <p className="mt-3 text-xs text-muted-foreground">상담 데이터는 마지막 활동 기준 30일 후 자동 삭제됩니다.</p>
+        </CardContent>
+      </Card>
+
+      <AlertDialog
+        open={pendingDeletionThread !== null}
+        onOpenChange={(open) => {
+          if (!open) setPendingDeletionThread(null);
+        }}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>상담 기록을 삭제할까요?</AlertDialogTitle>
+            <AlertDialogDescription>
+              “{pendingDeletionThread?.title}”의 대화 내용이 모두 삭제됩니다. 삭제한 기록은 복구할 수 없습니다.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>취소</AlertDialogCancel>
+            <AlertDialogAction onClick={confirmDelete} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+              삭제하기
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   );
 }
 
@@ -769,61 +820,149 @@ function PesticideDiscoveryModeSelector({
 
 function PesticideRepresentativeOptionCard({ option }: { option: PesticideRepresentativeOption }) {
   const item = option.representativeItem;
+  const [imageFailed, setImageFailed] = useState(false);
+  const { data: verifiedMedia = null } = useQuery({
+    queryKey: ["verified-pesticide-media", item.pestiCode],
+    queryFn: () => getVerifiedPesticideMedia(item.pestiCode),
+    staleTime: 24 * 60 * 60 * 1000,
+  });
   const brandSummary = option.brandNames.length > 1
     ? `${option.brandNames.slice(0, 4).join(", ")}${option.brandNames.length > 4 ? ` 외 ${option.brandNames.length - 4}개` : ""}`
-    : "대표 상표 1개";
+    : option.brandNames[0] || item.pestiBrandName || "상표 정보 없음";
   const companySummary = option.companyNames.slice(0, 3).join(", ");
+  const fallbackMedia = resolvePesticideProductMedia([
+    item.pestiBrandName,
+    option.farmerTitle,
+    ...option.brandNames,
+  ]);
+  const productMedia = verifiedMedia
+    ? {
+        brandName: item.pestiBrandName,
+        imageUrl: verifiedMedia.imageUrl,
+        productPageUrl: verifiedMedia.productPageUrl,
+        sourceLabel: verifiedMedia.sourceLabel,
+      }
+    : fallbackMedia;
+  const quickSummary = buildPesticideQuickSummary({
+    cropName: option.cropName,
+    targetName: option.targetName,
+    plainUse: option.plainUse,
+    safetyNote: option.safetyNote,
+  });
+  const showProductImage = productMedia && !imageFailed;
 
   return (
-    <div className="rounded-md border p-3">
-      <div className="flex flex-wrap items-start justify-between gap-2">
-        <div>
-          <div className="font-medium">{option.farmerTitle}</div>
-          <div className="mt-0.5 text-sm text-muted-foreground">
-            {option.groupName}
-            {companySummary ? ` · ${companySummary}` : ""}
+    <article className="group overflow-hidden rounded-2xl border border-emerald-950/10 bg-background shadow-[0_12px_36px_-28px_rgba(6,78,59,0.65)] transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-700/25 hover:shadow-[0_18px_44px_-26px_rgba(6,78,59,0.55)]">
+      <div className="grid lg:grid-cols-[188px_minmax(0,1fr)]">
+        <div className="relative flex min-h-[210px] items-center justify-center overflow-hidden border-b border-emerald-950/10 bg-[radial-gradient(circle_at_50%_35%,rgba(255,255,255,0.95),rgba(236,244,238,0.78)_55%,rgba(216,232,222,0.82))] p-5 lg:min-h-full lg:border-b-0 lg:border-r">
+          <div className="absolute left-3 top-3 z-10 rounded-full border border-white/80 bg-white/85 px-2.5 py-1 text-[11px] font-medium text-emerald-950 shadow-sm backdrop-blur">
+            제품 모습
+          </div>
+          {showProductImage ? (
+            <img
+              src={productMedia.imageUrl}
+              alt={`${productMedia.brandName} 제품 사진`}
+              className="h-40 w-full object-contain drop-shadow-[0_18px_16px_rgba(17,62,42,0.18)] transition-transform duration-500 group-hover:scale-[1.04] lg:h-48"
+              loading="lazy"
+              onError={() => setImageFailed(true)}
+            />
+          ) : (
+            <div className="flex max-w-[150px] flex-col items-center text-center text-emerald-950/65">
+              <div className="flex h-20 w-20 items-center justify-center rounded-[24px] border border-emerald-900/10 bg-white/70 shadow-sm">
+                {imageFailed ? <ImageOff className="h-8 w-8" /> : <PackageSearch className="h-8 w-8" />}
+              </div>
+              <span className="mt-3 text-xs font-medium">공식 제품 사진 준비 중</span>
+              <span className="mt-1 text-[11px] leading-4 text-muted-foreground">확인되지 않은 이미지는 표시하지 않습니다.</span>
+            </div>
+          )}
+          <div className="absolute inset-x-3 bottom-3 z-10 flex justify-center">
+            {showProductImage ? (
+              <a
+                href={productMedia.productPageUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex max-w-full items-center gap-1 truncate rounded-full border border-white/80 bg-white/90 px-2.5 py-1 text-[10px] font-medium text-emerald-900 shadow-sm transition-colors hover:bg-white"
+              >
+                {productMedia.sourceLabel}
+                <ExternalLink className="h-3 w-3 shrink-0" />
+              </a>
+            ) : (
+              <a
+                href="https://psis.rda.go.kr/psis/agc/res/agchmRegistStusLst.ps"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 rounded-full border border-emerald-950/10 bg-white/75 px-2.5 py-1 text-[10px] font-medium text-emerald-900 hover:bg-white"
+              >
+                PSIS에서 제품 확인
+                <ExternalLink className="h-3 w-3" />
+              </a>
+            )}
           </div>
         </div>
-        <div className="flex flex-wrap gap-1">
-          {option.useName && <Badge variant="outline">{option.useName}</Badge>}
-          <Badge variant="secondary">대표 후보</Badge>
-        </div>
-      </div>
+        <div className="min-w-0 p-4 sm:p-5">
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-2">
+                <h3 className="text-lg font-bold tracking-tight text-foreground">{option.farmerTitle}</h3>
+                {option.useName && <Badge variant="outline" className="border-emerald-800/20 bg-emerald-50/60 text-emerald-900">{option.useName}</Badge>}
+              </div>
+              <p className="mt-1 text-sm text-muted-foreground">
+                {option.groupName}
+                {companySummary ? ` · ${companySummary}` : ""}
+              </p>
+            </div>
+            <Badge className="border-0 bg-emerald-800 text-white hover:bg-emerald-800">대표 후보</Badge>
+          </div>
 
-      <div className="mt-3 rounded-md bg-surface-muted p-2 text-sm">
-        <div className="text-xs text-muted-foreground">AI가 먼저 보여주는 이유</div>
-        <div className="mt-1 font-medium">{option.whySelected}</div>
-      </div>
+          <div className="relative mt-4 overflow-hidden rounded-xl border border-emerald-800/10 bg-emerald-50/70 px-4 py-3.5">
+            <div className="absolute -right-5 -top-7 h-20 w-20 rounded-full bg-amber-300/20 blur-2xl" />
+            <div className="relative flex gap-3">
+              <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-emerald-800 text-white shadow-sm">
+                <Sparkles className="h-3.5 w-3.5" />
+              </span>
+              <div>
+                <div className="text-xs font-semibold tracking-wide text-emerald-800">AI 핵심 사용 요약</div>
+                <p className="mt-1 text-[15px] font-medium leading-6 text-emerald-950">{quickSummary}</p>
+              </div>
+            </div>
+          </div>
 
-      <div className="mt-3 grid gap-2 text-sm md:grid-cols-2 xl:grid-cols-4">
-        <div className="rounded-md bg-surface-muted p-2">
-          <div className="text-xs text-muted-foreground">작물/적용대상</div>
-          <div className="mt-1 font-medium">{option.cropName} · {option.targetName}</div>
-        </div>
-        <div className="rounded-md bg-surface-muted p-2">
-          <div className="text-xs text-muted-foreground">초보자용 사용 기준</div>
-          <div className="mt-1 font-medium">{option.plainUse}</div>
-        </div>
-        <div className="rounded-md bg-surface-muted p-2">
-          <div className="text-xs text-muted-foreground">수확 전 안전 기준</div>
-          <div className="mt-1 font-medium">{option.safetyNote}</div>
-        </div>
-        <div className="rounded-md bg-surface-muted p-2">
-          <div className="text-xs text-muted-foreground">같은 기준으로 묶인 상표</div>
-          <div className="mt-1 font-medium">{brandSummary}</div>
-        </div>
-      </div>
+          <div className="mt-3 grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="rounded-xl border border-border/70 bg-card px-3 py-2.5">
+              <div className="flex items-center gap-1.5 text-xs text-muted-foreground"><Sprout className="h-3.5 w-3.5 text-emerald-700" />적용 대상</div>
+              <div className="mt-1.5 text-sm font-semibold leading-5">{option.cropName} · {option.targetName}</div>
+            </div>
+            <div className="rounded-xl border border-border/70 bg-card px-3 py-2.5">
+              <div className="flex items-center gap-1.5 text-xs text-muted-foreground"><Clock3 className="h-3.5 w-3.5 text-emerald-700" />사용 시기·방법</div>
+              <div className="mt-1.5 text-sm font-semibold leading-5">{officialValue(option.officialUseMethod)}</div>
+            </div>
+            <div className="rounded-xl border border-border/70 bg-card px-3 py-2.5">
+              <div className="flex items-center gap-1.5 text-xs text-muted-foreground"><Droplets className="h-3.5 w-3.5 text-sky-700" />희석·사용량</div>
+              <div className="mt-1.5 text-sm font-semibold leading-5">{officialValue(option.officialDilution)}</div>
+            </div>
+            <div className="rounded-xl border border-amber-600/15 bg-amber-50/55 px-3 py-2.5">
+              <div className="flex items-center gap-1.5 text-xs text-amber-800"><ShieldCheck className="h-3.5 w-3.5" />안전사용기준</div>
+              <div className="mt-1.5 text-sm font-semibold leading-5 text-amber-950">
+                {officialValue(option.officialPreHarvestInterval)} · {officialValue(option.officialMaxUseCount)}
+              </div>
+            </div>
+          </div>
 
-      <div className="mt-2 grid gap-1 text-xs text-muted-foreground md:grid-cols-2">
-        <div>공식 사용방법: {officialValue(option.officialUseMethod)}</div>
-        <div>공식 희석/사용량: <span>{officialValue(option.officialDilution)}</span></div>
-        <div>공식 안전기준: {officialValue(option.officialPreHarvestInterval)} / {officialValue(option.officialMaxUseCount)}</div>
-        <div>
-          공식 조회키: {item.pestiCode}/{item.diseaseUseSeq}
-          {option.sourceItemCount > 1 ? ` · 같은 기준 ${option.sourceItemCount}건 묶음` : ""}
+          <details className="group/details mt-3 rounded-lg border border-transparent px-1 text-xs text-muted-foreground open:border-border/70 open:bg-surface-muted open:px-3 open:py-2">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-2 py-1 font-medium text-foreground/70 marker:content-none">
+              공식 등록정보와 추천 근거 자세히 보기
+              <ChevronDown className="h-4 w-4 transition-transform group-open/details:rotate-180" />
+            </summary>
+            <div className="mt-2 grid gap-1.5 border-t border-border/60 pt-2 md:grid-cols-2">
+              <div><span className="text-foreground/60">대표 선정 이유</span> · {option.whySelected}</div>
+              <div><span className="text-foreground/60">같은 기준 상표</span> · {brandSummary}</div>
+              <div><span className="text-foreground/60">공식 조회키</span> · {item.pestiCode}/{item.diseaseUseSeq}</div>
+              <div><span className="text-foreground/60">등록 묶음</span> · 같은 기준 {option.sourceItemCount}건</div>
+            </div>
+          </details>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
 

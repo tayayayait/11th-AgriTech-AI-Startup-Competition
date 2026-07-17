@@ -1,3 +1,4 @@
+import { createClient } from "@supabase/supabase-js";
 import {
   buildQueryString,
   ensureMethod,
@@ -9,6 +10,7 @@ import {
   readJson,
   requireEnv,
 } from "@shared/http.ts";
+import { persistPsisCatalog } from "./persistence.ts";
 
 const PSIS_BASE_URL = Deno.env.get("PSIS_BASE_URL") ?? "https://psis.rda.go.kr/openApi/service.do";
 
@@ -132,7 +134,7 @@ function elementToRecord(element: XmlElement): Record<string, string> {
   return Object.fromEntries(element.children.map((child) => [child.tagName, xmlText(child).trim()]));
 }
 
-function parsePsisXml(raw: string): Record<string, unknown> {
+function parsePsisXml(raw: string): { service: Record<string, unknown> } {
   const document = parseXml(raw);
   const service = findFirstElement(document, "service");
   if (!service) {
@@ -176,6 +178,7 @@ Deno.serve(async (request) => {
   if (corsResponse) return corsResponse;
 
   try {
+    const startedAt = new Date().toISOString();
     ensureMethod(request, ["POST"]);
     const body = await readJson<PsisProxyRequest>(request);
 
@@ -208,10 +211,36 @@ Deno.serve(async (request) => {
       throw new ProxyError(upstream.status, "PSIS API request failed.", "psis_upstream_error", parsedBody);
     }
 
+    const fetchedAt = new Date().toISOString();
+    const service = parsedBody.service;
+    const hasPsisError = typeof service.errorCode === "string" && service.errorCode.trim().length > 0;
+    const catalogCache = hasPsisError
+      ? { status: "skipped" as const, reason: "psis_error" as const }
+      : await persistPsisCatalog(
+        createClient(
+          requireEnv("SUPABASE_URL"),
+          requireEnv("SUPABASE_SERVICE_ROLE_KEY"),
+          {
+            auth: {
+              autoRefreshToken: false,
+              persistSession: false,
+            },
+          },
+        ),
+        {
+          serviceCode: serviceCode as "SVC01" | "SVC02",
+          params: body.params ?? {},
+          service,
+          fetchedAt,
+          startedAt,
+        },
+      );
+
     return jsonResponse(200, {
       source: "psis",
       serviceCode,
-      fetchedAt: new Date().toISOString(),
+      fetchedAt,
+      catalogCache,
       data: parsedBody,
     });
   } catch (error) {

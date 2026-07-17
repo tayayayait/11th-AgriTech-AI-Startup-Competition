@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { ArrowRight, Bug, Camera, ChevronLeft, ChevronRight, Clock, CloudRain, Droplets, FileText, Loader2, Pill, Sprout, Thermometer, Wind } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -28,6 +28,7 @@ import {
 } from "@/services/npmsPestService";
 
 const NCPMS_CANDIDATES_PAGE_SIZE = 6;
+const LIVE_WEATHER_REFRESH_INTERVAL_MS = 60 * 60 * 1000;
 
 function sourceStatusLabel(status: SourceStatus): string {
   if (status === "connected") return "정상 수집";
@@ -67,6 +68,7 @@ function npmsCandidateTypeLabel(kind: NpmsPestCandidate["kind"]): string {
 
 export default function Dashboard() {
   const { fields, selected, setSelectedId } = useSelectedField();
+  const queryClient = useQueryClient();
   const [selectedNpmsCandidateId, setSelectedNpmsCandidateId] = useState<string | null>(null);
   const [npmsCandidatePage, setNpmsCandidatePage] = useState(1);
   const selectedCropName = selected?.crop_name.trim() ?? "";
@@ -81,8 +83,16 @@ export default function Dashboard() {
     queryKey: ["weather-live", selected?.id, selected?.lat, selected?.lng],
     enabled: !!selected,
     queryFn: () => getLiveWeatherByLatLng(selected!.lat, selected!.lng, selected!.id),
+    refetchInterval: LIVE_WEATHER_REFRESH_INTERVAL_MS,
+    refetchIntervalInBackground: false,
+    refetchOnWindowFocus: true,
     staleTime: 30 * 60 * 1000,
   });
+
+  useEffect(() => {
+    if (!selected?.id || liveWeather?.sourceStatus !== "connected" || !liveWeather.collectedAt) return;
+    void queryClient.invalidateQueries({ queryKey: ["fields"] });
+  }, [liveWeather?.collectedAt, liveWeather?.sourceStatus, queryClient, selected?.id]);
 
   const { data: pestRisks } = useQuery({
     queryKey: ["pest", selected?.id],

@@ -8,6 +8,7 @@ import {
   getWorkScheduleLookupForCrop,
   getWorkSchedulesForCrop,
 } from "@/services/nongsaroWorkScheduleService";
+import { downloadReadableNongsaroSchedule } from "@/services/nongsaroReadableScheduleService";
 import { generateAndSaveTaskCardsForField } from "@/services/taskGenerationService";
 import { getTaskCardsByField } from "@/services/taskService";
 import { getWeeklyFarmBriefing } from "@/services/weeklyFarmBriefingService";
@@ -58,6 +59,10 @@ vi.mock("@/services/nongsaroWeeklyService", () => ({
 vi.mock("@/services/nongsaroWorkScheduleService", () => ({
   getWorkScheduleLookupForCrop: vi.fn(),
   getWorkSchedulesForCrop: vi.fn(),
+}));
+
+vi.mock("@/services/nongsaroReadableScheduleService", () => ({
+  downloadReadableNongsaroSchedule: vi.fn(),
 }));
 
 vi.mock("@/services/taskGenerationService", () => ({
@@ -118,6 +123,7 @@ const getPestRisksMock = vi.mocked(getPestRisks);
 const getWeeklyFarmInfosMock = vi.mocked(getWeeklyFarmInfos);
 const getWorkScheduleLookupForCropMock = vi.mocked(getWorkScheduleLookupForCrop);
 const getWorkSchedulesForCropMock = vi.mocked(getWorkSchedulesForCrop);
+const downloadReadableNongsaroScheduleMock = vi.mocked(downloadReadableNongsaroSchedule);
 const generateAndSaveTaskCardsForFieldMock = vi.mocked(generateAndSaveTaskCardsForField);
 const getTaskCardsByFieldMock = vi.mocked(getTaskCardsByField);
 const getWeeklyFarmBriefingMock = vi.mocked(getWeeklyFarmBriefing);
@@ -215,6 +221,7 @@ describe("Tasks weekly farm briefing", () => {
       },
     ]);
     generateAndSaveTaskCardsForFieldMock.mockResolvedValue([]);
+    downloadReadableNongsaroScheduleMock.mockResolvedValue("복숭아 농작업일정.html");
     generateWeeklyFarmAlternativeBriefingMock.mockResolvedValue({
       headline: "복숭아 AI 참고 농사 브리핑",
       summaryBullets: ["AI 참고: 착과기 복숭아는 열매 상태와 수분 스트레스를 우선 확인합니다."],
@@ -733,7 +740,14 @@ describe("Tasks weekly farm briefing", () => {
     expect(screen.getByText(/이번 달\(\d+월\) 해당 항목/)).toBeInTheDocument();
     expect(screen.getByText("봉오리따기,꽃솎기,열매솎기")).toBeInTheDocument();
     expect(screen.getByText("확인할 일")).toBeInTheDocument();
-    expect(screen.getByText("첨부 자료 확인")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "농작업일정 내용 파일 다운로드" }));
+    await waitFor(() => {
+      expect(downloadReadableNongsaroScheduleMock).toHaveBeenCalledWith({
+        sourceUrl: "https://www.nongsaro.go.kr/peach.hwpx",
+        sourceFileName: "복숭아 농작업일정.hwpx",
+        title: "복숭아",
+      });
+    });
     expect(screen.getByText("이번 주 예정 작업")).toBeInTheDocument();
     expect(screen.getByText("농작업일정 실행: 봉오리따기,꽃솎기,열매솎기")).toBeInTheDocument();
     expect(screen.queryByText("해야 할 작업 카드가 없습니다.")).toBeInTheDocument();

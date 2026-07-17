@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MemoryRouter } from "react-router-dom";
 import { beforeEach, describe, expect, it, vi } from "vitest";
@@ -91,14 +91,16 @@ function makeCandidate(index: number): NpmsPestCandidate {
   };
 }
 
-function renderDashboard() {
-  const queryClient = new QueryClient({
+function createQueryClient() {
+  return new QueryClient({
     defaultOptions: {
       queries: { retry: false },
       mutations: { retry: false },
     },
   });
+}
 
+function renderDashboard(queryClient = createQueryClient()) {
   const ui = (
     <QueryClientProvider client={queryClient}>
       <MemoryRouter>
@@ -122,7 +124,64 @@ describe("Dashboard NCPMS candidates", () => {
     taskServiceMocks.getPendingTaskCardsByField.mockResolvedValue([]);
     timelineServiceMocks.getTimelineItemsByField.mockResolvedValue([]);
     weatherServiceMocks.getLiveWeatherByLatLng.mockResolvedValue(null);
+    npmsServiceMocks.getAllNpmsPestCandidates.mockResolvedValue({ candidates: [], totalCount: 0 });
     npmsServiceMocks.getNpmsPestDetail.mockResolvedValue(null);
+  });
+  it("refreshes live weather once per hour while the dashboard is open", async () => {
+    vi.useFakeTimers();
+    weatherServiceMocks.getLiveWeatherByLatLng.mockResolvedValue({
+      temperature: 21,
+      precipitation: 0,
+      wind: 2,
+      humidity: 60,
+      sourceStatus: "connected",
+      collectedAt: "2026-05-08T01:00:00.000Z",
+      summary: "clear",
+      riskScore: 10,
+      riskLevel: "low",
+      riskFactors: [],
+    });
+
+    try {
+      renderDashboard();
+      await act(async () => {
+        await Promise.resolve();
+        await Promise.resolve();
+      });
+      expect(weatherServiceMocks.getLiveWeatherByLatLng).toHaveBeenCalledTimes(1);
+
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(60 * 60 * 1000);
+      });
+
+      expect(weatherServiceMocks.getLiveWeatherByLatLng).toHaveBeenCalledTimes(2);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("invalidates the fields query after live weather data is saved", async () => {
+    weatherServiceMocks.getLiveWeatherByLatLng.mockResolvedValue({
+      temperature: 21,
+      precipitation: 0,
+      wind: 2,
+      humidity: 60,
+      sourceStatus: "connected",
+      collectedAt: "2026-05-08T01:00:00.000Z",
+      summary: "clear",
+      riskScore: 10,
+      riskLevel: "low",
+      riskFactors: [],
+    });
+    const queryClient = createQueryClient();
+    const invalidateQueries = vi.spyOn(queryClient, "invalidateQueries");
+
+    renderDashboard(queryClient);
+
+    await waitFor(() => {
+      expect(invalidateQueries).toHaveBeenCalledWith({ queryKey: ["fields"] });
+    });
+
   });
 
   it("shows six NCPMS candidates per page and pages through all results", async () => {
