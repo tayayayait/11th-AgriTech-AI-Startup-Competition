@@ -589,7 +589,6 @@ export default function Tasks() {
   const actionableTasks = [...visiblePending].sort((left, right) => dueTime(left) - dueTime(right));
   const splitTasks = splitTasksByDueDate(actionableTasks);
   const todayTasks = splitTasks.today.slice(0, 3);
-  const upcomingTasks = splitTasks.upcoming.slice(0, 3);
   const currentMonthScheduleEraCount = workSchedules.reduce(
     (count, schedule) => count + schedule.eras.filter((era) => isEraInMonth(era, currentSchedulePeriod.month)).length,
     0,
@@ -700,20 +699,6 @@ export default function Tasks() {
           <p className="text-sm text-muted-foreground">해야 할 작업 카드가 없습니다.</p>
         )}
       </section>
-
-      {upcomingTasks.length > 0 && (
-        <section className="space-y-3" aria-labelledby="upcoming-tasks-title">
-          <div>
-            <h2 id="upcoming-tasks-title" className="text-sm font-semibold">이번 주 예정 작업</h2>
-            <p className="text-xs text-muted-foreground">오늘 이후 예정된 작업입니다.</p>
-          </div>
-          <div className="grid gap-3 md:grid-cols-2">
-            {upcomingTasks.map((task) => (
-              <TaskCardView key={task.id} task={task} onChecksChange={saveChecks} onComplete={complete} />
-            ))}
-          </div>
-        </section>
-      )}
 
       <Card>
         <CardContent className="space-y-6 p-4">

@@ -569,7 +569,7 @@ describe("Tasks weekly farm briefing", () => {
     expect(await screen.findByText("새 복숭아 주간 브리핑")).toBeInTheDocument();
   });
 
-  it("places tasks due today separately from upcoming task cards", async () => {
+  it("shows tasks due today without rendering upcoming task cards", async () => {
     getTaskCardsByFieldMock.mockResolvedValue([
       {
         id: "today-task",
@@ -602,17 +602,15 @@ describe("Tasks weekly farm briefing", () => {
     renderTasks();
 
     const todayTask = await screen.findByText("today-action");
-    const upcomingTask = await screen.findByText("upcoming-action");
     const todaySection = todayTask.closest("section");
     const upcomingSection = document.querySelector('[aria-labelledby="upcoming-tasks-title"]');
 
     expect(todaySection).toContainElement(todayTask);
-    expect(todaySection).not.toContainElement(upcomingTask);
-    expect(upcomingSection).toContainElement(upcomingTask);
-    expect(upcomingSection).not.toContainElement(todayTask);
+    expect(screen.queryByText("upcoming-action")).not.toBeInTheDocument();
+    expect(upcomingSection).not.toBeInTheDocument();
   });
 
-  it("separates weekly task cards from farm schedule API match failures", async () => {
+  it("keeps weekly task generation status while hiding future-dated task cards", async () => {
     const dueAt = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString();
     getTaskCardsByFieldMock.mockResolvedValue([
       {
@@ -644,7 +642,7 @@ describe("Tasks weekly farm briefing", () => {
 
     expect(await screen.findByText("농작업일정 API 조회 성공 + 복숭아 목록 매칭 실패")).toBeInTheDocument();
     expect(await screen.findByText("주간농사정보 기반 작업카드 생성됨")).toBeInTheDocument();
-    expect(screen.getByText("주간농사정보 기반 작업 실행")).toBeInTheDocument();
+    expect(screen.queryByText("주간농사정보 기반 작업 실행")).not.toBeInTheDocument();
     expect(screen.queryByText("3순위")).not.toBeInTheDocument();
   });
 
@@ -748,8 +746,8 @@ describe("Tasks weekly farm briefing", () => {
         title: "복숭아",
       });
     });
-    expect(screen.getByText("이번 주 예정 작업")).toBeInTheDocument();
-    expect(screen.getByText("농작업일정 실행: 봉오리따기,꽃솎기,열매솎기")).toBeInTheDocument();
+    expect(screen.queryByText("이번 주 예정 작업")).not.toBeInTheDocument();
+    expect(screen.queryByText("농작업일정 실행: 봉오리따기,꽃솎기,열매솎기")).not.toBeInTheDocument();
     expect(screen.queryByText("해야 할 작업 카드가 없습니다.")).toBeInTheDocument();
     await waitFor(() => {
       expect(generateAndSaveTaskCardsForFieldMock).toHaveBeenCalledWith(
