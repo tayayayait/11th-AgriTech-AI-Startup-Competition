@@ -140,8 +140,9 @@ export function SelectedFieldProvider({ children }: { children: React.ReactNode 
   ]);
 
   const refetch = useCallback(() => {
-    void qc.invalidateQueries();
-  }, [qc]);
+    void qc.invalidateQueries({ queryKey: ["fields", user?.id] });
+    void qc.invalidateQueries({ queryKey: ["user-preferences", user?.id] });
+  }, [qc, user?.id]);
 
   const selected = useMemo(
     () => fields.find((field) => field.id === selectedId) ?? null,

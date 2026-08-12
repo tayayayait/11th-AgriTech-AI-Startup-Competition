@@ -121,9 +121,10 @@ export default function FieldsMap() {
     isLoading: isRegionLoading,
   } = useQuery({
     queryKey: ["standard-region-codes", "page-size-1000"],
-    queryFn: getAllStandardRegionCodes,
+    queryFn: () => getAllStandardRegionCodes(),
     staleTime: 24 * 60 * 60 * 1000,
     gcTime: 24 * 60 * 60 * 1000,
+    retry: false,
   });
 
   const sidoOptions = useMemo(
